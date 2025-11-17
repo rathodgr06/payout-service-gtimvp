@@ -1,0 +1,67 @@
+{
+  "name": "Paydart Payout",
+  "version": "1.2.3",
+  "description": "Payout module",
+  "main": "index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "migrate": "dotenv -e .env -- npx sequelize-cli db:migrate",
+    "start": "node app.js"
+  },
+  
+  "keywords": [
+    "api",
+    "boilerplate",
+    "nodejs",
+    "express",
+    "sequelize",
+    "mysql",
+    "jwt",
+    "swagger",
+    "winston",
+    "pm2",
+    "api-boilerplate",
+    "nodejs-api",
+    "nodejs-sequelize-api"
+  ],
+  "author": "Harshal Randhe",
+  "license": "ISC",
+
+  "homepage": "",
+  "dependencies": {
+    "axios": "^1.9.0",
+    "base-64": "^1.0.0",
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.1",
+    "cors": "^2.8.5",
+    "crypto-js": "^4.2.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "form-data": "^4.0.4",
+    "generate-unique-id": "^2.0.3",
+    "helmet": "^6.0.1",
+    "http-status": "^1.6.2",
+    "joi": "^17.9.1",
+    "jsonwebtoken": "^8.5.1",
+    "mime-types": "^3.0.1",
+    "moment": "^2.29.4",
+    "moment-timezone": "^0.6.0",
+    "multer": "^2.0.2",
+    "mysql2": "^2.3.3",
+    "nodemailer": "^6.9.1",
+    "nodemon": "^2.0.20",
+    "passport": "^0.6.0",
+    "passport-jwt": "^4.0.1",
+    "pm2": "^5.2.2",
+    "sequelize": "^6.25.5",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^4.6.2",
+    "winston": "^3.8.2",
+    "xss-clean": "^0.1.1"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.6.2"
+  }
+}

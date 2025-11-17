@@ -1,0 +1,222 @@
+/**
+ * Mock MoMo Collection Server
+ * --------------------------------
+ * Endpoints:
+ *  - POST /collection/token/
+ *  - POST /collection/v1_0/requesttopay
+ *  - GET  /collection/v1_0/requesttopay/:referenceId
+ */
+
+const express = require("express");
+const bodyParser = require("body-parser");
+const jwt = require("jsonwebtoken");   // npm install jsonwebtoken
+const { v4: uuidv4 } = require("uuid"); // npm install uuid
+
+const app = express();
+const PORT = 3001;
+
+app.use(bodyParser.json());
+
+// =============================
+// 🔧 Configurable mock values
+// =============================
+const VALID_SUBSCRIPTION_KEY = "ec31d4b6e7d843e6b554be7c1df8d0cf";
+const VALID_AUTHORIZATION = "Basic ZjY4YjQzYzMtYjBmMy00Mzc1LWJiNjctOWM1ZGY5ZjEzNDJkOmUwNTRiMDllYTE3OTRlM2M4NzY1MDk5Y2NhNTY4NzAw";
+const JWT_SECRET = "mock_secret_key"; // for mock signing
+
+// In-memory transaction store
+const transactions = new Map();
+
+// Utility: random 10-digit number
+function generateRandom10DigitId() {
+  return Math.floor(1000000000 + Math.random() * 9000000000).toString();
+}
+
+// Utility: expiry 1 hour later
+function generateExpiry() {
+  const now = new Date();
+  now.setHours(now.getHours() + 1);
+  return now.toISOString();
+}
+
+// Decide initial status based on MSISDN
+function getStatusFromMsisdn(msisdnRaw) {
+  const msisdn = String(msisdnRaw).trim();
+  console.log(`🟡 Checking MSISDN for status: ${msisdn}`);
+
+  if (msisdn === "233900800111" || msisdn === "233550000001") {
+    return "PENDING";
+  } else if (msisdn === "233550000002") {
+    return "FAILED";
+  } else {
+    return "SUCCESSFUL";
+  }
+}
+
+// Simulate background update for pending → final
+function schedulePendingToFinalStatus(referenceId) {
+  const delayInMinutes = Math.floor(Math.random() * 2) + 3; // 3–4 minutes
+  const delayMs = delayInMinutes * 60 * 1000;
+
+  console.log(`⏳ Scheduling status update for ${referenceId} in ${delayInMinutes} minute(s)`);
+
+  setTimeout(() => {
+    if (!transactions.has(referenceId)) return;
+
+    const tx = transactions.get(referenceId);
+    if (tx.status !== "PENDING") return;
+
+    const finalStatus = Math.random() < 0.5 ? "SUCCESSFUL" : "FAILED";
+    tx.status = finalStatus;
+
+    console.log(`🔄 Transaction ${referenceId} updated to: ${finalStatus}`);
+  }, delayMs);
+}
+
+
+// =============================
+// 📥 POST Request to Pay Status
+// =============================
+app.post("/disbursement/token/", (req, res) => {
+  const subscriptionKey = req.header("Ocp-Apim-Subscription-Key");
+  const authHeader = req.header("Authorization");
+  console.log("🚀 ~ authHeader:", authHeader)
+
+  console.log("🔑 Token request received");
+  console.log("📌 Subscription-Key:", subscriptionKey);
+  console.log("📌 Authorization:", authHeader);
+
+  if (!subscriptionKey || !authHeader) {
+    return res.status(400).json({ error: "Missing required headers" });
+  }
+
+  if (
+    subscriptionKey !== VALID_SUBSCRIPTION_KEY ||
+    authHeader !== VALID_AUTHORIZATION
+  ) {
+    return res.status(401).json({
+      error: "Unauthorized",
+      message: "Invalid Ocp-Apim-Subscription-Key or Authorization"
+    });
+  }
+
+  // JWT payload
+  const payload = {
+    clientId: "b5ddc6e2-529b-438f-ae70-c1ae5b50a487",
+    expires: generateExpiry(),
+    sessionId: uuidv4()
+  };
+
+  // Sign JWT (HS256 mock)
+  const token = jwt.sign(payload, JWT_SECRET, { algorithm: "HS256" });
+
+  const tokenResponse = {
+    access_token: token,
+    token_type: "Bearer",
+    expires_in: 3600
+  };
+
+  return res.status(200).json(tokenResponse);
+});
+
+// =============================
+// 📩 POST disbursement/v1_0/transfer
+// =============================
+app.post("/disbursement/v1_0/transfer", (req, res) => {
+  const Authorization = req.header("Authorization");
+  const xCallbackUrl = req.header("X-Callback-Url");
+  const referenceId = req.header("X-Reference-Id");
+  const xTargetEnvironment = req.header("X-Target-Environment");
+  console.log(`📩 referenceId on pay: ${referenceId}`);
+  console.log("📦 Incoming body:", JSON.stringify(req.body, null, 2));
+
+  if (!Authorization) {
+    return res.status(400).json({ message: "Missing Bearer Authentication" });
+  }
+
+  if (!referenceId) {
+    return res.status(400).json({ message: "Missing X-Reference-Id header" });
+  }
+
+  if (!xTargetEnvironment) {
+    return res.status(400).json({ message: "Missing X-Target-Environment header" });
+  }
+
+  const {
+    amount,
+    currency,
+    externalId,
+    payee,
+    payerMessage,
+    payeeNote
+  } = req.body;
+
+  if (!amount || !currency || !payee?.partyIdType || !payee?.partyId) {
+    return res.status(400).json({ message: "Missing required fields in body" });
+  }
+
+  const finalExternalId = externalId || generateRandom10DigitId();
+  const status = getStatusFromMsisdn(payee.partyId);
+
+  const transaction = {
+    amount,
+    currency,
+    financialTransactionId: generateRandom10DigitId(),
+    externalId: finalExternalId,
+    referenceId,
+    payee,
+    payerMessage,
+    payeeNote,
+    status,
+    timestamp: new Date().toISOString()
+  };
+
+  transactions.set(referenceId, transaction);
+
+  if (status === "PENDING") {
+    schedulePendingToFinalStatus(referenceId);
+  }
+
+  return res.status(202).json({ message: "Request to pay accepted" });
+});
+
+// =============================
+// 📩 GET disbursement/v1_0/transfer/{referenceId}
+// =============================
+app.get("/disbursement/v1_0/transfer/:referenceId", (req, res) => {
+  const Authorization = req.header("Authorization");
+  const xTargetEnvironment = req.header("X-Target-Environment");
+
+  if (!Authorization) {
+    return res.status(400).json({ message: "Missing Bearer Authentication" });
+  }
+  if (!xTargetEnvironment) {
+    return res.status(400).json({ message: "Missing X-Target-Environment header" });
+  }
+
+
+  const { referenceId } = req.params;
+  console.log(`📥 Fetching transaction status for: ${referenceId}`);
+
+  if (!transactions.has(referenceId)) {
+    return res.status(404).json({ message: "Transaction not found" });
+  }
+
+  const tx = transactions.get(referenceId);
+
+  const response = {
+    amount: tx.amount,
+    currency: tx.currency,
+    financialTransactionId: tx.financialTransactionId,
+    externalId: tx.externalId,
+    payee: tx.payee,
+    payerMessage: tx.payerMessage,
+    payeeNote: tx.payeeNote,
+    status: tx.status
+  };
+
+  return res.status(200).json(response);
+});
+
+
+module.exports = app;
