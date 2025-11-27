@@ -1,1 +1,82 @@
-const a18_0x1c997d=a18_0x1d51;(function(_0xc3fc34,_0x2d3588){const _0x2d2649=a18_0x1d51,_0x7084bf=_0xc3fc34();while(!![]){try{const _0x3f9efa=-parseInt(_0x2d2649(0x8d))/0x1*(parseInt(_0x2d2649(0xa1))/0x2)+parseInt(_0x2d2649(0x9b))/0x3*(parseInt(_0x2d2649(0x89))/0x4)+parseInt(_0x2d2649(0x8f))/0x5*(parseInt(_0x2d2649(0x8a))/0x6)+parseInt(_0x2d2649(0x92))/0x7*(parseInt(_0x2d2649(0x85))/0x8)+parseInt(_0x2d2649(0xa4))/0x9*(-parseInt(_0x2d2649(0x80))/0xa)+parseInt(_0x2d2649(0x9c))/0xb*(-parseInt(_0x2d2649(0x8e))/0xc)+parseInt(_0x2d2649(0x82))/0xd*(parseInt(_0x2d2649(0x99))/0xe);if(_0x3f9efa===_0x2d3588)break;else _0x7084bf['push'](_0x7084bf['shift']());}catch(_0x4533a3){_0x7084bf['push'](_0x7084bf['shift']());}}}(a18_0x1de9,0xed9ba));const axios=require(a18_0x1c997d(0x9f)),urls=require(a18_0x1c997d(0x86)),https=require(a18_0x1c997d(0x95)),agent=new https[(a18_0x1c997d(0x97))]({'rejectUnauthorized':![]});async function initiateOrangeMoneyTransfer(_0x2980d8){const _0x4db05a=a18_0x1c997d;let _0xdc2a4=![];try{const _0xa9c5f6=await axios['post'](process[_0x4db05a(0xa2)][_0x4db05a(0x98)]==_0x4db05a(0x9e)?urls[_0x4db05a(0xa0)][_0x4db05a(0x8c)]+_0x4db05a(0x91):urls[_0x4db05a(0xa0)][_0x4db05a(0x84)]+_0x4db05a(0x91),_0x2980d8,{'headers':{'Content-Type':_0x4db05a(0x96)},'httpsAgent':agent});let _0x3370e2=_0xa9c5f6[_0x4db05a(0x83)];return console[_0x4db05a(0x8b)](_0x3370e2),_0x3370e2[_0x4db05a(0xa7)]=='Success'?(_0xdc2a4=_0x3370e2?.[_0x4db05a(0x9d)]?.[_0x4db05a(0x87)],console[_0x4db05a(0x8b)](_0x4db05a(0x9a),_0xdc2a4),{'status':0xc8,'message':_0x4db05a(0x93),'data':_0x3370e2}):{'status':0x190,'message':_0x4db05a(0x90),'data':_0x3370e2};}catch(_0x28c60a){return console[_0x4db05a(0x88)](_0x4db05a(0x81),_0x28c60a[_0x4db05a(0xa5)]?.[_0x4db05a(0x83)]||_0x28c60a[_0x4db05a(0x7f)]),![];}}function a18_0x1d51(_0x2d4511,_0x28f376){const _0x1de9f1=a18_0x1de9();return a18_0x1d51=function(_0x1d5199,_0x160296){_0x1d5199=_0x1d5199-0x7f;let _0x467597=_0x1de9f1[_0x1d5199];return _0x467597;},a18_0x1d51(_0x2d4511,_0x28f376);}async function getOrangeMoneyTransferStatus(_0x49a30a,_0x500ec5,_0x4115b7,_0x5870e8){const _0xb18d02=a18_0x1c997d;try{let _0x49c057={'auth':{'user':_0x500ec5,'pwd':_0x4115b7},'param':{'TXNID':_0x49a30a,'Currency':_0x5870e8}},_0x30eb24={'method':_0xb18d02(0xa8),'url':process[_0xb18d02(0xa2)]['PAYOUT_MODE']=='test'?urls[_0xb18d02(0xa0)][_0xb18d02(0x8c)]+_0xb18d02(0xa3):urls['orange_money'][_0xb18d02(0x84)]+_0xb18d02(0xa3),'headers':{'Content-Type':_0xb18d02(0x96)},'httpsAgent':agent,'data':_0x49c057},_0x93f156=await axios['request'](_0x30eb24);return console[_0xb18d02(0x8b)](_0xb18d02(0xa6),_0x93f156['data']),console[_0xb18d02(0x8b)](_0x93f156),_0x93f156[_0xb18d02(0x83)];}catch(_0x40a5c7){return console[_0xb18d02(0x88)](_0xb18d02(0x94),_0x40a5c7[_0xb18d02(0xa5)]?.[_0xb18d02(0x83)]||_0x40a5c7[_0xb18d02(0x7f)]),![];}}function a18_0x1de9(){const _0x545398=['2013lqqbIh','resultset','test','axios','orange_money','8MxfVnr','env','OM/Transaction/Status','36oLLkVk','response','Transfer\x20Status:','exec_msg','get','message','4159780LRZgrn','Transfer\x20Error:','28223fhYuNo','data','live_url','4016HYNSDr','../config/urls','TXNID','error','156644PmGszW','6AkBZuH','log','test_url','406313GZZOsa','51756IOpnMB','9063445wUxeLf','failed','Merchant/Balance/OM/Transfer','4900AUEQPT','success','Status\x20Error:','https','application/json','Agent','PAYOUT_MODE','18116VwQvlL','Transfer\x20initiated,\x20Reference\x20ID:','6tdFjEf'];a18_0x1de9=function(){return _0x545398;};return a18_0x1de9();}module['exports']={'initiateOrangeMoneyTransfer':initiateOrangeMoneyTransfer,'getOrangeMoneyTransferStatus':getOrangeMoneyTransferStatus};
+const axios = require("axios");
+const urls = require("../config/urls");
+const https = require("https");
+
+const agent = new https.Agent({
+  rejectUnauthorized: false, // disables cert check for this request only
+});
+
+async function initiateOrangeMoneyTransfer(data) {
+  let referenceId = false;
+  try {
+    const res = await axios.post(
+      process.env.PAYOUT_MODE == "test"
+        ? `${urls.orange_money.test_url}Merchant/Balance/OM/Transfer`
+        : `${urls.orange_money.live_url}Merchant/Balance/OM/Transfer`,
+      data,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        httpsAgent: agent,
+      }
+    );
+
+    let response = res.data;
+    console.log(response);
+    if (response.exec_msg == "Success") {
+      referenceId = response?.resultset?.TXNID;
+      console.log("Transfer initiated, Reference ID:", referenceId);
+      return {status: 200, message: "success", data: response};
+    }else{
+      return {status: 400, message: "failed", data: response};
+    }
+  } catch (err) {
+    console.error("Transfer Error:", err.response?.data || err.message);
+    return false;
+  }
+}
+
+async function getOrangeMoneyTransferStatus(
+  referenceId,
+  key,
+  password,
+  currecny
+) {
+  try {
+    let payload = {
+      auth: {
+        user: key,
+        pwd: password,
+      },
+      param: {
+        TXNID: referenceId,
+        Currency: currecny,
+      },
+    };
+    let config = {
+      method: "get",
+      url:
+        process.env.PAYOUT_MODE == "test"
+          ? `${urls.orange_money.test_url}OM/Transaction/Status`
+          : `${urls.orange_money.live_url}OM/Transaction/Status`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      httpsAgent: agent,
+      data: payload,
+    };
+    let res = await axios.request(config);
+    console.log("Transfer Status:", res.data);
+    console.log(res);
+    return res.data;
+  } catch (err) {
+    console.error("Status Error:", err.response?.data || err.message);
+    return false;
+  }
+}
+
+module.exports = {
+  initiateOrangeMoneyTransfer,
+  getOrangeMoneyTransferStatus,
+};

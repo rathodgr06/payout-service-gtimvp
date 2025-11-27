@@ -1,1 +1,119 @@
-const a35_0x4f350e=a35_0x427c;(function(_0x702f52,_0x14e191){const _0x504aed=a35_0x427c,_0x360830=_0x702f52();while(!![]){try{const _0x7cd130=parseInt(_0x504aed(0x102))/0x1+-parseInt(_0x504aed(0xee))/0x2*(-parseInt(_0x504aed(0x10b))/0x3)+parseInt(_0x504aed(0xf6))/0x4*(-parseInt(_0x504aed(0xec))/0x5)+-parseInt(_0x504aed(0xf2))/0x6+parseInt(_0x504aed(0x107))/0x7+-parseInt(_0x504aed(0x10e))/0x8+parseInt(_0x504aed(0xf4))/0x9*(parseInt(_0x504aed(0x104))/0xa);if(_0x7cd130===_0x14e191)break;else _0x360830['push'](_0x360830['shift']());}catch(_0x5740ec){_0x360830['push'](_0x360830['shift']());}}}(a35_0x2f62,0xcc59a));const jwt=require(a35_0x4f350e(0x114)),moment=require(a35_0x4f350e(0xff)),httpStatus=require(a35_0x4f350e(0xf1)),userService=require(a35_0x4f350e(0x112)),encryptDecryptService=require(a35_0x4f350e(0xfc)),db=require('../models'),Token=db[a35_0x4f350e(0x10c)],{tokenTypes}=require(a35_0x4f350e(0xf7)),ApiError=require(a35_0x4f350e(0xf5)),verifyAccessToken=async _0x202949=>{const _0x10f264=a35_0x4f350e;console[_0x10f264(0x108)](_0x10f264(0x10a),_0x202949);try{const _0x2f2407=await encryptDecryptService[_0x10f264(0xfd)](_0x202949);return JSON[_0x10f264(0xfe)](_0x2f2407);}catch(_0x89f057){console[_0x10f264(0xfa)]('Error\x20verifying\x20access\x20token:',_0x89f057);throw new Error(_0x10f264(0xf3));}},generateToken=(_0xbbef0b,_0xcd1c90,_0x1fa66f,_0x1abcaa=process[a35_0x4f350e(0xed)][a35_0x4f350e(0x106)])=>{const _0x522a56=a35_0x4f350e,_0x223448={'sub':_0xbbef0b,'iat':moment()[_0x522a56(0x109)](),'exp':_0xcd1c90['unix'](),'type':_0x1fa66f};return jwt['sign'](_0x223448,_0x1abcaa);},saveToken=async(_0x2977aa,_0x4d8315,_0x19b580,_0x31595a,_0x3cc3ff=![])=>{const _0x5167f9=a35_0x4f350e,_0x2f6346=await Token[_0x5167f9(0x100)]({'token':_0x2977aa,'user_id':_0x4d8315,'expire_at':_0x19b580[_0x5167f9(0x110)](),'type':_0x31595a,'black_listed':_0x3cc3ff});return _0x2f6346;},verifyToken=async(_0x2d8b27,_0x420e34)=>{const _0x5d43f5=a35_0x4f350e,_0x1c4efd=jwt[_0x5d43f5(0x10d)](_0x2d8b27,process['env'][_0x5d43f5(0x106)]),_0xb2c8f0=await Token[_0x5d43f5(0xfb)]({'where':{'token':_0x2d8b27,'type':_0x420e34,'user_id':_0x1c4efd['sub'],'black_listed':![]}});if(!_0xb2c8f0)return null;return _0xb2c8f0;},generateAuthTokens=async _0x28c023=>{const _0x51939c=a35_0x4f350e,_0x59fc59=moment()[_0x51939c(0x105)](process['env'][_0x51939c(0x10f)],'minutes'),_0x2b8fb2=generateToken(_0x28c023['id'],_0x59fc59,tokenTypes[_0x51939c(0xf9)]),_0x7e2cbd=moment()[_0x51939c(0x105)](process[_0x51939c(0xed)][_0x51939c(0xf8)],_0x51939c(0x101)),_0x38058b=generateToken(_0x28c023['id'],_0x7e2cbd,tokenTypes['REFRESH']);return await saveToken(_0x38058b,_0x28c023['id'],_0x7e2cbd,tokenTypes[_0x51939c(0x111)]),{'access':{'token':_0x2b8fb2,'expires':_0x59fc59[_0x51939c(0x110)]()},'refresh':{'token':_0x38058b,'expires':_0x7e2cbd[_0x51939c(0x110)]()}};},generateResetPasswordToken=async _0x5a1367=>{const _0x269e22=a35_0x4f350e,_0x46a624=await userService[_0x269e22(0x113)](_0x5a1367);if(!_0x46a624)throw new ApiError(httpStatus[_0x269e22(0x103)],_0x269e22(0x116));const _0x550fe7=moment()[_0x269e22(0x105)](process[_0x269e22(0xed)][_0x269e22(0xef)],_0x269e22(0x118)),_0x1e32ba=generateToken(_0x46a624['id'],_0x550fe7,tokenTypes[_0x269e22(0x117)]);return await saveToken(_0x1e32ba,_0x46a624['id'],_0x550fe7,tokenTypes[_0x269e22(0x117)]),_0x1e32ba;},generateVerifyEmailToken=async _0x176185=>{const _0x5ed2d8=a35_0x4f350e,_0x57d358=moment()[_0x5ed2d8(0x105)](process['env'][_0x5ed2d8(0xf0)],_0x5ed2d8(0x118)),_0x235994=generateToken(_0x176185['id'],_0x57d358,tokenTypes['VERIFY_EMAIL']);return await saveToken(_0x235994,_0x176185['id'],_0x57d358,tokenTypes['VERIFY_EMAIL']),_0x235994;};function a35_0x427c(_0x352488,_0x3a4f80){const _0x2f62a5=a35_0x2f62();return a35_0x427c=function(_0x427c95,_0x9bce33){_0x427c95=_0x427c95-0xec;let _0x4d3114=_0x2f62a5[_0x427c95];return _0x4d3114;},a35_0x427c(_0x352488,_0x3a4f80);}function a35_0x2f62(){const _0x4b0660=['findOne','./encrypt_decrypt.service','decrypt','parse','moment','create','days','207113dtZerk','NOT_FOUND','128670eyAOCh','add','JWT_SECRET','4184292rXpuZK','log','unix','🚀\x20~\x20verifyAccessToken\x20~\x20token:','1511967GMwAJv','token','verify','4664056pUTsSF','JWT_ACCESS_EXPIRATION_MINUTES','toDate','REFRESH','./user.service','getUserByEmail','jsonwebtoken','exports','No\x20users\x20found\x20with\x20this\x20email','RESET_PASSWORD','minutes','15eeVMQP','env','2wLZBHh','JWT_RESET_PASSWORD_EXPIRATION_MINUTES','JWT_VERIFY_EMAIL_EXPIRATION_MINUTES','http-status','2138712PZAiFw','Invalid\x20or\x20expired\x20token','990FwFLeX','../utils/ApiError','1263668baFxjL','../config/token','JWT_REFRESH_EXPIRATION_DAYS','ACCESS','error'];a35_0x2f62=function(){return _0x4b0660;};return a35_0x2f62();}module[a35_0x4f350e(0x115)]={'verifyAccessToken':verifyAccessToken,'generateToken':generateToken,'saveToken':saveToken,'verifyToken':verifyToken,'generateAuthTokens':generateAuthTokens,'generateResetPasswordToken':generateResetPasswordToken,'generateVerifyEmailToken':generateVerifyEmailToken};
+const jwt = require('jsonwebtoken');
+const moment = require('moment');
+const httpStatus = require('http-status');
+const userService = require('./user.service');
+const encryptDecryptService = require('./encrypt_decrypt.service');
+const db = require("../models");
+const Token = db.token;
+const {tokenTypes} = require('../config/token');
+const ApiError = require('../utils/ApiError');
+
+const verifyAccessToken = async (token) => {
+    console.log("🚀 ~ verifyAccessToken ~ token:", token)
+    try {
+        // const payload = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+        
+        // Assuming payload.payload is the encrypted data
+        const decryptedPayload = await encryptDecryptService.decrypt(token);
+        
+        return JSON.parse(decryptedPayload);
+    } catch (error) {
+        // Handle token verification or decryption errors
+        console.error('Error verifying access token:', error);
+        throw new Error('Invalid or expired token');
+    }
+};
+
+const generateToken = (userId, expires, type, secret = process.env.JWT_SECRET) => {
+    const payload = {
+        sub: userId,
+        iat: moment().unix(),
+        exp: expires.unix(),
+        type,
+    };
+    return jwt.sign(payload, secret);
+};
+
+
+const saveToken = async (token, userId, expires, type, blacklisted = false) => {
+    const tokenDoc = await Token.create({
+        token,
+        user_id     : userId,
+        expire_at   : expires.toDate(),
+        type,
+        black_listed: blacklisted,
+    });
+
+    return tokenDoc;
+};
+
+
+const verifyToken = async (token, type) => {
+    const payload = jwt.verify(token, process.env.JWT_SECRET);
+    const tokenDoc = await Token.findOne({
+        where: {
+            token,
+            type,
+            user_id     : payload.sub,
+            black_listed: false
+        }
+    });
+    if (!tokenDoc) return null;
+    return tokenDoc;
+};
+
+/**
+ * Generate auth tokens
+ * @param {User} user
+ * @returns {Promise<Object>}
+ */
+const generateAuthTokens = async (user) => {
+
+    const accessTokenExpires = moment().add(process.env.JWT_ACCESS_EXPIRATION_MINUTES, 'minutes');
+    const accessToken = generateToken(user.id, accessTokenExpires, tokenTypes.ACCESS);
+
+    const refreshTokenExpires = moment().add(process.env.JWT_REFRESH_EXPIRATION_DAYS, 'days');
+    const refreshToken = generateToken(user.id, refreshTokenExpires, tokenTypes.REFRESH);
+    await saveToken(refreshToken, user.id, refreshTokenExpires, tokenTypes.REFRESH);
+
+    return {
+        access : {
+            token  : accessToken,
+            expires: accessTokenExpires.toDate(),
+        },
+        refresh: {
+            token  : refreshToken,
+            expires: refreshTokenExpires.toDate(),
+        },
+    };
+};
+
+
+const generateResetPasswordToken = async (email) => {
+    const user = await userService.getUserByEmail(email);
+    if (!user) {
+        throw new ApiError(httpStatus.NOT_FOUND, 'No users found with this email');
+    }
+    const expires = moment().add(process.env.JWT_RESET_PASSWORD_EXPIRATION_MINUTES, 'minutes');
+    const resetPasswordToken = generateToken(user.id, expires, tokenTypes.RESET_PASSWORD);
+    await saveToken(resetPasswordToken, user.id, expires, tokenTypes.RESET_PASSWORD);
+    return resetPasswordToken;
+};
+
+
+const generateVerifyEmailToken = async (user) => {
+    const expires = moment().add(process.env.JWT_VERIFY_EMAIL_EXPIRATION_MINUTES, 'minutes');
+    const verifyEmailToken = generateToken(user.id, expires, tokenTypes.VERIFY_EMAIL);
+    await saveToken(verifyEmailToken, user.id, expires, tokenTypes.VERIFY_EMAIL);
+    return verifyEmailToken;
+};
+
+module.exports = {
+    verifyAccessToken,
+    generateToken,
+    saveToken,
+    verifyToken,
+    generateAuthTokens,
+    generateResetPasswordToken,
+    generateVerifyEmailToken,
+};

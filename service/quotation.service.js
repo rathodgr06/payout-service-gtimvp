@@ -1,1 +1,922 @@
-const a30_0xcab2b5=a30_0xffa8;function a30_0x57ac(){const _0x20176f=['debit_amount','destination','🚀\x20~\x20create_transaction_API_Call\x20~\x20result:','908528CrZCHT','isNotValid','quotation_id','fromEntries','../service/api_client.service','YYYY-MM-DD\x20hh:mm:ss','sub_merchant_id','error','USA','source','addNewTransaction','./payout_routes.service','../service/node_server.service','./helper.service','./psp.service','15623496HnZynI','customer_type','692830fdyhTx','../utils/ApiError','payer_id','exports','http-status','get_receiver_by_id','make_unique_id','moment','find_routing_mid','settlement','toLowerCase','required_sending_entity_fields','45172ebJfBO','B2B','sent_amount','🚀\x20~\x20MERCHANT:','🚀\x20~\x20add_transaction_attachment\x20~\x20transactionAttachmentResponse:','credit_party_identifier','MID\x20not\x20found!','getQuotationByExternalId','MTN','format','status','./quotation.db.service','94111','post','wholesale_fx_rate','receiver_name','isArray','🚀\x20~\x20webhook_result:','creation_date','./transactions.service','registered_business_address','status_message','webhook_secret','Paydart','New\x20York','receiving_business','GTI','SERVICE_UNAVAILABLE','INTERNAL_SERVER_ERROR','debit_currency','OTHER_FEES','Error\x20fetching\x20data:','7954275rmFigk','get','account_id','THUNES_WEBHOOK','🚀\x20~\x20send_webhook\x20~\x20error:','filter','transaction_types','MTN_MOMO','document_reference_number','🚀\x20~\x20create_transaction_API_Call\x20~\x20account_result:','......\x20Default\x20MID\x20found\x20.......','123456','expiration_date','../models/beneficiary','./receiver.service','Transaction\x20attachement\x20is\x20successful','append','SOURCE_AMOUNT','business','originalname','Transaction\x20cancelled','DESTINATION_AMOUNT','339TELmxp','required_receiving_entity_fields','order_id','8251836ZDGdIT','log','destination_currency','stringify','add','🚀\x20~\x20webhook_url:','payer_name','env','/transactions/','beneficiary','payout_reference','currency','Transaction\x20not\x20created!','8824886ZnIJpZ','api_key','path','ORANGE','get_transaction_list','BAD_REQUEST','message','ORANGE_MONEY','./transaction.db.service','existsSync','country_iso_code','transaction_type','wallet_id','postMultipart','isValid','psp_id','account_details','notification_url','/attachments','funding_source_type','NOT_FOUND','🚀\x20~\x20create_transaction_API_Call\x20~\x20account_data:','payer','Transaction\x20confirmed\x20successfully','Quotation\x20created\x20successfully','type','transaction','amount','length','AL_PAY','find_payout_routes','country','Retry...........','credit_party_identifiers_accepted','password','B2C','map','/quotations/','service','Transaction\x20not\x20attached!','purpose_of_remittance','request','❌\x20File\x20does\x20not\x20exist:','AP_','......\x20Override\x20MID\x20found\x20.......','name','Transaction\x20found','Route\x20not\x20found!','./thunes_client.service','data','./account_details.service','USD','Transaction\x20created\x20successfully','🚀\x20~\x20constcreate_quotations=\x20~\x20payload:','form-data','Transaction\x20not\x20found!','fee','receiver_id','extra','external_id','includes','🚀\x20~\x20\x20conditionPayload:','webhook_url','file\x20not\x20found','🚀\x20~\x20create_transaction_API_Call\x20~\x20transactionData:','here\x20goes\x20thunes\x20','Quotation\x20not\x20created!'];a30_0x57ac=function(){return _0x20176f;};return a30_0x57ac();}(function(_0x3daaa7,_0x323a36){const _0x146187=a30_0xffa8,_0x2623d3=_0x3daaa7();while(!![]){try{const _0x5b04da=parseInt(_0x146187(0x1c6))/0x1+parseInt(_0x146187(0x1d7))/0x2+parseInt(_0x146187(0x219))/0x3*(-parseInt(_0x146187(0x1e3))/0x4)+parseInt(_0x146187(0x203))/0x5+-parseInt(_0x146187(0x21c))/0x6+-parseInt(_0x146187(0x229))/0x7+parseInt(_0x146187(0x1d5))/0x8;if(_0x5b04da===_0x323a36)break;else _0x2623d3['push'](_0x2623d3['shift']());}catch(_0x223923){_0x2623d3['push'](_0x2623d3['shift']());}}}(a30_0x57ac,0xd875e));const httpStatus=require(a30_0xcab2b5(0x1db)),helperService=require(a30_0xcab2b5(0x1d3)),payoutRoutesService=require(a30_0xcab2b5(0x1d1)),receiverService=require(a30_0xcab2b5(0x211)),quotationDbService=require(a30_0xcab2b5(0x1ee)),transactionDbService=require(a30_0xcab2b5(0x231)),transactionService=require(a30_0xcab2b5(0x1f6)),accountDetailsService=require(a30_0xcab2b5(0x1b2)),db=require('../models'),ApiError=require(a30_0xcab2b5(0x1d8)),beneficiary=require(a30_0xcab2b5(0x210)),nodeServerService=require(a30_0xcab2b5(0x1d2)),nodeServerAPIService=require('../service/node_server_api.service'),{ref}=require('joi'),pspService=require(a30_0xcab2b5(0x1d4)),createApiClient=require(a30_0xcab2b5(0x259)),createGeneralApiClient=require(a30_0xcab2b5(0x1ca)),moment=require(a30_0xcab2b5(0x1de)),FormData=require(a30_0xcab2b5(0x1b6)),fs=require('fs'),get_wallet_balance=async _0x17feac=>{const _0x1ffa49=a30_0xcab2b5;var _0x4c34ad='';try{let _0x5c3709='/fetch-wallet-balance';_0x4c34ad=await nodeServerService[_0x1ffa49(0x1f0)](_0x5c3709,_0x17feac);}catch(_0xf8d047){return console[_0x1ffa49(0x1cd)](_0x1ffa49(0x202),_0xf8d047[_0x1ffa49(0x22f)]),{'status':_0xf8d047[_0x1ffa49(0x1ed)],'message':_0xf8d047[_0x1ffa49(0x22f)]};}if(helperService['isNotValid'](_0x4c34ad))return{'status':httpStatus[_0x1ffa49(0x23d)],'message':'Balance\x20is\x20not\x20fetch'};return{'status':httpStatus['OK'],'message':'Balance\x20fetched!','data':_0x4c34ad};},create_quotations=async _0x57378c=>{const _0xdbf35a=a30_0xcab2b5,_0xe5b499=_0x57378c?.['extra']?.['receiver'],_0x2ef398=_0x57378c?.[_0xdbf35a(0x239)],_0x285e49=_0x57378c?.['extra']?.['payer'],_0x166c4d=_0x57378c?.[_0xdbf35a(0x1ba)]?.['MID'];let _0x827b95='',_0x28e0fa=_0xe5b499?.[_0xdbf35a(0x1cc)],_0x54bfff=await helperService[_0xdbf35a(0x1dd)]();var _0xa269bb={'external_id':_0x54bfff,'payer_id':_0x2ef398?.[_0xdbf35a(0x1d9)],'mode':_0xdbf35a(0x218),'transaction_type':_0x2ef398?.['customer_type']?.['toLowerCase']()===_0xdbf35a(0x215)?_0xdbf35a(0x1e4):_0xdbf35a(0x24c),'source':{'amount':null,'currency':_0xdbf35a(0x1b3),'country_iso_code':_0xdbf35a(0x1ce)},'destination':{'amount':_0x57378c?.['destination_amount'],'currency':_0x2ef398?.['currency']}};_0x57378c?.[_0xdbf35a(0x1c3)]&&_0x57378c?.[_0xdbf35a(0x200)]&&(_0xa269bb={'external_id':_0x54bfff,'payer_id':_0x2ef398?.[_0xdbf35a(0x1d9)],'mode':_0xdbf35a(0x214),'transaction_type':_0x2ef398?.[_0xdbf35a(0x1d6)]?.[_0xdbf35a(0x1e1)]()===_0xdbf35a(0x215)?'B2B':_0xdbf35a(0x24c),'source':{'amount':_0x57378c?.[_0xdbf35a(0x1c3)],'currency':_0x57378c?.['debit_currency'],'country_iso_code':'USA'},'destination':{'amount':null,'currency':_0x2ef398?.[_0xdbf35a(0x227)]}});console[_0xdbf35a(0x21d)](_0xdbf35a(0x1b5),_0xa269bb);var _0x1de93e='';try{const _0x46f79e=createApiClient(_0x166c4d?.['api_key'],_0x166c4d?.[_0xdbf35a(0x24b)]);let _0x50e355='/quotations';_0x1de93e=await _0x46f79e[_0xdbf35a(0x1f0)](_0x50e355,_0xa269bb);}catch(_0x1b89a4){return console[_0xdbf35a(0x1cd)](_0xdbf35a(0x202),_0x1b89a4[_0xdbf35a(0x22f)]),{'status':httpStatus[_0xdbf35a(0x1fe)],'message':_0x1b89a4[_0xdbf35a(0x22f)]};}if(helperService[_0xdbf35a(0x1c7)](_0x1de93e))return{'status':httpStatus['NOT_FOUND'],'message':_0xdbf35a(0x1c2)};const _0x2259bb={'id':_0x1de93e?.['id'],'external_id':_0x1de93e?.['external_id'],'receiver_id':_0xe5b499?.[_0xdbf35a(0x1b9)],'super_merchant_id':_0x827b95,'sub_merchant_id':_0x28e0fa,'mode':_0x1de93e?.['mode'],'transaction_type':_0x1de93e?.[_0xdbf35a(0x234)],'wholesale_fx_rate':_0x1de93e?.[_0xdbf35a(0x1f1)],'destination_amount':_0x1de93e?.[_0xdbf35a(0x1c4)]?.[_0xdbf35a(0x244)],'destination_currency':_0x1de93e?.[_0xdbf35a(0x1c4)]?.[_0xdbf35a(0x227)],'sent_amount':_0x1de93e?.['sent_amount']?.[_0xdbf35a(0x244)],'sent_currency':_0x1de93e?.[_0xdbf35a(0x1e5)]?.[_0xdbf35a(0x227)],'source_amount':_0x1de93e?.[_0xdbf35a(0x1cf)]?.[_0xdbf35a(0x244)],'source_currency':_0x1de93e?.[_0xdbf35a(0x1cf)]?.[_0xdbf35a(0x227)],'source_country_iso_code':_0x1de93e?.['source']?.['country_iso_code'],'fee_amount':_0x1de93e?.['fee']?.[_0xdbf35a(0x244)],'fee_currency':_0x1de93e?.[_0xdbf35a(0x1b8)]?.[_0xdbf35a(0x227)],'creation_date':_0x1de93e?.[_0xdbf35a(0x1f5)],'expiration_date':_0x1de93e?.[_0xdbf35a(0x20f)],'payer_country_iso_code':_0x1de93e?.['payer']?.[_0xdbf35a(0x233)],'payer_currency':_0x1de93e?.[_0xdbf35a(0x23f)]?.[_0xdbf35a(0x227)],'payer_id':_0x1de93e?.['payer']?.['id'],'payer_name':_0x1de93e?.[_0xdbf35a(0x23f)]?.[_0xdbf35a(0x256)],'service_id':_0x1de93e?.[_0xdbf35a(0x23f)]?.[_0xdbf35a(0x24f)]?.['id'],'service_name':_0x1de93e?.[_0xdbf35a(0x23f)]?.[_0xdbf35a(0x24f)]?.[_0xdbf35a(0x256)]};let _0x13c1a3=await quotationDbService['addNewQuotation'](_0x2259bb);if(_0x13c1a3?.[_0xdbf35a(0x1ed)]!==httpStatus['OK'])return _0x13c1a3;return{'status':httpStatus['OK'],'message':_0xdbf35a(0x241),'data':_0x1de93e};},post_transaction=async(_0x20eebc,_0x4191d6,_0x1eaacf,_0x291379,_0x5cc093,_0x5a6116)=>{const _0x4390f7=a30_0xcab2b5;let _0x1e768d={'registered_name':_0x4390f7(0x1fd),'registration_number':_0x4390f7(0x20e),'country_iso_code':_0x4390f7(0x1ce),'address':_0x4390f7(0x1ce),'city':_0x4390f7(0x1fb),'code':_0x4390f7(0x1ef)};const _0x11bba6=_0x291379?.[_0x4390f7(0x239)];console[_0x4390f7(0x21d)]('account\x20details'),console[_0x4390f7(0x21d)](_0x11bba6);if(_0x11bba6[_0x4390f7(0x1d9)]==_0x4390f7(0x20a))console[_0x4390f7(0x21d)]('here\x20goes\x20mtn\x20momo\x20');else{console[_0x4390f7(0x21d)](_0x4390f7(0x1c1));let _0x235c43=_0x291379?.[_0x4390f7(0x1d6)];const _0x1f883d=_0x235c43?.[_0x4390f7(0x1e1)]()===_0x4390f7(0x215)?_0x4191d6?.[_0x4390f7(0x209)]?.[_0x4390f7(0x1e4)]:_0x4191d6?.[_0x4390f7(0x209)]?.[_0x4390f7(0x24c)],_0x1d6090=_0x1f883d?.[_0x4390f7(0x24a)][0x0],_0x504280=_0x1f883d?.[_0x4390f7(0x21a)][0x0],_0xd1de92=_0x1f883d?.[_0x4390f7(0x1e2)][0x0],_0x14e13d=Object[_0x4390f7(0x1c9)](_0x1d6090[_0x4390f7(0x24d)](_0x339934=>[_0x339934,_0x11bba6[_0x339934]])[_0x4390f7(0x208)](([_0x3c9e6e,_0x2884ed])=>_0x2884ed!==undefined)),_0x33c608=Object[_0x4390f7(0x1c9)](_0x504280[_0x4390f7(0x24d)](_0x2e4e8c=>[_0x2e4e8c,_0x11bba6[_0x2e4e8c]])[_0x4390f7(0x208)](([_0x57abb6,_0xe4075b])=>_0xe4075b!==undefined)),_0x518b8a=Object['fromEntries'](_0xd1de92[_0x4390f7(0x24d)](_0x323cdc=>[_0x323cdc,_0x1e768d[_0x323cdc]])[_0x4390f7(0x208)](([_0x387b7e,_0x9d7ed7])=>_0x9d7ed7!==undefined));let _0x568b45=helperService[_0x4390f7(0x1dd)]();var _0xe33933={'credit_party_identifier':_0x14e13d,'callback_url':process[_0x4390f7(0x223)][_0x4390f7(0x206)],'sending_business':_0x518b8a,'external_id':_0x20eebc?.[_0x4390f7(0x1bb)],'purpose_of_remittance':helperService[_0x4390f7(0x1c7)](_0x20eebc?.[_0x4390f7(0x252)]?.[_0x4390f7(0x251)])?_0x4390f7(0x201):_0x20eebc?.[_0x4390f7(0x252)]?.[_0x4390f7(0x251)],'document_reference_number':_0x568b45};return _0x235c43?.[_0x4390f7(0x1e1)]()==='business'?_0xe33933[_0x4390f7(0x1fc)]=_0x33c608:_0xe33933[_0x4390f7(0x225)]=_0x33c608,console[_0x4390f7(0x21d)]('🚀\x20~\x20constpost_transaction=\x20~\x20payload:',_0xe33933),await create_transaction_API_Call(_0xe33933,_0x20eebc,_0x1eaacf,_0x291379,_0x5cc093,_0x5a6116,_0x4191d6);}},create_transaction_API_Call=async(_0x531c00,_0x1c49d2,_0x5c6623,_0x3091d0,_0x5f2a83,_0x21eddd,_0x5043c2)=>{const _0x442d6c=a30_0xcab2b5;var _0x290f52='',_0x9732d=_0x1c49d2[_0x442d6c(0x1c8)]==undefined?_0x1c49d2['id']:_0x1c49d2['quotation_id'];try{let _0x93cd7f=_0x442d6c(0x24e)+_0x9732d+'/transactions';const _0x162e19=createApiClient(_0x21eddd?.['api_key'],_0x21eddd?.[_0x442d6c(0x24b)]);_0x290f52=await _0x162e19[_0x442d6c(0x1f0)](_0x93cd7f,_0x531c00);}catch(_0x59a83f){return console[_0x442d6c(0x1cd)](_0x442d6c(0x202),_0x59a83f[_0x442d6c(0x22f)]),{'status':httpStatus[_0x442d6c(0x1fe)],'message':_0x59a83f[_0x442d6c(0x22f)]};}if(helperService['isNotValid'](_0x290f52))return{'status':httpStatus[_0x442d6c(0x1ff)],'message':_0x442d6c(0x228)};const _0x231f25={'transaction':_0x290f52,'super_merchant_id':null,'sub_merchant_id':_0x5c6623?.[_0x442d6c(0x1cc)],'quotation_id':_0x1c49d2?.['quotation_id'],'receiver_id':_0x5c6623?.[_0x442d6c(0x1b9)],'batch_id':_0x5f2a83,'mid_id':_0x21eddd?.['id'],'order_id':_0x1c49d2?.['request']?.[_0x442d6c(0x21b)],'wallet_id':_0x1c49d2?.[_0x442d6c(0x252)]?.[_0x442d6c(0x235)],'account_id':_0x1c49d2?.[_0x442d6c(0x252)]?.[_0x442d6c(0x205)],'payout_reference':_0x1c49d2?.[_0x442d6c(0x252)]?.[_0x442d6c(0x226)],'webhook_url':_0x1c49d2?.[_0x442d6c(0x252)]?.[_0x442d6c(0x1be)]};console[_0x442d6c(0x21d)](_0x442d6c(0x1c0),_0x231f25);var _0x6c50a7=await transactionService[_0x442d6c(0x1d0)](_0x231f25);_0x6c50a7[_0x442d6c(0x1ed)]!==httpStatus['OK']&&console[_0x442d6c(0x21d)](_0x442d6c(0x1c5),_0x6c50a7);let _0x4e099a='';helperService[_0x442d6c(0x1c7)](_0x3091d0?.[_0x442d6c(0x1cc)])&&helperService[_0x442d6c(0x237)](_0x3091d0?.[_0x442d6c(0x1b9)])?_0x4e099a='payout':_0x4e099a=_0x442d6c(0x1e0);let _0x5755c8={'transaction_id':_0x231f25?.[_0x442d6c(0x243)]?.['id'],'order_id':_0x231f25?.[_0x442d6c(0x21b)],'external_id':_0x231f25?.[_0x442d6c(0x243)]?.[_0x442d6c(0x1bb)],'receiver_id':_0x231f25?.[_0x442d6c(0x1b9)],'sub_merchant_id':helperService[_0x442d6c(0x1c7)](_0x231f25?.[_0x442d6c(0x1cc)])?0x0:_0x231f25?.[_0x442d6c(0x1cc)],'transaction_date':_0x231f25?.[_0x442d6c(0x243)]?.['creation_date'],'account_id':_0x231f25?.['account_id'],'account_type':_0x3091d0?.[_0x442d6c(0x1d6)]?.[_0x442d6c(0x1e1)]()===_0x442d6c(0x215)?0x2:0x1,'account_for':_0x4e099a,'account_data':JSON[_0x442d6c(0x21f)](_0x3091d0),'payer_id':_0x231f25?.[_0x442d6c(0x243)]?.['payer']?.['id'],'payer_name':_0x231f25?.[_0x442d6c(0x243)]?.[_0x442d6c(0x23f)]?.['name'],'payer_currency':_0x231f25?.['transaction']?.[_0x442d6c(0x23f)]?.['currency'],'payer_data':JSON[_0x442d6c(0x21f)](_0x5043c2)};console['log'](_0x442d6c(0x23e),_0x5755c8);let _0x2857a1=await accountDetailsService[_0x442d6c(0x220)](_0x5755c8);console[_0x442d6c(0x21d)](_0x442d6c(0x20c),_0x2857a1);let _0x5d25ed={};if(helperService[_0x442d6c(0x1c7)](_0x5c6623?.[_0x442d6c(0x1cc)]))_0x5d25ed={'id':_0x5c6623?.[_0x442d6c(0x1b9)],'name':_0x5c6623?.[_0x442d6c(0x1f2)],'country':_0x5c6623?.[_0x442d6c(0x1f7)],'webhook_url':_0x5c6623?.['webhook_url']};else helperService[_0x442d6c(0x237)](_0x5c6623?.[_0x442d6c(0x1cc)])&&helperService['isValid'](_0x5c6623?.[_0x442d6c(0x1b9)])&&(_0x5d25ed={'id':null,'name':_0x442d6c(0x1fa),'country':'UAE','webhook_url':null});let _0x232423={'account_id':_0x3091d0?.['account_id'],..._0x3091d0?.[_0x442d6c(0x239)]},_0x1f7deb={..._0x290f52?.[_0x442d6c(0x1e8)],'payer_id':_0x3091d0?.[_0x442d6c(0x1d9)],'payer_name':_0x3091d0?.[_0x442d6c(0x222)]};const _0x26e971={'order_id':_0x1c49d2?.['request']?.[_0x442d6c(0x21b)],'external_id':_0x290f52?.[_0x442d6c(0x1bb)],'transaction_id':_0x290f52?.['id'],'sub_merchant_id':_0x5c6623?.['sub_merchant_id'],'receiver_id':_0x5c6623?.[_0x442d6c(0x1b9)],'currency':_0x290f52?.[_0x442d6c(0x1c4)]?.[_0x442d6c(0x227)],'wallet_id':_0x1c49d2?.[_0x442d6c(0x252)]?.[_0x442d6c(0x235)],'debit_party':_0x5d25ed,'credit_party':_0x232423,'credit_party_identifier':_0x1f7deb,'debit_details':{'debit_amount':_0x290f52?.['sent_amount']?.[_0x442d6c(0x244)],'currency':_0x290f52?.[_0x442d6c(0x1e5)]?.[_0x442d6c(0x227)]},'credit_details':{'amount':_0x290f52?.[_0x442d6c(0x1c4)]?.[_0x442d6c(0x244)],'currency':_0x290f52?.[_0x442d6c(0x1c4)]?.['currency']},'payout_reference':helperService[_0x442d6c(0x237)](_0x1c49d2?.['request']?.['payout_reference'])?_0x1c49d2?.[_0x442d6c(0x252)]?.[_0x442d6c(0x226)]:null,'webhook_url':helperService[_0x442d6c(0x237)](_0x1c49d2?.[_0x442d6c(0x252)]?.[_0x442d6c(0x1be)])?_0x1c49d2?.['request']?.[_0x442d6c(0x1be)]:null,'document_reference_number':_0x290f52?.[_0x442d6c(0x20b)],'purpose_of_remittance':helperService[_0x442d6c(0x237)](_0x1c49d2?.[_0x442d6c(0x252)]?.[_0x442d6c(0x251)])?_0x1c49d2?.[_0x442d6c(0x252)]?.['purpose_of_remittance']:null,'transaction_status':_0x290f52?.['status_message'],'transaction_status_code':_0x290f52?.[_0x442d6c(0x1ed)],'order_created_date':moment(_0x290f52?.[_0x442d6c(0x1f5)])['format'](_0x442d6c(0x1cb)),'order_updated_date':moment(_0x290f52?.[_0x442d6c(0x1f5)])['format'](_0x442d6c(0x1cb)),'batch_id':_0x5f2a83};return{'status':httpStatus['OK'],'message':_0x442d6c(0x1b4),'data':_0x26e971};},confirm_transaction=async(_0x2e4594,_0x78d815=null,_0x4095ed,_0x2dce27,_0x3a9999)=>{const _0x58aad6=a30_0xcab2b5;var _0x29902f='';try{let _0x3dfbfc=_0x58aad6(0x224)+_0x2e4594+'/confirm';const _0x3fad96=createApiClient(_0x4095ed?.[_0x58aad6(0x22a)],_0x4095ed?.['password']);_0x29902f=await _0x3fad96[_0x58aad6(0x1f0)](_0x3dfbfc,{});}catch(_0x1a8293){return console[_0x58aad6(0x1cd)](_0x58aad6(0x202),_0x1a8293['message']),{'status':httpStatus[_0x58aad6(0x1fe)],'message':_0x1a8293[_0x58aad6(0x22f)]};}if(helperService[_0x58aad6(0x1c7)](_0x29902f))return{'status':httpStatus[_0x58aad6(0x1ff)],'message':_0x58aad6(0x228)};let _0x268290=_0x29902f?.['external_id'];var _0x41325d=await quotationDbService[_0x58aad6(0x1ea)](_0x268290);if(helperService['isNotValid'](_0x41325d))return{'status':0x190,'message':'Quotation\x20not\x20found!'};var _0x4219a3=await receiverService[_0x58aad6(0x1dc)](_0x41325d?.[_0x58aad6(0x1b9)],_0x41325d?.[_0x58aad6(0x21e)]);if(helperService[_0x58aad6(0x1c7)](_0x4219a3))return{'status':0x190,'message':'Receiver\x20not\x20found!'};const _0x3886c3={'transaction':_0x29902f,'super_merchant_id':null,'sub_merchant_id':_0x4219a3?.[_0x58aad6(0x1cc)],'quotation_id':_0x41325d?.['quotation_id'],'receiver_id':_0x4219a3?.[_0x58aad6(0x1b9)],'order_id':_0x2dce27?.[_0x58aad6(0x21b)],'wallet_id':_0x2dce27?.[_0x58aad6(0x235)],'account_id':_0x2dce27?.[_0x58aad6(0x205)],'batch_id':_0x78d815,'mid_id':_0x4095ed?.['id'],'payout_reference':_0x2dce27?.[_0x58aad6(0x226)],'webhook_url':_0x2dce27?.[_0x58aad6(0x1be)]};var _0x1515a4=await transactionService[_0x58aad6(0x1d0)](_0x3886c3);_0x1515a4[_0x58aad6(0x1ed)]!==httpStatus['OK']&&new ApiError(httpStatus[_0x58aad6(0x1ff)],_0x1515a4[_0x58aad6(0x22f)]);let _0x381112={};if(helperService[_0x58aad6(0x1c7)](_0x4219a3?.[_0x58aad6(0x1cc)]))_0x381112={'id':_0x4219a3?.[_0x58aad6(0x1b9)],'name':_0x4219a3?.[_0x58aad6(0x1f2)],'country':_0x4219a3?.[_0x58aad6(0x1f7)],'webhook_url':_0x4219a3?.[_0x58aad6(0x1be)]};else helperService[_0x58aad6(0x237)](_0x4219a3?.[_0x58aad6(0x1cc)])&&helperService[_0x58aad6(0x237)](_0x4219a3?.[_0x58aad6(0x1b9)])&&(_0x381112={'id':null,'name':_0x58aad6(0x1fa),'country':'UAE','webhook_url':null});let _0x1aeecb={'account_id':_0x3a9999?.[_0x58aad6(0x205)],..._0x3a9999?.[_0x58aad6(0x239)]},_0x248b42={..._0x29902f?.['credit_party_identifier'],'payer_id':_0x3a9999?.['payer_id'],'payer_name':_0x3a9999?.[_0x58aad6(0x222)]};const _0x342d98={'order_id':_0x2dce27?.[_0x58aad6(0x21b)],'external_id':_0x29902f?.['external_id'],'transaction_id':_0x29902f?.['id'],'sub_merchant_id':_0x4219a3?.[_0x58aad6(0x1cc)],'receiver_id':_0x4219a3?.[_0x58aad6(0x1b9)],'currency':_0x29902f?.['destination']?.[_0x58aad6(0x227)],'wallet_id':_0x2dce27?.['wallet_id'],'debit_party':_0x381112,'credit_party':_0x1aeecb,'credit_party_identifier':_0x248b42,'debit_details':{'debit_amount':_0x29902f?.[_0x58aad6(0x1e5)]?.[_0x58aad6(0x244)],'currency':_0x29902f?.[_0x58aad6(0x1e5)]?.[_0x58aad6(0x227)]},'credit_details':{'amount':_0x29902f?.['destination']?.[_0x58aad6(0x244)],'currency':_0x29902f?.['destination']?.[_0x58aad6(0x227)]},'payout_reference':helperService['isValid'](_0x41325d?.[_0x58aad6(0x252)]?.[_0x58aad6(0x226)])?_0x41325d?.[_0x58aad6(0x252)]?.['payout_reference']:null,'webhook_url':helperService[_0x58aad6(0x237)](_0x41325d?.[_0x58aad6(0x252)]?.[_0x58aad6(0x1be)])?_0x41325d?.[_0x58aad6(0x252)]?.['webhook_url']:null,'document_reference_number':_0x29902f?.['document_reference_number'],'purpose_of_remittance':helperService['isValid'](_0x41325d?.['request']?.['purpose_of_remittance'])?_0x41325d?.[_0x58aad6(0x252)]?.['purpose_of_remittance']:null,'transaction_status':_0x29902f?.[_0x58aad6(0x1f8)],'transaction_status_code':_0x29902f?.[_0x58aad6(0x1ed)],'order_created_date':moment(_0x29902f?.[_0x58aad6(0x1f5)])[_0x58aad6(0x1ec)](_0x58aad6(0x1cb)),'order_updated_date':moment(_0x29902f?.[_0x58aad6(0x1f5)])[_0x58aad6(0x1ec)](_0x58aad6(0x1cb)),'payout_reference':_0x41325d?.[_0x58aad6(0x252)]?.[_0x58aad6(0x226)],'batch_id':_0x78d815};return{'status':httpStatus['OK'],'message':_0x58aad6(0x240),'data':_0x342d98};},transaction_status=async(_0x1a30f8,_0x2e8eb1)=>{const _0x416f44=a30_0xcab2b5;var _0x27c980='';try{let _0x4b507d=_0x416f44(0x224)+_0x1a30f8;const _0x200998=createApiClient(_0x2e8eb1?.[_0x416f44(0x22a)],_0x2e8eb1?.['password']);_0x27c980=await _0x200998[_0x416f44(0x204)](_0x4b507d);}catch(_0x15cc83){return console[_0x416f44(0x1cd)](_0x416f44(0x202),_0x15cc83[_0x416f44(0x22f)]),{'status':httpStatus[_0x416f44(0x1fe)],'message':_0x15cc83[_0x416f44(0x22f)]};}if(helperService['isNotValid'](_0x27c980))return{'status':httpStatus[_0x416f44(0x1ff)],'message':_0x416f44(0x1b7)};const _0x2a99b4={'transaction_id':_0x27c980?.['id'],'transaction_status':_0x27c980?.[_0x416f44(0x1f8)],'status_code':_0x27c980?.['status'],..._0x27c980};return delete _0x2a99b4['id'],delete _0x2a99b4[_0x416f44(0x1ed)],delete _0x2a99b4[_0x416f44(0x1f8)],{'status':httpStatus['OK'],'message':_0x416f44(0x257),'data':_0x2a99b4};},transaction_cancel=async(_0x4a8a5f,_0x398282)=>{const _0x40aaa7=a30_0xcab2b5;var _0xc5f7fe='';try{let _0x1c68b4=_0x40aaa7(0x224)+_0x4a8a5f+'/cancel';const _0xeb12a8=createApiClient(_0x398282?.[_0x40aaa7(0x22a)],_0x398282?.[_0x40aaa7(0x24b)]);_0xc5f7fe=await _0xeb12a8[_0x40aaa7(0x204)](_0x1c68b4);}catch(_0x336215){return console[_0x40aaa7(0x1cd)](_0x40aaa7(0x202),_0x336215[_0x40aaa7(0x22f)]),{'status':httpStatus[_0x40aaa7(0x1fe)],'message':_0x336215[_0x40aaa7(0x22f)]};}if(helperService[_0x40aaa7(0x1c7)](_0xc5f7fe))return{'status':httpStatus[_0x40aaa7(0x1ff)],'message':'Transaction\x20not\x20cancelled!'};return{'status':httpStatus['OK'],'message':_0x40aaa7(0x217),'data':_0xc5f7fe};},get_payout_list=async(_0x4634c9,_0x2d11a5)=>{const _0x35bda1=a30_0xcab2b5;try{return await transactionDbService[_0x35bda1(0x22d)](_0x4634c9,_0x2d11a5);}catch(_0x2cc922){return console[_0x35bda1(0x1cd)]('Sequelize\x20query\x20failed:',_0x2cc922),{'status':0x190,'message':_0x2cc922['message']};}},makeMTNMomoRequest=async(_0x5ca947,_0x13a55d)=>{},find_mid_by_psp=async _0x3afc98=>{let _0x4a8719=await pspService['find_routing_mid']({'psp_id':_0x3afc98});return _0x4a8719;},find_mid_by_psp_and_receiver=async(_0x6e8c29,_0x5505f8)=>{const _0x486c81=a30_0xcab2b5;let _0x32f4b8=await pspService[_0x486c81(0x1df)]({'psp_id':_0x6e8c29,'receiver_id':_0x5505f8});return _0x32f4b8;},payout_psp_routing=async _0x17ecb7=>{const _0x3378a8=a30_0xcab2b5;console[_0x3378a8(0x21d)]('🚀\x20~\x20payout_psp_routing\x20~\x20receiver_account_details:',_0x17ecb7);let _0x3d1bbd=_0x17ecb7?.[_0x3378a8(0x23c)],_0x37fab5=_0x17ecb7?.[_0x3378a8(0x248)],_0x46a1f7=_0x17ecb7?.[_0x3378a8(0x227)],_0x148dc6=_0x17ecb7?.[_0x3378a8(0x1d9)];const _0x16892e={'country_iso':_0x37fab5,'account_type':_0x3d1bbd,'currency':_0x46a1f7,'payer_id':_0x148dc6};console[_0x3378a8(0x21d)](_0x16892e);if(_0x16892e?.[_0x3378a8(0x1d9)]?.[_0x3378a8(0x1bc)](_0x3378a8(0x254)))_0x16892e['payer_id']=_0x3378a8(0x246);else _0x16892e['payer_id']!=='MTN_MOMO'&&_0x16892e[_0x3378a8(0x1d9)]!==_0x3378a8(0x1eb)&&_0x16892e[_0x3378a8(0x1d9)]!='ORANGE_MONEY'&&_0x16892e[_0x3378a8(0x1d9)]!=_0x3378a8(0x22c)&&_0x16892e[_0x3378a8(0x1d9)]!='AL'&&(_0x16892e[_0x3378a8(0x1d9)]='NA');console[_0x3378a8(0x21d)](_0x3378a8(0x1bd),_0x16892e);let _0x1e03eb=await payoutRoutesService[_0x3378a8(0x247)](_0x16892e);console[_0x3378a8(0x21d)]('🚀\x20~\x20constpayout_psp_routing=\x20~\x20route:',_0x1e03eb);if(_0x1e03eb?.['status']==httpStatus['OK']){let _0x31147b=_0x1e03eb?.[_0x3378a8(0x1b1)];_0x31147b=Array[_0x3378a8(0x1f3)](_0x31147b)?_0x31147b:[];if(_0x31147b?.[_0x3378a8(0x245)]<0x1)return{'status':httpStatus[_0x3378a8(0x22e)],'message':_0x3378a8(0x258)};let _0x1ebcf1=_0x31147b[0x0]?.[_0x3378a8(0x238)],_0x52fc26=await find_mid_by_psp_and_receiver(_0x1ebcf1,_0x17ecb7?.[_0x3378a8(0x1b9)]);_0x52fc26?.[_0x3378a8(0x1ed)]==httpStatus['OK']&&console['log'](_0x3378a8(0x255));_0x52fc26?.[_0x3378a8(0x1ed)]!==httpStatus['OK']&&(_0x52fc26=await find_mid_by_psp(_0x1ebcf1),_0x52fc26?.[_0x3378a8(0x1ed)]==httpStatus['OK']&&console['log'](_0x3378a8(0x20d)));if(_0x52fc26?.[_0x3378a8(0x1ed)]!==httpStatus['OK']&&_0x148dc6===_0x3378a8(0x20a)||_0x52fc26?.[_0x3378a8(0x1ed)]!==httpStatus['OK']&&_0x148dc6===_0x3378a8(0x1eb)||_0x52fc26?.[_0x3378a8(0x1ed)]!==httpStatus['OK']&&_0x148dc6===_0x3378a8(0x230)||_0x52fc26?.[_0x3378a8(0x1ed)]!==httpStatus['OK']&&_0x148dc6===_0x3378a8(0x22c)||_0x52fc26?.['status']!==httpStatus['OK']&&_0x148dc6?.[_0x3378a8(0x1bc)]('AP_')||_0x52fc26?.[_0x3378a8(0x1ed)]!==httpStatus['OK']&&_0x148dc6==='AL'){console['log'](_0x3378a8(0x249));if(_0x31147b[_0x3378a8(0x245)]>0x1){_0x1ebcf1=_0x31147b[0x1]?.[_0x3378a8(0x238)],_0x52fc26=await find_mid_by_psp(_0x1ebcf1);if(_0x52fc26?.['status']==httpStatus['OK'])return _0x52fc26;}_0x17ecb7['payer_id']='NA',payout_psp_routing(_0x17ecb7);}return _0x52fc26;}return{'status':httpStatus[_0x3378a8(0x22e)],'message':_0x3378a8(0x1e9)};},send_webhook=async _0x3f99fc=>{const _0x15663d=a30_0xcab2b5;let _0x3372a4;try{let _0x595e75=null,_0x37c5d3=null;if(helperService['isNotValid'](_0x3f99fc?.[_0x15663d(0x1be)])){if(helperService[_0x15663d(0x237)](_0x3f99fc?.[_0x15663d(0x1cc)])){const _0xe8ffa4=await nodeServerAPIService['get_merchant_webhook_settings'](_0x3f99fc?.[_0x15663d(0x1cc)]);console['log'](_0x15663d(0x1e6),_0xe8ffa4),_0x595e75=_0xe8ffa4?.[_0x15663d(0x1b1)][_0x15663d(0x23a)],_0x37c5d3=_0xe8ffa4?.[_0x15663d(0x1b1)]['notification_secret'];}else{if(helperService['isValid'](_0x3f99fc?.[_0x15663d(0x1b9)])){const _0x40b37a=await receiverService[_0x15663d(0x1dc)](_0x3f99fc?.[_0x15663d(0x1b9)]);_0x595e75=_0x40b37a?.['webhook_url'],_0x37c5d3=_0x40b37a?.[_0x15663d(0x1f9)];}}}else _0x595e75=_0x3f99fc?.[_0x15663d(0x1be)];console[_0x15663d(0x21d)](_0x15663d(0x221),_0x595e75);if(helperService[_0x15663d(0x237)](_0x595e75)){var _0x305406=createGeneralApiClient();_0x3372a4=await _0x305406['post'](_0x595e75,_0x3f99fc,{'headers':{'notification-secret':_0x37c5d3}}),console[_0x15663d(0x21d)](_0x15663d(0x1f4),_0x3372a4);}}catch(_0x4ec9a0){console[_0x15663d(0x21d)](_0x15663d(0x207),_0x4ec9a0);}return _0x3372a4;},add_transaction_attachment=async(_0x4857ca,_0x4b166d,_0x23ff10,_0x19f555)=>{const _0x1ca4db=a30_0xcab2b5;console['log']('🚀\x20~\x20add_transaction_attachment\x20~\x20file:',_0x4b166d);var _0x1a0057='';try{let _0x1c10a5=_0x1ca4db(0x224)+_0x19f555+_0x1ca4db(0x23b);const _0x3bb135=createApiClient(_0x4857ca?.['api_key'],_0x4857ca?.[_0x1ca4db(0x24b)]);if(!fs[_0x1ca4db(0x232)](_0x4b166d[_0x1ca4db(0x22b)]))return console[_0x1ca4db(0x1cd)](_0x1ca4db(0x253),_0x4b166d[_0x1ca4db(0x22b)]),{'status':httpStatus[_0x1ca4db(0x22e)],'message':_0x1ca4db(0x1bf)};const _0x319c6b=new FormData();_0x319c6b['append']('file',fs['createReadStream'](_0x4b166d[_0x1ca4db(0x22b)]),{'filename':_0x4b166d[_0x1ca4db(0x216)],'contentType':_0x4b166d['mimetype']}),_0x319c6b[_0x1ca4db(0x213)]('name',_0x4b166d[_0x1ca4db(0x216)]),_0x319c6b['append'](_0x1ca4db(0x242),_0x23ff10),_0x1a0057=await _0x3bb135[_0x1ca4db(0x236)](_0x1c10a5,_0x319c6b),console[_0x1ca4db(0x21d)](_0x1ca4db(0x1e7),_0x1a0057);}catch(_0x3b1764){return console[_0x1ca4db(0x1cd)](_0x1ca4db(0x202),_0x3b1764[_0x1ca4db(0x22f)]),{'status':httpStatus[_0x1ca4db(0x1fe)],'message':_0x3b1764[_0x1ca4db(0x22f)]};}if(helperService['isNotValid'](_0x1a0057))return{'status':httpStatus[_0x1ca4db(0x1ff)],'message':_0x1ca4db(0x250)};return{'status':httpStatus['OK'],'message':_0x1ca4db(0x212),'data':_0x1a0057};};function a30_0xffa8(_0x4afabb,_0x29384e){const _0x57ac18=a30_0x57ac();return a30_0xffa8=function(_0xffa8b9,_0x1d9390){_0xffa8b9=_0xffa8b9-0x1b1;let _0x4753a0=_0x57ac18[_0xffa8b9];return _0x4753a0;},a30_0xffa8(_0x4afabb,_0x29384e);}module[a30_0xcab2b5(0x1da)]={'get_payout_list':get_payout_list,'create_quotations':create_quotations,'post_transaction':post_transaction,'confirm_transaction':confirm_transaction,'transaction_status':transaction_status,'transaction_cancel':transaction_cancel,'get_wallet_balance':get_wallet_balance,'payout_psp_routing':payout_psp_routing,'send_webhook':send_webhook,'add_transaction_attachment':add_transaction_attachment};
+const httpStatus = require("http-status");
+const helperService = require("./helper.service");
+const payoutRoutesService = require("./payout_routes.service");
+const receiverService = require("./receiver.service");
+const quotationDbService = require("./quotation.db.service");
+const transactionDbService = require("./transaction.db.service");
+const transactionService = require("./transactions.service");
+const accountDetailsService = require("./account_details.service");
+const db = require("../models");
+const ApiError = require("../utils/ApiError");
+const beneficiary = require("../models/beneficiary");
+const nodeServerService = require("../service/node_server.service");
+const nodeServerAPIService = require("../service/node_server_api.service");
+const { ref } = require("joi");
+const pspService = require("./psp.service");
+const createApiClient = require("./thunes_client.service");
+const createGeneralApiClient = require("../service/api_client.service");
+const moment = require("moment");
+const FormData = require('form-data');
+const fs = require('fs');
+
+/**
+ * Add New Receiver
+ * @param {string} email
+ * @param {string} password
+ * @returns {Promise<User>}
+ */
+const get_wallet_balance = async (balance_payload) => {
+  // const balance_payload = {
+  //   sub_merchant_id: sub_merchant_id,
+  //   currency: source_currency,
+  // };
+
+  // Axios API request
+  var receiverResponse = "";
+  try {
+    let url = "/fetch-wallet-balance";
+    receiverResponse = await nodeServerService.post(url, balance_payload);
+  } catch (err) {
+    console.error("Error fetching data:", err.message);
+    return {
+      status: err.status,
+      message: err.message,
+    };
+  }
+
+  // Check transaction created
+  if (helperService.isNotValid(receiverResponse)) {
+    return {
+      status: httpStatus.NOT_FOUND,
+      message: "Balance is not fetch",
+    };
+  }
+
+  // Send success response
+  return {
+    status: httpStatus.OK,
+    message: "Balance fetched!",
+    data: receiverResponse,
+  };
+};
+
+/**
+ * Create Quotation
+ * @param {*} param
+ * @returns Created Quotation
+ */
+const create_quotations = async (request_payload) => {
+  const receiver = request_payload?.extra?.receiver;
+  const receiver_account_details = request_payload?.account_details;
+  const payer = request_payload?.extra?.payer;
+  const MID = request_payload?.extra?.MID;
+
+  let super_merchant_id = "";
+  let sub_merchant_id = receiver?.sub_merchant_id;
+  let external_id = await helperService.make_unique_id();
+
+  //   Axios Payload
+  var payload = {
+    external_id: external_id,
+    payer_id: receiver_account_details?.payer_id,
+    mode: "DESTINATION_AMOUNT",
+    transaction_type: receiver_account_details?.customer_type?.toLowerCase() === "business" ? "B2B" : "B2C",
+    source: {
+      amount: null,
+      currency: "USD",
+      country_iso_code: "USA",
+    },
+    destination: {
+      amount: request_payload?.destination_amount,
+      currency: receiver_account_details?.currency,
+    },
+  };
+
+  // If debit amount and debit currency mentions
+  if (request_payload?.debit_amount && request_payload?.debit_currency) {
+    payload = {
+      external_id: external_id,
+      payer_id: receiver_account_details?.payer_id,
+      mode: "SOURCE_AMOUNT",
+      transaction_type:
+        receiver_account_details?.customer_type?.toLowerCase() === "business" ? "B2B" : "B2C",
+      source: {
+        amount: request_payload?.debit_amount,
+        currency: request_payload?.debit_currency,
+        country_iso_code: "USA",
+      },
+      destination: {
+        amount: null,
+        currency: receiver_account_details?.currency,
+      },
+    };
+  }
+
+  console.log("🚀 ~ constcreate_quotations= ~ payload:", payload)
+  // return;
+
+  // Axios API request
+  var quotationResponse = "";
+  try {
+    const api = createApiClient(MID?.api_key, MID?.password);
+
+    let url = "/quotations";
+    quotationResponse = await api.post(url, payload);
+  } catch (err) {
+    console.error("Error fetching data:", err.message);
+    return {
+      status: httpStatus.SERVICE_UNAVAILABLE,
+      message: err.message,
+    };
+  }
+
+  // Check response
+  if (helperService.isNotValid(quotationResponse)) {
+    return {
+      status: httpStatus.NOT_FOUND,
+      message: "Quotation not created!",
+    };
+  }
+
+  // Save Quotation Payload
+  const newQuotationData = {
+    id: quotationResponse?.id,
+    external_id: quotationResponse?.external_id,
+    receiver_id: receiver?.receiver_id,
+    super_merchant_id: super_merchant_id,
+    sub_merchant_id: sub_merchant_id,
+    mode: quotationResponse?.mode,
+    transaction_type: quotationResponse?.transaction_type,
+    wholesale_fx_rate: quotationResponse?.wholesale_fx_rate, // Can be string or number
+    destination_amount: quotationResponse?.destination?.amount,
+    destination_currency: quotationResponse?.destination?.currency,
+    sent_amount: quotationResponse?.sent_amount?.amount,
+    sent_currency: quotationResponse?.sent_amount?.currency,
+    source_amount: quotationResponse?.source?.amount,
+    source_currency: quotationResponse?.source?.currency,
+    source_country_iso_code: quotationResponse?.source?.country_iso_code,
+    fee_amount: quotationResponse?.fee?.amount,
+    fee_currency: quotationResponse?.fee?.currency,
+    creation_date: quotationResponse?.creation_date,
+    expiration_date: quotationResponse?.expiration_date,
+    payer_country_iso_code: quotationResponse?.payer?.country_iso_code,
+    payer_currency: quotationResponse?.payer?.currency,
+    payer_id: quotationResponse?.payer?.id,
+    payer_name: quotationResponse?.payer?.name,
+    service_id: quotationResponse?.payer?.service?.id,
+    service_name: quotationResponse?.payer?.service?.name,
+  };
+
+  // On Quotation Created
+  // Save Quotation
+  let saveQuotationResult = await quotationDbService.addNewQuotation(
+    newQuotationData
+  );
+
+  if (saveQuotationResult?.status !== httpStatus.OK) {
+    return saveQuotationResult;
+  }
+
+  //Set Callback url for post transaction
+  // quotationResponse.callback = process.env.THUNES_WEBHOOK;
+
+  // Send success response
+  return {
+    status: httpStatus.OK,
+    message: "Quotation created successfully",
+    data: quotationResponse,
+  };
+};
+
+/**
+ * Post | Create Transaction
+ * @param {*} req post request data
+ * @param {*} quotationResponse quotation response
+ * @returns
+ */
+const post_transaction = async (quotation, payer, receiver, receiver_account_details, batch_id, MID) => {
+ 
+
+  let sending_business = {
+    registered_name: "GTI",
+    registration_number: "123456",
+    country_iso_code: "USA",
+    address: "USA",
+    city: "New York",
+    code: "94111"
+  };
+
+  const account_details = receiver_account_details?.account_details;
+  console.log(`account details`);
+  console.log(account_details);
+  if (account_details.payer_id == "MTN_MOMO") {
+    console.log(`here goes mtn momo `);
+  } else {
+    console.log(`here goes thunes `);
+
+    
+    let customer_type = receiver_account_details?.customer_type;
+    const transaction_type = customer_type?.toLowerCase() === "business" ? payer?.transaction_types?.B2B : payer?.transaction_types?.B2C;
+
+    const credit_party_identifiers = transaction_type?.credit_party_identifiers_accepted[0];
+    const required_receiving_entity_fields =
+      transaction_type?.required_receiving_entity_fields[0];
+    const required_sending_entity_fields =
+      transaction_type?.required_sending_entity_fields[0];
+
+    const credit_party_identifiers_data = Object.fromEntries(
+      credit_party_identifiers
+        .map((key) => [key, account_details[key]])
+        .filter(([_, value]) => value !== undefined)
+    );
+
+    const required_receiving_entity_fields_data = Object.fromEntries(
+      required_receiving_entity_fields
+        .map((key) => [key, account_details[key]])
+        .filter(([_, value]) => value !== undefined)
+    );
+
+    const required_sending_entity_fields_data = Object.fromEntries(
+      required_sending_entity_fields
+        .map((key) => [key, sending_business[key]])
+        .filter(([_, value]) => value !== undefined)
+    );
+
+    let doc_reference_number = helperService.make_unique_id();
+    var payload = {
+      credit_party_identifier: credit_party_identifiers_data,
+      callback_url: process.env.THUNES_WEBHOOK,
+      sending_business: required_sending_entity_fields_data,
+      external_id: quotation?.external_id,
+      purpose_of_remittance: helperService.isNotValid(quotation?.request?.purpose_of_remittance) ? "OTHER_FEES" : quotation?.request?.purpose_of_remittance,
+      document_reference_number: doc_reference_number,
+    };
+
+    if (customer_type?.toLowerCase() === "business") {
+      payload.receiving_business = required_receiving_entity_fields_data;
+    }else{
+      payload.beneficiary = required_receiving_entity_fields_data;
+    }
+
+
+    console.log("🚀 ~ constpost_transaction= ~ payload:", payload)
+
+    return await create_transaction_API_Call(
+      payload,
+      quotation,
+      receiver,
+      receiver_account_details,
+      batch_id,
+      MID,
+      payer
+    );
+  }
+};
+
+/**
+ * API Call Post Transaction
+ * @param {*} payload
+ * @returns
+ */
+const create_transaction_API_Call = async (
+  payload,
+  quotation,
+  receiver,
+  receiver_account_details,
+  batch_id,
+  MID,
+  payer
+) => {
+  // Axios API request
+  var postTransactionResponse = "";
+  var quotationID =
+    quotation.quotation_id == undefined ? quotation.id : quotation.quotation_id;
+  try {
+    let url = "/quotations/" + quotationID + "/transactions";
+    const api = createApiClient(MID?.api_key, MID?.password);
+    postTransactionResponse = await api.post(url, payload);
+
+  } catch (err) {
+    console.error("Error fetching data:", err.message);
+    return {
+      status: httpStatus.SERVICE_UNAVAILABLE,
+      message: err.message,
+    };
+  }
+
+  // Check transaction created
+  if (helperService.isNotValid(postTransactionResponse)) {
+    return {
+      status: httpStatus.INTERNAL_SERVER_ERROR,
+      message: "Transaction not created!",
+    };
+  }
+
+  // Save Transaction
+  const transactionData = {
+    transaction: postTransactionResponse,
+    super_merchant_id: null,
+    sub_merchant_id: receiver?.sub_merchant_id,
+    quotation_id: quotation?.quotation_id,
+    receiver_id: receiver?.receiver_id,
+    batch_id: batch_id,
+    mid_id: MID?.id,
+    order_id: quotation?.request?.order_id,
+    wallet_id: quotation?.request?.wallet_id,
+    account_id: quotation?.request?.account_id,
+    payout_reference: quotation?.request?.payout_reference,
+    webhook_url: quotation?.request?.webhook_url,
+  };
+  console.log("🚀 ~ create_transaction_API_Call ~ transactionData:", transactionData)
+
+  // DB Add
+  var result = await transactionService.addNewTransaction(transactionData);
+  if (result.status !== httpStatus.OK) {
+    console.log("🚀 ~ create_transaction_API_Call ~ result:", result)
+  }
+
+  //=============================================================================================
+  // DB Save account and payers data
+  let account_for = "";
+  if (helperService.isNotValid(receiver_account_details?.sub_merchant_id) && helperService.isValid(receiver_account_details?.receiver_id)) {
+    account_for = "payout";
+  } else {
+    account_for = "settlement";
+  }
+  
+  let account_data = {
+    transaction_id: transactionData?.transaction?.id,
+    order_id: transactionData?.order_id,
+    external_id: transactionData?.transaction?.external_id,
+    receiver_id: transactionData?.receiver_id,
+    sub_merchant_id: helperService.isNotValid(transactionData?.sub_merchant_id) ? 0 : transactionData?.sub_merchant_id,
+    transaction_date: transactionData?.transaction?.creation_date,
+    account_id: transactionData?.account_id,
+    account_type: receiver_account_details?.customer_type?.toLowerCase() === 'business' ? 2 : 1,
+    account_for: account_for,
+    account_data: JSON.stringify(receiver_account_details),
+    payer_id: transactionData?.transaction?.payer?.id,
+    payer_name: transactionData?.transaction?.payer?.name,
+    payer_currency: transactionData?.transaction?.payer?.currency,
+    payer_data: JSON.stringify(payer),
+  }
+  console.log("🚀 ~ create_transaction_API_Call ~ account_data:", account_data)
+
+  let account_result = await accountDetailsService.add(account_data);
+  console.log("🚀 ~ create_transaction_API_Call ~ account_result:", account_result)
+
+  //=============================================================================================
+  // Build And Return Response
+  
+  let debit_party = {};
+  // Check Type Of Transation (Settelment OR Payout)
+  if (helperService.isNotValid(receiver?.sub_merchant_id)) {
+    // This is payout
+    debit_party = {
+      id: receiver?.receiver_id,
+      name: receiver?.receiver_name,
+      country: receiver?.registered_business_address,
+      webhook_url: receiver?.webhook_url,
+    }
+  }else if (helperService.isValid(receiver?.sub_merchant_id) && helperService.isValid(receiver?.receiver_id)) {
+    // This is settelment
+    debit_party = {
+      id: null,
+      name: 'Paydart',
+      country: 'UAE',
+      webhook_url: null,
+    }
+  }
+
+  let credit_party = {
+    account_id: receiver_account_details?.account_id,
+    ...receiver_account_details?.account_details,
+  }
+
+  let credit_party_identifier = {
+    ...postTransactionResponse?.credit_party_identifier,
+    payer_id: receiver_account_details?.payer_id,
+    payer_name: receiver_account_details?.payer_name,
+  }
+  
+  const responsePayload = {
+    order_id: quotation?.request?.order_id,
+    external_id: postTransactionResponse?.external_id,
+    transaction_id: postTransactionResponse?.id,
+    sub_merchant_id: receiver?.sub_merchant_id,
+    receiver_id: receiver?.receiver_id,
+    currency: postTransactionResponse?.destination?.currency,
+    wallet_id: quotation?.request?.wallet_id,
+    debit_party: debit_party,
+    credit_party: credit_party,
+    credit_party_identifier: credit_party_identifier,
+    debit_details: {
+      debit_amount: postTransactionResponse?.sent_amount?.amount,
+      currency: postTransactionResponse?.sent_amount?.currency,
+    },
+    credit_details: {
+      amount: postTransactionResponse?.destination?.amount,
+      currency: postTransactionResponse?.destination?.currency,
+    },
+    payout_reference: helperService.isValid(quotation?.request?.payout_reference)
+      ? quotation?.request?.payout_reference
+      : null,
+    webhook_url: helperService.isValid(quotation?.request?.webhook_url) ? quotation?.request?.webhook_url : null,
+    document_reference_number: postTransactionResponse?.document_reference_number,
+    purpose_of_remittance: helperService.isValid(quotation?.request?.purpose_of_remittance)
+      ? quotation?.request?.purpose_of_remittance
+      : null,
+    transaction_status: postTransactionResponse?.status_message,
+    transaction_status_code: postTransactionResponse?.status,
+    order_created_date: moment(postTransactionResponse?.creation_date).format("YYYY-MM-DD hh:mm:ss"),
+    order_updated_date: moment(postTransactionResponse?.creation_date).format("YYYY-MM-DD hh:mm:ss"),
+    batch_id: batch_id,
+  };
+  
+  // Send success response
+  return {
+    status: httpStatus.OK,
+    message: "Transaction created successfully",
+    data: responsePayload,
+  };
+};
+
+/**
+ * Confirm Transaction
+ * @param {*} req
+ * @returns
+ */
+const confirm_transaction = async (transaction_id, batch_id = null, MID, request, receiver_account_details) => {
+  // Axios API request
+  var confirmTransactionResponse = "";
+  try {
+    let url = "/transactions/" + transaction_id + "/confirm";
+    const api = createApiClient(MID?.api_key, MID?.password);
+    confirmTransactionResponse = await api.post(url, {});
+
+  } catch (err) {
+    console.error("Error fetching data:", err.message);
+    return {
+      status: httpStatus.SERVICE_UNAVAILABLE,
+      message: err.message,
+    };
+  }
+
+  // Check is transaction created
+  if (helperService.isNotValid(confirmTransactionResponse)) {
+    return {
+      status: httpStatus.INTERNAL_SERVER_ERROR,
+      message: "Transaction not created!",
+    };
+  }
+
+  let external_id = confirmTransactionResponse?.external_id;
+
+  var quotation = await quotationDbService.getQuotationByExternalId(
+    external_id
+  );
+  // Check quotation created
+  if (helperService.isNotValid(quotation)) {
+    return {
+      status: 400,
+      message: "Quotation not found!",
+    };
+  }
+
+  var receiver = await receiverService.get_receiver_by_id(
+    quotation?.receiver_id,
+    quotation?.destination_currency
+  );
+  // Check receiver created
+  if (helperService.isNotValid(receiver)) {
+    return {
+      status: 400,
+      message: "Receiver not found!",
+    };
+  }
+
+  // Save Transaction
+  const transactionData = {
+    transaction: confirmTransactionResponse,
+    super_merchant_id: null,
+    sub_merchant_id: receiver?.sub_merchant_id,
+    quotation_id: quotation?.quotation_id,
+    receiver_id: receiver?.receiver_id,
+    order_id: request?.order_id,
+    wallet_id: request?.wallet_id,
+    account_id: request?.account_id,
+    batch_id: batch_id,
+    mid_id: MID?.id,
+    payout_reference: request?.payout_reference,
+    webhook_url: request?.webhook_url,
+  };
+
+  // DB Add
+  var result = await transactionService.addNewTransaction(transactionData);
+  if (result.status !== httpStatus.OK) {
+    new ApiError(httpStatus.INTERNAL_SERVER_ERROR, result.message);
+  }
+  
+  let debit_party = {};
+  // Check Type Of Transation (Settelment OR Payout)
+  if (helperService.isNotValid(receiver?.sub_merchant_id)) {
+    // THis is payout 
+    debit_party = {
+      id: receiver?.receiver_id,
+      name: receiver?.receiver_name,
+      country: receiver?.registered_business_address,
+      webhook_url: receiver?.webhook_url,
+    }
+  }else if (helperService.isValid(receiver?.sub_merchant_id) && helperService.isValid(receiver?.receiver_id)) {
+    // THis is settelment 
+    debit_party = {
+      id: null,
+      name: 'Paydart',
+      country: 'UAE',
+      webhook_url: null,
+    }
+  }
+
+  let credit_party = {
+    account_id: receiver_account_details?.account_id,
+    ...receiver_account_details?.account_details,
+  }
+
+  let credit_party_identifier = {
+    ...confirmTransactionResponse?.credit_party_identifier,
+    payer_id: receiver_account_details?.payer_id,
+    payer_name: receiver_account_details?.payer_name,
+  }
+  
+  const responsePayload = {
+    order_id: request?.order_id,
+    external_id: confirmTransactionResponse?.external_id,
+    transaction_id: confirmTransactionResponse?.id,
+    sub_merchant_id: receiver?.sub_merchant_id,
+    receiver_id: receiver?.receiver_id,
+    currency: confirmTransactionResponse?.destination?.currency,
+    wallet_id: request?.wallet_id,
+    debit_party: debit_party,
+    credit_party: credit_party,
+    credit_party_identifier: credit_party_identifier,
+    debit_details: {
+      debit_amount: confirmTransactionResponse?.sent_amount?.amount,
+      currency: confirmTransactionResponse?.sent_amount?.currency,
+    },
+    credit_details: {
+      amount: confirmTransactionResponse?.destination?.amount,
+      currency: confirmTransactionResponse?.destination?.currency,
+    },
+    payout_reference: helperService.isValid(quotation?.request?.payout_reference)
+      ? quotation?.request?.payout_reference
+      : null,
+    webhook_url: helperService.isValid(quotation?.request?.webhook_url) ? quotation?.request?.webhook_url : null,
+    document_reference_number: confirmTransactionResponse?.document_reference_number,
+    purpose_of_remittance: helperService.isValid(quotation?.request?.purpose_of_remittance)
+      ? quotation?.request?.purpose_of_remittance
+      : null,
+    transaction_status: confirmTransactionResponse?.status_message,
+    transaction_status_code: confirmTransactionResponse?.status,
+    order_created_date: moment(confirmTransactionResponse?.creation_date).format("YYYY-MM-DD hh:mm:ss"),
+    order_updated_date: moment(confirmTransactionResponse?.creation_date).format("YYYY-MM-DD hh:mm:ss"),
+    payout_reference: quotation?.request?.payout_reference,
+    batch_id: batch_id,
+  };
+
+  // Send success response
+  return {
+    status: httpStatus.OK,
+    message: "Transaction confirmed successfully",
+    data: responsePayload,
+  };
+};
+
+/**
+ * Transaction Status
+ * @param {*} req
+ * @returns
+ */
+const transaction_status = async (transaction_id, MID) => {
+  // Axios API request
+  var transactionResponse = "";
+  try {
+    let url = "/transactions/" + transaction_id;
+    const api = createApiClient(MID?.api_key, MID?.password);
+    transactionResponse = await api.get(url);
+
+  } catch (err) {
+    console.error("Error fetching data:", err.message);
+    return {
+      status: httpStatus.SERVICE_UNAVAILABLE,
+      message: err.message,
+    };
+  }
+
+  // Check is transaction created
+  if (helperService.isNotValid(transactionResponse)) {
+    return {
+      status: httpStatus.INTERNAL_SERVER_ERROR,
+      message: "Transaction not found!",
+    };
+  }
+
+  const responsePayload = {
+    transaction_id: transactionResponse?.id,
+    transaction_status: transactionResponse?.status_message,
+    status_code: transactionResponse?.status,
+    ...transactionResponse,
+  };
+
+  delete responsePayload.id;
+  delete responsePayload.status;
+  delete responsePayload.status_message;
+
+  // Send success response
+  return {
+    status: httpStatus.OK,
+    message: "Transaction found",
+    data: responsePayload,
+  };
+};
+
+/**
+ * Transaction cancel
+ * @param {*} req
+ * @returns
+ */
+const transaction_cancel = async (transaction_id, MID) => {
+  // Axios API request
+  var transactionCancelResponse = "";
+  try {
+    let url = "/transactions/" + transaction_id + "/cancel";
+    const api = createApiClient(MID?.api_key, MID?.password);
+    transactionCancelResponse = await api.get(url);
+  } catch (err) {
+    console.error("Error fetching data:", err.message);
+    return {
+      status: httpStatus.SERVICE_UNAVAILABLE,
+      message: err.message,
+    };
+  }
+
+  // Check is transaction created
+  if (helperService.isNotValid(transactionCancelResponse)) {
+    return {
+      status: httpStatus.INTERNAL_SERVER_ERROR,
+      message: "Transaction not cancelled!",
+    };
+  }
+
+  // Send success response
+  return {
+    status: httpStatus.OK,
+    message: "Transaction cancelled",
+    data: transactionCancelResponse,
+  };
+};
+
+const get_payout_list = async (req, res) => {
+  try {
+    return await transactionDbService.get_transaction_list(req, res);
+  } catch (error) {
+    console.error("Sequelize query failed:", error);
+    return {
+      status: 400,
+      message: error.message,
+    };
+  }
+};
+
+const makeMTNMomoRequest = async (req, res) => {};
+
+const find_mid_by_psp = async (psp_id) => {
+  let MID = await pspService.find_routing_mid({ psp_id: psp_id });
+  return MID;
+};
+
+const find_mid_by_psp_and_receiver = async (psp_id, receiver_id) => {
+  let MID = await pspService.find_routing_mid({ psp_id: psp_id , receiver_id: receiver_id});
+  return MID;
+};
+
+/**
+ * Payout routing
+ * @param {*} receiver_account_details 
+ * @returns 
+ */
+const payout_psp_routing = async (receiver_account_details) => {
+  console.log("🚀 ~ payout_psp_routing ~ receiver_account_details:", receiver_account_details)
+  let funding_source_type = receiver_account_details?.funding_source_type;
+  let funding_souce_country = receiver_account_details?.country;
+  let currency = receiver_account_details?.currency;
+  let payerID = receiver_account_details?.payer_id;
+
+  const conditionPayload = {
+    country_iso: funding_souce_country,
+    account_type: funding_source_type,
+    currency: currency,
+    payer_id: payerID,
+  };
+  console.log(conditionPayload);
+  
+  if (conditionPayload?.payer_id?.includes("AP_")) {
+    conditionPayload.payer_id = "AL_PAY";
+  }else if (
+    conditionPayload.payer_id !== "MTN_MOMO" &&
+    conditionPayload.payer_id !== "MTN" &&
+    conditionPayload.payer_id != "ORANGE_MONEY" &&
+    conditionPayload.payer_id != "ORANGE" &&
+    conditionPayload.payer_id != "AL"
+  ) {
+    conditionPayload.payer_id = "NA";
+  }
+  
+  console.log("🚀 ~  conditionPayload:", conditionPayload);
+
+  // Find PSP
+  let route = await payoutRoutesService.find_payout_routes(conditionPayload);
+  console.log("🚀 ~ constpayout_psp_routing= ~ route:", route)
+  
+  if (route?.status == httpStatus.OK) {
+    let RouteList = route?.data;
+    RouteList = Array.isArray(RouteList) ? RouteList : [];
+
+     if (RouteList?.length < 1) {
+      return {
+        status: httpStatus.BAD_REQUEST,
+        message: "Route not found!",
+      };
+     }
+
+    
+    let psp_id = RouteList[0]?.psp_id;
+    
+    // Find MID By Receiver ID (Override MID)
+    let MID = await find_mid_by_psp_and_receiver(psp_id, receiver_account_details?.receiver_id);
+
+    if (MID?.status == httpStatus.OK) {
+      console.log("...... Override MID found .......");
+    }
+
+    if (MID?.status !== httpStatus.OK) {
+      // Check account details
+      // if (helperService.isNotValid(receiver_account_details?.submerchant_id) && helperService.isValid(receiver_account_details?.receiver_id)) {
+      //   // This is a payout account, and payout transactions are only allowed through the default MID.
+      //   return {
+      //     status: httpStatus.BAD_REQUEST,
+      //     message: "Payout MID not found!",
+      //   };
+      // }
+
+      // Find Default MID By PSP ID (Default MID)
+      MID = await find_mid_by_psp(psp_id);
+      if (MID?.status == httpStatus.OK) {
+        console.log("...... Default MID found .......");
+      }
+    }
+
+    if (
+      (MID?.status !== httpStatus.OK && payerID === "MTN_MOMO") ||
+      (MID?.status !== httpStatus.OK && payerID === "MTN") ||
+      (MID?.status !== httpStatus.OK && payerID === "ORANGE_MONEY") ||
+      (MID?.status !== httpStatus.OK && payerID === "ORANGE") ||
+      (MID?.status !== httpStatus.OK && payerID?.includes("AP_")) ||
+      (MID?.status !== httpStatus.OK && payerID === "AL")
+    ) {
+      console.log("Retry...........");
+
+      if (RouteList.length > 1) {
+        psp_id = RouteList[1]?.psp_id;
+        MID = await find_mid_by_psp(psp_id);
+        if (MID?.status == httpStatus.OK) {
+          return MID;
+        }
+      }
+
+      receiver_account_details.payer_id = "NA";
+      payout_psp_routing(receiver_account_details);
+    }
+
+    // Here return a found MID
+    return MID;
+  }
+
+
+  return {
+    status: httpStatus.BAD_REQUEST,
+    message: "MID not found!",
+  };
+};
+
+
+/**
+ * Send Webhook
+ * @param {*} payload 
+ * @returns 
+ */
+const send_webhook = async (webhookPayload) => {
+  let webhook_result;
+  try {
+    let webhook_url = null;
+    let webhook_secret = null;
+    if (helperService.isNotValid(webhookPayload?.webhook_url)) {
+      if (helperService.isValid(webhookPayload?.sub_merchant_id)) {
+        const MERCHANT = await nodeServerAPIService.get_merchant_webhook_settings(webhookPayload?.sub_merchant_id);
+        console.log("🚀 ~ MERCHANT:", MERCHANT);
+        webhook_url = MERCHANT?.data.notification_url;
+        webhook_secret = MERCHANT?.data.notification_secret;
+      } else if (helperService.isValid(webhookPayload?.receiver_id)) {
+        const RECEIVER = await receiverService.get_receiver_by_id(webhookPayload?.receiver_id);
+        webhook_url = RECEIVER?.webhook_url;
+        webhook_secret = RECEIVER?.webhook_secret;
+      }
+    }else{
+      webhook_url = webhookPayload?.webhook_url;
+    }
+
+    console.log("🚀 ~ webhook_url:", webhook_url);
+
+    // POST data on webhook url
+    if (helperService.isValid(webhook_url)) {
+      var client = createGeneralApiClient();
+      webhook_result = await client.post(
+        webhook_url,
+        webhookPayload,
+        {
+          headers: {
+            "notification-secret": webhook_secret,
+          },
+        }
+      );
+      console.log("🚀 ~ webhook_result:", webhook_result);
+    }
+  } catch (error) {
+    console.log("🚀 ~ send_webhook ~ error:", error)
+  }
+  return webhook_result;
+};
+
+const add_transaction_attachment = async (MID, file, type, transaction_id) => {
+  console.log("🚀 ~ add_transaction_attachment ~ file:", file)
+  // Axios API request
+  var transactionAttachmentResponse = "";
+  try {
+    let url = "/transactions/" + transaction_id + "/attachments";
+    const api = createApiClient(MID?.api_key, MID?.password);
+
+    if (!fs.existsSync(file.path)) {
+      console.error("❌ File does not exist:", file.path);
+      return {
+        status: httpStatus.BAD_REQUEST,
+        message: "file not found",
+      };
+    }
+    
+    const form = new FormData();
+    // form.append('file', fs.createReadStream(file.path));
+    form.append("file", fs.createReadStream(file.path), {
+      filename: file.originalname, // optional but helpful
+      contentType: file.mimetype, // optional
+    });
+    form.append("name", file.originalname);
+    form.append("type", type);
+    
+    transactionAttachmentResponse = await api.postMultipart(url, form);
+    console.log("🚀 ~ add_transaction_attachment ~ transactionAttachmentResponse:", transactionAttachmentResponse)
+    
+  } catch (err) {
+    console.error("Error fetching data:", err.message);
+    return {
+      status: httpStatus.SERVICE_UNAVAILABLE,
+      message: err.message,
+    };
+  }
+
+  // Check is transaction created
+  if (helperService.isNotValid(transactionAttachmentResponse)) {
+    return {
+      status: httpStatus.INTERNAL_SERVER_ERROR,
+      message: "Transaction not attached!",
+    };
+  }
+
+  // Send success response
+  return {
+    status: httpStatus.OK,
+    message: "Transaction attachement is successful",
+    data: transactionAttachmentResponse,
+  };
+};
+
+module.exports = {
+  get_payout_list,
+  create_quotations,
+  post_transaction,
+  confirm_transaction,
+  transaction_status,
+  transaction_cancel,
+  get_wallet_balance,
+  payout_psp_routing,
+  send_webhook,
+  add_transaction_attachment
+};

@@ -1,1 +1,106 @@
-function a29_0x2533(){const _0x19ea5c=['destroy','payer_name','expiration_date','fee_amount','source_currency','message','destination_amount','Error\x20adding\x20quotation:','log','create','Failed\x20to\x20add\x20quotation:','1478968mEJmmz','destination_currency','payer_country_iso_code','toJSON','10273635DtlqiP','source_amount','5864124rLjVNj','../models','sent_currency','13366991YYlAvA','Quotation\x20added!','27173208XDPuAx','bcrypt','update','receiver_id','176mbdsXR','super_merchant_id','creation_date','1448cYEYmY','body','wholesale_fx_rate','21VfqJnM','mode','5fLhZnV','10GIoUlz','INTERNAL_SERVER_ERROR','findOne','service_name','quotation','error','16372FSdZUN','payer_id','10041MvznjI'];a29_0x2533=function(){return _0x19ea5c;};return a29_0x2533();}const a29_0x17d452=a29_0x54bb;(function(_0x38348b,_0x3b2cbe){const _0x2ed046=a29_0x54bb,_0x3f8d69=_0x38348b();while(!![]){try{const _0x389159=-parseInt(_0x2ed046(0x93))/0x1*(-parseInt(_0x2ed046(0xa2))/0x2)+-parseInt(_0x2ed046(0x78))/0x3*(parseInt(_0x2ed046(0x96))/0x4)+parseInt(_0x2ed046(0x9b))/0x5*(parseInt(_0x2ed046(0x8a))/0x6)+parseInt(_0x2ed046(0x99))/0x7*(-parseInt(_0x2ed046(0x84))/0x8)+-parseInt(_0x2ed046(0x88))/0x9*(-parseInt(_0x2ed046(0x9c))/0xa)+parseInt(_0x2ed046(0x8d))/0xb+-parseInt(_0x2ed046(0x8f))/0xc;if(_0x389159===_0x3b2cbe)break;else _0x3f8d69['push'](_0x3f8d69['shift']());}catch(_0x152a96){_0x3f8d69['push'](_0x3f8d69['shift']());}}}(a29_0x2533,0xb5abd));function a29_0x54bb(_0x1bfaa4,_0x43034f){const _0x253384=a29_0x2533();return a29_0x54bb=function(_0x54bb70,_0x15ae92){_0x54bb70=_0x54bb70-0x78;let _0x3d5578=_0x253384[_0x54bb70];return _0x3d5578;},a29_0x54bb(_0x1bfaa4,_0x43034f);}const db=require(a29_0x17d452(0x8b)),bcrypt=require(a29_0x17d452(0x90)),httpStatus=require('http-status'),Quotation=db[a29_0x17d452(0xa0)],addNewQuotation=async _0x4721bd=>{const _0x1382ed=a29_0x17d452,_0x4185ce=await addQuotation(_0x4721bd);if(_0x4185ce!==undefined)return console[_0x1382ed(0x81)]('Quotation\x20added:',_0x4185ce),{'status':httpStatus['OK'],'message':_0x1382ed(0x8e)};return console['error'](_0x1382ed(0x83),err),{'status':httpStatus[_0x1382ed(0x9d)],'message':'Failed\x20to\x20add\x20quotation:'+err[_0x1382ed(0x7e)]};};async function addQuotation(_0x3d61e4){const _0x1851f4=a29_0x17d452;let _0x2bcca9='';try{_0x2bcca9=await Quotation[_0x1851f4(0x82)]({'quotation_id':_0x3d61e4['id'],'external_id':_0x3d61e4['external_id'],'receiver_id':_0x3d61e4[_0x1851f4(0x92)],'super_merchant_id':_0x3d61e4[_0x1851f4(0x94)],'sub_merchant_id':_0x3d61e4['sub_merchant_id'],'mode':_0x3d61e4[_0x1851f4(0x9a)],'transaction_type':_0x3d61e4['transaction_type'],'wholesale_fx_rate':_0x3d61e4[_0x1851f4(0x98)],'destination_amount':_0x3d61e4[_0x1851f4(0x7f)],'destination_currency':_0x3d61e4[_0x1851f4(0x85)],'sent_amount':_0x3d61e4['sent_amount'],'sent_currency':_0x3d61e4[_0x1851f4(0x8c)],'source_amount':_0x3d61e4[_0x1851f4(0x89)],'source_currency':_0x3d61e4[_0x1851f4(0x7d)],'source_country_iso_code':_0x3d61e4['source_country_iso_code'],'fee_amount':_0x3d61e4[_0x1851f4(0x7c)],'fee_currency':_0x3d61e4['fee_currency'],'creation_date':_0x3d61e4[_0x1851f4(0x95)],'expiration_date':_0x3d61e4[_0x1851f4(0x7b)],'payer_country_iso_code':_0x3d61e4[_0x1851f4(0x86)],'payer_currency':_0x3d61e4['payer_currency'],'payer_id':_0x3d61e4[_0x1851f4(0xa3)],'payer_name':_0x3d61e4[_0x1851f4(0x7a)],'service_id':_0x3d61e4['service_id'],'service_name':_0x3d61e4[_0x1851f4(0x9f)]});}catch(_0x3c15d0){console[_0x1851f4(0xa1)](_0x1851f4(0x80),_0x3c15d0);throw _0x3c15d0;}finally{return _0x2bcca9;}}const getAllQuotation=async(_0x30ac13,_0x4e4a9e)=>{const _0x33eae3=await Quotation['findAll']();return _0x33eae3;},getQuotationById=async _0x56788a=>{const _0x3857bf=a29_0x17d452,_0x3939a7=await Quotation[_0x3857bf(0x9e)]({'where':{'quotation_id':_0x56788a}});return _0x3939a7?_0x3939a7[_0x3857bf(0x87)]():null;},getQuotationByExternalId=async _0x1e8c8d=>{const _0xe11ec8=a29_0x17d452,_0x38aff9=await Quotation[_0xe11ec8(0x9e)]({'where':{'external_id':_0x1e8c8d}});return _0x38aff9?_0x38aff9[_0xe11ec8(0x87)]():null;},updateQuotationById=async(_0x145b24,_0x43a051)=>{const _0x51c2a4=a29_0x17d452,{}=_0x43a051[_0x51c2a4(0x97)],_0x52fc3c={},_0x4fe42b=await Quotation[_0x51c2a4(0x91)](_0x52fc3c,{'where':{'quotation_id':_0x145b24}});return _0x4fe42b;},deleteQuotationById=async _0x278bc0=>{const _0x4588ca=a29_0x17d452,_0x27c89d=await getQuotationById(_0x278bc0);if(!_0x27c89d)return null;return await _0x27c89d[_0x4588ca(0x79)](),_0x27c89d;};module['exports']={'addNewQuotation':addNewQuotation,'getAllQuotation':getAllQuotation,'getQuotationById':getQuotationById,'getQuotationByExternalId':getQuotationByExternalId,'updateQuotationById':updateQuotationById,'deleteQuotationById':deleteQuotationById};
+const db = require("../models");
+const bcrypt = require("bcrypt");
+const httpStatus = require("http-status");
+const Quotation = db.quotation;
+
+const addNewQuotation = async (newQuotationData) => {
+  const result = await addQuotation(newQuotationData);
+
+  if (result !== undefined) {
+    console.log("Quotation added:", result);
+    return {
+      status: httpStatus.OK,
+      message: "Quotation added!",
+    };
+  }
+
+  console.error("Failed to add quotation:", err);
+  return {
+    status: httpStatus.INTERNAL_SERVER_ERROR,
+    message: "Failed to add quotation:" + err.message,
+  };
+};
+
+/**
+ * Add a new quotation to the database.
+ * @param {Object} data - The quotation data to insert.
+ * @returns {Promise<Object>} - The created quotation record.
+ */
+async function addQuotation(data) {
+  let newQuotation = "";
+  try {
+    newQuotation = await Quotation.create({
+      quotation_id: data.id,
+      external_id: data.external_id,
+      receiver_id: data.receiver_id,
+      super_merchant_id: data.super_merchant_id,
+      sub_merchant_id: data.sub_merchant_id,
+      mode: data.mode,
+      transaction_type: data.transaction_type,
+      wholesale_fx_rate: data.wholesale_fx_rate, // Should be a number or string that matches DECIMAL
+      destination_amount: data.destination_amount,
+      destination_currency: data.destination_currency,
+      sent_amount: data.sent_amount,
+      sent_currency: data.sent_currency,
+      source_amount: data.source_amount,
+      source_currency: data.source_currency,
+      source_country_iso_code: data.source_country_iso_code,
+      fee_amount: data.fee_amount,
+      fee_currency: data.fee_currency,
+      creation_date: data.creation_date,
+      expiration_date: data.expiration_date,
+      payer_country_iso_code: data.payer_country_iso_code,
+      payer_currency: data.payer_currency,
+      payer_id: data.payer_id,
+      payer_name: data.payer_name,
+      service_id: data.service_id,
+      service_name: data.service_name,
+    });
+  } catch (error) {
+    console.error("Error adding quotation:", error);
+    throw error;
+  } finally {
+    return newQuotation;
+  }
+}
+
+const getAllQuotation = async (filter, options) => {
+  const quotations = await Quotation.findAll();
+  return quotations;
+};
+
+const getQuotationById = async (quotation_id) => {
+  const quotation = await Quotation.findOne({ where: { quotation_id } });
+  return quotation ? quotation.toJSON() : null;
+};
+
+const getQuotationByExternalId = async (external_id) => {
+  const quotation = await Quotation.findOne({ where: { external_id } });
+  return quotation ? quotation.toJSON() : null;
+};
+
+const updateQuotationById = async (id, req) => {
+  const {} = req.body;
+  const quotation = {};
+
+  const row = await Quotation.update(quotation, {
+    where: { quotation_id: id },
+  });
+  return row;
+};
+
+const deleteQuotationById = async (quotation_id) => {
+  const quotation = await getQuotationById(quotation_id);
+  if (!quotation) return null;
+  await quotation.destroy();
+  return quotation;
+};
+
+module.exports = {
+  addNewQuotation,
+  getAllQuotation,
+  getQuotationById,
+  getQuotationByExternalId,
+  updateQuotationById,
+  deleteQuotationById,
+};

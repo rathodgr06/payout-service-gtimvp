@@ -1,1 +1,217 @@
-function a12_0x620b(){const _0x513fc1=['psp_name','MID\x20not\x20created','1649548xhCpRf','max_txn_amount','toJSON','20AsuhPO','callback','rows','Sequelize\x20query\x20failed:','findByPk','6930259zRKvyy','Error\x20finding\x20or\x20creating\x20MID:','psp_id','5349705ZTvQAU','exports','NOT_FOUND','findAndCountAll','🚀\x20~\x20getMIDById\x20~\x20error:','receiver_id','findOrCreate','http-status','message','112053OydUbA','count','country_iso_code','password','sub_merchant_id','MID\x20updated\x20successfully','min_txn_amount','registered_name','Error\x20updating\x20MID:\x20','findOne','psp','api_key','map','deleted','log','status','INTERNAL_SERVER_ERROR','6uGcGZI','4123624rdjaqk','BAD_REQUEST','../models','sequelize','payout_psp','error','4122396jQQQlZ','receiver','findAll','MID\x20already\x20added','712615EZFOaZ','MID\x20not\x20found\x20or\x20already\x20updated','priority'];a12_0x620b=function(){return _0x513fc1;};return a12_0x620b();}function a12_0x5d71(_0x122801,_0x269f57){const _0x620bb3=a12_0x620b();return a12_0x5d71=function(_0x5d71a4,_0x176216){_0x5d71a4=_0x5d71a4-0xd4;let _0x31eaed=_0x620bb3[_0x5d71a4];return _0x31eaed;},a12_0x5d71(_0x122801,_0x269f57);}const a12_0x5082f7=a12_0x5d71;(function(_0x1852f0,_0x941283){const _0x46aaee=a12_0x5d71,_0x5168d7=_0x1852f0();while(!![]){try{const _0x31eb27=-parseInt(_0x46aaee(0xd5))/0x1+-parseInt(_0x46aaee(0xda))/0x2+-parseInt(_0x46aaee(0xee))/0x3*(-parseInt(_0x46aaee(0xdd))/0x4)+parseInt(_0x46aaee(0xe5))/0x5+parseInt(_0x46aaee(0xff))/0x6*(parseInt(_0x46aaee(0xe2))/0x7)+-parseInt(_0x46aaee(0x100))/0x8+parseInt(_0x46aaee(0x106))/0x9;if(_0x31eb27===_0x941283)break;else _0x5168d7['push'](_0x5168d7['shift']());}catch(_0x101e66){_0x5168d7['push'](_0x5168d7['shift']());}}}(a12_0x620b,0x9f29f));const httpStatus=require(a12_0x5082f7(0xec)),db=require(a12_0x5082f7(0x102)),PayoutMid=db['payout_mid'],Receiver=db[a12_0x5082f7(0x107)],PayoutPsp=db[a12_0x5082f7(0x104)],{Op}=require(a12_0x5082f7(0x103)),addMID=async _0x4efa71=>{const _0x5d2bd3=a12_0x5082f7;console[_0x5d2bd3(0xfc)](_0x4efa71);try{let _0x2601ca={'psp_id':_0x4efa71?.[_0x5d2bd3(0xe4)]};_0x4efa71?.['sub_merchant_id']&&(_0x2601ca[_0x5d2bd3(0xf2)]=_0x4efa71?.[_0x5d2bd3(0xf2)]);_0x4efa71?.['receiver_id']&&(_0x2601ca['receiver_id']=_0x4efa71?.[_0x5d2bd3(0xea)]);const [_0xbea969,_0x304710]=await PayoutMid[_0x5d2bd3(0xeb)]({'where':_0x2601ca,'defaults':{'sub_merchant_id':_0x4efa71?.[_0x5d2bd3(0xf2)],'receiver_id':_0x4efa71?.[_0x5d2bd3(0xea)],'psp_id':_0x4efa71?.[_0x5d2bd3(0xe4)],'primary_key':_0x4efa71?.['primary_key'],'api_key':_0x4efa71?.[_0x5d2bd3(0xf9)],'password':_0x4efa71?.[_0x5d2bd3(0xf1)],'currency_code':_0x4efa71?.['currency_code'],'country_iso_code':_0x4efa71?.[_0x5d2bd3(0xf0)],'min_txn_amount':_0x4efa71?.[_0x5d2bd3(0xf4)],'max_txn_amount':_0x4efa71?.[_0x5d2bd3(0xdb)],'callback':_0x4efa71?.[_0x5d2bd3(0xde)],'priority':_0x4efa71?.[_0x5d2bd3(0xd7)]||0x0,'status':_0x4efa71?.[_0x5d2bd3(0xfd)]||0x1,'deleted':_0x4efa71?.[_0x5d2bd3(0xfb)]||0x0,'created_at':new Date(),'updated_at':new Date()}});if(_0x304710)return{'status':httpStatus['OK'],'message':'MID\x20created','data':_0xbea969[_0x5d2bd3(0xdc)]()};else return _0xbea969?{'status':httpStatus[_0x5d2bd3(0x101)],'message':_0x5d2bd3(0xd4)}:{'status':httpStatus[_0x5d2bd3(0x101)],'message':_0x5d2bd3(0xd9)};}catch(_0x3ba1e7){return console[_0x5d2bd3(0x105)](_0x5d2bd3(0xe3),_0x3ba1e7),{'status':httpStatus[_0x5d2bd3(0xfe)],'message':'Error\x20finding\x20or\x20creating\x20MID:'+_0x3ba1e7[_0x5d2bd3(0xed)]};}},getMIDById=async(_0x3addf4,_0x9b307a)=>{const _0x1308b5=a12_0x5082f7;try{const _0x3acf23=await PayoutMid[_0x1308b5(0xf7)]({'where':{'sub_merchant_id':_0x3addf4,'receiver_id':_0x9b307a}});return _0x3acf23?_0x3acf23[_0x1308b5(0xdc)]():null;}catch(_0x4c5f97){return console['log'](_0x1308b5(0xe9),_0x4c5f97),null;}},getMIDByMIDId=async _0x28440d=>{const _0x4f0042=a12_0x5082f7,_0xca9ff7=await PayoutMid[_0x4f0042(0xf7)]({'where':{'id':_0x28440d}});return _0xca9ff7?_0xca9ff7[_0x4f0042(0xdc)]():null;},getSpecificMID=async _0x3105a0=>{const _0x2beb14=a12_0x5082f7,_0x36b261=await PayoutMid[_0x2beb14(0xf7)]({'where':_0x3105a0});return _0x36b261?_0x36b261['toJSON']():null;},getMIDList=async _0x5d10c0=>{const _0x58f102=a12_0x5082f7;try{const _0x5404c4=await PayoutMid[_0x58f102(0xe8)]({'include':[{'model':Receiver,'as':_0x58f102(0x107),'required':![],'attributes':['id',_0x58f102(0xf5)]},{'model':PayoutPsp,'as':_0x58f102(0xf8),'required':![],'attributes':['id',_0x58f102(0xd8)]}],'where':{'sub_merchant_id':_0x5d10c0}});return{'status':0xc8,'message':'','data':_0x5404c4[_0x58f102(0xdf)],'total':_0x5404c4[_0x58f102(0xef)]};}catch(_0x5ed7d3){return console[_0x58f102(0x105)](_0x58f102(0xe0),_0x5ed7d3),{'status':0x190,'message':_0x5ed7d3[_0x58f102(0xed)]};}},getMIDBySubReceiverId=async(_0x339593,_0x1c2408)=>{const _0x14a9ff=a12_0x5082f7;let _0x3fcc19={};_0x339593&&(_0x3fcc19['sub_merchant_id']=_0x339593);_0x1c2408&&(_0x3fcc19['receiver_id']=_0x1c2408);const _0x4f3ab9=await PayoutMid[_0x14a9ff(0x108)]({'where':_0x3fcc19});return _0x4f3ab9[_0x14a9ff(0xfa)](_0x2148da=>_0x2148da[_0x14a9ff(0xdc)]());},getMIDByPSPId=async _0x186142=>{const _0xf24880=a12_0x5082f7,_0xa82b62=await PayoutMid[_0xf24880(0xf7)]({'where':{'psp_id':_0x186142}});return _0xa82b62?_0xa82b62[_0xf24880(0xdc)]():null;},updatePayoutPspMid=async(_0x6d9a7d,_0x14de87)=>{const _0x477442=a12_0x5082f7;try{const [_0x1f4a32]=await PayoutMid['update'](_0x14de87,{'where':{'id':_0x6d9a7d,'deleted':0x0}});if(_0x1f4a32===0x0)return{'status':httpStatus[_0x477442(0xe7)],'message':_0x477442(0xd6)};const _0x5d67d7=await PayoutMid[_0x477442(0xe1)](_0x6d9a7d);return{'status':httpStatus['OK'],'message':_0x477442(0xf3),'data':_0x5d67d7[_0x477442(0xdc)]()};}catch(_0x30050e){return console['error']('Error\x20updating\x20MID:',_0x30050e),{'status':httpStatus['INTERNAL_SERVER_ERROR'],'message':_0x477442(0xf6)+_0x30050e['message']};}};module[a12_0x5082f7(0xe6)]={'addMID':addMID,'getMIDById':getMIDById,'getMIDByMIDId':getMIDByMIDId,'getMIDList':getMIDList,'getMIDBySubReceiverId':getMIDBySubReceiverId,'getSpecificMID':getSpecificMID,'getMIDByPSPId':getMIDByPSPId,'updatePayoutPspMid':updatePayoutPspMid};
+const httpStatus = require("http-status");
+const db = require("../models");
+const PayoutMid = db.payout_mid;
+const Receiver = db.receiver;
+const PayoutPsp = db.payout_psp;
+const { Op } = require("sequelize");
+
+const addMID = async (data) => {
+  console.log(data);
+  try {
+    let where = {
+      psp_id: data?.psp_id,
+    };
+    if (data?.sub_merchant_id) {
+      where.sub_merchant_id = data?.sub_merchant_id;
+    }
+    if (data?.receiver_id) {
+      where.receiver_id = data?.receiver_id;
+    }
+    const [MID, created] = await PayoutMid.findOrCreate({
+      where: where,
+      defaults: {
+        sub_merchant_id: data?.sub_merchant_id,
+        receiver_id: data?.receiver_id,
+        psp_id: data?.psp_id,
+        primary_key:data?.primary_key,
+        api_key: data?.api_key,
+        password: data?.password,
+        currency_code: data?.currency_code,
+        country_iso_code: data?.country_iso_code,
+        min_txn_amount: data?.min_txn_amount,
+        max_txn_amount: data?.max_txn_amount,
+        callback: data?.callback,
+        priority: data?.priority || 0,
+        status: data?.status || 1,
+        deleted: data?.deleted || 0,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+    });
+
+    if (created) {
+      return {
+        status: httpStatus.OK,
+        message: "MID created",
+        data: MID.toJSON(),
+      };
+    } else if (MID) {
+      return {
+        status: httpStatus.BAD_REQUEST, // 409 Conflict is more accurate for "already exists"
+        message: "MID already added",
+      };
+    } else {
+      return {
+        status: httpStatus.BAD_REQUEST,
+        message: "MID not created",
+      };
+    }
+  } catch (error) {
+    console.error("Error finding or creating MID:", error);
+    // throw error;
+    return {
+      status: httpStatus.INTERNAL_SERVER_ERROR,
+      message: "Error finding or creating MID:" + error.message,
+    };
+  }
+};
+
+/**
+ * Get MID By Sub Merchant ID
+ * @param {*} id
+ * @returns
+ */
+const getMIDById = async (sub_merchant_id, receiver_id) => {
+  try {
+    const MID = await PayoutMid.findOne({
+      where: { sub_merchant_id, receiver_id },
+    });
+    return MID ? MID.toJSON() : null;
+  } catch (error) {
+    console.log("🚀 ~ getMIDById ~ error:", error);
+    return null;
+  }
+};
+
+/**
+ * Get MID By ID
+ * @param {*} id
+ * @returns
+ */
+const getMIDByMIDId = async (id) => {
+  const MID = await PayoutMid.findOne({ where: { id } });
+  return MID ? MID.toJSON() : null;
+};
+
+/**
+ * Get Specific MID
+ * @param {*} id
+ * @returns
+ */
+const getSpecificMID = async (wherePayload) => {
+  const MID = await PayoutMid.findOne({ where: wherePayload });
+  return MID ? MID.toJSON() : null;
+};
+
+/**
+ * Get MID By ID
+ * @param {*} id
+ * @returns
+ */
+const getMIDList = async (sub_merchant_id) => {
+  try {
+    const result = await PayoutMid.findAndCountAll({
+      include: [
+        {
+          model: Receiver,
+          as: "receiver",
+          required: false,
+          attributes: ["id", "registered_name"],
+        },
+        {
+          model: PayoutPsp,
+          as: "psp",
+          required: false,
+          attributes: ["id", "psp_name"],
+        },
+      ],
+      where: { sub_merchant_id },
+    });
+    return {
+      status: 200,
+      message: "",
+      data: result.rows,
+      total: result.count,
+    };
+  } catch (error) {
+    console.error("Sequelize query failed:", error);
+    return {
+      status: 400,
+      message: error.message,
+    };
+  }
+};
+
+
+/**
+ * Get MID By ID
+ * @param {*} id
+ * @returns
+ */
+const getMIDBySubReceiverId = async (sub_merchant_id, receiver_id) => {
+  let where = {};
+  if (sub_merchant_id) {
+    where.sub_merchant_id = sub_merchant_id;
+  }
+  if (receiver_id) {
+    where.receiver_id = receiver_id;
+  }
+  
+  const MIDs = await PayoutMid.findAll({ where });
+
+  return MIDs.map(mid => mid.toJSON());
+};
+
+/**
+ * Get MID By PSP ID
+ * @param {*} id
+ * @returns
+ */
+const getMIDByPSPId = async (psp_id) => {
+  const MID = await PayoutMid.findOne({ where: { psp_id } });
+  return MID ? MID.toJSON() : null;
+};
+
+
+const updatePayoutPspMid = async (MID_ID, updateData) => {
+  try {
+    const [updatedCount] = await PayoutMid.update(updateData, {
+      where: {
+        id: MID_ID,
+        deleted: 0 // Only update if the record is not deleted
+      }
+    });
+
+    if (updatedCount === 0) {
+      return {
+        status: httpStatus.NOT_FOUND,
+        message: "MID not found or already updated"
+      };
+    }
+
+    const updatedMID = await PayoutMid.findByPk(MID_ID);
+
+    return {
+      status: httpStatus.OK,
+      message: "MID updated successfully",
+      data: updatedMID.toJSON()
+    };
+  } catch (error) {
+    console.error("Error updating MID:", error);
+    return {
+      status: httpStatus.INTERNAL_SERVER_ERROR,
+      message: "Error updating MID: " + error.message
+    };
+  }
+};
+
+module.exports = {
+  addMID,
+  getMIDById,
+  getMIDByMIDId,
+  getMIDList,
+  getMIDBySubReceiverId,
+  getSpecificMID,
+  getMIDByPSPId,
+  updatePayoutPspMid
+};

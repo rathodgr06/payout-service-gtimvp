@@ -1,1 +1,123 @@
-function a5_0x4b6c(){const _0x1444ca=['Transaction\x20attachment\x20already\x20added','BAD_REQUEST','DESC','574992FloBeU','toJSON','findOne','NOT_FOUND','Error\x20finding\x20or\x20creating\x20Transaction\x20attachment:','6656KUJkkS','Error\x20fetching\x20account\x20details:\x20','findOrCreate','Error\x20found\x20account\x20details:\x20','transaction_id','type','INTERNAL_SERVER_ERROR','Attachment\x20not\x20found','63734CyJcHj','Attachment\x20fetch\x20successfully','27344574kQjXYk','Error\x20found\x20account\x20details:','1322836eVRXEl','15EhOMfW','Transaction\x20attachment\x20added\x20successfully','../models','external_id','exports','receiver_id','attachment','map','log','5986275NnwqGq','11746BDdZrL','findAll','893184YtqcPS','error','Attachment\x20fetched\x20successfully','Attachment\x20found\x20for\x20this\x20plan','🚀\x20~\x20findOne\x20~\x20where:','message'];a5_0x4b6c=function(){return _0x1444ca;};return a5_0x4b6c();}const a5_0x5a2310=a5_0x4408;function a5_0x4408(_0xc8645f,_0x204d0e){const _0x4b6ca1=a5_0x4b6c();return a5_0x4408=function(_0x4408dd,_0x3d4929){_0x4408dd=_0x4408dd-0x182;let _0x12af87=_0x4b6ca1[_0x4408dd];return _0x12af87;},a5_0x4408(_0xc8645f,_0x204d0e);}(function(_0x2183ea,_0x16da88){const _0x241795=a5_0x4408,_0x4aa04e=_0x2183ea();while(!![]){try{const _0x312eef=-parseInt(_0x241795(0x191))/0x1+-parseInt(_0x241795(0x184))/0x2+-parseInt(_0x241795(0x196))/0x3*(parseInt(_0x241795(0x195))/0x4)+parseInt(_0x241795(0x19f))/0x5+parseInt(_0x241795(0x1a2))/0x6+parseInt(_0x241795(0x1a0))/0x7*(-parseInt(_0x241795(0x189))/0x8)+parseInt(_0x241795(0x193))/0x9;if(_0x312eef===_0x16da88)break;else _0x4aa04e['push'](_0x4aa04e['shift']());}catch(_0x4ab546){_0x4aa04e['push'](_0x4aa04e['shift']());}}}(a5_0x4b6c,0xf01ee));const db=require(a5_0x5a2310(0x198)),httpStatus=require('http-status'),Attachment=db[a5_0x5a2310(0x19c)],add=async _0x4eba94=>{const _0x8c9643=a5_0x5a2310;try{let _0x34e2bf={};_0x4eba94?.[_0x8c9643(0x199)]&&(_0x34e2bf[_0x8c9643(0x199)]=_0x4eba94?.[_0x8c9643(0x199)]);const [_0x3aef6b,_0x84309]=await Attachment[_0x8c9643(0x18b)]({'where':_0x34e2bf,'defaults':_0x4eba94});if(_0x84309){const _0xcd3b76=_0x3aef6b[_0x8c9643(0x185)](),_0x45fe71={'attachment_id':_0xcd3b76['id'],'order_id':_0xcd3b76['external_id'],'transaction_id':_0xcd3b76[_0x8c9643(0x18d)],'receiver_id':_0xcd3b76[_0x8c9643(0x19b)],'file_name':_0xcd3b76['file_name'],'original_name':_0xcd3b76['original_name'],'mimetype':_0xcd3b76['mimetype'],'type':_0xcd3b76[_0x8c9643(0x18e)]};return{'status':httpStatus['OK'],'message':_0x8c9643(0x197),'data':_0x45fe71};}else return _0x3aef6b?{'status':httpStatus[_0x8c9643(0x182)],'message':_0x8c9643(0x1a8)}:{'status':httpStatus[_0x8c9643(0x182)],'message':'Transaction\x20attachment\x20not\x20created'};}catch(_0x39625a){return console['error']('Error\x20finding\x20or\x20creating\x20Transaction\x20attachment:',_0x39625a),{'status':httpStatus[_0x8c9643(0x18f)],'message':_0x8c9643(0x188)+_0x39625a[_0x8c9643(0x1a7)]};}},findAll=async _0x2cab19=>{const _0x23089a=a5_0x5a2310;try{const _0x5356e5=await Attachment[_0x23089a(0x1a1)]({'where':_0x2cab19,'order':[['id',_0x23089a(0x183)]]});return _0x5356e5&&_0x5356e5['length']>0x0?{'status':httpStatus['OK'],'message':_0x23089a(0x1a4),'data':_0x5356e5[_0x23089a(0x19d)](_0xb732c9=>{const _0xc54e84=_0x23089a,_0xad8a7f=_0xb732c9[_0xc54e84(0x185)]();return _0xad8a7f;})}:{'status':httpStatus[_0x23089a(0x187)],'message':_0x23089a(0x1a5)};}catch(_0x25c805){return console[_0x23089a(0x1a3)]('Error\x20fetching\x20account\x20details:',_0x25c805),{'status':httpStatus[_0x23089a(0x18f)],'message':_0x23089a(0x18a)+_0x25c805[_0x23089a(0x1a7)]};}},findOne=async _0x90ec2c=>{const _0x408143=a5_0x5a2310;console['log'](_0x408143(0x1a6),_0x90ec2c);try{const _0x44c68d=await Attachment[_0x408143(0x186)]({'where':_0x90ec2c});return console[_0x408143(0x19e)]('🚀\x20~\x20findOne\x20~\x20account_details:',_0x44c68d),_0x44c68d?{'status':httpStatus['OK'],'message':_0x408143(0x192),'data':_0x44c68d[_0x408143(0x185)]()}:{'status':httpStatus[_0x408143(0x187)],'message':_0x408143(0x190)};}catch(_0x38f3bc){return console[_0x408143(0x1a3)](_0x408143(0x194),_0x38f3bc),{'status':httpStatus[_0x408143(0x18f)],'message':_0x408143(0x18c)+_0x38f3bc[_0x408143(0x1a7)]};}};module[a5_0x5a2310(0x19a)]={'add':add,'findAll':findAll,'findOne':findOne};
+const db = require("../models");
+const httpStatus = require("http-status");
+const Attachment = db.attachment;
+
+const add = async (data) => {
+  try {
+    let where = {};
+    if (data?.external_id) {
+      where.external_id = data?.external_id;
+    }
+
+    const [attachmentResponse, created] = await Attachment.findOrCreate({
+      where: where,
+      defaults: data,
+    });
+
+    if (created) {
+
+      const json = attachmentResponse.toJSON();
+
+      const renamed = {
+        attachment_id: json.id,
+        order_id: json.external_id,
+        transaction_id: json.transaction_id,
+        receiver_id: json.receiver_id,
+        file_name: json.file_name,
+        original_name: json.original_name,
+        // file_path: json.file_path,
+        mimetype: json.mimetype,
+        type: json.type,
+      };
+
+      return {
+        status: httpStatus.OK,
+        message: "Transaction attachment added successfully",
+        data: renamed,
+      };
+    } else if (attachmentResponse) {
+      return {
+        status: httpStatus.BAD_REQUEST,
+        message: "Transaction attachment already added",
+      };
+    } else {
+      return {
+        status: httpStatus.BAD_REQUEST,
+        message: "Transaction attachment not created",
+      };
+    }
+  } catch (error) {
+    console.error("Error finding or creating Transaction attachment:", error);
+    // throw error;
+    return {
+      status: httpStatus.INTERNAL_SERVER_ERROR,
+      message:
+        "Error finding or creating Transaction attachment:" + error.message,
+    };
+  }
+};
+
+const findAll = async (where) => {
+  try {
+    const account_details = await Attachment.findAll({
+      where: where,
+      order: [["id", "DESC"]],
+    });
+    if (account_details && account_details.length > 0) {
+      return {
+        status: httpStatus.OK,
+        message: "Attachment fetched successfully",
+        data: account_details.map((item) => {
+          const json = item.toJSON();
+          return json;
+        }),
+      };
+    } else {
+      return {
+        status: httpStatus.NOT_FOUND,
+        message: "Attachment found for this plan",
+      };
+    }
+  } catch (error) {
+    console.error("Error fetching account details:", error);
+    return {
+      status: httpStatus.INTERNAL_SERVER_ERROR,
+      message: "Error fetching account details: " + error.message,
+    };
+  }
+};
+
+const findOne = async (where) => {
+  console.log("🚀 ~ findOne ~ where:", where)
+  try {
+    const account_details = await Attachment.findOne({
+      where: where,
+    });
+    console.log("🚀 ~ findOne ~ account_details:", account_details)
+
+    if (account_details) {
+      return {
+        status: httpStatus.OK,
+        message: "Attachment fetch successfully",
+        data: account_details.toJSON(),
+      };
+    } else {
+      return {
+        status: httpStatus.NOT_FOUND,
+        message: "Attachment not found",
+      };
+    }
+  } catch (error) {
+    console.error("Error found account details:", error);
+    return {
+      status: httpStatus.INTERNAL_SERVER_ERROR,
+      message: "Error found account details: " + error.message,
+    };
+  }
+};
+
+module.exports = {
+  add,
+  findAll,
+  findOne,
+};

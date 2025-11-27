@@ -1,1 +1,27 @@
-const a38_0x4b6bce=a38_0x303f;(function(_0x17df3b,_0x31c1a9){const _0x1ffb99=a38_0x303f,_0x49aa8b=_0x17df3b();while(!![]){try{const _0x6120bc=parseInt(_0x1ffb99(0xb4))/0x1*(-parseInt(_0x1ffb99(0xaf))/0x2)+parseInt(_0x1ffb99(0xab))/0x3+-parseInt(_0x1ffb99(0xa6))/0x4*(-parseInt(_0x1ffb99(0xa8))/0x5)+-parseInt(_0x1ffb99(0xb6))/0x6*(-parseInt(_0x1ffb99(0xb0))/0x7)+-parseInt(_0x1ffb99(0xac))/0x8+parseInt(_0x1ffb99(0xbc))/0x9*(-parseInt(_0x1ffb99(0xba))/0xa)+-parseInt(_0x1ffb99(0xb7))/0xb*(-parseInt(_0x1ffb99(0xb1))/0xc);if(_0x6120bc===_0x31c1a9)break;else _0x49aa8b['push'](_0x49aa8b['shift']());}catch(_0x39aca9){_0x49aa8b['push'](_0x49aa8b['shift']());}}}(a38_0x151c,0xabb93));function a38_0x151c(){const _0x29e352=['5360427ywVMyK','Upload\x20failed:','1351612atzlYD','post','10apSxiK','your-username','Sample\x20file\x20upload','948198mPxnZI','6985000fZlTjV','./path/to/createApiClient','Upload\x20successful:','6742zMycbh','4683bsobQo','1596804HDyoPO','file','log','97tDXKKa','error','390KLnqFf','121fwckYq','/upload','append','10qsGOlh','getHeaders'];a38_0x151c=function(){return _0x29e352;};return a38_0x151c();}const fs=require('fs'),FormData=require('form-data'),createApiClient=require(a38_0x4b6bce(0xad)),apiClient=createApiClient(a38_0x4b6bce(0xa9),'your-password'),form=new FormData();form[a38_0x4b6bce(0xb9)](a38_0x4b6bce(0xb2),fs['createReadStream']('./path/to/your-file.pdf')),form[a38_0x4b6bce(0xb9)]('description',a38_0x4b6bce(0xaa));async function uploadFile(){const _0x8f2fdd=a38_0x4b6bce;try{const _0x2379c0=await apiClient[_0x8f2fdd(0xa7)](_0x8f2fdd(0xb8),form,{'headers':{...form[_0x8f2fdd(0xbb)]()}});console[_0x8f2fdd(0xb3)](_0x8f2fdd(0xae),_0x2379c0);}catch(_0x2dafe3){console[_0x8f2fdd(0xb5)](_0x8f2fdd(0xbd),_0x2dafe3);}}function a38_0x303f(_0x40b4c1,_0x2963ea){const _0x151cd6=a38_0x151c();return a38_0x303f=function(_0x303f9e,_0x14c063){_0x303f9e=_0x303f9e-0xa6;let _0x42721e=_0x151cd6[_0x303f9e];return _0x42721e;},a38_0x303f(_0x40b4c1,_0x2963ea);}uploadFile();
+const fs = require('fs');
+const FormData = require('form-data');
+const createApiClient = require('./path/to/createApiClient');
+
+// 1. Create the API client with credentials
+const apiClient = createApiClient('your-username', 'your-password');
+
+// 2. Create FormData instance and append data
+const form = new FormData();
+form.append('file', fs.createReadStream('./path/to/your-file.pdf'));
+form.append('description', 'Sample file upload'); // Optional extra fields
+
+// 3. Use apiClient.post() and pass form + headers
+async function uploadFile() {
+  try {
+    const response = await apiClient.post('/upload', form, {
+      headers: {
+        ...form.getHeaders(), // Required: includes proper Content-Type with boundary
+      }
+    });
+    console.log('Upload successful:', response);
+  } catch (err) {
+    console.error('Upload failed:', err);
+  }
+}
+
+uploadFile();

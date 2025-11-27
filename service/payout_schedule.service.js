@@ -1,1 +1,747 @@
-function a23_0x3b34(_0x33807f,_0x24661a){const _0x5d6ecd=a23_0x5d6e();return a23_0x3b34=function(_0x3b34ad,_0x3d3539){_0x3b34ad=_0x3b34ad-0x14d;let _0xdcdb66=_0x5d6ecd[_0x3b34ad];return _0xdcdb66;},a23_0x3b34(_0x33807f,_0x24661a);}const a23_0x2a443d=a23_0x3b34;function a23_0x5d6e(){const _0x4f8e7b=['🚀\x20~\x20get_master_payout_schedule\x20~\x20sub_merchant_id:','push','772302xrDvsy','get_paginated_payout_schedule_plans','5tLatuD','message','12838eyIwDk','created_at','YYYY-MM-DD\x20hh:mm\x20A','day','params','currency','second','get_payout_schedule_plan_by_id','isBefore','DELETE','items','format','QUARTERLY','remove_payout_schedule_plan_by_merchant_id','schedules','Updated\x20schedule\x20date:','347394muzsqR','update_payout_schedule_plan','create_master_payout_schedule','isAfter','plan_id','days','moment','Invalid\x20frequency','log','Payout\x20schedule\x20plan\x20found!','country_iso_code','608648JdQXWl','WEEKLY','update_payout_schedule_item','plan_item_action','weeks','all','isSameOrBefore','YYYY-MM-DD','./payout_schedule_master.db.service','Invalid\x20action!','filter','DAILY','13299fcCINO','create_payout_schedule_item','941913sloWSw','./payout_schedule_plans.db.service','delete_payout_schedule_item_by_plan_id','hour','body','delete_payout_schedule_plan','data','sub_merchant_id','🚀\x20~\x20constcreate_payout_schedule_items=catchAsync\x20~\x20error:','is_default','date','MONTHLY','UPDATE','active_disable_payout_schedule_item_by_item_id','updated_at','length','deleted','plan_name','active','minute','2705112QpFKaG','get_payout_schedule_items_by_plan_id','🚀\x20~\x20get_master_payout_schedule\x20~\x20payout_schedule:','🚀\x20~\x20constcreate_master_payout_schedule=\x20~\x20payload:','create_payout_schedule_plan','./node_server_api.service','sequelize','map','status','decrypt','add','payout_time','check_payout_schedule'];a23_0x5d6e=function(){return _0x4f8e7b;};return a23_0x5d6e();}(function(_0x22c3d1,_0x11ab1c){const _0x86d9f3=a23_0x3b34,_0x2e1957=_0x22c3d1();while(!![]){try{const _0x1b4b19=parseInt(_0x86d9f3(0x19c))/0x1+parseInt(_0x86d9f3(0x185))/0x2+-parseInt(_0x86d9f3(0x14e))/0x3+parseInt(_0x86d9f3(0x190))/0x4+parseInt(_0x86d9f3(0x173))/0x5*(-parseInt(_0x86d9f3(0x171))/0x6)+parseInt(_0x86d9f3(0x175))/0x7+parseInt(_0x86d9f3(0x162))/0x8;if(_0x1b4b19===_0x11ab1c)break;else _0x2e1957['push'](_0x2e1957['shift']());}catch(_0x5bd003){_0x2e1957['push'](_0x2e1957['shift']());}}}(a23_0x5d6e,0x39b9b));const httpStatus=require('http-status'),helperService=require('./helper.service'),payoutScheduleDBService=require(a23_0x2a443d(0x14f)),payoutScheduleItemsDBService=require('./payout_schedule_items.db.service'),payoutScheduleMasterDBService=require(a23_0x2a443d(0x198)),encryptDecryptService=require('./encrypt_decrypt.service'),moment=require(a23_0x2a443d(0x18b)),{get_sub_merchants}=require(a23_0x2a443d(0x167)),{Op}=require(a23_0x2a443d(0x168)),create_payout_schedule_plan=async _0x387f88=>{const _0x4228a2=a23_0x2a443d;let _0x5efeb4=await payoutScheduleDBService[_0x4228a2(0x166)](_0x387f88);if(_0x5efeb4?.[_0x4228a2(0x16a)]!==httpStatus['OK'])return _0x5efeb4;let _0x1618be=_0x5efeb4[_0x4228a2(0x154)]['id'],_0x2af7ff=_0x387f88?.['payout_time'],_0x3511ea=_0x387f88?.['items'];_0x5efeb4['data'][_0x4228a2(0x17f)]=[];const _0x290123=await Promise[_0x4228a2(0x195)](_0x3511ea[_0x4228a2(0x169)](async _0xdc3df7=>{const _0x371e9f=_0x4228a2;_0xdc3df7['plan_id']=_0x1618be;const _0x1dea98=await create_payout_schedule_items(_0xdc3df7,_0x2af7ff);let _0x24f5dd={};return _0x1dea98?.[_0x371e9f(0x16a)]===httpStatus['OK']&&(_0x24f5dd={'plan_item_id':_0x1dea98['data']['id'],..._0x1dea98['data']},delete _0x24f5dd['id']),_0x1dea98?.[_0x371e9f(0x16a)]===httpStatus['OK']?_0x24f5dd:null;}));_0x5efeb4['data']['items']=_0x290123[_0x4228a2(0x19a)](_0x14cfc3=>_0x14cfc3!==null),_0x5efeb4[_0x4228a2(0x154)][_0x4228a2(0x189)]=_0x1618be,delete _0x5efeb4['data']['id'];const _0x43a051={'plan_id':_0x5efeb4?.[_0x4228a2(0x154)]?.[_0x4228a2(0x189)],'plan_name':_0x5efeb4?.[_0x4228a2(0x154)]?.['plan_name'],'country_iso_code':_0x5efeb4?.['data']?.[_0x4228a2(0x18f)],'is_default':_0x5efeb4?.['data']?.[_0x4228a2(0x157)],'active':_0x5efeb4?.['data']?.['active'],'deleted':_0x5efeb4?.[_0x4228a2(0x154)]?.['deleted'],'created_at':_0x5efeb4?.[_0x4228a2(0x154)]?.[_0x4228a2(0x176)],'updated_at':_0x5efeb4?.[_0x4228a2(0x154)]?.[_0x4228a2(0x15c)],'schedules':_0x5efeb4?.['data']?.[_0x4228a2(0x17f)]};let _0x1b8718={'status':_0x5efeb4[_0x4228a2(0x16a)],'message':_0x5efeb4[_0x4228a2(0x174)],'data':_0x43a051};return _0x1b8718;},create_payout_schedule_items=async(_0x2ebd4e,_0x33ceaf)=>{const _0x44e55e=a23_0x2a443d,{plan_id:_0xc0413b,currency:_0x23429b,frequency:_0xa0c256,occurrence:_0x59531e,start:_0x3551eb,min_amount:_0x4311a5}=_0x2ebd4e;let _0x1f2def='',_0x126dfd='';try{const _0x577570=moment()['format'](_0x44e55e(0x197)),_0x4c3707={'Sunday':0x0,'Monday':0x1,'Tuesday':0x2,'Wednesday':0x3,'Thursday':0x4,'Friday':0x5,'Saturday':0x6},_0x5b2995={'Sunday':0x0,'Monday':0x1,'Tuesday':0x2,'Wednesday':0x3,'Thursday':0x4,'Friday':0x5,'Saturday':0x6},_0x41a37c=moment();switch(_0xa0c256){case _0x44e55e(0x19b):const _0x334266=moment(_0x577570+'\x20'+_0x33ceaf,_0x44e55e(0x177));!_0x334266[_0x44e55e(0x188)](moment())&&_0x334266[_0x44e55e(0x16c)](_0x59531e,_0x44e55e(0x18a));_0x126dfd=_0x334266[_0x44e55e(0x180)](_0x44e55e(0x197));break;case _0x44e55e(0x191):const _0x1d039d=_0x4c3707[_0x3551eb];let _0x23c911=moment()[_0x44e55e(0x178)](_0x1d039d)['hour'](0x0)[_0x44e55e(0x161)](0x0)['second'](0x0);_0x41a37c['day']()===_0x1d039d&&moment(_0x41a37c[_0x44e55e(0x180)](_0x44e55e(0x197))+'\x20'+_0x33ceaf,'YYYY-MM-DD\x20hh:mm\x20A')['isBefore'](_0x41a37c)&&_0x23c911[_0x44e55e(0x16c)](_0x59531e,_0x44e55e(0x194));_0x23c911[_0x44e55e(0x17d)](_0x41a37c,_0x44e55e(0x178))&&_0x23c911['add'](_0x59531e,_0x44e55e(0x194));const _0x1adb54=moment(_0x23c911['format'](_0x44e55e(0x197))+'\x20'+_0x33ceaf,_0x44e55e(0x177));_0x126dfd=_0x1adb54[_0x44e55e(0x180)](_0x44e55e(0x197));break;case _0x44e55e(0x159):let _0x5c7d91=moment()[_0x44e55e(0x158)](_0x3551eb)[_0x44e55e(0x180)]('YYYY-MM-DD'),_0xf1a3c3=moment(_0x5c7d91+'\x20'+_0x33ceaf,'YYYY-MM-DD\x20hh:mm\x20A');while(_0xf1a3c3[_0x44e55e(0x196)](_0x41a37c)){_0xf1a3c3[_0x44e55e(0x16c)](_0x59531e,'months')[_0x44e55e(0x158)](_0x3551eb),_0xf1a3c3=moment(_0xf1a3c3['format'](_0x44e55e(0x197))+'\x20'+_0x33ceaf,_0x44e55e(0x177));}_0x126dfd=_0xf1a3c3['format'](_0x44e55e(0x197));break;case _0x44e55e(0x181):let _0x494afc=moment(_0x3551eb+'\x20'+_0x33ceaf,'YYYY-MM-DD\x20hh:mm\x20A');if(_0x494afc[_0x44e55e(0x17d)](_0x41a37c))while(_0x494afc[_0x44e55e(0x196)](_0x41a37c)){_0x494afc[_0x44e55e(0x16c)](_0x59531e*0x3,'months');}const _0xcce694=moment(_0x494afc[_0x44e55e(0x180)]('YYYY-MM-DD')+'\x20'+_0x33ceaf,_0x44e55e(0x177));_0x126dfd=_0xcce694[_0x44e55e(0x180)]('YYYY-MM-DD');break;default:throw new Error(_0x44e55e(0x18c));}}catch(_0x58af53){console['log'](_0x44e55e(0x156),_0x58af53);}_0x1f2def=_0x126dfd;const _0x46d91a={'plan_id':_0xc0413b,'currency':_0x23429b,'frequency':_0xa0c256,'occurrence':_0x59531e,'start':_0x3551eb,'run_next_at':_0x1f2def,'min_amount':_0x4311a5,'payout_time':_0x33ceaf};return await payoutScheduleItemsDBService[_0x44e55e(0x14d)](_0x46d91a);},update_payout_schedule_plan=async _0x58536d=>{const _0x5ab55a=a23_0x2a443d;let _0x500211=await payoutScheduleDBService[_0x5ab55a(0x186)](_0x58536d);if(_0x500211?.[_0x5ab55a(0x16a)]!==httpStatus['OK'])return _0x500211;let _0x21abfc=_0x500211[_0x5ab55a(0x154)]['id'],_0x570937=_0x58536d?.[_0x5ab55a(0x16d)],_0x4cd3ef=_0x58536d?.[_0x5ab55a(0x183)];_0x500211[_0x5ab55a(0x154)][_0x5ab55a(0x183)]=[];let _0x4b97cc=await get_payout_schedule_plan_by_id(_0x58536d?.[_0x5ab55a(0x189)]);if(_0x4b97cc?.[_0x5ab55a(0x16a)]==httpStatus['OK']){let _0xbf8b7e=_0x4b97cc?.['data']?.[_0x5ab55a(0x183)];const _0x649e5f=_0xbf8b7e[_0x5ab55a(0x19a)](_0x2aa49d=>!_0x4cd3ef['some'](_0x28d529=>_0x28d529[_0x5ab55a(0x17a)]===_0x2aa49d[_0x5ab55a(0x17a)]));_0x649e5f['map'](async _0x5bfcde=>{const _0x31e509=_0x5ab55a;_0x5bfcde[_0x31e509(0x193)]='DELETE',_0x4cd3ef[_0x31e509(0x170)](_0x5bfcde);});}const _0x9dfd2=await Promise[_0x5ab55a(0x195)](_0x4cd3ef[_0x5ab55a(0x169)](async _0x425d68=>{const _0x551964=_0x5ab55a;if(_0x425d68[_0x551964(0x193)]==_0x551964(0x15a)||_0x425d68[_0x551964(0x193)]=='ADD'){_0x425d68[_0x551964(0x189)]=_0x21abfc;const _0x4b0afa=await update_payout_schedule_items(_0x425d68,_0x570937);let _0x46f6c6={};return _0x4b0afa?.[_0x551964(0x16a)]===httpStatus['OK']&&(_0x46f6c6={'plan_item_id':_0x4b0afa[_0x551964(0x154)]['id'],..._0x4b0afa[_0x551964(0x154)]},delete _0x46f6c6['id']),_0x4b0afa?.[_0x551964(0x16a)]===httpStatus['OK']?_0x46f6c6:null;}else{if(_0x425d68[_0x551964(0x193)]==_0x551964(0x17e)){let _0x4f3701=payoutScheduleItemsDBService['delete_payout_schedule_item_by_item_id'](_0x425d68['plan_item_id']);if(_0x4f3701?.['status']===httpStatus['OK'])return _0x4f3701?.[_0x551964(0x154)];return _0x425d68;}else return{'status':httpStatus[0x190],'message':_0x551964(0x199)};}}));_0x500211['data']['schedules']=_0x9dfd2[_0x5ab55a(0x19a)](_0x24a079=>_0x24a079!==null),_0x500211[_0x5ab55a(0x154)][_0x5ab55a(0x189)]=_0x21abfc,delete _0x500211['data']['id'];const _0x1ce741={'plan_id':_0x500211?.[_0x5ab55a(0x154)]?.[_0x5ab55a(0x189)],'plan_name':_0x500211?.[_0x5ab55a(0x154)]?.[_0x5ab55a(0x15f)],'country_iso_code':_0x500211?.[_0x5ab55a(0x154)]?.[_0x5ab55a(0x18f)],'is_default':_0x500211?.[_0x5ab55a(0x154)]?.[_0x5ab55a(0x157)],'active':_0x500211?.['data']?.[_0x5ab55a(0x160)],'deleted':_0x500211?.[_0x5ab55a(0x154)]?.[_0x5ab55a(0x15e)],'created_at':_0x500211?.[_0x5ab55a(0x154)]?.[_0x5ab55a(0x176)],'updated_at':_0x500211?.[_0x5ab55a(0x154)]?.[_0x5ab55a(0x15c)],'schedules':_0x500211?.[_0x5ab55a(0x154)]?.[_0x5ab55a(0x183)]};let _0x269f45={'status':_0x500211[_0x5ab55a(0x16a)],'message':_0x500211[_0x5ab55a(0x174)],'data':_0x1ce741};return _0x269f45;},update_payout_schedule_items=async(_0x2e853f,_0x385ea9)=>{const _0x403fcb=a23_0x2a443d,{plan_item_id:_0x304119,plan_id:_0xa4286b,currency:_0xa165b8,frequency:_0x117393,occurrence:_0x13a999,start:_0x174f89,min_amount:_0x198da8}=_0x2e853f;let _0x1f92a4='',_0x3c3c3b='';try{const _0x2712c5=moment()[_0x403fcb(0x180)](_0x403fcb(0x197)),_0x33c32f={'Sunday':0x0,'Monday':0x1,'Tuesday':0x2,'Wednesday':0x3,'Thursday':0x4,'Friday':0x5,'Saturday':0x6},_0x34b206={'Sunday':0x0,'Monday':0x1,'Tuesday':0x2,'Wednesday':0x3,'Thursday':0x4,'Friday':0x5,'Saturday':0x6},_0x35c133=moment();switch(_0x117393){case _0x403fcb(0x19b):const _0x4b1c7f=moment(_0x2712c5+'\x20'+_0x385ea9,_0x403fcb(0x177));!_0x4b1c7f[_0x403fcb(0x188)](moment())&&_0x4b1c7f[_0x403fcb(0x16c)](_0x13a999,_0x403fcb(0x18a));_0x3c3c3b=_0x4b1c7f['format'](_0x403fcb(0x197));break;case _0x403fcb(0x191):const _0x555960=_0x33c32f[_0x174f89];let _0xa0992c=moment()['day'](_0x555960)[_0x403fcb(0x151)](0x0)[_0x403fcb(0x161)](0x0)[_0x403fcb(0x17b)](0x0);_0x35c133[_0x403fcb(0x178)]()===_0x555960&&moment(_0x35c133['format']('YYYY-MM-DD')+'\x20'+_0x385ea9,'YYYY-MM-DD\x20hh:mm\x20A')[_0x403fcb(0x17d)](_0x35c133)&&_0xa0992c[_0x403fcb(0x16c)](_0x13a999,_0x403fcb(0x194));_0xa0992c[_0x403fcb(0x17d)](_0x35c133,_0x403fcb(0x178))&&_0xa0992c[_0x403fcb(0x16c)](_0x13a999,'weeks');const _0x3e2615=moment(_0xa0992c['format'](_0x403fcb(0x197))+'\x20'+_0x385ea9,_0x403fcb(0x177));_0x3c3c3b=_0x3e2615['format'](_0x403fcb(0x197));break;case _0x403fcb(0x159):let _0x488f38=moment()[_0x403fcb(0x158)](_0x174f89)[_0x403fcb(0x180)]('YYYY-MM-DD'),_0x32e133=moment(_0x488f38+'\x20'+_0x385ea9,'YYYY-MM-DD\x20hh:mm\x20A');while(_0x32e133['isSameOrBefore'](_0x35c133)){_0x32e133[_0x403fcb(0x16c)](_0x13a999,'months')['date'](_0x174f89),_0x32e133=moment(_0x32e133[_0x403fcb(0x180)](_0x403fcb(0x197))+'\x20'+_0x385ea9,_0x403fcb(0x177));}_0x3c3c3b=_0x32e133[_0x403fcb(0x180)](_0x403fcb(0x197));break;case'QUARTERLY':let _0x3ddcb3=moment(_0x174f89+'\x20'+_0x385ea9,'YYYY-MM-DD\x20hh:mm\x20A');if(_0x3ddcb3[_0x403fcb(0x17d)](_0x35c133))while(_0x3ddcb3['isSameOrBefore'](_0x35c133)){_0x3ddcb3[_0x403fcb(0x16c)](_0x13a999*0x3,'months');}const _0x196cad=moment(''+_0x3ddcb3[_0x403fcb(0x180)]('YYYY-MM-DD'),_0x403fcb(0x197));_0x3c3c3b=_0x196cad[_0x403fcb(0x180)](_0x403fcb(0x197));break;default:throw new Error(_0x403fcb(0x18c));}}catch(_0x505b19){console['log'](_0x403fcb(0x184),_0x505b19);}_0x1f92a4=_0x3c3c3b;const _0x3400e9={'plan_item_id':_0x304119,'plan_id':_0xa4286b,'currency':_0xa165b8,'frequency':_0x117393,'occurrence':_0x13a999,'start':_0x174f89,'run_next_at':_0x1f92a4,'min_amount':_0x198da8,'payout_time':_0x385ea9};return await payoutScheduleItemsDBService[_0x403fcb(0x192)](_0x3400e9);},delete_payout_schedule_plan=async _0x2b0c14=>{const _0x1f0fa5=a23_0x2a443d;let _0x228b3d=await payoutScheduleDBService[_0x1f0fa5(0x153)](_0x2b0c14);if(_0x228b3d?.[_0x1f0fa5(0x16a)]!==httpStatus['OK'])return _0x228b3d;let _0x43948c=await payoutScheduleItemsDBService[_0x1f0fa5(0x150)](_0x2b0c14);if(_0x43948c?.[_0x1f0fa5(0x16a)]!==httpStatus['OK'])return _0x43948c;return _0x43948c;},active_disable_payout_schedule_plan=async(_0x2edf41,_0x2c67d0)=>{const _0xa86121=a23_0x2a443d;let _0x41c40d=await payoutScheduleDBService['active_disable_payout_schedule_plan'](_0x2edf41,_0x2c67d0);if(_0x41c40d?.[_0xa86121(0x16a)]!==httpStatus['OK'])return _0x41c40d;let _0x2f27b8=await payoutScheduleItemsDBService[_0xa86121(0x15b)](_0x2edf41,_0x2c67d0);if(_0x2f27b8?.[_0xa86121(0x16a)]!==httpStatus['OK'])return _0x2f27b8;return await get_payout_schedule_plan_by_id(_0x2edf41);},delete_payout_schedule_items=async _0xfc11ca=>{const {plan_item_id:_0x22ff0c,plan_id:_0x59c49d,currency:_0x18ebfc,frequency:_0x3e2997,occurrence:_0x36f785,start:_0x3e7523,min_amount:_0xccc97e}=_0xfc11ca,_0x3a97c0={'plan_item_id':_0x22ff0c,'plan_id':_0x59c49d,'currency':_0x18ebfc,'frequency':_0x3e2997,'occurrence':_0x36f785,'start':_0x3e7523,'run_next_at':run_next_at,'min_amount':_0xccc97e,'payout_time':payout_time};return await payoutScheduleItemsDBService['update_payout_schedule_item'](_0x3a97c0);},get_payout_schedule_plan_by_id=async _0x1a6603=>{const _0x4fee8c=a23_0x2a443d;var _0x4dd390=await payoutScheduleDBService[_0x4fee8c(0x17c)](_0x1a6603);if(_0x4dd390?.[_0x4fee8c(0x16a)]!==httpStatus['OK'])return _0x4dd390;var _0x3161c3;if(_0x4dd390?.[_0x4fee8c(0x16a)]===httpStatus['OK']){var _0x1ff166=await payoutScheduleItemsDBService[_0x4fee8c(0x163)](_0x1a6603);_0x3161c3={..._0x4dd390[_0x4fee8c(0x154)],'schedules':_0x1ff166[_0x4fee8c(0x154)]};}return{'status':httpStatus['OK'],'message':_0x4fee8c(0x18e),'data':_0x3161c3};},list_payout_schedule_plan_by_id=async _0x37f5df=>{const _0x32953c=a23_0x2a443d;var _0x13ef6b=await payoutScheduleDBService[_0x32953c(0x172)](_0x37f5df);return _0x13ef6b;},check_payout_schedule=async _0x4c4b5e=>{const _0x356518=a23_0x2a443d,{schedule_date:_0x4e8387}=_0x4c4b5e[_0x356518(0x152)];var _0x3ebdf4=await payoutScheduleItemsDBService[_0x356518(0x16e)](_0x4e8387);if(_0x3ebdf4?.[_0x356518(0x16a)]!==httpStatus['OK'])return _0x3ebdf4;return _0x3ebdf4;},create_master_payout_schedule=async _0x3d8999=>{const _0x50ebb4=a23_0x2a443d,{super_merchant_id:_0x54eaf0,sub_merchant_id:_0x1e79aa,plan_id:_0x1bcb16}=_0x3d8999[_0x50ebb4(0x152)],_0x2e48b2={'super_merchant_id':_0x54eaf0,'sub_merchant_id':await encryptDecryptService[_0x50ebb4(0x16b)](_0x1e79aa),'plan_id':_0x1bcb16};console[_0x50ebb4(0x18d)](_0x50ebb4(0x165),_0x2e48b2);var _0x255e4a=await payoutScheduleMasterDBService[_0x50ebb4(0x187)](_0x2e48b2);if(_0x255e4a?.[_0x50ebb4(0x16a)]!==httpStatus['OK'])return _0x255e4a;return _0x255e4a;},get_master_payout_schedule=async _0x460351=>{const _0x41ed28=a23_0x2a443d,_0x50ea09=_0x460351[_0x41ed28(0x179)][_0x41ed28(0x155)];console['log'](_0x41ed28(0x16f),_0x50ea09);let _0x4d45b1='';_0x50ea09[_0x41ed28(0x15d)]<0xb?_0x4d45b1=_0x50ea09:_0x4d45b1=await encryptDecryptService[_0x41ed28(0x16b)](_0x50ea09);let _0x566d99={'sub_merchant_id':_0x4d45b1,'deleted':0x0};var _0x19f5a9=await payoutScheduleMasterDBService['get_payout_schedule_plan_by_merchant_id'](_0x566d99);console[_0x41ed28(0x18d)](_0x41ed28(0x164),_0x19f5a9);if(_0x19f5a9?.['status']!==httpStatus['OK'])return _0x19f5a9;var _0x31f1c8,_0xc124dc=await payoutScheduleDBService[_0x41ed28(0x17c)](_0x19f5a9?.[_0x41ed28(0x154)]?.[_0x41ed28(0x189)]);if(_0xc124dc?.[_0x41ed28(0x16a)]!==httpStatus['OK'])return _0xc124dc;var _0x4e711f;return _0xc124dc?.['status']===httpStatus['OK']&&(_0x4e711f=await payoutScheduleItemsDBService[_0x41ed28(0x163)](_0x19f5a9?.[_0x41ed28(0x154)]?.[_0x41ed28(0x189)])),_0x31f1c8={..._0x19f5a9['data'],..._0xc124dc[_0x41ed28(0x154)],'schedules':_0x4e711f['data']},_0x19f5a9[_0x41ed28(0x154)]=_0x31f1c8,_0x19f5a9;},remove_master_payout_schedule=async _0x80a3c4=>{const _0x304188=a23_0x2a443d,{sub_merchant_id:_0x341888}=_0x80a3c4[_0x304188(0x152)];let _0x3aa353=await encryptDecryptService[_0x304188(0x16b)](_0x341888);var _0x16ed9a=await payoutScheduleMasterDBService[_0x304188(0x182)](_0x3aa353);if(_0x16ed9a?.[_0x304188(0x16a)]!==httpStatus['OK'])return _0x16ed9a;return _0x16ed9a;};module['exports']={'create_payout_schedule_plan':create_payout_schedule_plan,'create_payout_schedule_items':create_payout_schedule_items,'update_payout_schedule_plan':update_payout_schedule_plan,'update_payout_schedule_items':update_payout_schedule_items,'get_payout_schedule_plan_by_id':get_payout_schedule_plan_by_id,'list_payout_schedule_plan_by_id':list_payout_schedule_plan_by_id,'check_payout_schedule':check_payout_schedule,'delete_payout_schedule_plan':delete_payout_schedule_plan,'active_disable_payout_schedule_plan':active_disable_payout_schedule_plan,'create_master_payout_schedule':create_master_payout_schedule,'get_master_payout_schedule':get_master_payout_schedule,'remove_master_payout_schedule':remove_master_payout_schedule};
+const httpStatus = require("http-status");
+const helperService = require("./helper.service");
+const payoutScheduleDBService = require("./payout_schedule_plans.db.service");
+const payoutScheduleItemsDBService = require("./payout_schedule_items.db.service");
+const payoutScheduleMasterDBService = require("./payout_schedule_master.db.service");
+const encryptDecryptService = require('./encrypt_decrypt.service');
+const moment = require("moment");
+const { get_sub_merchants } = require("./node_server_api.service");
+const { Op } = require("sequelize");
+
+/**
+ * Add New Payout Schedule
+ * @returns {Promise<User>}
+ */
+const create_payout_schedule_plan = async (payload) => {
+  // Save mid
+  let payout_schedule =
+    await payoutScheduleDBService.create_payout_schedule_plan(payload);
+  if (payout_schedule?.status !== httpStatus.OK) {
+    return payout_schedule;
+  }
+
+  let plan_id = payout_schedule.data.id;
+
+  let payout_time = payload?.payout_time;
+  let items = payload?.items;
+  payout_schedule.data.items = [];
+
+  const createdItems = await Promise.all(
+    items.map(async (item) => {
+      item.plan_id = plan_id;
+      const result = await create_payout_schedule_items(item, payout_time);
+      let response = {};
+      if (result?.status === httpStatus.OK) {
+        response = {
+          plan_item_id: result.data.id,
+          ...result.data,
+        };
+        delete response.id;
+      }
+      return result?.status === httpStatus.OK ? response : null;
+    })
+  );
+
+  // Filter out any failed items
+  payout_schedule.data.items = createdItems.filter((item) => item !== null);
+  payout_schedule.data.plan_id = plan_id;
+  delete payout_schedule.data.id;
+
+  const reorderedData = {
+    plan_id: payout_schedule?.data?.plan_id,
+    plan_name: payout_schedule?.data?.plan_name,
+    country_iso_code: payout_schedule?.data?.country_iso_code,
+    is_default: payout_schedule?.data?.is_default,
+    active: payout_schedule?.data?.active,
+    deleted: payout_schedule?.data?.deleted,
+    created_at: payout_schedule?.data?.created_at,
+    updated_at: payout_schedule?.data?.updated_at,
+    schedules: payout_schedule?.data?.items,
+  };
+
+  let final_response = {
+    status: payout_schedule.status,
+    message: payout_schedule.message,
+    data: reorderedData,
+  };
+
+  // Send success response
+  return final_response;
+};
+
+const create_payout_schedule_items = async (payload, payout_time) => {
+  const { plan_id, currency, frequency, occurrence, start, min_amount } =
+    payload;
+
+  let run_next_at = "";
+  let formattedDate = "";
+  try {
+    const currentDate = moment().format("YYYY-MM-DD");
+
+    const weekdays = {
+      Sunday: 0,
+      Monday: 1,
+      Tuesday: 2,
+      Wednesday: 3,
+      Thursday: 4,
+      Friday: 5,
+      Saturday: 6,
+    };
+
+    const months = {
+      Sunday: 0,
+      Monday: 1,
+      Tuesday: 2,
+      Wednesday: 3,
+      Thursday: 4,
+      Friday: 5,
+      Saturday: 6,
+    };
+
+    const now = moment();
+
+    switch (frequency) {
+      case "DAILY":
+        const combinedDateTime = moment(`${currentDate} ${payout_time}`, "YYYY-MM-DD hh:mm A" );
+         if (!combinedDateTime.isAfter(moment())) {
+           combinedDateTime.add(occurrence, "days");
+         }
+        // DO Nothing already schedule today
+        // formattedDate = combinedDateTime.format("YYYY-MM-DD hh:mm A");
+        formattedDate = combinedDateTime.format("YYYY-MM-DD");
+        break;
+
+      case "WEEKLY":
+        const targetWeekdayIndex = weekdays[start];
+        // Create moment for the upcoming weekday
+        let nextWeekday = moment()
+          .day(targetWeekdayIndex)
+          .hour(0)
+          .minute(0)
+          .second(0);
+        // If today is the target day and the payout time has already passed, skip to next week
+        if (
+          now.day() === targetWeekdayIndex &&
+          moment(
+            `${now.format("YYYY-MM-DD")} ${payout_time}`,
+            "YYYY-MM-DD hh:mm A"
+          ).isBefore(now)
+        ) {
+          nextWeekday.add(occurrence, "weeks");
+        }
+        
+        // If target day is before today (e.g., today is Wednesday, and target is Tuesday), move to next week
+        if (nextWeekday.isBefore(now, "day")) {
+          nextWeekday.add(occurrence, "weeks");
+        }
+        // Combine with payout time
+        const nextRunDateTime = moment(
+          `${nextWeekday.format("YYYY-MM-DD")} ${payout_time}`,
+          "YYYY-MM-DD hh:mm A"
+        );
+
+        // formattedDate = nextRunDateTime.format("YYYY-MM-DD hh:mm A");
+        formattedDate = nextRunDateTime.format("YYYY-MM-DD");
+
+        break;
+
+      case "MONTHLY":
+        // ===== GET CURRENT TIME =====
+
+        // ===== CREATE INITIAL TARGET DATE =====
+        let scheduledDate = moment().date(start).format("YYYY-MM-DD");
+        let scheduledDateTime = moment(
+          `${scheduledDate} ${payout_time}`,
+          "YYYY-MM-DD hh:mm A"
+        );
+
+        // ===== CHECK IF DATE PASSED, THEN ADD MONTHS =====
+        while (scheduledDateTime.isSameOrBefore(now)) {
+          scheduledDateTime.add(occurrence, "months").date(start);
+          // Reset time after date change
+          scheduledDateTime = moment(
+            `${scheduledDateTime.format("YYYY-MM-DD")} ${payout_time}`,
+            "YYYY-MM-DD hh:mm A"
+          );
+        }
+
+        // formattedDate = scheduledDateTime.format("YYYY-MM-DD hh:mm A");
+        formattedDate = scheduledDateTime.format("YYYY-MM-DD");
+
+        break;
+      case "QUARTERLY":
+      
+        // === Build first occurrence based on this year's starting month and day ===
+        let scheduled = moment(`${start} ${payout_time}`, 'YYYY-MM-DD hh:mm A');
+
+        // If first schedule was earlier this year and already passed, find next valid one
+        if (scheduled.isBefore(now)) {
+          while (scheduled.isSameOrBefore(now)) {
+            scheduled.add(occurrence * 3, "months"); // QUARTERLY * occurrence => months to add
+          }
+        }
+
+        // Set the correct time
+        const nextRunDatetime = moment(
+          `${scheduled.format("YYYY-MM-DD")} ${payout_time}`,
+          "YYYY-MM-DD hh:mm A"
+        );
+
+        // formattedDate = nextRunDatetime.format("YYYY-MM-DD hh:mm A");
+        formattedDate = nextRunDatetime.format("YYYY-MM-DD");
+
+        break;
+      default:
+        throw new Error("Invalid frequency");
+    }
+  } catch (error) {
+    console.log(
+      "🚀 ~ constcreate_payout_schedule_items=catchAsync ~ error:",
+      error
+    );
+  }
+  run_next_at = formattedDate;
+
+  const payload_item = {
+    plan_id: plan_id,
+    currency: currency,
+    frequency: frequency,
+    occurrence: occurrence,
+    start: start,
+    run_next_at: run_next_at,
+    min_amount: min_amount,
+    payout_time: payout_time,
+  };
+
+  return await payoutScheduleItemsDBService.create_payout_schedule_item(
+    payload_item
+  );
+};
+
+/**
+ * Manage Payout Schedule
+ * @returns {Promise<User>}
+ */
+const update_payout_schedule_plan = async (payload) => {
+  // update payout schedule plan
+  let payout_schedule =
+    await payoutScheduleDBService.update_payout_schedule_plan(payload);
+  if (payout_schedule?.status !== httpStatus.OK) {
+    return payout_schedule;
+  }
+
+  let plan_id = payout_schedule.data.id;
+
+  let payout_time = payload?.payout_time;
+  let schedules = payload?.schedules;
+  payout_schedule.data.schedules = [];
+
+
+  // Check Removed Items
+  let oldschedules = await get_payout_schedule_plan_by_id(payload?.plan_id);
+  if (oldschedules?.status == httpStatus.OK) {
+    let oldlist = oldschedules?.data?.schedules;
+    const deletedItems = oldlist.filter(
+      (item1) => !schedules.some((item2) => item2.currency === item1.currency)
+    );
+    deletedItems.map(async (deletedItem) => {
+      deletedItem.plan_item_action = "DELETE";
+      schedules.push(deletedItem);
+    })
+  }
+  
+  // update payout schedule plan items
+  const createdItems = await Promise.all(
+    schedules.map(async (schedule_item) => {
+      if (schedule_item.plan_item_action == "UPDATE" || schedule_item.plan_item_action == "ADD") {
+        // ADD | UPDATE
+        schedule_item.plan_id = plan_id;
+        const result = await update_payout_schedule_items(
+          schedule_item,
+          payout_time
+        );
+        let response = {};
+        if (result?.status === httpStatus.OK) {
+          response = {
+            plan_item_id: result.data.id,
+            ...result.data,
+          };
+          delete response.id;
+        }
+        return result?.status === httpStatus.OK ? response : null;
+      }else if (schedule_item.plan_item_action == "DELETE") {
+        // DELETE
+        let result =  payoutScheduleItemsDBService.delete_payout_schedule_item_by_item_id(schedule_item.plan_item_id);
+        if (result?.status === httpStatus.OK) {
+          return result?.data;
+        }
+        return schedule_item;
+      } else {
+
+        return { status: httpStatus[400], message: "Invalid action!" };
+      }
+    })
+  );
+
+  // Filter out any failed items
+  payout_schedule.data.schedules = createdItems.filter((item) => item !== null);
+  payout_schedule.data.plan_id = plan_id;
+  delete payout_schedule.data.id;
+
+  const reorderedData = {
+    plan_id: payout_schedule?.data?.plan_id,
+    plan_name: payout_schedule?.data?.plan_name,
+    country_iso_code: payout_schedule?.data?.country_iso_code,
+    is_default: payout_schedule?.data?.is_default,
+    active: payout_schedule?.data?.active,
+    deleted: payout_schedule?.data?.deleted,
+    created_at: payout_schedule?.data?.created_at,
+    updated_at: payout_schedule?.data?.updated_at,
+    schedules: payout_schedule?.data?.schedules,
+  };
+
+  let final_response = {
+    status: payout_schedule.status,
+    message: payout_schedule.message,
+    data: reorderedData,
+  };
+
+  // Send success response
+  return final_response;
+};
+
+const update_payout_schedule_items = async (payload, payout_time) => {
+  const {
+    plan_item_id,
+    plan_id,
+    currency,
+    frequency,
+    occurrence,
+    start,
+    min_amount,
+  } = payload;
+
+  let run_next_at = "";
+  let formattedDate = "";
+  try {
+    const currentDate = moment().format("YYYY-MM-DD");
+
+    const weekdays = {
+      Sunday: 0,
+      Monday: 1,
+      Tuesday: 2,
+      Wednesday: 3,
+      Thursday: 4,
+      Friday: 5,
+      Saturday: 6,
+    };
+
+    const months = {
+      Sunday: 0,
+      Monday: 1,
+      Tuesday: 2,
+      Wednesday: 3,
+      Thursday: 4,
+      Friday: 5,
+      Saturday: 6,
+    };
+
+    const now = moment();
+
+    switch (frequency) {
+      case "DAILY":
+        const combinedDateTime = moment(
+          `${currentDate} ${payout_time}`,
+          "YYYY-MM-DD hh:mm A"
+        );
+        if (!combinedDateTime.isAfter(moment())) {
+          combinedDateTime.add(occurrence, "days");
+        }
+        // DO Nothing already schedule today
+        // formattedDate = combinedDateTime.format("YYYY-MM-DD hh:mm A");
+        formattedDate = combinedDateTime.format("YYYY-MM-DD");
+        break;
+
+      case "WEEKLY":
+        const targetWeekdayIndex = weekdays[start];
+        // Create moment for the upcoming weekday
+        let nextWeekday = moment()
+          .day(targetWeekdayIndex)
+          .hour(0)
+          .minute(0)
+          .second(0);
+        // If today is the target day and the payout time has already passed, skip to next week
+        if (
+          now.day() === targetWeekdayIndex &&
+          moment(
+            `${now.format("YYYY-MM-DD")} ${payout_time}`,
+            "YYYY-MM-DD hh:mm A"
+          ).isBefore(now)
+        ) {
+          nextWeekday.add(occurrence, "weeks");
+        }
+        // If target day is before today (e.g., today is Wednesday, and target is Tuesday), move to next week
+        if (nextWeekday.isBefore(now, "day")) {
+          nextWeekday.add(occurrence, "weeks");
+        }
+        // Combine with payout time
+        const nextRunDateTime = moment(
+          `${nextWeekday.format("YYYY-MM-DD")} ${payout_time}`,
+          "YYYY-MM-DD hh:mm A"
+        );
+
+        // formattedDate = nextRunDateTime.format("YYYY-MM-DD hh:mm A");
+        formattedDate = nextRunDateTime.format("YYYY-MM-DD");
+
+        break;
+
+      case "MONTHLY":
+        // ===== GET CURRENT TIME =====
+
+        // ===== CREATE INITIAL TARGET DATE =====
+        let scheduledDate = moment().date(start).format("YYYY-MM-DD");
+        let scheduledDateTime = moment(
+          `${scheduledDate} ${payout_time}`,
+          "YYYY-MM-DD hh:mm A"
+        );
+
+        // ===== CHECK IF DATE PASSED, THEN ADD MONTHS =====
+        while (scheduledDateTime.isSameOrBefore(now)) {
+          scheduledDateTime.add(occurrence, "months").date(start);
+          // Reset time after date change
+          scheduledDateTime = moment(
+            `${scheduledDateTime.format("YYYY-MM-DD")} ${payout_time}`,
+            "YYYY-MM-DD hh:mm A"
+          );
+        }
+
+        // formattedDate = scheduledDateTime.format("YYYY-MM-DD hh:mm A");
+        formattedDate = scheduledDateTime.format("YYYY-MM-DD");
+
+        break;
+      case "QUARTERLY":
+
+        let scheduled = moment(`${start} ${payout_time}`, 'YYYY-MM-DD hh:mm A');
+
+        // If first schedule was earlier this year and already passed, find next valid one
+        if (scheduled.isBefore(now)) {
+          while (scheduled.isSameOrBefore(now)) {
+            scheduled.add(occurrence * 3, "months"); // QUARTERLY * occurrence => months to add
+          }
+        }
+
+        // Set the correct time
+        // const nextRunDatetime = moment(
+        //   `${scheduled.format("YYYY-MM-DD")} ${payout_time}`,
+        //   "YYYY-MM-DD hh:mm A"
+        // );
+
+        const nextRunDatetime = moment(
+          `${scheduled.format("YYYY-MM-DD")}`,
+          "YYYY-MM-DD"
+        );
+
+        // formattedDate = nextRunDatetime.format("YYYY-MM-DD hh:mm A");
+        formattedDate = nextRunDatetime.format("YYYY-MM-DD");
+
+        break;
+      default:
+        throw new Error("Invalid frequency");
+    }
+  } catch (error) {
+    console.log("Updated schedule date:", error);
+  }
+
+  run_next_at = formattedDate;
+
+  const payload_item = {
+    plan_item_id: plan_item_id,
+    plan_id: plan_id,
+    currency: currency,
+    frequency: frequency,
+    occurrence: occurrence,
+    start: start,
+    run_next_at: run_next_at,
+    min_amount: min_amount,
+    payout_time: payout_time,
+  };
+
+  return await payoutScheduleItemsDBService.update_payout_schedule_item(
+    payload_item
+  );
+};
+
+
+
+/**
+ * Delete Payout Plan
+ * @returns {Promise<User>}
+ */
+const delete_payout_schedule_plan = async (plan_id) => {
+  // update payout schedule plan
+  let payout_schedule_plan =
+    await payoutScheduleDBService.delete_payout_schedule_plan(plan_id);
+  if (payout_schedule_plan?.status !== httpStatus.OK) {
+    return payout_schedule_plan;
+  }
+
+  let payout_schedule =
+    await payoutScheduleItemsDBService.delete_payout_schedule_item_by_plan_id(plan_id);
+  if (payout_schedule?.status !== httpStatus.OK) {
+    return payout_schedule;
+  }
+  
+  // Send success response
+  return payout_schedule;
+};
+
+/**
+ * Delete Payout Plan
+ * @returns {Promise<User>}
+ */
+const active_disable_payout_schedule_plan = async (plan_id, flag) => {
+  // update payout schedule plan
+  let payout_schedule_plan =
+    await payoutScheduleDBService.active_disable_payout_schedule_plan(plan_id, flag);
+  if (payout_schedule_plan?.status !== httpStatus.OK) {
+    return payout_schedule_plan;
+  }
+
+  let payout_schedule =
+    await payoutScheduleItemsDBService.active_disable_payout_schedule_item_by_item_id(plan_id, flag);
+  if (payout_schedule?.status !== httpStatus.OK) {
+    return payout_schedule;
+  }
+  
+  // Send success response
+  return await get_payout_schedule_plan_by_id(plan_id);
+};
+
+const delete_payout_schedule_items = async (payload) => {
+  const {
+    plan_item_id,
+    plan_id,
+    currency,
+    frequency,
+    occurrence,
+    start,
+    min_amount,
+  } = payload;
+
+  const payload_item = {
+    plan_item_id: plan_item_id,
+    plan_id: plan_id,
+    currency: currency,
+    frequency: frequency,
+    occurrence: occurrence,
+    start: start,
+    run_next_at: run_next_at,
+    min_amount: min_amount,
+    payout_time: payout_time,
+  };
+
+  return await payoutScheduleItemsDBService.update_payout_schedule_item(
+    payload_item
+  );
+};
+
+/**
+ * Get Payout Schedule Plan By Id
+ * @returns {Promise<User>}
+ */
+const get_payout_schedule_plan_by_id = async (plan_id) => {
+  // Get Plan & items
+  var payout_schedule_plan =
+    await payoutScheduleDBService.get_payout_schedule_plan_by_id(plan_id);
+  if (payout_schedule_plan?.status !== httpStatus.OK) {
+    return payout_schedule_plan;
+  }
+
+  var responseData;
+  if (payout_schedule_plan?.status === httpStatus.OK) {
+    var plan_items_data =
+      await payoutScheduleItemsDBService.get_payout_schedule_items_by_plan_id(
+        plan_id
+      );
+
+    responseData = {
+      ...payout_schedule_plan.data,
+      schedules: plan_items_data.data,
+    };
+  }
+
+  // Send success response
+  return {
+    status: httpStatus.OK,
+    message: "Payout schedule plan found!",
+    data: responseData,
+  };
+};
+
+/**
+ * List Payout Schedule Plan By Id
+ * @returns {Promise<User>}
+ */
+const list_payout_schedule_plan_by_id = async (req) => {
+  // Save items
+  var payout_schedule_plan =
+    await payoutScheduleDBService.get_paginated_payout_schedule_plans(req);
+  // Send success response
+  return payout_schedule_plan;
+};
+
+/**
+ * Check Payout Schedule Plan By Date
+ * @returns {Promise<User>}
+ */
+const check_payout_schedule = async (req) => {
+  const { schedule_date } = req.body;
+  // Save items
+  var payout_schedule =
+    await payoutScheduleItemsDBService.check_payout_schedule(schedule_date);
+  if (payout_schedule?.status !== httpStatus.OK) {
+    return payout_schedule;
+  }
+  // Send success response
+  return payout_schedule;
+};
+
+/**
+ * Create Mater Merchant Payout Schedule
+ * @returns {Promise<User>}
+ */
+const create_master_payout_schedule = async (req) => {
+  const { super_merchant_id, sub_merchant_id, plan_id } = req.body;
+   
+ const payload = {
+    super_merchant_id: super_merchant_id,
+    sub_merchant_id: await encryptDecryptService.decrypt(sub_merchant_id),
+    plan_id: plan_id
+  };
+  console.log("🚀 ~ constcreate_master_payout_schedule= ~ payload:", payload)
+  // Save items
+  var payout_schedule = await payoutScheduleMasterDBService.create_master_payout_schedule(payload);
+  if (payout_schedule?.status !== httpStatus.OK) {
+    return payout_schedule;
+  }
+
+  // Send success response
+  return payout_schedule;
+};
+
+/**
+ * Get Master Merchant Payout Schedule
+ * @returns {Promise<User>}
+ */
+const get_master_payout_schedule = async (req) => {
+  const sub_merchant_id = req.params.sub_merchant_id;
+  console.log("🚀 ~ get_master_payout_schedule ~ sub_merchant_id:", sub_merchant_id)
+  
+  let sub_merchant_id_dec = "";
+  if (sub_merchant_id.length < 11) {
+    sub_merchant_id_dec = sub_merchant_id;
+  } else {
+    sub_merchant_id_dec = await encryptDecryptService.decrypt(sub_merchant_id);
+  }
+
+  let where = {
+    sub_merchant_id: sub_merchant_id_dec, // filter by your input
+    deleted: 0, // filter by your input
+  };
+
+  // if (req?.user?.type === "merchant") {
+  //   const sub_merchants = await get_sub_merchants(req.user.token);
+
+  //   // Collect decrypted IDs into an array
+  //   const decryptedIds = [];
+  //   for (const element of sub_merchants?.data || []) {
+  //     const decryptedId = await encryptDecryptService.decrypt(element.submerchant_id);
+  //     decryptedIds.push(decryptedId);
+  //   }
+
+  //   // Add to where condition if IDs exist
+  //   if (decryptedIds.length > 0) {
+  //     where.sub_merchant_id = { [Op.in]: decryptedIds };
+  //   }
+  // }
+  // console.log("🚀 ~ get_master_payout_schedule ~ where:", where)
+
+  // Save items
+  var payout_schedule = await payoutScheduleMasterDBService.get_payout_schedule_plan_by_merchant_id(where);
+  console.log("🚀 ~ get_master_payout_schedule ~ payout_schedule:", payout_schedule)
+  if (payout_schedule?.status !== httpStatus.OK) {
+    return payout_schedule;
+  }
+
+  var responseData;
+  // Get Plan & items
+  var payout_schedule_plan =
+    await payoutScheduleDBService.get_payout_schedule_plan_by_id(payout_schedule?.data?.plan_id);
+  if (payout_schedule_plan?.status !== httpStatus.OK) {
+    return payout_schedule_plan;
+  }
+
+  var plan_items_data;
+  if (payout_schedule_plan?.status === httpStatus.OK) {
+    plan_items_data =
+      await payoutScheduleItemsDBService.get_payout_schedule_items_by_plan_id(
+        payout_schedule?.data?.plan_id
+      );
+
+    // responseData = {
+    //   ...payout_schedule_plan.data,
+    //   schedules: plan_items_data.data,
+    // };
+  }
+
+  responseData = {
+    ...payout_schedule.data,
+    ...payout_schedule_plan.data,
+    schedules: plan_items_data.data,
+  };
+
+  payout_schedule.data = responseData;
+
+  // Send success response
+  return payout_schedule;
+};
+
+
+/**
+ * Remove Mater Merchant Payout Schedule
+ * @returns {Promise<User>}
+ */
+const remove_master_payout_schedule = async (req) => {
+  const { sub_merchant_id } = req.body;
+
+  let sub_merchant_id_dec = await encryptDecryptService.decrypt(
+    sub_merchant_id
+  );
+
+  // Save items
+  var payout_schedule =
+    await payoutScheduleMasterDBService.remove_payout_schedule_plan_by_merchant_id(
+      sub_merchant_id_dec
+    );
+  if (payout_schedule?.status !== httpStatus.OK) {
+    return payout_schedule;
+  }
+
+  // Send success response
+  return payout_schedule;
+};
+
+module.exports = {
+  create_payout_schedule_plan,
+  create_payout_schedule_items,
+  update_payout_schedule_plan,
+  update_payout_schedule_items,
+  get_payout_schedule_plan_by_id,
+  list_payout_schedule_plan_by_id,
+  check_payout_schedule,
+  delete_payout_schedule_plan,
+  active_disable_payout_schedule_plan,
+  create_master_payout_schedule,
+  get_master_payout_schedule,
+  remove_master_payout_schedule
+};

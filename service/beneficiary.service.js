@@ -1,1 +1,266 @@
-const a7_0x4649a4=a7_0x6b1e;(function(_0x1ed547,_0x3f1041){const _0x3362b3=a7_0x6b1e,_0x3188f5=_0x1ed547();while(!![]){try{const _0x1ec83a=-parseInt(_0x3362b3(0x183))/0x1+parseInt(_0x3362b3(0x175))/0x2*(parseInt(_0x3362b3(0x186))/0x3)+-parseInt(_0x3362b3(0x173))/0x4+-parseInt(_0x3362b3(0x162))/0x5*(-parseInt(_0x3362b3(0x15f))/0x6)+parseInt(_0x3362b3(0x17d))/0x7+parseInt(_0x3362b3(0x163))/0x8*(parseInt(_0x3362b3(0x15e))/0x9)+parseInt(_0x3362b3(0x16a))/0xa*(-parseInt(_0x3362b3(0x18a))/0xb);if(_0x1ec83a===_0x3f1041)break;else _0x3188f5['push'](_0x3188f5['shift']());}catch(_0x32473b){_0x3188f5['push'](_0x3188f5['shift']());}}}(a7_0x4792,0x8c396));function a7_0x4792(){const _0x5df556=['city_name','password','super_merchant_id','Payer\x20not\x20found!','get-receiver-details','bcrypt','./thunes_client.service','195060eAtIUf','length','22642mgzemu','Payer\x20found!','isNotValid','/payers/','Receiver\x20details\x20not\x20found!','message','compare','post','3462928uBCplv','company_name','exports','iban','./helper.service','./beneficiary.db.service','700887RdNzhO','./node_server.service','getReceiverById','129mZAgEF','NOT_FOUND','deleteReceiverById','country_code','11vqtEBa','registered_name','http-status','./receiver.db.service','../utils/ApiError','data','log','verifyReceiver','../models','Error\x20fetching\x20data:','27wixkwi','402QzfkGy','address','success','22430EeMtoe','2678432lQxPfy','addNewReceiver','status','error','Receiver\x20added!','api_key','toJSON','9624710jTmEKy','sub_merchant_id'];a7_0x4792=function(){return _0x5df556;};return a7_0x4792();}const httpStatus=require(a7_0x4649a4(0x18c)),bcrypt=require(a7_0x4649a4(0x171)),helperService=require(a7_0x4649a4(0x181)),nodeServerService=require(a7_0x4649a4(0x184)),beneficiaryDBService=require(a7_0x4649a4(0x182)),receiverDBService=require(a7_0x4649a4(0x18d)),db=require(a7_0x4649a4(0x192)),ApiError=require(a7_0x4649a4(0x18e)),createApiClient=require(a7_0x4649a4(0x172)),add_receiver=async _0x187fcd=>{const _0x5a7b36=a7_0x4649a4;let _0x106a2d=await get_receiver_details(_0x187fcd['sub_merchant_id']);if(_0x106a2d?.['status']==_0x5a7b36(0x161)){if(Array['isArray'](_0x106a2d?.[_0x5a7b36(0x18f)])&&_0x106a2d?.[_0x5a7b36(0x18f)][_0x5a7b36(0x174)]<0x1)return{'status':0x190,'message':_0x5a7b36(0x179),'data':_0xbc00e2};}else return{'status':0x190,'message':_0x5a7b36(0x179),'data':_0xbc00e2};var _0xa5e4aa=await receiverDBService[_0x5a7b36(0x164)](_0x187fcd);if(_0xa5e4aa?.[_0x5a7b36(0x165)]!==httpStatus['OK'])return _0xa5e4aa;var _0xbc00e2;return _0xa5e4aa?.['status']===httpStatus['OK']&&(_0xbc00e2={'receiver_id':_0xa5e4aa[_0x5a7b36(0x18f)]['id'],'super_merchant_id':_0x106a2d?.[_0x5a7b36(0x18f)][0x0]?.[_0x5a7b36(0x16e)],'iban':_0x106a2d?.[_0x5a7b36(0x18f)][0x0]?.['iban'],'registered_name':_0x106a2d?.[_0x5a7b36(0x18f)][0x0]?.[_0x5a7b36(0x17e)],'country_iso_code':_0x106a2d?.[_0x5a7b36(0x18f)][0x0]?.[_0x5a7b36(0x189)],'address':_0x106a2d?.['data'][0x0]?.['address'],'city':_0x106a2d?.[_0x5a7b36(0x18f)][0x0]?.[_0x5a7b36(0x16c)],..._0xa5e4aa[_0x5a7b36(0x18f)]},delete _0xbc00e2['id'],_0xa5e4aa[_0x5a7b36(0x18f)]=_0xbc00e2),{'status':httpStatus['OK'],'message':_0x5a7b36(0x167),'data':_0xbc00e2};},get_receiver_details=async _0x47167b=>{const _0x3b0b76=a7_0x4649a4;let _0x15aa55={'sub_merchant_id':_0x47167b};var _0x8a2a93='';try{let _0x359faf=_0x3b0b76(0x170);_0x8a2a93=await nodeServerService[_0x3b0b76(0x17c)](_0x359faf,_0x15aa55);}catch(_0x45886c){return console[_0x3b0b76(0x166)](_0x3b0b76(0x15d),_0x45886c[_0x3b0b76(0x17a)]),{'status':_0x45886c[_0x3b0b76(0x165)],'message':_0x45886c[_0x3b0b76(0x17a)]};}if(helperService['isNotValid'](_0x8a2a93))return{'status':httpStatus[_0x3b0b76(0x187)],'message':_0x3b0b76(0x179)};return _0x8a2a93;},add_sender_receiver=async _0x174b8e=>{const _0x218231=a7_0x4649a4;var _0x27f57e=await beneficiaryDBService['addNewSenderReceiver'](_0x174b8e);if(_0x27f57e?.['status']===httpStatus['OK']){const _0x6a1057={'receiver_id':_0x27f57e[_0x218231(0x18f)]['id'],..._0x27f57e[_0x218231(0x18f)]};delete _0x6a1057['id'],_0x27f57e[_0x218231(0x18f)]=_0x6a1057;}return _0x27f57e;},verify_sender=async _0x3c0454=>{const _0x56c5c3=a7_0x4649a4;var _0xd1dda0=await receiverDBService[_0x56c5c3(0x191)](_0x3c0454);if(_0xd1dda0?.['status']==httpStatus['OK']){var _0x51a13f=_0xd1dda0[_0x56c5c3(0x18f)][_0x56c5c3(0x169)]();const _0x10474a={'receiver_id':_0x51a13f['id'],..._0x51a13f};delete _0x10474a['id'],_0xd1dda0[_0x56c5c3(0x18f)]=_0x10474a;}return _0xd1dda0;},delete_receiver=async _0x4f2873=>{const _0x49192d=a7_0x4649a4;return await beneficiaryDBService[_0x49192d(0x188)](_0x4f2873);},update_receiver=async _0x3e06f6=>{const _0x3ab8ea=a7_0x4649a4;var _0x51edb6=await beneficiaryDBService['update_receiver'](_0x3e06f6);if(_0x51edb6?.['data']!==null){const _0x985794={'receiver_id':_0x51edb6['id'],..._0x51edb6};delete _0x985794['id'],_0x51edb6[_0x3ab8ea(0x18f)]=_0x985794;}return _0x51edb6;},add=async _0x3ef829=>{const _0x4c698b=a7_0x4649a4,_0x5a1fd8=await beneficiaryDBService['addNewPayer'](_0x3ef829);if(!_0x5a1fd8||!await bcrypt[_0x4c698b(0x17b)](password,_0x5a1fd8[_0x4c698b(0x16d)]))return null;return _0x5a1fd8;},getBeneficiaryById=async _0x52fe2b=>{const _0x13b688=a7_0x4649a4;var _0x37aba2=await receiverDBService[_0x13b688(0x185)](_0x52fe2b);if(!helperService[_0x13b688(0x177)](_0x37aba2)){const _0x2f22ce={'receiver_id':_0x37aba2['id'],..._0x37aba2};delete _0x2f22ce['id'],_0x37aba2=_0x2f22ce;}let _0x4a2e31=await get_receiver_details(_0x37aba2[_0x13b688(0x16b)]);console[_0x13b688(0x190)]('🚀\x20~\x20constadd_receiver=\x20~\x20receiver_details:',_0x4a2e31);let _0x283ea2=_0x4a2e31?.[_0x13b688(0x18f)][0x0];return _0x37aba2[_0x13b688(0x16e)]=_0x283ea2?.['super_merchant_id'],_0x37aba2[_0x13b688(0x180)]=_0x283ea2?.[_0x13b688(0x180)],_0x37aba2['country_iso_code']=_0x283ea2?.[_0x13b688(0x189)],_0x37aba2[_0x13b688(0x160)]=_0x283ea2?.[_0x13b688(0x160)],_0x37aba2['city']=_0x283ea2?.[_0x13b688(0x16c)],_0x37aba2[_0x13b688(0x18b)]=_0x283ea2?.[_0x13b688(0x17e)],_0x37aba2;},getById=async(_0x8a166e,_0x4edc90)=>{const _0x4c26e3=a7_0x4649a4;var _0x2f6850='';try{let _0x3fc2b0=_0x4c26e3(0x178)+_0x8a166e;const _0x5d8779=createApiClient(_0x4edc90?.[_0x4c26e3(0x168)],_0x4edc90?.[_0x4c26e3(0x16d)]);_0x2f6850=await _0x5d8779['get'](_0x3fc2b0);}catch(_0xac2cfa){return console['error'](_0x4c26e3(0x15d),_0xac2cfa?.[_0x4c26e3(0x17a)]),{'status':_0xac2cfa?.[_0x4c26e3(0x165)],'message':_0xac2cfa?.[_0x4c26e3(0x17a)]};}if(helperService[_0x4c26e3(0x177)](_0x2f6850))return{'status':httpStatus[_0x4c26e3(0x187)],'message':_0x4c26e3(0x16f)};return{'status':httpStatus['OK'],'message':_0x4c26e3(0x176),'data':_0x2f6850};};function a7_0x6b1e(_0x152b31,_0x48590a){const _0x479253=a7_0x4792();return a7_0x6b1e=function(_0x6b1e65,_0x2f9ebd){_0x6b1e65=_0x6b1e65-0x15d;let _0x40af21=_0x479253[_0x6b1e65];return _0x40af21;},a7_0x6b1e(_0x152b31,_0x48590a);}module[a7_0x4649a4(0x17f)]={'add_sender_receiver':add_sender_receiver,'add_receiver':add_receiver,'update_receiver':update_receiver,'verify_sender':verify_sender,'getBeneficiaryById':getBeneficiaryById,'delete_receiver':delete_receiver,'add':add,'getById':getById};
+const httpStatus = require("http-status");
+const bcrypt = require("bcrypt");
+const helperService = require("./helper.service");
+const nodeServerService = require("./node_server.service");
+const beneficiaryDBService = require("./beneficiary.db.service");
+const receiverDBService = require("./receiver.db.service");
+const db = require("../models");
+const ApiError = require("../utils/ApiError");
+const createApiClient = require("./thunes_client.service");
+
+/**
+ * Add New Receiver
+ * @param {string} email
+ * @param {string} password
+ * @returns {Promise<User>}
+ */
+const add_receiver = async (payload) => {
+
+  let receiver_details = await get_receiver_details(payload.sub_merchant_id);
+
+  if (receiver_details?.status == "success") {
+  if (
+    Array.isArray(receiver_details?.data) &&
+    receiver_details?.data.length < 1
+  ) {
+    return {
+      status: 400,
+      message: "Receiver details not found!",
+      data: responseData,
+    };
+  }
+  }else{
+    return {
+      status: 400,
+      message: "Receiver details not found!",
+      data: responseData,
+    };
+  }
+  
+  var receiver = await receiverDBService.addNewReceiver(payload);
+  if (receiver?.status !== httpStatus.OK) {
+    return receiver;
+  }
+  
+  var responseData;
+  if (receiver?.status === httpStatus.OK) {
+     responseData = {
+       receiver_id: receiver.data.id, // put first
+       super_merchant_id: receiver_details?.data[0]?.super_merchant_id,
+       iban: receiver_details?.data[0]?.iban,
+       registered_name: receiver_details?.data[0]?.company_name,
+       country_iso_code: receiver_details?.data[0]?.country_code,
+       address: receiver_details?.data[0]?.address,
+       city: receiver_details?.data[0]?.city_name,
+       ...receiver.data, // spread remaining keys
+     };
+    delete responseData.id;
+    receiver.data = responseData;
+  }
+  
+  // Send success response
+  return {
+    status: httpStatus.OK,
+    message: "Receiver added!",
+    data: responseData,
+  };
+};
+
+/**
+ * Add New Receiver
+ * @param {string} email
+ * @param {string} password
+ * @returns {Promise<User>}
+ */
+const get_receiver_details = async (sub_merchant_id) => {
+
+  let payload = {
+    sub_merchant_id: sub_merchant_id
+  }
+
+  // Axios API request
+  var receiverResponse = "";
+  try {
+    let url = "get-receiver-details";
+    receiverResponse = await nodeServerService.post(url, payload);
+  } catch (err) {
+    console.error("Error fetching data:", err.message);
+    return {
+      status: err.status,
+      message: err.message,
+    };
+  }
+
+  // Check transaction created
+  if (helperService.isNotValid(receiverResponse)) {
+    return {
+      status: httpStatus.NOT_FOUND,
+      message: "Receiver details not found!",
+    };
+  }
+
+  // Send success response
+  return receiverResponse;
+};
+
+/**
+ * Add New Sender Receiver
+ * @param {string} email
+ * @param {string} password
+ * @returns {Promise<User>}
+ */
+const add_sender_receiver = async (param) => {
+  var receiver = await beneficiaryDBService.addNewSenderReceiver(param);
+  if (receiver?.status === httpStatus.OK) {
+    const responseData = {
+      receiver_id: receiver.data.id, // put first
+      ...receiver.data,              // spread remaining keys
+    };
+    delete responseData.id;
+    receiver.data = responseData;
+  }
+  return receiver;
+};
+
+/**
+ * Sender verification
+ */
+const verify_sender = async (receiver_id) => {
+  
+  // Send success response
+  var receiverResponse =  await receiverDBService.verifyReceiver(receiver_id);
+  // var receiverResponse =  await beneficiaryDBService.verifyBeneficiary(receiver_id);
+  if (receiverResponse?.status == httpStatus.OK) {
+    var receiver = receiverResponse.data.toJSON();
+    const responseData = {
+      receiver_id: receiver.id, // put first
+      ...receiver,              // spread remaining keys
+    };
+    delete responseData.id;
+    receiverResponse.data = responseData;
+  }
+  return receiverResponse;
+};
+
+/**
+ * Delete Receiver
+ */
+const delete_receiver = async (receiver_id) => {
+  
+  // Send success response
+  return await beneficiaryDBService.deleteReceiverById(receiver_id);
+};
+
+
+/**
+ *  Update Receiver
+ * @param {*} param 
+ * @returns 
+ */
+const update_receiver = async (param) => {
+  var receiver = await beneficiaryDBService.update_receiver(param);
+  if (receiver?.data !== null) {
+    const responseData = {
+      receiver_id: receiver.id, // put first
+      ...receiver,              // spread remaining keys
+    };
+    delete responseData.id;
+    receiver.data = responseData;
+  }
+  return receiver;
+};
+
+
+/**
+ * Add Payee
+ * @param {string} email
+ * @param {string} password
+ * @returns {Promise<User>}
+ */
+const add = async (param) => {
+  const user = await beneficiaryDBService.addNewPayer(param);
+  if (!user || !(await bcrypt.compare(password, user.password))) {
+    return null;
+  }
+  return user;
+};
+
+
+/**
+ * Get Beneficiary By Id
+ */
+const getBeneficiaryById = async (id) => {
+  var beneficiary = await receiverDBService.getReceiverById(id);
+  // var beneficiary = await beneficiaryDBService.getBeneficiaryById(id);
+  if (!helperService.isNotValid(beneficiary)) {
+    const responseData = {
+      receiver_id: beneficiary.id, // put first
+      ...beneficiary,              // spread remaining keys
+    };
+    delete responseData.id;
+    beneficiary = responseData;
+  }
+
+  let receiver_details = await get_receiver_details(beneficiary.sub_merchant_id);
+  console.log("🚀 ~ constadd_receiver= ~ receiver_details:", receiver_details)
+
+  let data = receiver_details?.data[0];
+
+  beneficiary.super_merchant_id = data?.super_merchant_id;
+  beneficiary.iban = data?.iban;
+  beneficiary.country_iso_code = data?.country_code;
+  beneficiary.address = data?.address;
+  beneficiary.city = data?.city_name;
+  beneficiary.registered_name = data?.company_name;
+
+  return beneficiary;
+};
+
+/**
+ * Get Payee By ID
+ * @param {string} id
+ * @returns {Promise<User>}
+ */
+const getById = async (id, MID) => {
+  // Axios API request
+  var payerResponse = "";
+  try {
+    
+    let url = "/payers/" + id;
+    const api = createApiClient(MID?.api_key, MID?.password);
+    payerResponse = await api.get(url);
+
+  } catch (err) {
+    console.error("Error fetching data:", err?.message);
+    return {
+      status: err?.status,
+      message: err?.message,
+    };
+  }
+
+  // Check transaction created
+  if (helperService.isNotValid(payerResponse)) {
+    return {
+      status: httpStatus.NOT_FOUND,
+      message: "Payer not found!",
+    };
+  }
+
+  // Send success response
+  return {
+    status: httpStatus.OK,
+    message: "Payer found!",
+    data: payerResponse,
+  };
+};
+
+module.exports = {
+  add_sender_receiver,
+  add_receiver,
+  update_receiver,
+  verify_sender,
+  getBeneficiaryById,
+  delete_receiver,
+  add,
+  getById,
+};

@@ -1,1 +1,50 @@
-const a8_0x650aa9=a8_0x3e68;(function(_0x6d1db1,_0x1912ab){const _0x450369=a8_0x3e68,_0xe086e6=_0x6d1db1();while(!![]){try{const _0x219bea=parseInt(_0x450369(0x115))/0x1*(parseInt(_0x450369(0x116))/0x2)+parseInt(_0x450369(0x120))/0x3*(parseInt(_0x450369(0x11b))/0x4)+parseInt(_0x450369(0x11f))/0x5*(-parseInt(_0x450369(0x121))/0x6)+-parseInt(_0x450369(0x11c))/0x7*(-parseInt(_0x450369(0x117))/0x8)+parseInt(_0x450369(0x126))/0x9+-parseInt(_0x450369(0x129))/0xa*(parseInt(_0x450369(0x122))/0xb)+-parseInt(_0x450369(0x118))/0xc*(parseInt(_0x450369(0x119))/0xd);if(_0x219bea===_0x1912ab)break;else _0xe086e6['push'](_0xe086e6['shift']());}catch(_0x143d85){_0xe086e6['push'](_0xe086e6['shift']());}}}(a8_0x3443,0x27b03));function a8_0x3e68(_0x38b3f3,_0x1bd86c){const _0x34434c=a8_0x3443();return a8_0x3e68=function(_0x3e68e5,_0x3b0108){_0x3e68e5=_0x3e68e5-0x114;let _0x1a7d49=_0x34434c[_0x3e68e5];return _0x1a7d49;},a8_0x3e68(_0x38b3f3,_0x1bd86c);}function a8_0x3443(){const _0x554154=['14mOAeBD','../service/transactions.service','http-status','10IbhLHV','329907KpPZqc','204420kXhPUP','37609ycNqKU','log','params','../utils/catchAsync','2122245XIwRVE','status','transaction_details','410pHsNxZ','list','🚀\x20~\x20external_id:','33639HuoFfl','16tkTKyi','305232LBqcSX','480468kSDVRY','104VDItmd','send','4IyBCDL'];a8_0x3443=function(){return _0x554154;};return a8_0x3443();}const transactionsService=require(a8_0x650aa9(0x11d)),catchAsync=require(a8_0x650aa9(0x125)),httpStatus=require(a8_0x650aa9(0x11e)),list=catchAsync(async(_0x1fdd24,_0x50e5b7)=>{const _0xd90153=a8_0x650aa9,_0x563266=await transactionsService[_0xd90153(0x12a)](_0x1fdd24);if(_0x563266?.[_0xd90153(0x127)]!==httpStatus['OK']){_0x50e5b7[_0xd90153(0x127)](httpStatus['OK'])[_0xd90153(0x11a)](_0x563266);return;}_0x50e5b7[_0xd90153(0x127)](httpStatus['OK'])[_0xd90153(0x11a)](_0x563266);}),transaction_details=catchAsync(async(_0x1fbde3,_0x3502eb)=>{const _0x3bf916=a8_0x650aa9;console[_0x3bf916(0x123)]('🚀\x20~\x20req.params:',_0x1fbde3['params']);const {transaction_id:_0x488a8e}=_0x1fbde3[_0x3bf916(0x124)],_0x4ee893=await transactionsService[_0x3bf916(0x128)](_0x488a8e);if(_0x4ee893?.[_0x3bf916(0x127)]!==httpStatus['OK']){_0x3502eb['status'](httpStatus['OK'])[_0x3bf916(0x11a)](_0x4ee893);return;}_0x3502eb['status'](httpStatus['OK'])['send'](_0x4ee893);}),transaction_attachment=catchAsync(async(_0x5306d2,_0x548313)=>{const _0x1344ee=a8_0x650aa9,{external_id:_0x52d342}=_0x5306d2['params'];console[_0x1344ee(0x123)](_0x1344ee(0x114),_0x52d342);const _0x3a4cfd=await transactionsService['transaction_attachment'](_0x52d342);console['log']('🚀\x20~\x20transactions:',_0x3a4cfd);if(_0x3a4cfd?.['status']!==httpStatus['OK']){_0x548313[_0x1344ee(0x127)](httpStatus['OK'])[_0x1344ee(0x11a)](_0x3a4cfd);return;}_0x548313[_0x1344ee(0x127)](httpStatus['OK'])[_0x1344ee(0x11a)](_0x3a4cfd);});module['exports']={'list':list,'transaction_details':transaction_details,'transaction_attachment':transaction_attachment};
+const transactionsService = require("../service/transactions.service");
+const catchAsync = require("../utils/catchAsync");
+const httpStatus = require("http-status");
+
+/**
+ * Get Transactions list
+ */
+const list = catchAsync(async (req, res) => {
+  const transactions = await transactionsService.list(req);
+  if (transactions?.status !== httpStatus.OK) {
+    res.status(httpStatus.OK).send(transactions);
+    return;
+  }
+  res.status(httpStatus.OK).send(transactions);
+});
+
+/**
+ * Get Transactions Details By ID
+ */
+const transaction_details = catchAsync(async (req, res) => {
+  console.log("🚀 ~ req.params:", req.params)
+  const {transaction_id} = req.params;
+  const transactions = await transactionsService.transaction_details(transaction_id);
+  if (transactions?.status !== httpStatus.OK) {
+    res.status(httpStatus.OK).send(transactions);
+    return;
+  }
+  res.status(httpStatus.OK).send(transactions);
+});
+
+/**
+ * Get Transactions Attachment By ID
+ */
+const transaction_attachment = catchAsync(async (req, res) => {
+  const {external_id} = req.params;
+  console.log("🚀 ~ external_id:", external_id)
+  const transactions = await transactionsService.transaction_attachment(external_id);
+  console.log("🚀 ~ transactions:", transactions)
+  if (transactions?.status !== httpStatus.OK) {
+    res.status(httpStatus.OK).send(transactions);
+    return;
+  }
+  res.status(httpStatus.OK).send(transactions);
+});
+
+module.exports = {
+  list,
+  transaction_details,
+  transaction_attachment
+};

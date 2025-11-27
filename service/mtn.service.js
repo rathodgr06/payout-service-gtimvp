@@ -1,1 +1,92 @@
-const a13_0x269b4b=a13_0x1466;(function(_0x69cc58,_0x2fcc4d){const _0x5c1c55=a13_0x1466,_0x1a0f37=_0x69cc58();while(!![]){try{const _0xd9fd75=-parseInt(_0x5c1c55(0xa3))/0x1+-parseInt(_0x5c1c55(0x7c))/0x2*(-parseInt(_0x5c1c55(0xa8))/0x3)+parseInt(_0x5c1c55(0x8c))/0x4+-parseInt(_0x5c1c55(0x78))/0x5*(parseInt(_0x5c1c55(0x9a))/0x6)+parseInt(_0x5c1c55(0x7e))/0x7*(-parseInt(_0x5c1c55(0xa1))/0x8)+parseInt(_0x5c1c55(0x89))/0x9+parseInt(_0x5c1c55(0x85))/0xa*(parseInt(_0x5c1c55(0x91))/0xb);if(_0xd9fd75===_0x2fcc4d)break;else _0x1a0f37['push'](_0x1a0f37['shift']());}catch(_0x54c96c){_0x1a0f37['push'](_0x1a0f37['shift']());}}}(a13_0x39e5,0x2cfba));const axios=require(a13_0x269b4b(0x9d)),urls=require(a13_0x269b4b(0x84));async function getAccessToken(_0x47dd49,_0x40377e,_0x1a53e7){const _0x462f48=a13_0x269b4b;try{const _0x3138d0=await axios[_0x462f48(0x81)](process['env']['PAYOUT_MODE']==_0x462f48(0x8e)?urls[_0x462f48(0x83)][_0x462f48(0x9e)]+_0x462f48(0x87):urls['mtn_momo']['live_url']+_0x462f48(0x87),{},{'headers':{'Authorization':_0x462f48(0x8b)+Buffer['from'](_0x40377e+':'+_0x1a53e7)[_0x462f48(0xa6)]('base64'),'Ocp-Apim-Subscription-Key':_0x47dd49}});return console['log'](_0x462f48(0xa5),_0x3138d0[_0x462f48(0x82)]),_0x3138d0[_0x462f48(0x79)][_0x462f48(0xa0)];}catch(_0x41955e){return console[_0x462f48(0x88)](_0x462f48(0x8f),_0x41955e[_0x462f48(0x94)]?.[_0x462f48(0x79)]||_0x41955e[_0x462f48(0x90)]),![];}}function a13_0x39e5(){const _0x975133=['env','/disbursement/token/','error','1267614rFUXNk','Transfer\x20Data:','Basic\x20','508332nYIcqA','Using\x20Subscription\x20Key:','test','Token\x20Error:','message','38533egUtsI','Using\x20Base\x20URL:','stringify','response','PAYOUT_MODE','get','Transfer\x20initiated,\x20Reference\x20ID:','live_url','Transfer\x20Response:','42bixypz','Initiating\x20Transfer\x20with\x20Reference\x20ID:','exports','axios','test_url','/disbursement/v1_0/transfer','access_token','8xctMPj','Status\x20Error:','88900xSAhHm','uuid','🚀\x20~\x20getAccessToken\x20~\x20res.headers:','toString','Bearer\x20','297TuZkkn','log','/disbursement/v1_0/transfer/','186645ckBZnw','data','Transfer\x20Status:','mtnliberia','5318lQXHwm','application/json','320313NuGhTw','sandbox','Headers:','post','headers','mtn_momo','../config/urls','140OSbWjM'];a13_0x39e5=function(){return _0x975133;};return a13_0x39e5();}function a13_0x1466(_0x13d2e0,_0x21606d){const _0x39e5b6=a13_0x39e5();return a13_0x1466=function(_0x1466bd,_0x4cc5cf){_0x1466bd=_0x1466bd-0x76;let _0x593f23=_0x39e5b6[_0x1466bd];return _0x593f23;},a13_0x1466(_0x13d2e0,_0x21606d);}const {v4:uuidv4}=require(a13_0x269b4b(0xa4));async function initiateTransfer(_0x5e208c,_0x4b4c2d,_0x3f03ed){const _0x342096=a13_0x269b4b,_0x4dd593=uuidv4();try{console[_0x342096(0x76)](_0x342096(0x9b),_0x4dd593),console['log'](_0x342096(0x8a),JSON[_0x342096(0x93)](_0x4b4c2d)),console[_0x342096(0x76)](_0x342096(0x8d),_0x3f03ed),console[_0x342096(0x76)]('Using\x20Token:',_0x5e208c),console[_0x342096(0x76)](_0x342096(0x92),process['env']['PAYOUT_MODE']==_0x342096(0x8e)?urls[_0x342096(0x83)][_0x342096(0x9e)]+_0x342096(0x9f):urls[_0x342096(0x83)][_0x342096(0x98)]+_0x342096(0x9f));let _0x1fab43={'Authorization':'Bearer\x20'+_0x5e208c,'X-Reference-Id':_0x4dd593,'X-Target-Environment':process[_0x342096(0x86)][_0x342096(0x95)]==_0x342096(0x8e)?_0x342096(0x7f):_0x342096(0x7b),'Content-Type':'application/json','Ocp-Apim-Subscription-Key':_0x3f03ed};console[_0x342096(0x76)](_0x342096(0x80),_0x1fab43);const _0x26ef6e=await axios[_0x342096(0x81)](process[_0x342096(0x86)][_0x342096(0x95)]=='test'?urls[_0x342096(0x83)]['test_url']+_0x342096(0x9f):urls['mtn_momo'][_0x342096(0x98)]+_0x342096(0x9f),_0x4b4c2d,{'headers':{'Authorization':_0x342096(0xa7)+_0x5e208c,'X-Reference-Id':_0x4dd593,'X-Target-Environment':process[_0x342096(0x86)][_0x342096(0x95)]==_0x342096(0x8e)?'sandbox':'mtnliberia','Content-Type':_0x342096(0x7d),'Ocp-Apim-Subscription-Key':_0x3f03ed}});return console[_0x342096(0x76)](_0x342096(0x97),_0x4dd593),console[_0x342096(0x76)](_0x342096(0x99),_0x26ef6e[_0x342096(0x79)]),_0x4dd593;}catch(_0x566504){return console[_0x342096(0x76)](_0x566504),console[_0x342096(0x88)]('Transfer\x20Error:',_0x566504?.['response']?.[_0x342096(0x79)]||_0x566504?.[_0x342096(0x90)]),![];}}async function getTransferStatus(_0x28ee5d,_0x487761,_0x5b47f4){const _0x2e3c46=a13_0x269b4b;try{const _0x3f11df=await axios[_0x2e3c46(0x96)](process[_0x2e3c46(0x86)][_0x2e3c46(0x95)]==_0x2e3c46(0x8e)?urls[_0x2e3c46(0x83)]['test_url']+_0x2e3c46(0x77)+_0x487761:urls[_0x2e3c46(0x83)]['live_url']+_0x2e3c46(0x77)+_0x487761,{'headers':{'Authorization':_0x2e3c46(0xa7)+_0x28ee5d,'X-Target-Environment':process[_0x2e3c46(0x86)][_0x2e3c46(0x95)]==_0x2e3c46(0x8e)?_0x2e3c46(0x7f):_0x2e3c46(0x7b),'Ocp-Apim-Subscription-Key':_0x5b47f4}});return console[_0x2e3c46(0x76)](_0x2e3c46(0x7a),_0x3f11df[_0x2e3c46(0x79)]),_0x3f11df[_0x2e3c46(0x79)];}catch(_0x458640){return console[_0x2e3c46(0x88)](_0x2e3c46(0xa2),_0x458640[_0x2e3c46(0x94)]?.[_0x2e3c46(0x79)]||_0x458640[_0x2e3c46(0x90)]),![];}}module[a13_0x269b4b(0x9c)]={'getAccessToken':getAccessToken,'initiateTransfer':initiateTransfer,'getTransferStatus':getTransferStatus};
+const axios = require('axios');
+const urls = require('../config/urls');
+
+async function getAccessToken(subscriptionKey,mid,password) {
+  try {
+    const res = await axios.post(
+      process.env.PAYOUT_MODE=="test"?`${urls.mtn_momo.test_url}/disbursement/token/`:`${urls.mtn_momo.live_url}/disbursement/token/`,
+      {},
+      {
+        headers: {
+          'Authorization': 'Basic ' + Buffer.from(`${mid}:${password}`).toString('base64'),
+          'Ocp-Apim-Subscription-Key': subscriptionKey,
+        },
+      }
+    );
+        console.log("🚀 ~ getAccessToken ~ res.headers:", res.headers)
+    return res.data.access_token;
+  } catch (err) {
+    console.error('Token Error:', err.response?.data || err.message);
+    return false
+  }
+}
+const { v4: uuidv4 } = require('uuid');
+
+async function initiateTransfer(token,data,subscriptionKey) {
+  const referenceId = uuidv4(); // Generate UUID
+  try {
+    console.log('Initiating Transfer with Reference ID:', referenceId);
+    console.log('Transfer Data:', JSON.stringify(data));
+    console.log('Using Subscription Key:', subscriptionKey);
+    console.log('Using Token:', token);
+    console.log('Using Base URL:', process.env.PAYOUT_MODE=="test"?`${urls.mtn_momo.test_url}/disbursement/v1_0/transfer`:`${urls.mtn_momo.live_url}/disbursement/v1_0/transfer`,
+ );
+    let headers =  {
+          'Authorization': `Bearer ${token}`,
+          'X-Reference-Id': referenceId,
+          'X-Target-Environment':  process.env.PAYOUT_MODE=="test"?'sandbox':'mtnliberia',
+          'Content-Type': 'application/json',
+          'Ocp-Apim-Subscription-Key': subscriptionKey,
+        };
+    console.log('Headers:', headers);    
+
+  
+    const res = await axios.post(
+      process.env.PAYOUT_MODE=="test"?`${urls.mtn_momo.test_url}/disbursement/v1_0/transfer`:`${urls.mtn_momo.live_url}/disbursement/v1_0/transfer`,
+      data,
+      {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'X-Reference-Id': referenceId,
+          'X-Target-Environment': process.env.PAYOUT_MODE=="test"?'sandbox':'mtnliberia', 
+          'Content-Type': 'application/json',
+          'Ocp-Apim-Subscription-Key': subscriptionKey,
+        },
+      }
+    );
+    console.log('Transfer initiated, Reference ID:', referenceId);
+    console.log('Transfer Response:', res.data);
+    return referenceId;
+  } catch (err) {
+    console.log(err)
+    console.error('Transfer Error:', err?.response?.data || err?.message);
+    return false;
+  }
+}
+
+async function getTransferStatus(token, referenceId, subscriptionKey) {
+  try {
+    const res = await axios.get(
+       process.env.PAYOUT_MODE=="test"?`${urls.mtn_momo.test_url}/disbursement/v1_0/transfer/${referenceId}`:`${urls.mtn_momo.live_url}/disbursement/v1_0/transfer/${referenceId}`,
+      {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'X-Target-Environment': process.env.PAYOUT_MODE=="test"?'sandbox':'mtnliberia',
+          'Ocp-Apim-Subscription-Key': subscriptionKey,
+        },
+      }
+    );
+    console.log('Transfer Status:', res.data);
+    return res.data;
+  } catch (err) {
+    console.error('Status Error:', err.response?.data || err.message);
+    return false;
+  }
+}
+
+
+module.exports = {
+  getAccessToken,
+  initiateTransfer,
+  getTransferStatus
+};

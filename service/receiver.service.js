@@ -1,1 +1,849 @@
-const a32_0x3e9900=a32_0x5008;function a32_0x4bcd(){const _0x471d5f=['receiver_id','body','19704BHxfUV','NOT_FOUND','update_receiver','Invalid\x20MSISDN\x20Number','length','address','7086330eJeGky','registered_business_address','customer_type','./thunes_client.service','MTN_MOMO','payer_id','webhook_url','update_receiver_key','isValid','receiver_key','8ATlMGb','email','🚀\x20~\x20add_receiver_with_fund_details\x20~\x20update_response:','🚀\x20~\x20constcheck_valid_bank_details=\x20~\x20account_details:','updated_at','error','company_name','http-status','Sequelize\x20query\x20failed:','register_business_country','getById','account_id','Business','province_name','getReceiverById','./helper.service','find_receiver_key','active','make_order_number','test','code','live','isNotValid','20rlWmvf','Invalid\x20account\x20ID','user','./node_server_api.service','getReceiverBySubMerchantId','encrypt','94111','isNaN','webhook_secret','ORANGE_MONEY','Invalid\x20Payer\x20ID','18vbthFi','notification_secret','post','New\x20York','get_sub_merchant_details','./beneficiary.db.service','B2B','../service/encrypt_decrypt.service','Invalid\x20\x27credit_party_identifiers\x27','required_sending_entity_fields','exports','../models','compare','4716100CaFNOO','update_wallet','credit_party_identifiers_accepted','18733920BaRhiT','referral_code','708868IOssVb','addNewPayer','sec-','update_charges','created_at','country_code','mobile_no','message','BAD_REQUEST','Valid\x20payer','37954HWbBuw','data','status','purpose_of_remittance','Receiver\x20added!','deleted','type','🚀\x20~\x20check_valid_bank_details\x20~\x20transaction_type:','🚀\x20~\x20add_receiver_with_fund_details\x20~\x20update_charges_response:','🚀\x20~\x20add_receiver_with_fund_details\x20~\x20addReceiverPayload:','GTI','city_name','123456','log','BUSINESS','25LGixUK','receiver_name','notification_url','Receiver\x20details\x20not\x20found!','test-','addNewReceiver','live-','../utils/ApiError','636PiFwiY','get_receiver_list','receiver_secret','bcrypt','account_details','transaction_types','🚀\x20~\x20constcheck_valid_bank_details=\x20~\x20key:','../service/beneficiary.service','get_receiver_count','Error\x20fetching\x20data:','address_line1','Invalid\x20\x27required_receiving_entity_fields\x27','B2C','decrypt','verification','push','get-receiver-details','super_merchant_id','here\x20goes\x20mtn\x20momo\x20or\x20orange\x20money','Receiver\x20not\x20found','sub_merchant_id','deleteReceiverById','6015130fxuOHq','token','every','USA','purpose_of_remittance_values_accepted'];a32_0x4bcd=function(){return _0x471d5f;};return a32_0x4bcd();}(function(_0x302e59,_0x2bc57e){const _0x1ea81e=a32_0x5008,_0x4d66bd=_0x302e59();while(!![]){try{const _0x521f1b=parseInt(_0x1ea81e(0x1d9))/0x1*(-parseInt(_0x1ea81e(0x1fe))/0x2)+parseInt(_0x1ea81e(0x230))/0x3*(-parseInt(_0x1ea81e(0x1c0))/0x4)+-parseInt(_0x1ea81e(0x1bb))/0x5+-parseInt(_0x1ea81e(0x1e1))/0x6*(parseInt(_0x1ea81e(0x1ca))/0x7)+parseInt(_0x1ea81e(0x20e))/0x8*(parseInt(_0x1ea81e(0x204))/0x9)+-parseInt(_0x1ea81e(0x225))/0xa*(-parseInt(_0x1ea81e(0x1f7))/0xb)+parseInt(_0x1ea81e(0x1be))/0xc;if(_0x521f1b===_0x2bc57e)break;else _0x4d66bd['push'](_0x4d66bd['shift']());}catch(_0x5c8a67){_0x4d66bd['push'](_0x4d66bd['shift']());}}}(a32_0x4bcd,0x960ec));const httpStatus=require(a32_0x3e9900(0x215)),bcrypt=require(a32_0x3e9900(0x1e4)),helperService=require(a32_0x3e9900(0x21d)),nodeServerService=require('./node_server.service'),beneficiaryDBService=require(a32_0x3e9900(0x235)),receiverDBService=require('./receiver.db.service'),payerService=require(a32_0x3e9900(0x1e8)),nodeServerApiService=require(a32_0x3e9900(0x228)),db=require(a32_0x3e9900(0x1b9)),ApiError=require(a32_0x3e9900(0x1e0)),encryptDecryptService=require(a32_0x3e9900(0x237)),createApiClient=require(a32_0x3e9900(0x207)),add_receiver_with_fund_details=async _0x5ba7fc=>{const _0x1947de=a32_0x3e9900,{sub_merchant_id:_0x4c35c5,receiver_name:_0x5e27c3,registered_business_address:_0x25e54b,email:_0x168c2a,code:_0x3fd3dc,mobile_no:_0x52929f,referral_code:_0x313802,webhook_url:_0x187ee9}=_0x5ba7fc['body'];let _0x16b31e={'sub_merchant_id':_0x4c35c5,'receiver_name':_0x5e27c3,'registered_business_address':_0x25e54b,'email':_0x168c2a,'code':_0x3fd3dc,'mobile_no':_0x52929f,'referral_code':_0x313802,'webhook_url':_0x187ee9,'webhook_secret':helperService['generateKey'](),'verification':'verified','active':0x1};if(helperService[_0x1947de(0x20c)](_0x4c35c5)){let _0x1be0ba=await nodeServerApiService[_0x1947de(0x234)](_0x4c35c5);if(_0x1be0ba?.[_0x1947de(0x1cc)]!=httpStatus['OK'])return _0x1be0ba;helperService[_0x1947de(0x20c)](_0x1be0ba?.[_0x1947de(0x1cb)])&&(_0x16b31e[_0x1947de(0x1da)]=_0x1be0ba?.[_0x1947de(0x1cb)]?.[_0x1947de(0x214)],_0x16b31e[_0x1947de(0x205)]=_0x1be0ba?.[_0x1947de(0x1cb)]?.['register_business_country'],_0x16b31e['email']=_0x1be0ba?.[_0x1947de(0x1cb)]?.[_0x1947de(0x20f)],_0x16b31e[_0x1947de(0x222)]=_0x1be0ba?.[_0x1947de(0x1cb)]?.[_0x1947de(0x222)],_0x16b31e[_0x1947de(0x1c6)]=_0x1be0ba?.[_0x1947de(0x1cb)]?.[_0x1947de(0x1c6)],_0x16b31e['referral_code']=_0x1be0ba?.['data']?.[_0x1947de(0x1bf)]);if(helperService[_0x1947de(0x224)](_0x16b31e?.[_0x1947de(0x20a)])){let _0x527a78=await nodeServerApiService['get_merchant_webhook_settings'](_0x4c35c5);if(_0x527a78?.['status']!=httpStatus['OK'])return _0x527a78;helperService[_0x1947de(0x20c)](_0x527a78?.['data'])&&(_0x16b31e[_0x1947de(0x20a)]=_0x527a78?.[_0x1947de(0x1cb)]?.[_0x1947de(0x1db)],_0x16b31e['webhook_secret']=_0x527a78?.[_0x1947de(0x1cb)]?.[_0x1947de(0x231)]);}}console['log'](_0x1947de(0x1d3),_0x16b31e);var _0xbe463b=await receiverDBService[_0x1947de(0x1de)](_0x16b31e);if(_0xbe463b?.['status']!==httpStatus['OK'])return _0xbe463b;let _0x1e6a11=[],_0x254b99={'receiver_id':_0xbe463b?.['data']?.['id'],'type':_0x1947de(0x221),'receiver_key':await helperService['make_order_number'](_0x1947de(0x1dd)),'receiver_secret':await helperService['make_order_number'](_0x1947de(0x1c2))},_0x9bd464=await add_receiver_key_secret(_0x254b99);_0x9bd464?.[_0x1947de(0x1cc)]==httpStatus['OK']&&_0x1e6a11[_0x1947de(0x1f0)]({'type':_0x9bd464?.[_0x1947de(0x1cb)]?.[_0x1947de(0x1d0)],'receiver_key':_0x9bd464?.[_0x1947de(0x1cb)]?.['receiver_key'],'receiver_secret':_0x9bd464?.['data']?.[_0x1947de(0x1e3)]});_0x254b99={'receiver_id':_0xbe463b?.['data']?.['id'],'type':_0x1947de(0x223),'receiver_key':await helperService[_0x1947de(0x220)](_0x1947de(0x1df)),'receiver_secret':await helperService['make_order_number']('sec-')},_0x9bd464=await add_receiver_key_secret(_0x254b99);_0x9bd464?.['status']==httpStatus['OK']&&_0x1e6a11[_0x1947de(0x1f0)]({'type':_0x9bd464?.[_0x1947de(0x1cb)]?.[_0x1947de(0x1d0)],'receiver_key':_0x9bd464?.[_0x1947de(0x1cb)]?.['receiver_key'],'receiver_secret':_0x9bd464?.['data']?.[_0x1947de(0x1e3)]});var _0x32c243;if(_0xbe463b?.[_0x1947de(0x1cc)]===httpStatus['OK']&&!helperService[_0x1947de(0x224)](_0xbe463b?.[_0x1947de(0x1cb)])){_0x32c243={'receiver_id':_0xbe463b[_0x1947de(0x1cb)]['id'],'sub_merchant_id':helperService[_0x1947de(0x224)](_0xbe463b[_0x1947de(0x1cb)][_0x1947de(0x1f5)])?null:_0xbe463b[_0x1947de(0x1cb)]['sub_merchant_id'],'receiver_name':helperService['isNotValid'](_0xbe463b[_0x1947de(0x1cb)][_0x1947de(0x1da)])?null:_0xbe463b[_0x1947de(0x1cb)][_0x1947de(0x1da)],'registered_business_address':helperService[_0x1947de(0x224)](_0xbe463b[_0x1947de(0x1cb)][_0x1947de(0x205)])?null:_0xbe463b['data'][_0x1947de(0x205)],'email':helperService[_0x1947de(0x224)](_0xbe463b['data'][_0x1947de(0x20f)])?null:_0xbe463b[_0x1947de(0x1cb)]['email'],'code':helperService[_0x1947de(0x224)](_0xbe463b[_0x1947de(0x1cb)]['code'])?null:_0xbe463b[_0x1947de(0x1cb)][_0x1947de(0x222)],'mobile_no':helperService[_0x1947de(0x224)](_0xbe463b[_0x1947de(0x1cb)]['mobile_no'])?null:_0xbe463b[_0x1947de(0x1cb)][_0x1947de(0x1c6)],'referral_code':helperService[_0x1947de(0x224)](_0xbe463b[_0x1947de(0x1cb)][_0x1947de(0x1bf)])?null:_0xbe463b['data']['referral_code'],'webhook_url':helperService[_0x1947de(0x224)](_0xbe463b[_0x1947de(0x1cb)]['webhook_url'])?null:_0xbe463b[_0x1947de(0x1cb)][_0x1947de(0x20a)],'webhook_secret':helperService[_0x1947de(0x224)](_0xbe463b['data'][_0x1947de(0x22d)])?null:_0xbe463b['data'][_0x1947de(0x22d)],'verification':helperService[_0x1947de(0x224)](_0xbe463b['data']['verification'])?null:_0xbe463b[_0x1947de(0x1cb)][_0x1947de(0x1ef)],'active':helperService[_0x1947de(0x224)](_0xbe463b['data'][_0x1947de(0x21f)])?null:_0xbe463b[_0x1947de(0x1cb)][_0x1947de(0x21f)],'deleted':helperService[_0x1947de(0x224)](_0xbe463b[_0x1947de(0x1cb)][_0x1947de(0x1cf)])?null:_0xbe463b[_0x1947de(0x1cb)]['deleted'],'created_at':helperService[_0x1947de(0x224)](_0xbe463b[_0x1947de(0x1cb)]['created_at'])?null:_0xbe463b[_0x1947de(0x1cb)][_0x1947de(0x1c4)],'updated_at':helperService[_0x1947de(0x224)](_0xbe463b['data'][_0x1947de(0x212)])?null:_0xbe463b[_0x1947de(0x1cb)][_0x1947de(0x212)],'access':_0x1e6a11};if(_0x4c35c5&&_0xbe463b['data']['id']){let _0x48054e=await nodeServerApiService[_0x1947de(0x1bc)](_0x4c35c5,_0xbe463b[_0x1947de(0x1cb)]['id']);console['log'](_0x1947de(0x210),_0x48054e);let _0x469694=await nodeServerApiService[_0x1947de(0x1c3)](_0x4c35c5,_0xbe463b[_0x1947de(0x1cb)]['id']);console[_0x1947de(0x1d7)](_0x1947de(0x1d2),_0x469694);}_0xbe463b[_0x1947de(0x1cb)]=_0x32c243;}return _0xbe463b;},check_valid_bank_details=async(_0xacf897,_0xdf07ce)=>{const _0x195c04=a32_0x3e9900;console['log']('🚀\x20~\x20check_valid_bank_details\x20~\x20receiver_details:',_0xacf897);let _0x38bf40=null;try{if(helperService[_0x195c04(0x224)](_0xacf897?.[_0x195c04(0x1cb)])||helperService[_0x195c04(0x224)](_0xacf897?.[_0x195c04(0x1cb)]?.['account_details']))return{'status':httpStatus['BAD_REQUEST'],'message':'Merchant\x20bank\x20details\x20are\x20currently\x20unavailable\x20or\x20missing\x20some\x20fields.'};if(helperService['isNotValid'](_0xacf897?.['data']?.[_0x195c04(0x219)]))return{'status':httpStatus['BAD_REQUEST'],'message':_0x195c04(0x226)};_0x38bf40=_0xacf897?.[_0x195c04(0x1cb)]?.[_0x195c04(0x209)];let _0xfdabf9=_0xacf897?.['data']?.[_0x195c04(0x1e5)];console['log'](_0x195c04(0x211),_0xfdabf9);if(helperService[_0x195c04(0x224)](_0x38bf40))return{'status':httpStatus[_0x195c04(0x1c8)],'message':_0x195c04(0x22f)};let _0x308b3f=_0xacf897?.[_0x195c04(0x1cb)]?.[_0x195c04(0x206)];if(_0x38bf40==_0x195c04(0x208)||_0x38bf40==_0x195c04(0x22e)){console[_0x195c04(0x1d7)](_0x195c04(0x1f3));if(helperService['isNotValid'](_0xfdabf9?.['MSISDN']))return{'status':httpStatus['BAD_REQUEST'],'message':_0x195c04(0x201)};return{'status':httpStatus['OK'],'message':'Valid\x20payer'};}else{const _0x3f1319=await payerService[_0x195c04(0x218)](_0x38bf40,_0xdf07ce);if(_0x3f1319?.[_0x195c04(0x1cc)]!==httpStatus['OK'])return _0x3f1319;let _0x3ecef2=_0x3f1319?.[_0x195c04(0x1cb)];console[_0x195c04(0x1d7)]('🚀\x20~\x20check_valid_bank_details\x20~\x20payer:',_0x3ecef2),console[_0x195c04(0x1d7)]('here\x20goes\x20thunes\x20');let _0x132bd7={'registered_name':_0x195c04(0x1d4),'registration_number':_0x195c04(0x1d6),'country_iso_code':_0x195c04(0x1fa),'address':_0x195c04(0x1fa),'city':_0x195c04(0x233),'code':_0x195c04(0x22b)};const _0x41f2f7=_0x308b3f===_0x195c04(0x21a)?_0x3ecef2?.[_0x195c04(0x1e6)]?.[_0x195c04(0x236)]:_0x3ecef2?.[_0x195c04(0x1e6)]?.[_0x195c04(0x1ed)];helperService[_0x195c04(0x224)](_0x41f2f7)&&console[_0x195c04(0x1d7)](_0x195c04(0x1d1),_0x41f2f7);const _0x2a930b=_0x41f2f7?.[_0x195c04(0x1bd)][0x0],_0x232b05=_0x41f2f7?.['required_receiving_entity_fields'][0x0],_0x1ca99b=_0x41f2f7?.[_0x195c04(0x1b7)][0x0],_0x1d08fb=_0x41f2f7?.[_0x195c04(0x1fb)];console[_0x195c04(0x1d7)]('purpose_of_remittance_values_accepted:\x20',_0x1d08fb);if(helperService[_0x195c04(0x20c)](_0xacf897?.[_0x195c04(0x1cd)])){if(helperService['isValid'](_0x1d08fb)){if(!_0x1d08fb['includes'](_0xacf897?.[_0x195c04(0x1cd)]))return{'status':httpStatus[_0x195c04(0x1c8)],'message':'Invalid\x20\x27purpose_of_remittance\x27'};}else console[_0x195c04(0x1d7)]('No\x20valid\x20purpose_of_remittance_values_accepted\x20list\x20found\x20for\x20this\x20payer...\x20');}const _0x482a04=_0x2a930b['every'](_0x328b03=>{const _0x456487=_0x195c04,_0x3d33d9=_0xfdabf9[_0x328b03];return _0x3d33d9!==undefined&&_0x3d33d9!==null&&_0x3d33d9!==''&&!Number[_0x456487(0x22c)](_0x3d33d9);});if(!_0x482a04)return{'status':httpStatus[_0x195c04(0x1c8)],'message':_0x195c04(0x1b6)};const _0xafe759=_0x232b05[_0x195c04(0x1f9)](_0x917c1=>{const _0x5cc71d=_0x195c04,_0x58d8ef=_0xfdabf9[_0x917c1];return _0x58d8ef!==undefined&&_0x58d8ef!==null&&_0x58d8ef!==''&&!Number[_0x5cc71d(0x22c)](_0x58d8ef);});if(!_0xafe759)return{'status':httpStatus['BAD_REQUEST'],'message':_0x195c04(0x1ec)};const _0x4062b3=_0x1ca99b[_0x195c04(0x1f9)](_0x4e733c=>{const _0x813a89=_0x195c04;console[_0x813a89(0x1d7)](_0x813a89(0x1e7),_0x4e733c);const _0x28fa3b=_0x132bd7[_0x4e733c];return console[_0x813a89(0x1d7)]('🚀\x20~\x20constcheck_valid_bank_details=\x20~\x20value:',_0x28fa3b),_0x28fa3b!==undefined&&_0x28fa3b!==null&&_0x28fa3b!==''&&!Number[_0x813a89(0x22c)](_0x28fa3b);});if(!_0x4062b3)return{'status':httpStatus[_0x195c04(0x1c8)],'message':'Invalid\x20\x27required_sending_entity_fields\x27'};return{'status':httpStatus['OK'],'message':_0x195c04(0x1c9)};}}catch(_0x1aa79e){return console[_0x195c04(0x1d7)]('🚀\x20~\x20constadd_receiver=catchAsync\x20~\x20error:',_0x1aa79e),{'status':httpStatus[_0x195c04(0x1c8)],'message':_0x1aa79e?.[_0x195c04(0x1c7)]};}},add_receiver_with_account_no=async _0x1022e8=>{const _0xe20fdc=a32_0x3e9900,{sub_merchant_id:_0x2c67ba}=_0x1022e8[_0xe20fdc(0x1fd)],_0x420a0d=await encryptDecryptService[_0xe20fdc(0x22a)](_0x2c67ba);var _0x43be35=await nodeServerApiService['get_sub_merchant_profile'](_0x420a0d,_0x1022e8?.[_0xe20fdc(0x227)]?.[_0xe20fdc(0x1f8)]);const _0x1819a6=await encryptDecryptService[_0xe20fdc(0x1ee)](_0x43be35?.[_0xe20fdc(0x1cb)]?.[_0xe20fdc(0x217)]);let _0x4269be;_0x43be35?.[_0xe20fdc(0x1cb)]&&(_0x4269be={'sub_merchant_id':_0x2c67ba,'super_merchant_id':_0x43be35?.['data']?.[_0xe20fdc(0x1f2)]==undefined?'':_0x43be35?.[_0xe20fdc(0x1cb)]?.[_0xe20fdc(0x1f2)],'account_id':_0x43be35?.['data']?.['account_id'],'account_types':_0xe20fdc(0x1d8),'iban':_0x43be35?.[_0xe20fdc(0x1cb)]?.['iban'],'registered_name':_0x43be35?.[_0xe20fdc(0x1cb)]?.[_0xe20fdc(0x214)],'country_iso_code':_0x1819a6,'address':_0x43be35?.[_0xe20fdc(0x1cb)]?.[_0xe20fdc(0x1eb)],'city':_0x43be35?.[_0xe20fdc(0x1cb)]?.[_0xe20fdc(0x21b)]});var _0x32b833=await receiverDBService[_0xe20fdc(0x1de)](_0x4269be);if(_0x32b833?.['status']!==httpStatus['OK'])return _0x32b833;var _0x2b0dc8;return _0x32b833?.[_0xe20fdc(0x1cc)]===httpStatus['OK']&&!helperService[_0xe20fdc(0x224)](_0x32b833?.[_0xe20fdc(0x1cb)])&&(_0x2b0dc8={'receiver_id':_0x32b833['data']['id'],..._0x32b833[_0xe20fdc(0x1cb)]},delete _0x2b0dc8['id'],_0x32b833[_0xe20fdc(0x1cb)]=_0x2b0dc8),{'status':httpStatus['OK'],'message':_0x32b833?.[_0xe20fdc(0x1c7)],'data':_0x2b0dc8};},add_receiver=async _0x34390d=>{const _0x12b917=a32_0x3e9900;let _0x2ee535=await get_receiver_details(_0x34390d[_0x12b917(0x1f5)]);if(_0x2ee535?.[_0x12b917(0x1cc)]=='success'){if(Array['isArray'](_0x2ee535?.[_0x12b917(0x1cb)])&&_0x2ee535?.[_0x12b917(0x1cb)][_0x12b917(0x202)]<0x1)return{'status':0x190,'message':'Receiver\x20details\x20not\x20found!','data':_0x18376a};}else return{'status':0x190,'message':_0x12b917(0x1dc),'data':_0x18376a};let _0x346504;_0x2ee535?.['data'][0x0]&&(_0x346504={'super_merchant_id':_0x2ee535?.[_0x12b917(0x1cb)][0x0]?.['super_merchant_id'],'iban':_0x2ee535?.['data'][0x0]?.['iban'],'registered_name':_0x2ee535?.[_0x12b917(0x1cb)][0x0]?.[_0x12b917(0x214)],'country_iso_code':_0x2ee535?.[_0x12b917(0x1cb)][0x0]?.[_0x12b917(0x1c5)],'address':_0x2ee535?.[_0x12b917(0x1cb)][0x0]?.[_0x12b917(0x203)],'city':_0x2ee535?.['data'][0x0]?.[_0x12b917(0x1d5)],..._0x34390d});var _0x31a949=await receiverDBService['addNewReceiver'](_0x346504);if(_0x31a949?.['status']!==httpStatus['OK'])return _0x31a949;var _0x18376a;return _0x31a949?.[_0x12b917(0x1cc)]===httpStatus['OK']&&(_0x18376a={'receiver_id':_0x31a949[_0x12b917(0x1cb)]['id'],..._0x31a949[_0x12b917(0x1cb)]},delete _0x18376a['id'],_0x31a949['data']=_0x18376a),{'status':httpStatus['OK'],'message':_0x12b917(0x1ce),'data':_0x18376a};},get_receiver_by_id=async _0x439068=>{const _0x2643b4=a32_0x3e9900;var _0x524ef0=await receiverDBService[_0x2643b4(0x21c)](_0x439068);if(helperService[_0x2643b4(0x224)](_0x524ef0))return _0x524ef0;let _0x597a7a=await get_receiver_key_secret_by_receiver_id(_0x524ef0?.[_0x2643b4(0x1fc)]),_0x5e8b1f={'receiver_id':_0x524ef0?.[_0x2643b4(0x1fc)],'sub_merchant_id':helperService[_0x2643b4(0x224)](_0x524ef0?.[_0x2643b4(0x1f5)])?null:_0x524ef0?.['sub_merchant_id'],'receiver_name':helperService[_0x2643b4(0x224)](_0x524ef0?.['receiver_name'])?null:_0x524ef0?.[_0x2643b4(0x1da)],'registered_business_address':helperService[_0x2643b4(0x224)](_0x524ef0?.[_0x2643b4(0x205)])?null:_0x524ef0?.[_0x2643b4(0x205)],'email':helperService['isNotValid'](_0x524ef0?.[_0x2643b4(0x20f)])?null:_0x524ef0?.[_0x2643b4(0x20f)],'code':helperService[_0x2643b4(0x224)](_0x524ef0?.[_0x2643b4(0x222)])?null:_0x524ef0?.['code'],'mobile_no':helperService[_0x2643b4(0x224)](_0x524ef0?.[_0x2643b4(0x1c6)])?null:_0x524ef0?.['mobile_no'],'referral_code':helperService[_0x2643b4(0x224)](_0x524ef0?.[_0x2643b4(0x1bf)])?null:_0x524ef0?.[_0x2643b4(0x1bf)],'webhook_url':helperService[_0x2643b4(0x224)](_0x524ef0?.[_0x2643b4(0x20a)])?null:_0x524ef0?.[_0x2643b4(0x20a)],'webhook_secret':helperService['isNotValid'](_0x524ef0?.[_0x2643b4(0x22d)])?null:_0x524ef0?.['webhook_secret'],'verification':helperService[_0x2643b4(0x224)](_0x524ef0?.[_0x2643b4(0x1ef)])?null:_0x524ef0?.[_0x2643b4(0x1ef)],'active':helperService[_0x2643b4(0x224)](_0x524ef0?.['active'])?0x1:_0x524ef0?.[_0x2643b4(0x21f)],'deleted':helperService['isNotValid'](_0x524ef0?.[_0x2643b4(0x1cf)])?0x0:_0x524ef0?.[_0x2643b4(0x1cf)],'created_at':helperService['isNotValid'](_0x524ef0?.[_0x2643b4(0x1c4)])?null:_0x524ef0?.[_0x2643b4(0x1c4)],'updated_at':helperService[_0x2643b4(0x224)](_0x524ef0?.[_0x2643b4(0x212)])?null:_0x524ef0?.[_0x2643b4(0x212)]};if(_0x597a7a?.[_0x2643b4(0x1cc)]==httpStatus['OK']){let _0x2feb71=[];for(let _0x99f946=0x0;_0x99f946<_0x597a7a?.[_0x2643b4(0x1cb)][_0x2643b4(0x202)];_0x99f946++){const _0x41214e=_0x597a7a?.['data'][_0x99f946];_0x2feb71[_0x2643b4(0x1f0)]({'type':_0x41214e?.[_0x2643b4(0x1d0)],'receiver_key':_0x41214e?.[_0x2643b4(0x20d)],'receiver_secret':_0x41214e?.['receiver_secret']});}_0x5e8b1f['access']=_0x2feb71;}return _0x5e8b1f;},get_receiver_by_sub_merchant_id=async _0x518550=>{const _0x452f41=a32_0x3e9900;var _0x44b387=await receiverDBService[_0x452f41(0x229)](_0x518550);return _0x44b387;},get_receiver_details=async _0x393730=>{const _0x3b82fc=a32_0x3e9900;let _0x275072={'sub_merchant_id':_0x393730};var _0x4a7656='';try{let _0x4dc373=_0x3b82fc(0x1f1);_0x4a7656=await nodeServerService[_0x3b82fc(0x232)](_0x4dc373,_0x275072);}catch(_0x327df4){return console[_0x3b82fc(0x213)](_0x3b82fc(0x1ea),_0x327df4[_0x3b82fc(0x1c7)]),{'status':_0x327df4[_0x3b82fc(0x1cc)],'message':_0x327df4['message']};}if(helperService[_0x3b82fc(0x224)](_0x4a7656))return{'status':httpStatus[_0x3b82fc(0x1ff)],'message':_0x3b82fc(0x1dc)};return _0x4a7656;},add_sender_receiver=async _0x396ab4=>{const _0x4bb43c=a32_0x3e9900;var _0x562ad7=await beneficiaryDBService['addNewSenderReceiver'](_0x396ab4);if(_0x562ad7?.['status']===httpStatus['OK']){const _0x576667={'receiver_id':_0x562ad7[_0x4bb43c(0x1cb)]['id'],..._0x562ad7[_0x4bb43c(0x1cb)]};delete _0x576667['id'],_0x562ad7[_0x4bb43c(0x1cb)]=_0x576667;}return _0x562ad7;},verify_receiver=async(_0x52d870,_0x16aafb)=>{var _0xb09fe8=await receiverDBService['verifyReceiver'](_0x52d870);return _0xb09fe8['data']=await get_receiver_by_id(_0x52d870),_0xb09fe8;},delete_receiver=async _0x38e5f1=>{const _0x37b038=a32_0x3e9900;return await beneficiaryDBService[_0x37b038(0x1f6)](_0x38e5f1);},update_receiver=async _0x54cd19=>{const _0x298d34=a32_0x3e9900;var _0x57d7a5=await receiverDBService[_0x298d34(0x200)](_0x54cd19);let _0x9024f4=await get_receiver_by_id(_0x54cd19?.[_0x298d34(0x1fc)]);if(helperService['isNotValid'](_0x57d7a5))return{'status':0x190,'message':_0x298d34(0x1f4)};return _0x57d7a5[_0x298d34(0x1cb)]=_0x9024f4,_0x57d7a5;},add=async _0x209f94=>{const _0x2aa5b1=a32_0x3e9900,_0x17700e=await beneficiaryDBService[_0x2aa5b1(0x1c1)](_0x209f94);if(!_0x17700e||!await bcrypt[_0x2aa5b1(0x1ba)](password,_0x17700e['password']))return null;return _0x17700e;},get_receiver_list=async(_0x5e00c6,_0xcc707a)=>{const _0x41405c=a32_0x3e9900;try{return await receiverDBService[_0x41405c(0x1e2)](_0x5e00c6,_0xcc707a);}catch(_0x26fb91){return console[_0x41405c(0x213)](_0x41405c(0x216),_0x26fb91),{'status':0x190,'message':_0x26fb91[_0x41405c(0x1c7)]};}},add_receiver_key_secret=async _0x5585fe=>{const _0x55c5e9=a32_0x3e9900;try{return await receiverDBService['addReceiverKeyAndSecret'](_0x5585fe);}catch(_0x2779cf){return console['error'](_0x55c5e9(0x216),_0x2779cf),{'status':0x190,'message':_0x2779cf[_0x55c5e9(0x1c7)]};}},update_receiver_key_secret=async _0x475720=>{const _0x375ecd=a32_0x3e9900;try{return await receiverDBService['addOrUpdateReceiverKeyAndSecret'](_0x475720);}catch(_0x515839){return console[_0x375ecd(0x213)]('Sequelize\x20query\x20failed:',_0x515839),{'status':0x190,'message':_0x515839[_0x375ecd(0x1c7)]};}},get_receiver_key_secret_by_receiver_id=async _0x4832f7=>{const _0xa477aa=a32_0x3e9900;try{return await receiverDBService['find_receiver_keys_by_receiver_id'](_0x4832f7);}catch(_0x38e129){return console[_0xa477aa(0x213)]('Sequelize\x20query\x20failed:',_0x38e129),{'status':0x190,'message':_0x38e129[_0xa477aa(0x1c7)]};}},get_receiver_id_by_key_secret=async(_0x3e3fac,_0x44622c)=>{const _0x2936b6=a32_0x3e9900;try{return await receiverDBService[_0x2936b6(0x21e)](_0x3e3fac,_0x44622c);}catch(_0x49a62d){return console[_0x2936b6(0x213)]('Sequelize\x20query\x20failed:',_0x49a62d),{'status':0x190,'message':_0x49a62d[_0x2936b6(0x1c7)]};}},get_receiver_key_secret=async _0x3ba5a7=>{const _0x5075d0=a32_0x3e9900;try{return await receiverDBService['find_receiver_keys_by_receiver_id'](_0x3ba5a7);}catch(_0x3b5408){return console[_0x5075d0(0x213)](_0x5075d0(0x216),_0x3b5408),{'status':0x190,'message':_0x3b5408['message']};}},get_receiver_count=async _0x278b06=>{const _0x5adeba=a32_0x3e9900;try{return await receiverDBService[_0x5adeba(0x1e9)](_0x278b06);}catch(_0x30f1fc){return console[_0x5adeba(0x213)](_0x5adeba(0x216),_0x30f1fc),{'status':0x190,'message':_0x30f1fc[_0x5adeba(0x1c7)]};}},delete_key_secret=async _0x37f5e2=>{const _0x242c5f=a32_0x3e9900;try{let _0x4b98ff={'deleted':0x1};return await receiverDBService[_0x242c5f(0x20b)](_0x37f5e2,_0x4b98ff);}catch(_0xa189ca){return console['error']('Sequelize\x20query\x20failed:',_0xa189ca),{'status':0x190,'message':_0xa189ca[_0x242c5f(0x1c7)]};}};function a32_0x5008(_0x65e76e,_0x2e0990){const _0x4bcd1f=a32_0x4bcd();return a32_0x5008=function(_0x5008c7,_0x12e49d){_0x5008c7=_0x5008c7-0x1b6;let _0x3b7cb0=_0x4bcd1f[_0x5008c7];return _0x3b7cb0;},a32_0x5008(_0x65e76e,_0x2e0990);}module[a32_0x3e9900(0x1b8)]={'add_receiver_with_account_no':add_receiver_with_account_no,'get_receiver_list':get_receiver_list,'add_sender_receiver':add_sender_receiver,'add_receiver':add_receiver,'update_receiver':update_receiver,'verify_receiver':verify_receiver,'get_receiver_by_id':get_receiver_by_id,'delete_receiver':delete_receiver,'add':add,'get_receiver_by_sub_merchant_id':get_receiver_by_sub_merchant_id,'add_receiver_with_fund_details':add_receiver_with_fund_details,'check_valid_bank_details':check_valid_bank_details,'add_receiver_key_secret':add_receiver_key_secret,'get_receiver_id_by_key_secret':get_receiver_id_by_key_secret,'get_receiver_key_secret_by_receiver_id':get_receiver_key_secret_by_receiver_id,'get_receiver_count':get_receiver_count,'update_receiver_key_secret':update_receiver_key_secret,'get_receiver_key_secret':get_receiver_key_secret,'delete_key_secret':delete_key_secret};
+const httpStatus = require("http-status");
+const bcrypt = require("bcrypt");
+const helperService = require("./helper.service");
+const nodeServerService = require("./node_server.service");
+const beneficiaryDBService = require("./beneficiary.db.service");
+const receiverDBService = require("./receiver.db.service");
+const payerService = require("../service/beneficiary.service");
+const nodeServerApiService = require("./node_server_api.service");
+const db = require("../models");
+const ApiError = require("../utils/ApiError");
+const encryptDecryptService = require("../service/encrypt_decrypt.service");
+const createApiClient = require("./thunes_client.service");
+
+/**
+ * Add New Receiver
+ * @param {string} email
+ * @param {string} password
+ * @returns {Promise<User>}
+ */
+const add_receiver_with_fund_details = async (req) => {
+  const {
+    sub_merchant_id,
+    receiver_name,
+    registered_business_address,
+    email,
+    code,
+    mobile_no,
+    referral_code,
+    webhook_url,
+  } = req.body;
+
+  let addReceiverPayload = {
+    sub_merchant_id: sub_merchant_id,
+    receiver_name: receiver_name,
+    registered_business_address: registered_business_address, // Address
+    email: email,
+    code: code,
+    mobile_no: mobile_no,
+    referral_code: referral_code,
+    webhook_url: webhook_url,
+    webhook_secret: helperService.generateKey(),
+    verification: "verified",
+    active: 1,
+  };
+
+  if (helperService.isValid(sub_merchant_id)) {
+    let submerchant_response = await nodeServerApiService.get_sub_merchant_details(sub_merchant_id);
+    if (submerchant_response?.status != httpStatus.OK) {
+      return submerchant_response;
+    }
+
+    if (helperService.isValid(submerchant_response?.data)) {
+      addReceiverPayload.receiver_name = submerchant_response?.data?.company_name;
+      addReceiverPayload.registered_business_address = submerchant_response?.data?.register_business_country;
+      addReceiverPayload.email = submerchant_response?.data?.email;
+      addReceiverPayload.code = submerchant_response?.data?.code;
+      addReceiverPayload.mobile_no = submerchant_response?.data?.mobile_no;
+      addReceiverPayload.referral_code = submerchant_response?.data?.referral_code;
+    }
+
+    /**
+     * If webhook_url is passed through request and if it is settelment account
+     * then get the webhook details from merchant webhook settings
+     */
+    if (helperService.isNotValid(addReceiverPayload?.webhook_url)) {
+      let submerchant_webhook_response =
+        await nodeServerApiService.get_merchant_webhook_settings(
+          sub_merchant_id
+        );
+      if (submerchant_webhook_response?.status != httpStatus.OK) {
+        return submerchant_webhook_response;
+      }
+
+      if (helperService.isValid(submerchant_webhook_response?.data)) {
+        addReceiverPayload.webhook_url =
+          submerchant_webhook_response?.data?.notification_url;
+        addReceiverPayload.webhook_secret =
+          submerchant_webhook_response?.data?.notification_secret;
+      }
+    }
+    
+  }
+
+  
+  console.log("🚀 ~ add_receiver_with_fund_details ~ addReceiverPayload:", addReceiverPayload)
+
+  // Save receiver
+  var receiver = await receiverDBService.addNewReceiver(addReceiverPayload);
+  
+  if (receiver?.status !== httpStatus.OK) {
+    return receiver;
+  }
+
+  let receivers_keys = [];
+  // Add Test Key
+  let key_secret_payload = {
+    receiver_id: receiver?.data?.id,
+    type: "test",
+    receiver_key:  await helperService.make_order_number("test-"),
+    receiver_secret: await helperService.make_order_number("sec-"),
+  };
+  let keySecretResponse = await add_receiver_key_secret(key_secret_payload);
+  if (keySecretResponse?.status == httpStatus.OK) {
+    receivers_keys.push({
+      type: keySecretResponse?.data?.type,
+      receiver_key: keySecretResponse?.data?.receiver_key,
+      receiver_secret: keySecretResponse?.data?.receiver_secret,
+    })
+  }
+
+  // Add Live Key
+   key_secret_payload = {
+    receiver_id: receiver?.data?.id,
+    type: "live",
+    receiver_key:  await helperService.make_order_number("live-"),
+    receiver_secret: await helperService.make_order_number("sec-"),
+  };
+  keySecretResponse = await add_receiver_key_secret(key_secret_payload);
+  if (keySecretResponse?.status == httpStatus.OK) {
+    receivers_keys.push({
+      type: keySecretResponse?.data?.type,
+      receiver_key: keySecretResponse?.data?.receiver_key,
+      receiver_secret: keySecretResponse?.data?.receiver_secret,
+    })
+  }
+
+  var responseData;
+  if (
+    receiver?.status === httpStatus.OK &&
+    !helperService.isNotValid(receiver?.data)
+  ) {
+    responseData = {
+      receiver_id: receiver.data.id,
+      sub_merchant_id: helperService.isNotValid(receiver.data.sub_merchant_id)
+        ? null
+        : receiver.data.sub_merchant_id,
+      receiver_name: helperService.isNotValid(receiver.data.receiver_name)
+        ? null
+        : receiver.data.receiver_name,
+      registered_business_address: helperService.isNotValid(
+        receiver.data.registered_business_address
+      )
+        ? null
+        : receiver.data.registered_business_address,
+      email: helperService.isNotValid(receiver.data.email)
+        ? null
+        : receiver.data.email,
+      code: helperService.isNotValid(receiver.data.code)
+        ? null
+        : receiver.data.code,
+      mobile_no: helperService.isNotValid(receiver.data.mobile_no)
+        ? null
+        : receiver.data.mobile_no,
+      referral_code: helperService.isNotValid(receiver.data.referral_code)
+        ? null
+        : receiver.data.referral_code,
+      webhook_url: helperService.isNotValid(receiver.data.webhook_url)
+        ? null
+        : receiver.data.webhook_url,
+      webhook_secret: helperService.isNotValid(receiver.data.webhook_secret)
+        ? null
+        : receiver.data.webhook_secret,
+      verification: helperService.isNotValid(receiver.data.verification)
+        ? null
+        : receiver.data.verification,
+      active: helperService.isNotValid(receiver.data.active)
+        ? null
+        : receiver.data.active,
+      deleted: helperService.isNotValid(receiver.data.deleted)
+        ? null
+        : receiver.data.deleted,
+      created_at: helperService.isNotValid(receiver.data.created_at)
+        ? null
+        : receiver.data.created_at,
+      updated_at: helperService.isNotValid(receiver.data.updated_at)
+        ? null
+        : receiver.data.updated_at,
+      access: receivers_keys,
+    };
+
+    if (sub_merchant_id && receiver.data.id) {
+      let update_response = await nodeServerApiService.update_wallet(sub_merchant_id, receiver.data.id);
+      console.log("🚀 ~ add_receiver_with_fund_details ~ update_response:", update_response)
+      let update_charges_response = await nodeServerApiService.update_charges(sub_merchant_id, receiver.data.id);
+      console.log("🚀 ~ add_receiver_with_fund_details ~ update_charges_response:", update_charges_response)
+    }
+
+    receiver.data = responseData;
+  }
+
+  // Send success response
+  return receiver;
+};
+
+/**
+ * Add Receiver
+ */
+const check_valid_bank_details = async (receiver_details, MID) => {
+  console.log("🚀 ~ check_valid_bank_details ~ receiver_details:", receiver_details)
+
+  let PAYER_ID = null;
+
+  try {
+    if (
+      helperService.isNotValid(receiver_details?.data) ||
+      helperService.isNotValid(receiver_details?.data?.account_details)
+    ) {
+      return {
+        status: httpStatus.BAD_REQUEST,
+        message: "Merchant bank details are currently unavailable or missing some fields.",
+      };
+    }
+    
+    if (helperService.isNotValid(receiver_details?.data?.account_id)) {
+      return {
+        status: httpStatus.BAD_REQUEST,
+        message: "Invalid account ID",
+      };
+    }
+
+    //
+    PAYER_ID = receiver_details?.data?.payer_id;
+    
+    let account_details = receiver_details?.data?.account_details;
+    console.log("🚀 ~ constcheck_valid_bank_details= ~ account_details:", account_details)
+
+    if (helperService.isNotValid(PAYER_ID)) {
+      return {
+        status: httpStatus.BAD_REQUEST,
+        message: "Invalid Payer ID",
+      };
+    }
+
+    let customer_type = receiver_details?.data?.customer_type;
+
+    if (PAYER_ID == "MTN_MOMO" || PAYER_ID=="ORANGE_MONEY") {
+      console.log(`here goes mtn momo or orange money`);
+
+      if (
+        helperService.isNotValid(
+          account_details?.MSISDN
+        )
+      ) {
+        return {
+          status: httpStatus.BAD_REQUEST,
+          message: "Invalid MSISDN Number",
+        };
+      }
+
+      return {
+        status: httpStatus.OK,
+        message: "Valid payer",
+      };
+
+    } else {
+      // Get payer details by id
+      const payerResponse = await payerService.getById(PAYER_ID, MID);
+       if (payerResponse?.status !== httpStatus.OK) {
+        return payerResponse;
+      }
+      
+      let payer = payerResponse?.data;
+      console.log("🚀 ~ check_valid_bank_details ~ payer:", payer)
+      
+      console.log(`here goes thunes `);
+      
+      let sending_business = {
+        registered_name: "GTI",
+        registration_number: "123456",
+        country_iso_code: "USA",
+        address: "USA",
+        city: "New York",
+        code: "94111"
+      };
+      
+      const transaction_type = customer_type === "Business" ? payer?.transaction_types?.B2B : payer?.transaction_types?.B2C;
+      if (helperService.isNotValid(transaction_type)) {
+        console.log("🚀 ~ check_valid_bank_details ~ transaction_type:", transaction_type)
+      }
+      
+      const credit_party_identifiers = transaction_type?.credit_party_identifiers_accepted[0];
+      const required_receiving_entity_fields = transaction_type?.required_receiving_entity_fields[0];
+      const required_sending_entity_fields = transaction_type?.required_sending_entity_fields[0];
+      const purpose_of_remittance_values_accepted = transaction_type?.purpose_of_remittance_values_accepted;
+
+      console.log("purpose_of_remittance_values_accepted: ", purpose_of_remittance_values_accepted);
+      if (helperService.isValid(receiver_details?.purpose_of_remittance)) {
+        if (helperService.isValid(purpose_of_remittance_values_accepted)) {
+          if (!purpose_of_remittance_values_accepted.includes(receiver_details?.purpose_of_remittance)) {
+            return {
+              status: httpStatus.BAD_REQUEST,
+              message: "Invalid 'purpose_of_remittance'",
+            };
+          }
+        }else{
+          console.log("No valid purpose_of_remittance_values_accepted list found for this payer... ");
+        }
+      }
+      
+
+      // Check request payload fields
+      const isCreditPartyIdentifiersValid = credit_party_identifiers.every(
+        (key) => {
+          const value = account_details[key];
+          return (
+            value !== undefined &&
+            value !== null &&
+            value !== "" &&
+            !Number.isNaN(value)
+          );
+        }
+      );
+
+      if (!isCreditPartyIdentifiersValid) {
+        return {
+          status: httpStatus.BAD_REQUEST,
+          message: "Invalid 'credit_party_identifiers'",
+        };
+      }
+
+      // Check required receiving fields
+      const is_required_receiving_entity_fields_data_Valid = required_receiving_entity_fields.every(
+        (key) => {
+          const value = account_details[key];
+          return (
+            value !== undefined &&
+            value !== null &&
+            value !== "" &&
+            !Number.isNaN(value)
+          );
+        }
+      );
+
+      if (!is_required_receiving_entity_fields_data_Valid) {
+        return {
+          status: httpStatus.BAD_REQUEST,
+          message: "Invalid 'required_receiving_entity_fields'",
+        };
+      }
+
+      // Check required sending fields
+      const is_required_sending_entity_fields_data_Valid = required_sending_entity_fields.every(
+        (key) => {
+          console.log("🚀 ~ constcheck_valid_bank_details= ~ key:", key)
+          const value = sending_business[key];
+          console.log("🚀 ~ constcheck_valid_bank_details= ~ value:", value)
+          return (
+            value !== undefined &&
+            value !== null &&
+            value !== "" &&
+            !Number.isNaN(value)
+          );
+        }
+      );
+
+      if (!is_required_sending_entity_fields_data_Valid) {
+        return {
+          status: httpStatus.BAD_REQUEST,
+          message: "Invalid 'required_sending_entity_fields'",
+        };
+      }
+
+      return {
+        status: httpStatus.OK,
+        message: "Valid payer",
+      };
+    }
+  } catch (error) {
+    console.log("🚀 ~ constadd_receiver=catchAsync ~ error:", error);
+    return {
+      status: httpStatus.BAD_REQUEST,
+      message: error?.message,
+    };
+  }
+};
+
+/**
+ * Add New Receiver
+ * @param {string} email
+ * @param {string} password
+ * @returns {Promise<User>}
+ */
+const add_receiver_with_account_no = async (req) => {
+  const { sub_merchant_id } = req.body;
+
+  const encrypted_sub_merchant_id = await encryptDecryptService.encrypt(
+    sub_merchant_id
+  );
+  // console.log("🚀 ~ constadd_receiver_with_account_no= ~ encrypted_sub_merchant_id:", encrypted_sub_merchant_id)
+  var receiver_details = await nodeServerApiService.get_sub_merchant_profile(
+    encrypted_sub_merchant_id,
+    req?.user?.token
+  );
+  // console.log("🚀 ~ constadd_receiver_with_account_no= ~ receiver_details:", receiver_details)
+
+  const register_business_country = await encryptDecryptService.decrypt(
+    receiver_details?.data?.register_business_country
+  );
+
+  let addReceiverPayload;
+  if (receiver_details?.data) {
+    addReceiverPayload = {
+      sub_merchant_id: sub_merchant_id,
+      super_merchant_id:
+        receiver_details?.data?.super_merchant_id == undefined
+          ? ""
+          : receiver_details?.data?.super_merchant_id,
+      account_id: receiver_details?.data?.account_id,
+      account_types: "BUSINESS",
+      iban: receiver_details?.data?.iban,
+      registered_name: receiver_details?.data?.company_name,
+      country_iso_code: register_business_country,
+      address: receiver_details?.data?.address_line1,
+      city: receiver_details?.data?.province_name,
+    };
+  }
+  //   console.log("🚀 ~ constadd_receiver_with_account_no= ~ addReceiverPayload:", addReceiverPayload)
+  // return;
+  // Save receiver
+  var receiver = await receiverDBService.addNewReceiver(addReceiverPayload);
+  if (receiver?.status !== httpStatus.OK) {
+    return receiver;
+  }
+
+  var responseData;
+  if (
+    receiver?.status === httpStatus.OK &&
+    !helperService.isNotValid(receiver?.data)
+  ) {
+    responseData = {
+      receiver_id: receiver.data.id,
+      ...receiver.data,
+    };
+    delete responseData.id;
+    receiver.data = responseData;
+  }
+
+  // Send success response
+  return {
+    status: httpStatus.OK,
+    message: receiver?.message,
+    data: responseData,
+  };
+};
+
+/**
+ * Add New Receiver
+ * @param {string} email
+ * @param {string} password
+ * @returns {Promise<User>}
+ */
+const add_receiver = async (payload) => {
+  let receiver_details = await get_receiver_details(payload.sub_merchant_id);
+
+  if (receiver_details?.status == "success") {
+    if (
+      Array.isArray(receiver_details?.data) &&
+      receiver_details?.data.length < 1
+    ) {
+      return {
+        status: 400,
+        message: "Receiver details not found!",
+        data: responseData,
+      };
+    }
+  } else {
+    return {
+      status: 400,
+      message: "Receiver details not found!",
+      data: responseData,
+    };
+  }
+
+  let addReceiverPayload;
+  if (receiver_details?.data[0]) {
+    addReceiverPayload = {
+      super_merchant_id: receiver_details?.data[0]?.super_merchant_id,
+      iban: receiver_details?.data[0]?.iban,
+      registered_name: receiver_details?.data[0]?.company_name,
+      country_iso_code: receiver_details?.data[0]?.country_code,
+      address: receiver_details?.data[0]?.address,
+      city: receiver_details?.data[0]?.city_name,
+      ...payload,
+    };
+  }
+
+  // Save receiver
+  var receiver = await receiverDBService.addNewReceiver(addReceiverPayload);
+  if (receiver?.status !== httpStatus.OK) {
+    return receiver;
+  }
+
+  var responseData;
+  if (receiver?.status === httpStatus.OK) {
+    responseData = {
+      receiver_id: receiver.data.id,
+      ...receiver.data,
+    };
+    delete responseData.id;
+    receiver.data = responseData;
+  }
+
+  // Send success response
+  return {
+    status: httpStatus.OK,
+    message: "Receiver added!",
+    data: responseData,
+  };
+};
+
+/**
+ * Get Beneficiary By Id
+ */
+const get_receiver_by_id = async (id) => {
+  var receiver = await receiverDBService.getReceiverById(id);
+
+  if (helperService.isNotValid(receiver)) {
+    return receiver;
+  }
+
+  let receiver_keys_secrets = await get_receiver_key_secret_by_receiver_id(receiver?.receiver_id);
+
+
+  let responseData = {
+    receiver_id: receiver?.receiver_id,
+    sub_merchant_id: helperService.isNotValid(receiver?.sub_merchant_id)
+      ? null
+      : receiver?.sub_merchant_id,
+    receiver_name: helperService.isNotValid(receiver?.receiver_name)
+      ? null
+      : receiver?.receiver_name,
+    registered_business_address: helperService.isNotValid(receiver?.registered_business_address)
+      ? null
+      : receiver?.registered_business_address,
+    email: helperService.isNotValid(receiver?.email)
+      ? null
+      : receiver?.email,
+    code: helperService.isNotValid(receiver?.code)
+      ? null
+      : receiver?.code,
+    mobile_no: helperService.isNotValid(receiver?.mobile_no)
+      ? null
+      : receiver?.mobile_no,
+    referral_code: helperService.isNotValid(receiver?.referral_code)
+      ? null
+      : receiver?.referral_code,
+    webhook_url: helperService.isNotValid(receiver?.webhook_url)
+      ? null
+      : receiver?.webhook_url,
+    webhook_secret: helperService.isNotValid(receiver?.webhook_secret)
+      ? null
+      : receiver?.webhook_secret,
+    verification: helperService.isNotValid(receiver?.verification)
+      ? null
+      : receiver?.verification,
+    active: helperService.isNotValid(receiver?.active)
+      ? 1 
+      : receiver?.active,
+    deleted: helperService.isNotValid(receiver?.deleted)
+      ? 0
+      : receiver?.deleted,
+    created_at: helperService.isNotValid(receiver?.created_at)
+      ? null
+      : receiver?.created_at,
+    updated_at: helperService.isNotValid(receiver?.updated_at)
+      ? null
+      : receiver?.updated_at,
+  };
+
+  if (receiver_keys_secrets?.status == httpStatus.OK) {
+    let access = [];
+    for (let index = 0; index < receiver_keys_secrets?.data.length; index++) {
+      const element = receiver_keys_secrets?.data[index];
+      access.push({
+        "type": element?.type,
+        "receiver_key": element?.receiver_key,
+        "receiver_secret": element?.receiver_secret,
+      })
+    }
+    responseData.access = access;
+  }
+
+  return responseData;
+};
+
+/**
+ * Get Receiver By Sub Merchant Id
+ */
+const get_receiver_by_sub_merchant_id = async (sub_merchant_id) => {
+  var receiver = await receiverDBService.getReceiverBySubMerchantId(
+    sub_merchant_id
+  );
+  return receiver;
+};
+
+/**
+ * API Call Get Receiver Details From Node Server
+ * @param {string} email
+ * @param {string} password
+ * @returns {Promise<User>}
+ */
+const get_receiver_details = async (sub_merchant_id) => {
+  let payload = {
+    sub_merchant_id: sub_merchant_id,
+  };
+
+  // Axios API request
+  var receiverResponse = "";
+  try {
+    let url = "get-receiver-details";
+    receiverResponse = await nodeServerService.post(url, payload);
+  } catch (err) {
+    console.error("Error fetching data:", err.message);
+    return {
+      status: err.status,
+      message: err.message,
+    };
+  }
+
+  // Check transaction created
+  if (helperService.isNotValid(receiverResponse)) {
+    return {
+      status: httpStatus.NOT_FOUND,
+      message: "Receiver details not found!",
+    };
+  }
+
+  // Send success response
+  return receiverResponse;
+};
+
+/**
+ * Add New Sender Receiver
+ * @param {string} email
+ * @param {string} password
+ * @returns {Promise<User>}
+ */
+const add_sender_receiver = async (param) => {
+  var receiver = await beneficiaryDBService.addNewSenderReceiver(param);
+  if (receiver?.status === httpStatus.OK) {
+    const responseData = {
+      receiver_id: receiver.data.id,
+      ...receiver.data,
+    };
+    delete responseData.id;
+    receiver.data = responseData;
+  }
+  return receiver;
+};
+
+/**
+ * Sender verification
+ */
+const verify_receiver = async (receiver_id, action) => {
+  
+  // Send success response
+  var receiverResponse = await receiverDBService.verifyReceiver(receiver_id);
+  receiverResponse.data = await get_receiver_by_id(receiver_id);
+  return receiverResponse;
+};
+
+/**
+ * Delete Receiver
+ */
+const delete_receiver = async (receiver_id) => {
+  // Send success response
+  return await beneficiaryDBService.deleteReceiverById(receiver_id);
+};
+
+/**
+ *  Update Receiver
+ * @param {*} param
+ * @returns
+ */
+const update_receiver = async (param) => {
+  var receiver = await receiverDBService.update_receiver(param);
+  let data = await get_receiver_by_id(param?.receiver_id);
+  if (helperService.isNotValid(receiver)) {
+    return { status: 400, message: "Receiver not found" };
+  }
+  receiver.data = data;
+  return receiver;
+};
+
+/**
+ * Add Payee
+ * @param {string} email
+ * @param {string} password
+ * @returns {Promise<User>}
+ */
+const add = async (param) => {
+  const user = await beneficiaryDBService.addNewPayer(param);
+  if (!user || !(await bcrypt.compare(password, user.password))) {
+    return null;
+  }
+  return user;
+};
+
+
+/**
+ * Get Receiver List
+ * @returns {Promise<User>}
+ */
+const get_receiver_list = async (req, res) => {
+  try {
+    return await receiverDBService.get_receiver_list(req, res);
+  } catch (error) {
+    console.error("Sequelize query failed:", error);
+    return {
+      status: 400,
+      message: error.message,
+    };
+  }
+};
+
+/**
+ * Add Receiver Key & Secret
+ * @returns {Promise<User>}
+ */
+const add_receiver_key_secret = async (payload) => {
+  try {
+    return await receiverDBService.addReceiverKeyAndSecret(payload);
+  } catch (error) {
+    console.error("Sequelize query failed:", error);
+    return {
+      status: 400,
+      message: error.message,
+    };
+  }
+};
+
+/**
+ * Update Receiver Key & Secret
+ * @returns {Promise<User>}
+ */
+const update_receiver_key_secret = async (payload) => {
+  try {
+    return await receiverDBService.addOrUpdateReceiverKeyAndSecret(payload);
+  } catch (error) {
+    console.error("Sequelize query failed:", error);
+    return {
+      status: 400,
+      message: error.message,
+    };
+  }
+};
+
+/**
+ * Get Receiver Key & Secret By Receiver Id
+ * @returns {Promise<User>}
+ */
+const get_receiver_key_secret_by_receiver_id = async (receiver_id) => {
+  try {
+    return await receiverDBService.find_receiver_keys_by_receiver_id(receiver_id);
+  } catch (error) {
+    console.error("Sequelize query failed:", error);
+    return {
+      status: 400,
+      message: error.message,
+    };
+  }
+};
+
+/**
+ * Get Receiver Key & Secret By Receiver Id
+ * @returns {Promise<User>}
+ */
+const get_receiver_id_by_key_secret = async (receiver_key, receiver_secret) => {
+  try {
+    return await receiverDBService.find_receiver_key(receiver_key, receiver_secret);
+  } catch (error) {
+    console.error("Sequelize query failed:", error);
+    return {
+      status: 400,
+      message: error.message,
+    };
+  }
+};
+
+/**
+ * Get Receiver Key & Secret By Receiver Id
+ * @returns {Promise<User>}
+ */
+const get_receiver_key_secret = async (receiver_id) => {
+  try {
+    return await receiverDBService.find_receiver_keys_by_receiver_id(receiver_id);
+  } catch (error) {
+    console.error("Sequelize query failed:", error);
+    return {
+      status: 400,
+      message: error.message,
+    };
+  }
+};
+
+/**
+ * Get Receiver Count
+ * @returns {Promise<User>}
+ */
+const get_receiver_count = async (condition) => {
+  try {
+    return await receiverDBService.get_receiver_count(condition);
+  } catch (error) {
+    console.error("Sequelize query failed:", error);
+    return {
+      status: 400,
+      message: error.message,
+    };
+  }
+};
+
+/**
+ * Get Receiver Count
+ * @returns {Promise<User>}
+ */
+const delete_key_secret = async (id) => {
+  try {
+    let update_data = {deleted: 1}
+    return await receiverDBService.update_receiver_key(id, update_data);
+  } catch (error) {
+    console.error("Sequelize query failed:", error);
+    return {
+      status: 400,
+      message: error.message,
+    };
+  }
+};
+
+module.exports = {
+  add_receiver_with_account_no,
+  get_receiver_list,
+  add_sender_receiver,
+  add_receiver,
+  update_receiver,
+  verify_receiver,
+  get_receiver_by_id,
+  delete_receiver,
+  add,
+  get_receiver_by_sub_merchant_id,
+  add_receiver_with_fund_details,
+  check_valid_bank_details,
+  add_receiver_key_secret,
+  get_receiver_id_by_key_secret,
+  get_receiver_key_secret_by_receiver_id,
+  get_receiver_count,
+  update_receiver_key_secret,
+  get_receiver_key_secret,
+  delete_key_secret
+};

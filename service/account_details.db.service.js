@@ -1,1 +1,128 @@
-function a0_0x1033(_0x5defb0,_0x49fe76){const _0x2c2946=a0_0x2c29();return a0_0x1033=function(_0x103381,_0x506ff1){_0x103381=_0x103381-0xf5;let _0x4438e4=_0x2c2946[_0x103381];return _0x4438e4;},a0_0x1033(_0x5defb0,_0x49fe76);}function a0_0x2c29(){const _0x84830a=['Account\x20details\x20fetch\x20successfully','account_type','Error\x20found\x20account\x20details:','Error\x20fetching\x20account\x20details:','external_id','message','INTERNAL_SERVER_ERROR','log','receiver_id','toJSON','findOrCreate','payer_data','93BKqmHV','transaction_date','Account\x20details\x20fetched\x20successfully','map','NOT_FOUND','🚀\x20~\x20add\x20~\x20data:','BAD_REQUEST','../models','1448194zxtqiE','2629240ubZRQt','2021048bqnqEM','transaction_id','Error\x20finding\x20or\x20creating\x20Transaction\x20account\x20details:','312iWGCgT','error','transactions','account_id','36JaPIzu','Error\x20found\x20account\x20details:\x20','account_for','account_details','Error\x20fetching\x20account\x20details:\x20','account_data','34763nPwrSJ','findAll','1836275JlTtVc','70EzYmOm','payer_id','63524OMTWlZ','Account\x20details\x20not\x20found','Transaction\x20account\x20details\x20not\x20created','payer_name','685848cMiPjj','77pBfjHQ'];a0_0x2c29=function(){return _0x84830a;};return a0_0x2c29();}const a0_0x50041c=a0_0x1033;(function(_0x85be0a,_0x2cc72e){const _0x3bb7b1=a0_0x1033,_0x498f5f=_0x85be0a();while(!![]){try{const _0x42a357=-parseInt(_0x3bb7b1(0x11c))/0x1*(-parseInt(_0x3bb7b1(0x11f))/0x2)+parseInt(_0x3bb7b1(0x105))/0x3*(parseInt(_0x3bb7b1(0x121))/0x4)+parseInt(_0x3bb7b1(0x11e))/0x5+-parseInt(_0x3bb7b1(0xf7))/0x6*(-parseInt(_0x3bb7b1(0xf8))/0x7)+-parseInt(_0x3bb7b1(0x10f))/0x8*(-parseInt(_0x3bb7b1(0x116))/0x9)+-parseInt(_0x3bb7b1(0x10e))/0xa+parseInt(_0x3bb7b1(0x10d))/0xb*(-parseInt(_0x3bb7b1(0x112))/0xc);if(_0x42a357===_0x2cc72e)break;else _0x498f5f['push'](_0x498f5f['shift']());}catch(_0x547e8b){_0x498f5f['push'](_0x498f5f['shift']());}}}(a0_0x2c29,0xa0b4f));const httpStatus=require('http-status'),db=require(a0_0x50041c(0x10c)),Tansactions=db[a0_0x50041c(0x114)],AccountDetails=db[a0_0x50041c(0x119)],{Op}=require('sequelize'),add=async _0x1bc5c5=>{const _0x459d42=a0_0x50041c;console[_0x459d42(0x100)](_0x459d42(0x10a),_0x1bc5c5);try{let _0x5b0f56={};_0x1bc5c5?.[_0x459d42(0x110)]&&(_0x5b0f56[_0x459d42(0x110)]=_0x1bc5c5?.[_0x459d42(0x110)]);_0x1bc5c5?.['external_id']&&(_0x5b0f56[_0x459d42(0xfd)]=_0x1bc5c5?.[_0x459d42(0xfd)]);const [_0x16532e,_0x35f0e0]=await AccountDetails[_0x459d42(0x103)]({'where':_0x5b0f56,'defaults':{'transaction_id':_0x1bc5c5?.[_0x459d42(0x110)],'order_id':_0x1bc5c5?.['order_id'],'external_id':_0x1bc5c5?.[_0x459d42(0xfd)],'receiver_id':_0x1bc5c5?.[_0x459d42(0x101)],'sub_merchant_id':_0x1bc5c5?.['sub_merchant_id'],'transaction_date':_0x1bc5c5?.[_0x459d42(0x106)],'account_id':_0x1bc5c5?.[_0x459d42(0x115)],'account_type':_0x1bc5c5?.[_0x459d42(0xfa)],'account_for':_0x1bc5c5?.[_0x459d42(0x118)],'payer_id':_0x1bc5c5?.[_0x459d42(0x120)],'payer_name':_0x1bc5c5?.[_0x459d42(0xf6)],'payer_currency':_0x1bc5c5?.['payer_currency'],'account_data':_0x1bc5c5?.[_0x459d42(0x11b)],'payer_data':_0x1bc5c5?.[_0x459d42(0x104)]}});if(_0x35f0e0)return{'status':httpStatus['OK'],'message':'Transaction\x20account\x20details\x20added\x20successfully','data':_0x16532e[_0x459d42(0x102)]()};else return _0x16532e?{'status':httpStatus[_0x459d42(0x10b)],'message':'Transaction\x20account\x20details\x20already\x20added'}:{'status':httpStatus[_0x459d42(0x10b)],'message':_0x459d42(0xf5)};}catch(_0x1eca90){return console[_0x459d42(0x113)](_0x459d42(0x111),_0x1eca90),{'status':httpStatus[_0x459d42(0xff)],'message':_0x459d42(0x111)+_0x1eca90[_0x459d42(0xfe)]};}},findAll=async _0x23f1c3=>{const _0x35774b=a0_0x50041c;try{const _0x671e71=await AccountDetails[_0x35774b(0x11d)]({'where':_0x23f1c3,'order':[['id','DESC']]});return _0x671e71&&_0x671e71['length']>0x0?{'status':httpStatus['OK'],'message':_0x35774b(0x107),'data':_0x671e71[_0x35774b(0x108)](_0x54469c=>{const _0x41eb19=_0x54469c['toJSON']();return _0x41eb19;})}:{'status':httpStatus[_0x35774b(0x109)],'message':'Account\x20details\x20found\x20for\x20this\x20plan'};}catch(_0x428b63){return console[_0x35774b(0x113)](_0x35774b(0xfc),_0x428b63),{'status':httpStatus[_0x35774b(0xff)],'message':_0x35774b(0x11a)+_0x428b63['message']};}},findOne=async _0x217011=>{const _0x5b8c7b=a0_0x50041c;try{const _0x48a4d7=await AccountDetails['findOne']({'where':_0x217011});return _0x48a4d7?{'status':httpStatus['OK'],'message':_0x5b8c7b(0xf9),'data':_0x48a4d7[_0x5b8c7b(0x102)]()}:{'status':httpStatus['NOT_FOUND'],'message':_0x5b8c7b(0x122)};}catch(_0x3f7c48){return console[_0x5b8c7b(0x113)](_0x5b8c7b(0xfb),_0x3f7c48),{'status':httpStatus['INTERNAL_SERVER_ERROR'],'message':_0x5b8c7b(0x117)+_0x3f7c48['message']};}};module['exports']={'add':add,'findAll':findAll,'findOne':findOne};
+const httpStatus = require("http-status");
+const db = require("../models");
+const Tansactions = db.transactions;
+const AccountDetails = db.account_details;
+const { Op } = require("sequelize");
+
+const add = async (data) => {
+  console.log("🚀 ~ add ~ data:", data)
+  try {
+
+    let where = {};
+    if (data?.transaction_id) {
+      where.transaction_id = data?.transaction_id;
+    }
+    if (data?.external_id) {
+      where.external_id = data?.external_id;
+    }
+
+    const [account_details, created] = await AccountDetails.findOrCreate({
+      where: where,
+      defaults: {
+        transaction_id: data?.transaction_id,
+        order_id: data?.order_id,
+        external_id: data?.external_id,
+        receiver_id: data?.receiver_id,
+        sub_merchant_id: data?.sub_merchant_id,
+        transaction_date: data?.transaction_date,
+        account_id: data?.account_id,
+        account_type: data?.account_type,
+        account_for: data?.account_for,
+        payer_id: data?.payer_id,
+        payer_name: data?.payer_name,
+        payer_currency: data?.payer_currency,
+        account_data: data?.account_data,
+        payer_data: data?.payer_data
+      },
+    });
+
+    if (created) {
+      return {
+        status: httpStatus.OK,
+        message: "Transaction account details added successfully",
+        data: account_details.toJSON(),
+      };
+    } else if (account_details) {
+      return {
+        status: httpStatus.BAD_REQUEST,
+        message: "Transaction account details already added",
+      };
+    } else {
+      return {
+        status: httpStatus.BAD_REQUEST,
+        message: "Transaction account details not created",
+      };
+    }
+  } catch (error) {
+    console.error("Error finding or creating Transaction account details:", error);
+    // throw error;
+    return {
+      status: httpStatus.INTERNAL_SERVER_ERROR,
+      message: "Error finding or creating Transaction account details:" + error.message,
+    };
+  }
+};
+
+const findAll = async (where) => {
+  try {
+    const account_details = await AccountDetails.findAll({
+      where: where,
+      order: [["id", "DESC"]],
+    });
+    if (account_details && account_details.length > 0) {
+      return {
+        status: httpStatus.OK,
+        message: "Account details fetched successfully",
+        data: account_details.map((item) => {
+          const json = item.toJSON();
+          return json;
+        }),
+      };
+    } else {
+      return {
+        status: httpStatus.NOT_FOUND,
+        message: "Account details found for this plan",
+      };
+    }
+  } catch (error) {
+    console.error("Error fetching account details:", error);
+    return {
+      status: httpStatus.INTERNAL_SERVER_ERROR,
+      message: "Error fetching account details: " + error.message,
+    };
+  }
+};
+
+const findOne = async (where) => {
+  try {
+    const account_details = await AccountDetails.findOne({
+      where: where,
+    });
+
+    if (account_details) {
+      return {
+        status: httpStatus.OK,
+        message: "Account details fetch successfully",
+        data: account_details.toJSON(),
+      };
+    } else {
+      return {
+        status: httpStatus.NOT_FOUND,
+        message: "Account details not found",
+      };
+    }
+  } catch (error) {
+    console.error("Error found account details:", error);
+    return {
+      status: httpStatus.INTERNAL_SERVER_ERROR,
+      message: "Error found account details: " + error.message,
+    };
+  }
+};
+
+
+module.exports = {
+  add,
+  findAll,
+  findOne
+};
