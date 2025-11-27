@@ -1,1 +1,161 @@
-const a20_0xabaaa8=a20_0x50a6;function a20_0x4adc(){const _0x37e8ac=['Payer\x20not\x20found!','17306KFgneH','95976KcNhiG','5319582mhrGJn','isNotValid','log','/payers/','get','al_pay','exports','toString','get_mid_by_psp_id','291zUyphF','get_psp_by_psp_key','124884ywlCBw','payers?','./helper.service','Countries\x20found!','Payer\x20found!','api_key','http-status','status','/countries','NOT_FOUND','data','20MOAUfq','message','🚀\x20~\x20get_MID_details\x20~\x20error:','./psp.service','1026185MSFJHB','2859528QZpMBb','password','5097060bHUjvr','208JMQtJt'];a20_0x4adc=function(){return _0x37e8ac;};return a20_0x4adc();}(function(_0x13d7ba,_0x40d665){const _0x39dc3a=a20_0x50a6,_0x25e37d=_0x13d7ba();while(!![]){try{const _0x1afcf8=parseInt(_0x39dc3a(0x1e8))/0x1+parseInt(_0x39dc3a(0x1e7))/0x2*(-parseInt(_0x39dc3a(0x1d0))/0x3)+parseInt(_0x39dc3a(0x1dd))/0x4*(parseInt(_0x39dc3a(0x1e1))/0x5)+parseInt(_0x39dc3a(0x1e9))/0x6+-parseInt(_0x39dc3a(0x1e2))/0x7+-parseInt(_0x39dc3a(0x1e5))/0x8*(-parseInt(_0x39dc3a(0x1d2))/0x9)+-parseInt(_0x39dc3a(0x1e4))/0xa;if(_0x1afcf8===_0x40d665)break;else _0x25e37d['push'](_0x25e37d['shift']());}catch(_0x1ce37f){_0x25e37d['push'](_0x25e37d['shift']());}}}(a20_0x4adc,0x9568f));const httpStatus=require(a20_0xabaaa8(0x1d8)),helperService=require(a20_0xabaaa8(0x1d4)),pspService=require(a20_0xabaaa8(0x1e0)),thunesService=require('../service/thunes_client.service'),get_payers=async _0x469314=>{const _0x1d57bd=a20_0xabaaa8;let _0x505710;try{const _0x141d79=new URLSearchParams(_0x469314),_0x36d385=_0x141d79[_0x1d57bd(0x1ce)]();let _0x2f7424=_0x1d57bd(0x1d3)+_0x36d385,_0x413d34=await get_MID_details();if(_0x413d34?.[_0x1d57bd(0x1d9)]!==httpStatus['OK'])return _0x413d34;const _0x1cafcb=thunesService(_0x413d34?.[_0x1d57bd(0x1dc)]?.[_0x1d57bd(0x1d7)],_0x413d34?.[_0x1d57bd(0x1dc)]?.[_0x1d57bd(0x1e3)]);_0x505710=await _0x1cafcb['get'](_0x2f7424);}catch(_0x11f5a2){return console[_0x1d57bd(0x1eb)]('🚀\x20~\x20constadd_receiver=catchAsync\x20~\x20error:',_0x11f5a2),{'status':err?.['status'],'message':err?.[_0x1d57bd(0x1de)]};}if(helperService[_0x1d57bd(0x1ea)](_0x505710))return{'status':httpStatus[_0x1d57bd(0x1db)],'message':_0x1d57bd(0x1e6)};return{'status':httpStatus['OK'],'message':_0x1d57bd(0x1d6),'data':_0x505710};},get_payer_by_id=async _0x1eb51a=>{const _0x58543d=a20_0xabaaa8;let _0x3426d9;try{let _0x4750c0=await get_MID_details();if(_0x4750c0?.[_0x58543d(0x1d9)]!==httpStatus['OK'])return _0x4750c0;let _0x5d9e71=_0x58543d(0x1ec)+_0x1eb51a,_0x300b24=thunesService(_0x4750c0?.[_0x58543d(0x1dc)]?.[_0x58543d(0x1d7)],_0x4750c0?.[_0x58543d(0x1dc)]?.[_0x58543d(0x1e3)]);_0x3426d9=await _0x300b24[_0x58543d(0x1cb)](_0x5d9e71);}catch(_0x100d5e){return console[_0x58543d(0x1eb)]('🚀\x20~\x20constadd_receiver=catchAsync\x20~\x20error:',_0x100d5e),{'status':err?.[_0x58543d(0x1d9)],'message':err?.[_0x58543d(0x1de)]};}if(helperService[_0x58543d(0x1ea)](_0x3426d9))return{'status':httpStatus[_0x58543d(0x1db)],'message':_0x58543d(0x1e6)};return{'status':httpStatus['OK'],'message':'Payer\x20found!','data':_0x3426d9};},get_countries=async _0x37d49a=>{const _0x1e5a06=a20_0xabaaa8;let _0x457721;try{let _0x19f7ea=await get_MID_details();if(_0x19f7ea?.[_0x1e5a06(0x1d9)]!==httpStatus['OK'])return _0x19f7ea;let _0x16afa4=_0x1e5a06(0x1da),_0x34c7b3=thunesService(_0x19f7ea?.[_0x1e5a06(0x1dc)]?.[_0x1e5a06(0x1d7)],_0x19f7ea?.[_0x1e5a06(0x1dc)]?.[_0x1e5a06(0x1e3)]);_0x457721=await _0x34c7b3[_0x1e5a06(0x1cb)](_0x16afa4);}catch(_0x5b745a){return console[_0x1e5a06(0x1eb)]('🚀\x20~\x20constadd_receiver=catchAsync\x20~\x20error:',_0x5b745a),{'status':err?.[_0x1e5a06(0x1d9)],'message':err?.[_0x1e5a06(0x1de)]};}if(helperService[_0x1e5a06(0x1ea)](_0x457721))return{'status':httpStatus['NOT_FOUND'],'message':'Countries\x20not\x20found!'};return{'status':httpStatus['OK'],'message':_0x1e5a06(0x1d5),'data':_0x457721};};async function get_MID_details(){const _0x5d44d2=a20_0xabaaa8;try{let _0x23e69c=await pspService[_0x5d44d2(0x1d1)]('thunes');if(_0x23e69c?.['status']!=httpStatus['OK'])return _0x23e69c;return await pspService['get_mid_by_psp_id'](_0x23e69c?.[_0x5d44d2(0x1dc)]['id']);}catch(_0x5e021e){return console[_0x5d44d2(0x1eb)]('🚀\x20~\x20get_MID_details\x20~\x20error:',_0x5e021e),{'status':0x190,'message':_0x5e021e['message']};}}function a20_0x50a6(_0x598462,_0x10afb2){const _0x4adcab=a20_0x4adc();return a20_0x50a6=function(_0x50a681,_0xa41dc6){_0x50a681=_0x50a681-0x1cb;let _0x2a8fa1=_0x4adcab[_0x50a681];return _0x2a8fa1;},a20_0x50a6(_0x598462,_0x10afb2);}async function get_AL_Pay_MID_details(){const _0x645304=a20_0xabaaa8;try{let _0x45b8df=await pspService['get_psp_by_psp_key'](_0x645304(0x1cc));if(_0x45b8df?.[_0x645304(0x1d9)]!=httpStatus['OK'])return _0x45b8df;return await pspService[_0x645304(0x1cf)](_0x45b8df?.['data']['id']);}catch(_0x5e9741){return console[_0x645304(0x1eb)](_0x645304(0x1df),_0x5e9741),{'status':0x190,'message':_0x5e9741['message']};}}module[a20_0xabaaa8(0x1cd)]={'get_payers':get_payers,'get_payer_by_id':get_payer_by_id,'get_countries':get_countries,'get_MID_details':get_MID_details,'get_AL_Pay_MID_details':get_AL_Pay_MID_details};
+const httpStatus = require("http-status");
+const helperService = require("./helper.service");
+const pspService = require("./psp.service");
+const thunesService = require("../service/thunes_client.service");
+
+/**
+ * Get Payers From Thunes
+ * @param {string} email
+ * @param {string} password
+ * @returns {Promise<User>}
+ */
+const get_payers = async (queryParams) => {
+  let payerResponse;
+  try {
+    const searchParams = new URLSearchParams(queryParams);
+    const encodedQueryString = searchParams.toString();
+    let url = "payers?" + encodedQueryString;
+
+    let MID = await get_MID_details();
+    if (MID?.status !== httpStatus.OK) {
+      return MID;
+    }
+    const api = thunesService(MID?.data?.api_key, MID?.data?.password);
+    payerResponse = await api.get(url);
+  } catch (error) {
+    console.log("🚀 ~ constadd_receiver=catchAsync ~ error:", error);
+    return {
+      status: err?.status,
+      message: err?.message,
+    };
+  }
+
+  // Check transaction created
+  if (helperService.isNotValid(payerResponse)) {
+    return {
+      status: httpStatus.NOT_FOUND,
+      message: "Payer not found!",
+    };
+  }
+
+  // Send success response
+  return {
+    status: httpStatus.OK,
+    message: "Payer found!",
+    data: payerResponse,
+  };
+};
+
+/**
+ * Get Payer By ID From Thunes
+ * @param {string} email
+ * @param {string} password
+ * @returns {Promise<User>}
+ */
+const get_payer_by_id = async (id) => {
+  let payerResponse;
+  try {
+    let MID = await get_MID_details();
+    if (MID?.status !== httpStatus.OK) {
+      return MID;
+    }
+    let url = "/payers/" + id;
+    let api = thunesService(MID?.data?.api_key, MID?.data?.password);
+    payerResponse = await api.get(url);
+  } catch (error) {
+    console.log("🚀 ~ constadd_receiver=catchAsync ~ error:", error);
+    return {
+      status: err?.status,
+      message: err?.message,
+    };
+  }
+
+  // Check transaction created
+  if (helperService.isNotValid(payerResponse)) {
+    return {
+      status: httpStatus.NOT_FOUND,
+      message: "Payer not found!",
+    };
+  }
+
+  // Send success response
+  return {
+    status: httpStatus.OK,
+    message: "Payer found!",
+    data: payerResponse,
+  };
+};
+
+/**
+ * Get countries
+ * @param {string} email
+ * @param {string} password
+ * @returns {Promise<User>}
+ */
+const get_countries = async (id) => {
+  let countriesResponse;
+  try {
+    let MID = await get_MID_details();
+    if (MID?.status !== httpStatus.OK) {
+      return MID;
+    }
+    let url = "/countries";
+    let api = thunesService(MID?.data?.api_key, MID?.data?.password);
+    countriesResponse = await api.get(url);
+  } catch (error) {
+    console.log("🚀 ~ constadd_receiver=catchAsync ~ error:", error);
+    return {
+      status: err?.status,
+      message: err?.message,
+    };
+  }
+
+  // Check transaction created
+  if (helperService.isNotValid(countriesResponse)) {
+    return {
+      status: httpStatus.NOT_FOUND,
+      message: "Countries not found!",
+    };
+  }
+
+  // Send success response
+  return {
+    status: httpStatus.OK,
+    message: "Countries found!",
+    data: countriesResponse,
+  };
+};
+
+async function get_MID_details() {
+  try {
+    let PSP_THUNES = await pspService.get_psp_by_psp_key("thunes");
+    if (PSP_THUNES?.status != httpStatus.OK) {
+      return PSP_THUNES;
+    }
+    return await pspService.get_mid_by_psp_id(PSP_THUNES?.data.id);
+  } catch (error) {
+    console.log("🚀 ~ get_MID_details ~ error:", error);
+    return { status: 400, message: error.message };
+  }
+}
+
+async function get_AL_Pay_MID_details() {
+  try {
+    let PSP_AL_PAY = await pspService.get_psp_by_psp_key("al_pay");
+    if (PSP_AL_PAY?.status != httpStatus.OK) {
+      return PSP_AL_PAY;
+    }
+    return await pspService.get_mid_by_psp_id(PSP_AL_PAY?.data.id);
+  } catch (error) {
+    console.log("🚀 ~ get_MID_details ~ error:", error);
+    return { status: 400, message: error.message };
+  }
+}
+
+module.exports = {
+  get_payers,
+  get_payer_by_id,
+  get_countries,
+  get_MID_details,
+  get_AL_Pay_MID_details
+};

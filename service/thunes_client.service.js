@@ -1,1 +1,61 @@
-const a34_0x177b64=a34_0x2878;function a34_0x3e02(){const _0x1ef0a4=['live_url','2938422dnKYTH','request','30547872MDwJtf','error','data','length','700169REWRGV','from','post','440349iYVIXY','delete','axios','url','171927ejrULN','use','test_url','8548940iDmYbR','create','base64','../config/urls','102ZLcwjP','thunes','getHeaders','Unknown\x20error','reject','headers','4AomfSh','response','message','2793272rHcrYW','[Request]\x20','put','env','PAYOUT_MODE','errors','get','toString','interceptors'];a34_0x3e02=function(){return _0x1ef0a4;};return a34_0x3e02();}(function(_0x4d7460,_0x200b7f){const _0x5899c2=a34_0x2878,_0x3dca82=_0x4d7460();while(!![]){try{const _0x173b98=-parseInt(_0x5899c2(0x127))/0x1+-parseInt(_0x5899c2(0x121))/0x2+-parseInt(_0x5899c2(0x12e))/0x3+parseInt(_0x5899c2(0x114))/0x4*(-parseInt(_0x5899c2(0x131))/0x5)+-parseInt(_0x5899c2(0x10e))/0x6*(-parseInt(_0x5899c2(0x12a))/0x7)+parseInt(_0x5899c2(0x117))/0x8+parseInt(_0x5899c2(0x123))/0x9;if(_0x173b98===_0x200b7f)break;else _0x3dca82['push'](_0x3dca82['shift']());}catch(_0x2b41a1){_0x3dca82['push'](_0x3dca82['shift']());}}}(a34_0x3e02,0xd5f15));function a34_0x2878(_0xecff08,_0x4182fb){const _0x3e0222=a34_0x3e02();return a34_0x2878=function(_0x287812,_0x3e0d45){_0x287812=_0x287812-0x10b;let _0x146863=_0x3e0222[_0x287812];return _0x146863;},a34_0x2878(_0xecff08,_0x4182fb);}const axios=require(a34_0x177b64(0x12c)),urls=require(a34_0x177b64(0x10d));function createApiClient(_0x5bcc25,_0x505e71){const _0x1b5282=a34_0x177b64,_0xae202e=axios[_0x1b5282(0x10b)]({'baseURL':process[_0x1b5282(0x11a)][_0x1b5282(0x11b)]==='test'?urls[_0x1b5282(0x10f)][_0x1b5282(0x130)]:urls[_0x1b5282(0x10f)][_0x1b5282(0x120)],'timeout':0x4e20,'headers':{'Authorization':'Basic\x20'+Buffer[_0x1b5282(0x128)](_0x5bcc25+':'+_0x505e71)[_0x1b5282(0x11e)](_0x1b5282(0x10c))}});return _0xae202e['interceptors'][_0x1b5282(0x122)][_0x1b5282(0x12f)](_0xf8d345=>{const _0x235d5a=_0x1b5282;return console['log'](_0x235d5a(0x118)+_0xf8d345['method']['toUpperCase']()+'\x20'+_0xf8d345[_0x235d5a(0x12d)]),_0xf8d345;},_0x12b869=>Promise[_0x1b5282(0x112)](_0x12b869)),_0xae202e[_0x1b5282(0x11f)][_0x1b5282(0x115)][_0x1b5282(0x12f)](_0x5f3b65=>_0x5f3b65[_0x1b5282(0x125)],_0x3e0362=>{const _0x17a579=_0x1b5282;console[_0x17a579(0x124)]('[Response\x20Error]',_0x3e0362?.['response']?.[_0x17a579(0x125)]||_0x3e0362['message']);if(_0x3e0362?.['response']?.['data']?.['errors']?.[_0x17a579(0x126)]>0x0){const _0x25f25d=_0x3e0362['response']['data'][_0x17a579(0x11c)][0x0];return Promise[_0x17a579(0x112)]({'status':_0x25f25d['code'],'message':_0x25f25d[_0x17a579(0x116)]});}return Promise[_0x17a579(0x112)]({'status':_0x3e0362[_0x17a579(0x115)]?.['status']||0x1f4,'message':_0x3e0362[_0x17a579(0x116)]||_0x17a579(0x111)});}),{'get':(_0x236112,_0x1b8b0a={})=>_0xae202e[_0x1b5282(0x11d)](_0x236112,_0x1b8b0a),'post':(_0x2588ed,_0x501a13,_0x5a8f61={})=>_0xae202e[_0x1b5282(0x129)](_0x2588ed,_0x501a13,_0x5a8f61),'put':(_0x5619c6,_0x116e43,_0x55d2d4={})=>_0xae202e[_0x1b5282(0x119)](_0x5619c6,_0x116e43,_0x55d2d4),'delete':(_0x186266,_0x4c0caf={})=>_0xae202e[_0x1b5282(0x12b)](_0x186266,_0x4c0caf),'postMultipart':(_0x2f8d71,_0x5b8786,_0x5c86fc={})=>{const _0x23480c=_0x1b5282;return _0xae202e[_0x23480c(0x129)](_0x2f8d71,_0x5b8786,{..._0x5c86fc,'headers':{..._0x5b8786[_0x23480c(0x110)](),..._0x5c86fc[_0x23480c(0x113)]},'maxBodyLength':Infinity,'maxContentLength':Infinity});}};}module['exports']=createApiClient;
+const axios = require('axios');
+const urls = require('../config/urls');
+
+function createApiClient(username, password) {
+  const api = axios.create({
+    baseURL: process.env.PAYOUT_MODE === "test" ? urls.thunes.test_url : urls.thunes.live_url,
+    timeout: 20000,
+    headers: {
+      'Authorization': 'Basic ' + Buffer.from(`${username}:${password}`).toString('base64'),
+    },
+  });
+
+  api.interceptors.request.use(
+    config => {
+      console.log(`[Request] ${config.method.toUpperCase()} ${config.url}`);
+      return config;
+    },
+    error => Promise.reject(error)
+  );
+
+  api.interceptors.response.use(
+    response => response.data,
+    error => {
+      console.error('[Response Error]', error?.response?.data || error.message);
+
+      if (error?.response?.data?.errors?.length > 0) {
+        const firstError = error.response.data.errors[0];
+        return Promise.reject({
+          status: firstError.code,
+          message: firstError.message,
+        });
+      }
+
+      return Promise.reject({
+        status: error.response?.status || 500,
+        message: error.message || 'Unknown error',
+      });
+    }
+  );
+
+  return {
+    get: (url, config = {}) => api.get(url, config),
+    post: (url, data, config = {}) => api.post(url, data, config),
+    put: (url, data, config = {}) => api.put(url, data, config),
+    delete: (url, config = {}) => api.delete(url, config),
+
+    postMultipart: (url, formData, config = {}) => {
+      return api.post(url, formData, {
+        ...config,
+        headers: {
+          ...formData.getHeaders(), // Sets correct multipart/form-data boundary
+          ...config.headers,
+        },
+        maxBodyLength: Infinity, // Prevents Axios from limiting body size
+        maxContentLength: Infinity, // Just in case
+      });
+    },
+  };
+}
+
+module.exports = createApiClient;

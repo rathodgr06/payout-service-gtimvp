@@ -1,1 +1,200 @@
-const a3_0x125cbe=a3_0x2b40;function a3_0x1582(){const _0x45f49b=['test_url','Headers:','Status\x20Error:','base64','1210DVcrKe','24561nlMvia','NameEnquiry\x20Data:','env','NameEnquiry\x20Error:','Using\x20Token:','api/SendMoney/SendMoneyService','statusDesc','response','error','16tcWrPy','2574096iGedNT','🚀\x20~\x20getAccessToken\x20~\x20res.data:','alpay','username','30hYIeXU','PAYOUT_MODE','Transfer\x20Status:','toString','token','213985ncezoF','153924qULZWl','test','statusCode','api/TransactionStatus/TransactionStatusService','400626FNaQSs','Using\x20Base\x20URL:','Basic\x20','message','🚀\x20~\x20getTransferStatus\x20~\x20transactionId:','12aWixZx','Token\x20Error:','/api/Authentication/Login','173642bQOrWL','Bearer\x20','live_url','Initiating\x20NameEnquiry\x20with\x20transaction\x20ID:','exports','NameEnquiry\x20initiated,\x20Transaction\x20ID:','NameEnquiry\x20Response:','uuid','axios','Transfer\x20Error:','post','Transfer\x20Data:','application/json','password','data','stringify','from','Transfer\x20Response:','62590oSZOXV','log'];a3_0x1582=function(){return _0x45f49b;};return a3_0x1582();}(function(_0xd6a615,_0x61e196){const _0x1e8aef=a3_0x2b40,_0x52f796=_0xd6a615();while(!![]){try{const _0x2b4d99=-parseInt(_0x1e8aef(0x203))/0x1+-parseInt(_0x1e8aef(0x1f7))/0x2+parseInt(_0x1e8aef(0x1fb))/0x3*(parseInt(_0x1e8aef(0x200))/0x4)+-parseInt(_0x1e8aef(0x1f6))/0x5*(parseInt(_0x1e8aef(0x22a))/0x6)+-parseInt(_0x1e8aef(0x226))/0x7+parseInt(_0x1e8aef(0x225))/0x8*(parseInt(_0x1e8aef(0x21c))/0x9)+parseInt(_0x1e8aef(0x21b))/0xa*(parseInt(_0x1e8aef(0x215))/0xb);if(_0x2b4d99===_0x61e196)break;else _0x52f796['push'](_0x52f796['shift']());}catch(_0x3ca648){_0x52f796['push'](_0x52f796['shift']());}}}(a3_0x1582,0x40071));const axios=require(a3_0x125cbe(0x20b)),urls=require('../config/urls');async function getAccessToken(_0x498485){const _0x5f311d=a3_0x125cbe;console[_0x5f311d(0x216)]('🚀\x20~\x20getAccessToken\x20~\x20payload:',_0x498485);try{const _0x2d2011=await axios[_0x5f311d(0x20d)](process[_0x5f311d(0x21e)][_0x5f311d(0x1f2)]==_0x5f311d(0x1f8)?urls['alpay'][_0x5f311d(0x217)]+'/api/Authentication/Login':urls[_0x5f311d(0x228)][_0x5f311d(0x205)]+_0x5f311d(0x202),_0x498485,{'headers':{'Authorization':_0x5f311d(0x1fd)+Buffer[_0x5f311d(0x213)](_0x498485[_0x5f311d(0x229)]+':'+_0x498485[_0x5f311d(0x210)])[_0x5f311d(0x1f4)](_0x5f311d(0x21a))}});return console[_0x5f311d(0x216)](_0x5f311d(0x227),_0x2d2011[_0x5f311d(0x211)]),_0x2d2011[_0x5f311d(0x211)][_0x5f311d(0x1f5)];}catch(_0x68491a){return console[_0x5f311d(0x224)](_0x5f311d(0x201),_0x68491a[_0x5f311d(0x223)]?.[_0x5f311d(0x211)]||_0x68491a[_0x5f311d(0x1fe)]),![];}}async function nameEnquiryService(_0x3ae648,_0x39a181){const _0x491948=a3_0x125cbe,_0x4b4418=uuidv4(),_0x4304f1='api/NameEnquiry/NameEnquiryService';try{console[_0x491948(0x216)](_0x491948(0x206),_0x4b4418),console[_0x491948(0x216)](_0x491948(0x21d),JSON[_0x491948(0x212)](_0x39a181)),console[_0x491948(0x216)](_0x491948(0x220),_0x3ae648),console['log'](_0x491948(0x1fc),process[_0x491948(0x21e)]['PAYOUT_MODE']==_0x491948(0x1f8)?urls[_0x491948(0x228)][_0x491948(0x217)]+'/'+_0x4304f1:urls['alpay'][_0x491948(0x205)]+'/'+_0x4304f1);let _0x206963={'Authorization':'Bearer\x20'+_0x3ae648,'Content-Type':'application/json'};console[_0x491948(0x216)](_0x491948(0x218),_0x206963);const _0x4e100d=await axios[_0x491948(0x20d)](process['env'][_0x491948(0x1f2)]==_0x491948(0x1f8)?urls[_0x491948(0x228)][_0x491948(0x217)]+'/'+_0x4304f1:urls[_0x491948(0x228)][_0x491948(0x205)]+'/'+_0x4304f1,_0x39a181,{'headers':{'Authorization':_0x491948(0x204)+_0x3ae648,'Content-Type':'application/json'}});return console[_0x491948(0x216)](_0x491948(0x208),_0x4b4418),console[_0x491948(0x216)](_0x491948(0x209),_0x4e100d[_0x491948(0x211)]),_0x4e100d?.[_0x491948(0x211)][_0x491948(0x1f9)]!=0xc8?{'status':0x190,'message':_0x4e100d?.['data']?.['statusDesc']}:{'status':0xc8,'message':_0x4e100d?.['data']?.[_0x491948(0x222)],'data':_0x4e100d['data']?.[_0x491948(0x211)]};}catch(_0x3e7e83){console['log'](_0x3e7e83),console[_0x491948(0x224)](_0x491948(0x21f),_0x3e7e83?.[_0x491948(0x223)]?.[_0x491948(0x211)]||_0x3e7e83?.[_0x491948(0x1fe)]);let _0x2a933a=_0x3e7e83?.[_0x491948(0x1fe)];return _0x3e7e83?.['response']?.[_0x491948(0x211)]&&(_0x2a933a=_0x3e7e83?.[_0x491948(0x223)]?.[_0x491948(0x211)]?.[_0x491948(0x222)]),{'status':0x190,'message':_0x2a933a,'data':null};}}const {v4:uuidv4}=require(a3_0x125cbe(0x20a));async function initiateLocalTransfer(_0x26673f,_0x4aca26){const _0x281526=a3_0x125cbe,_0x213151=_0x281526(0x221);try{console[_0x281526(0x216)]('Transfer\x20Data:',JSON['stringify'](_0x4aca26)),console[_0x281526(0x216)](_0x281526(0x220),_0x26673f),console[_0x281526(0x216)](_0x281526(0x1fc),process['env'][_0x281526(0x1f2)]==_0x281526(0x1f8)?urls[_0x281526(0x228)][_0x281526(0x217)]+'/'+_0x213151:urls['alpay'][_0x281526(0x205)]+'/'+_0x213151);let _0x42f9e5={'Authorization':_0x281526(0x204)+_0x26673f,'Content-Type':_0x281526(0x20f)};console['log'](_0x281526(0x218),_0x42f9e5);const _0x57d0b6=await axios[_0x281526(0x20d)](process[_0x281526(0x21e)]['PAYOUT_MODE']==_0x281526(0x1f8)?urls[_0x281526(0x228)][_0x281526(0x217)]+'/'+_0x213151:urls['alpay'][_0x281526(0x205)]+'/'+_0x213151,_0x4aca26,{'headers':{'Authorization':_0x281526(0x204)+_0x26673f,'Content-Type':'application/json'}});return console[_0x281526(0x216)](_0x281526(0x214),_0x57d0b6[_0x281526(0x211)]),_0x57d0b6?.[_0x281526(0x211)]['statusCode']==0xca||_0x57d0b6?.[_0x281526(0x211)][_0x281526(0x1f9)]==0xc8?{'status':0xc8,'message':_0x57d0b6?.['data']?.[_0x281526(0x222)],'data':_0x57d0b6[_0x281526(0x211)]?.[_0x281526(0x211)]}:{'status':0x190,'message':_0x57d0b6?.[_0x281526(0x211)]?.['statusDesc']};}catch(_0x34f0df){console[_0x281526(0x216)](_0x34f0df),console[_0x281526(0x224)]('Transfer\x20Error:',_0x34f0df?.[_0x281526(0x223)]?.[_0x281526(0x211)]||_0x34f0df?.[_0x281526(0x1fe)]);let _0x154e34=_0x34f0df?.['message'];return _0x34f0df?.[_0x281526(0x223)]?.[_0x281526(0x211)]&&(_0x154e34=_0x34f0df?.[_0x281526(0x223)]?.['data']?.['statusDesc']),{'status':0x190,'message':_0x154e34,'data':null};}}async function initiateInternationalTransfer(_0x50063f,_0x2c2c47){const _0x3d8de1=a3_0x125cbe,_0x146493='api/Remittance/RemittanceService';try{console['log'](_0x3d8de1(0x20e),JSON[_0x3d8de1(0x212)](_0x2c2c47)),console[_0x3d8de1(0x216)]('Using\x20Token:',_0x50063f),console[_0x3d8de1(0x216)](_0x3d8de1(0x1fc),process[_0x3d8de1(0x21e)]['PAYOUT_MODE']==_0x3d8de1(0x1f8)?urls[_0x3d8de1(0x228)][_0x3d8de1(0x217)]+'/'+_0x146493:urls[_0x3d8de1(0x228)][_0x3d8de1(0x205)]+'/'+_0x146493);let _0x243b2f={'Authorization':'Bearer\x20'+_0x50063f,'Content-Type':'application/json'};console['log']('Headers:',_0x243b2f);const _0x13de2e=await axios[_0x3d8de1(0x20d)](process[_0x3d8de1(0x21e)]['PAYOUT_MODE']=='test'?urls[_0x3d8de1(0x228)][_0x3d8de1(0x217)]+'/'+_0x146493:urls[_0x3d8de1(0x228)][_0x3d8de1(0x205)]+'/'+_0x146493,_0x2c2c47,{'headers':{'Authorization':_0x3d8de1(0x204)+_0x50063f,'Content-Type':_0x3d8de1(0x20f)}});return console[_0x3d8de1(0x216)](_0x3d8de1(0x214),_0x13de2e[_0x3d8de1(0x211)]),_0x13de2e?.['data'][_0x3d8de1(0x1f9)]==0xca||_0x13de2e?.[_0x3d8de1(0x211)][_0x3d8de1(0x1f9)]==0xc8?{'status':0xc8,'message':_0x13de2e?.[_0x3d8de1(0x211)]?.['statusDesc'],'data':_0x13de2e[_0x3d8de1(0x211)]?.['data']}:{'status':0x190,'message':_0x13de2e?.['data']?.[_0x3d8de1(0x222)]};}catch(_0x141800){console[_0x3d8de1(0x216)](_0x141800),console['error'](_0x3d8de1(0x20c),_0x141800?.[_0x3d8de1(0x223)]?.[_0x3d8de1(0x211)]||_0x141800?.[_0x3d8de1(0x1fe)]);let _0x5e4d59=_0x141800?.[_0x3d8de1(0x1fe)];return _0x141800?.[_0x3d8de1(0x223)]?.[_0x3d8de1(0x211)]&&(_0x5e4d59=_0x141800?.[_0x3d8de1(0x223)]?.[_0x3d8de1(0x211)]?.[_0x3d8de1(0x222)]),{'status':0x190,'message':_0x5e4d59,'data':null};}}function a3_0x2b40(_0x53c262,_0x4dd294){const _0x15828a=a3_0x1582();return a3_0x2b40=function(_0x2b405a,_0x16523d){_0x2b405a=_0x2b405a-0x1f2;let _0x3a7c21=_0x15828a[_0x2b405a];return _0x3a7c21;},a3_0x2b40(_0x53c262,_0x4dd294);}async function getTransferStatus(_0x453736,_0x216fb9,_0x454316){const _0x51eae8=a3_0x125cbe;console[_0x51eae8(0x216)](_0x51eae8(0x1ff),_0x216fb9);try{const _0x1dd1b9=_0x51eae8(0x1fa),_0x1638f9=await axios[_0x51eae8(0x20d)](process[_0x51eae8(0x21e)]['PAYOUT_MODE']=='test'?urls[_0x51eae8(0x228)]['test_url']+'/'+_0x1dd1b9:urls['alpay'][_0x51eae8(0x205)]+'/'+_0x1dd1b9,{'transactionId':_0x216fb9,'transactionType':_0x454316},{'headers':{'Authorization':_0x51eae8(0x204)+_0x453736}});return console[_0x51eae8(0x216)](_0x51eae8(0x1f3),_0x1638f9[_0x51eae8(0x211)]),_0x1638f9?.[_0x51eae8(0x211)][_0x51eae8(0x1f9)]!=0xc8?{'status':0x190,'message':_0x1638f9?.['data']?.[_0x51eae8(0x222)]}:{'status':0xc8,'message':_0x1638f9?.[_0x51eae8(0x211)]?.[_0x51eae8(0x222)],'data':_0x1638f9[_0x51eae8(0x211)]?.[_0x51eae8(0x211)]};}catch(_0x5db2c3){console[_0x51eae8(0x224)](_0x51eae8(0x219),_0x5db2c3['response']?.[_0x51eae8(0x211)]||_0x5db2c3[_0x51eae8(0x1fe)]);let _0x39a6e9=_0x5db2c3?.['message'];return _0x5db2c3?.['response']?.['data']&&(_0x39a6e9=_0x5db2c3?.[_0x51eae8(0x223)]?.['data']?.[_0x51eae8(0x222)]),{'status':0x190,'message':_0x39a6e9,'data':null};}}module[a3_0x125cbe(0x207)]={'getAccessToken':getAccessToken,'nameEnquiryService':nameEnquiryService,'initiateLocalTransfer':initiateLocalTransfer,'initiateInternationalTransfer':initiateInternationalTransfer,'getTransferStatus':getTransferStatus};
+const axios = require('axios');
+const urls = require('../config/urls');
+
+async function getAccessToken(payload) {
+  console.log("🚀 ~ getAccessToken ~ payload:", payload)
+  try {
+    const res = await axios.post(
+      process.env.PAYOUT_MODE == "test"
+        ? `${urls.alpay.test_url}/api/Authentication/Login`
+        : `${urls.alpay.live_url}/api/Authentication/Login`,
+      payload,
+      {
+        headers: {
+          Authorization:
+            "Basic " + Buffer.from(`${payload.username}:${payload.password}`).toString("base64"),
+        },
+      }
+    );
+    console.log("🚀 ~ getAccessToken ~ res.data:", res.data)
+    return res.data.token;
+  } catch (err) {
+    console.error('Token Error:', err.response?.data || err.message);
+    return false
+  }
+}
+
+async function nameEnquiryService(token, data) {
+  const transaction_id = uuidv4(); // Generate UUID
+  const end_url = "api/NameEnquiry/NameEnquiryService";
+  try {
+    console.log('Initiating NameEnquiry with transaction ID:', transaction_id);
+    console.log('NameEnquiry Data:', JSON.stringify(data));
+    console.log('Using Token:', token);
+    console.log('Using Base URL:', process.env.PAYOUT_MODE=="test"?`${urls.alpay.test_url}/${end_url}`:`${urls.alpay.live_url}/${end_url}`,
+ );
+    let headers =  {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        };
+    console.log('Headers:', headers);    
+
+  
+    const res = await axios.post(
+      process.env.PAYOUT_MODE=="test"?`${urls.alpay.test_url}/${end_url}`:`${urls.alpay.live_url}/${end_url}`,
+      data,
+      {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    console.log('NameEnquiry initiated, Transaction ID:', transaction_id);
+    console.log('NameEnquiry Response:', res.data);
+
+    // {"statusCode":"200","statusDesc":"SUCCESSFUL","data":{"message":"Request proccessed successfully","transactionId":"NE1759324415","accountName":"Mark Otu Quartey","accountNumber":"233558287508"}}
+    if (res?.data.statusCode != 200) {
+      return {status: 400, message: res?.data?.statusDesc};
+    }else{
+      return {status: 200, message: res?.data?.statusDesc, data: res.data?.data} ;
+    }
+  } catch (err) {
+    console.log(err)
+    console.error('NameEnquiry Error:', err?.response?.data || err?.message);
+    let message = err?.message;
+    if (err?.response?.data) {
+      message = err?.response?.data?.statusDesc;
+    }
+    return {status: 400, message: message, data: null} ;
+  }
+}
+
+const { v4: uuidv4 } = require('uuid');
+
+async function initiateLocalTransfer(token, data) {
+  const end_url = "api/SendMoney/SendMoneyService";
+  try {
+    console.log('Transfer Data:', JSON.stringify(data));
+    console.log('Using Token:', token);
+    console.log('Using Base URL:', process.env.PAYOUT_MODE=="test"?`${urls.alpay.test_url}/${end_url}`:`${urls.alpay.live_url}/${end_url}`,
+ );
+    let headers =  {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        };
+    console.log('Headers:', headers);    
+
+  
+    const res = await axios.post(
+      process.env.PAYOUT_MODE=="test"?`${urls.alpay.test_url}/${end_url}`:`${urls.alpay.live_url}/${end_url}`,
+      data,
+      {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    
+    console.log('Transfer Response:', res.data);
+    if (res?.data.statusCode == 202 || res?.data.statusCode == 200) {
+      return {status: 200, message: res?.data?.statusDesc, data: res.data?.data} ;
+    }else{
+      return {status: 400, message: res?.data?.statusDesc};
+    }
+  } catch (err) {
+    console.log(err)
+    console.error('Transfer Error:', err?.response?.data || err?.message);
+    let message = err?.message;
+    if (err?.response?.data) {
+      message = err?.response?.data?.statusDesc;
+    }
+    return {status: 400, message: message, data: null} ;
+  }
+}
+
+async function initiateInternationalTransfer(token, data) {
+  const end_url = "api/Remittance/RemittanceService";
+  try {
+    console.log('Transfer Data:', JSON.stringify(data));
+    console.log('Using Token:', token);
+    console.log('Using Base URL:', process.env.PAYOUT_MODE=="test"?`${urls.alpay.test_url}/${end_url}`:`${urls.alpay.live_url}/${end_url}`,
+ );
+    let headers =  {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        };
+    console.log('Headers:', headers);    
+
+  
+    const res = await axios.post(
+      process.env.PAYOUT_MODE=="test"?`${urls.alpay.test_url}/${end_url}`:`${urls.alpay.live_url}/${end_url}`,
+      data,
+      {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    
+    console.log('Transfer Response:', res.data);
+    if (res?.data.statusCode == 202 || res?.data.statusCode == 200) {
+      return {status: 200, message: res?.data?.statusDesc, data: res.data?.data} ;
+    }else{
+      return {status: 400, message: res?.data?.statusDesc};
+    }
+  } catch (err) {
+    console.log(err)
+    console.error('Transfer Error:', err?.response?.data || err?.message);
+    let message = err?.message;
+    if (err?.response?.data) {
+      message = err?.response?.data?.statusDesc;
+    }
+    return {status: 400, message: message, data: null} ;
+  }
+}
+
+async function getTransferStatus(token, transactionId, transactionType) {
+  console.log("🚀 ~ getTransferStatus ~ transactionId:", transactionId)
+  try {
+    const end_url = "api/TransactionStatus/TransactionStatusService";
+    const res = await axios.post(
+      process.env.PAYOUT_MODE == "test"
+        ? `${urls.alpay.test_url}/${end_url}`
+        : `${urls.alpay.live_url}/${end_url}`,
+      {
+        transactionId: transactionId,
+        transactionType: transactionType, //CREDIT or DEBIT
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log('Transfer Status:', res.data);
+    if (res?.data.statusCode != 200) {
+      return {status: 400, message: res?.data?.statusDesc};
+    }else{
+      return {status: 200, message: res?.data?.statusDesc, data: res.data?.data} ;
+    }
+  } catch (err) {
+    console.error('Status Error:', err.response?.data || err.message);
+    let message = err?.message;
+    if (err?.response?.data) {
+      message = err?.response?.data?.statusDesc;
+    }
+    return {status: 400, message: message, data: null} ;
+  }
+}
+
+
+module.exports = {
+  getAccessToken,
+  nameEnquiryService,
+  initiateLocalTransfer,
+  initiateInternationalTransfer,
+  getTransferStatus,
+};

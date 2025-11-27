@@ -1,1 +1,51 @@
-const a4_0x4a6eb8=a4_0x394f;function a4_0x394f(_0x2dd69c,_0x39511a){const _0x46567b=a4_0x4656();return a4_0x394f=function(_0x394ff0,_0x5e9555){_0x394ff0=_0x394ff0-0x15f;let _0x5d91d4=_0x46567b[_0x394ff0];return _0x5d91d4;},a4_0x394f(_0x2dd69c,_0x39511a);}function a4_0x4656(){const _0x1f16b1=['[Request]\x20','errors','code','121ArdrOf','length','8gguhQf','[Response\x20Error]','error','log','4nqNjeS','2130507cHejRn','reject','interceptors','url','application/json','431604MwuySW','create','response','toUpperCase','6354955kNVZez','3679143IBtQtB','use','axios','exports','status','method','message','3173hngOOU','request','86xnKogs','7013754mLdGcf','data','6465450OVHCcj','7rBQeiZ'];a4_0x4656=function(){return _0x1f16b1;};return a4_0x4656();}(function(_0x4063db,_0x1df0f8){const _0x253f88=a4_0x394f,_0x24bc04=_0x4063db();while(!![]){try{const _0x2330f7=-parseInt(_0x253f88(0x174))/0x1*(-parseInt(_0x253f88(0x176))/0x2)+parseInt(_0x253f88(0x16d))/0x3+parseInt(_0x253f88(0x162))/0x4*(parseInt(_0x253f88(0x16c))/0x5)+-parseInt(_0x253f88(0x177))/0x6*(parseInt(_0x253f88(0x17a))/0x7)+-parseInt(_0x253f88(0x180))/0x8*(-parseInt(_0x253f88(0x163))/0x9)+-parseInt(_0x253f88(0x179))/0xa+parseInt(_0x253f88(0x17e))/0xb*(-parseInt(_0x253f88(0x168))/0xc);if(_0x2330f7===_0x1df0f8)break;else _0x24bc04['push'](_0x24bc04['shift']());}catch(_0x27d899){_0x24bc04['push'](_0x24bc04['shift']());}}}(a4_0x4656,0xa0fc1));const axios=require(a4_0x4a6eb8(0x16f));function createApiClient(){const _0x242c08=a4_0x4a6eb8,_0x513bee=axios[_0x242c08(0x169)]({'timeout':0x4e20,'headers':{'Content-Type':_0x242c08(0x167)}});return _0x513bee[_0x242c08(0x165)][_0x242c08(0x175)][_0x242c08(0x16e)](_0x1ea826=>{const _0x114625=_0x242c08;return console[_0x114625(0x161)](_0x114625(0x17b)+_0x1ea826[_0x114625(0x172)][_0x114625(0x16b)]()+'\x20'+_0x1ea826[_0x114625(0x166)]),_0x1ea826;},_0x3955bc=>Promise[_0x242c08(0x164)](_0x3955bc)),_0x513bee['interceptors']['response'][_0x242c08(0x16e)](_0x29492f=>_0x29492f[_0x242c08(0x178)],_0x46a850=>{const _0x2029df=_0x242c08;console[_0x2029df(0x160)](_0x2029df(0x15f),_0x46a850?.[_0x2029df(0x16a)]?.[_0x2029df(0x178)]||_0x46a850[_0x2029df(0x173)]);if(_0x46a850?.[_0x2029df(0x16a)]?.['data']?.[_0x2029df(0x17c)]?.[_0x2029df(0x17f)]>0x0){const _0x474581=_0x46a850[_0x2029df(0x16a)][_0x2029df(0x178)][_0x2029df(0x17c)][0x0];return Promise[_0x2029df(0x164)]({'status':_0x474581[_0x2029df(0x17d)],'message':_0x474581[_0x2029df(0x173)]});}return Promise[_0x2029df(0x164)]({'status':_0x46a850[_0x2029df(0x16a)]?.[_0x2029df(0x171)]||0x1f4,'message':_0x46a850[_0x2029df(0x173)]||'Unknown\x20error'});}),{'get':(_0xaff584,_0x719b66={})=>_0x513bee['get'](_0xaff584,_0x719b66),'post':(_0x1703bc,_0x434c13,_0x2e2c4e={})=>_0x513bee['post'](_0x1703bc,_0x434c13,_0x2e2c4e),'put':(_0x550cb3,_0x4516c4,_0x6a4e57={})=>_0x513bee['put'](_0x550cb3,_0x4516c4,_0x6a4e57),'delete':(_0x2e4daa,_0x2c24c3={})=>_0x513bee['delete'](_0x2e4daa,_0x2c24c3)};}module[a4_0x4a6eb8(0x170)]=createApiClient;
+const axios = require('axios');
+
+function createApiClient() {
+  // Create an Axios instanceaa
+  const api = axios.create({
+    timeout: 20000,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  // Request Interceptor
+  api.interceptors.request.use(
+    config => {
+      console.log(`[Request] ${config.method.toUpperCase()} ${config.url}`);
+      return config;
+    },
+    error => Promise.reject(error)
+  );
+
+  // Response Interceptor
+  api.interceptors.response.use(
+    response => response.data,
+    error => {
+      console.error('[Response Error]', error?.response?.data || error.message);
+
+      if (error?.response?.data?.errors?.length > 0) {
+        const firstError = error.response.data.errors[0];
+        return Promise.reject({
+          status: firstError.code,
+          message: firstError.message,
+        });
+      }
+
+      return Promise.reject({
+        status: error.response?.status || 500,
+        message: error.message || 'Unknown error',
+      });
+    }
+  );
+
+  // Return API methods bound to this instance
+  return {
+    get: (url, config = {}) => api.get(url, config),
+    post: (url, data, config = {}) => api.post(url, data, config),
+    put: (url, data, config = {}) => api.put(url, data, config),
+    delete: (url, config = {}) => api.delete(url, config),
+  };
+}
+
+module.exports = createApiClient;

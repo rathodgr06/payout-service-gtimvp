@@ -1,1 +1,157 @@
-function a25_0x4c16(){const _0x1b6a9d=['18DfOikA','active','Error\x20fetching\x20payout\x20schedule\x20plan:\x20','2qBVXwV','error','No\x20payout\x20schedule\x20plan\x20found\x20or\x20not\x20updated','570794MIrVlB','Payout\x20schedule\x20plan\x20fetched\x20successfully','Error\x20finding\x20or\x20applying\x20payout\x20schedule\x20plan:','findOrCreate','../models','Payout\x20schedule\x20plan\x20already\x20applied','deleted','BAD_REQUEST','638MxVkJd','payout_schedule_master','3516648wIbwGu','33270cJLafp','546TXTnLS','super_merchant_id','update','exports','updated_at','sub_merchant_id','INTERNAL_SERVER_ERROR','Update\x20Error:','created_at','3688845RnQROZ','383206ykkXCU','73092jBAmMJ','774729wdMdwC','Payout\x20schedule\x20plan\x20not\x20applied','payout_schedule_items','is_default','Error\x20fetching\x20payout\x20schedule\x20plan:','Payout\x20schedule\x20plan\x20applied\x20successfully','plan_id','4yJfxGL','message','Payout\x20schedule\x20plan\x20removed','NOT_FOUND','42XhmAfo','payout_schedule_plans','http-status','master_plan_id'];a25_0x4c16=function(){return _0x1b6a9d;};return a25_0x4c16();}const a25_0x5a68f7=a25_0x14d4;(function(_0x2e8622,_0x2e3440){const _0x42c5bb=a25_0x14d4,_0x27abb4=_0x2e8622();while(!![]){try{const _0x118f04=parseInt(_0x42c5bb(0x1b3))/0x1*(-parseInt(_0x42c5bb(0x19a))/0x2)+-parseInt(_0x42c5bb(0x1b5))/0x3*(-parseInt(_0x42c5bb(0x18f))/0x4)+parseInt(_0x42c5bb(0x1b2))/0x5+parseInt(_0x42c5bb(0x193))/0x6*(-parseInt(_0x42c5bb(0x19d))/0x7)+parseInt(_0x42c5bb(0x1a7))/0x8*(parseInt(_0x42c5bb(0x197))/0x9)+parseInt(_0x42c5bb(0x1a8))/0xa*(-parseInt(_0x42c5bb(0x1a5))/0xb)+-parseInt(_0x42c5bb(0x1b4))/0xc*(parseInt(_0x42c5bb(0x1a9))/0xd);if(_0x118f04===_0x2e3440)break;else _0x27abb4['push'](_0x27abb4['shift']());}catch(_0xed7a77){_0x27abb4['push'](_0x27abb4['shift']());}}}(a25_0x4c16,0x73542));function a25_0x14d4(_0x14d09d,_0x417b1c){const _0x4c16d6=a25_0x4c16();return a25_0x14d4=function(_0x14d467,_0x1e4f8f){_0x14d467=_0x14d467-0x189;let _0x4881fb=_0x4c16d6[_0x14d467];return _0x4881fb;},a25_0x14d4(_0x14d09d,_0x417b1c);}const httpStatus=require(a25_0x5a68f7(0x195)),db=require(a25_0x5a68f7(0x1a1)),PayoutScheduleMasters=db[a25_0x5a68f7(0x1a6)],PayoutSchedulePlans=db[a25_0x5a68f7(0x194)],PayoutScheduleItems=db[a25_0x5a68f7(0x18a)],{Op,where}=require('sequelize'),create_master_payout_schedule=async _0xaf1ac3=>{const _0x13f044=a25_0x5a68f7;try{const [_0x51a8a0,_0x47294e]=await PayoutScheduleMasters[_0x13f044(0x1a0)]({'where':{'sub_merchant_id':_0xaf1ac3?.[_0x13f044(0x1ae)],'deleted':0x0},'defaults':{'super_merchant_id':_0xaf1ac3?.[_0x13f044(0x1aa)],'sub_merchant_id':_0xaf1ac3?.[_0x13f044(0x1ae)],'plan_id':_0xaf1ac3?.[_0x13f044(0x18e)],'is_default':_0xaf1ac3?.[_0x13f044(0x18b)]||0x0,'active':_0xaf1ac3?.[_0x13f044(0x198)]||0x1,'deleted':_0xaf1ac3?.[_0x13f044(0x1a3)]||0x0}});if(_0x47294e)return{'status':httpStatus['OK'],'message':_0x13f044(0x18d),'data':_0x51a8a0['toJSON']()};else return _0x51a8a0?{'status':httpStatus[_0x13f044(0x1a4)],'message':_0x13f044(0x1a2)}:{'status':httpStatus[_0x13f044(0x1a4)],'message':_0x13f044(0x189)};}catch(_0x30142d){return console[_0x13f044(0x19b)](_0x13f044(0x19f),_0x30142d),{'status':httpStatus['INTERNAL_SERVER_ERROR'],'message':'Error\x20finding\x20or\x20applying\x20payout\x20schedule\x20plan:'+_0x30142d[_0x13f044(0x190)]};}},get_payout_schedule_plan_by_merchant_id=async _0x4f1cc8=>{const _0x4956db=a25_0x5a68f7;try{const _0xf2540b=await PayoutScheduleMasters['findOne']({'where':_0x4f1cc8,'attributes':[['id',_0x4956db(0x196)],[_0x4956db(0x18e),_0x4956db(0x18e)],[_0x4956db(0x1ae),_0x4956db(0x1ae)],['active','active'],[_0x4956db(0x1a3),_0x4956db(0x1a3)],['created_at',_0x4956db(0x1b1)],[_0x4956db(0x1ad),_0x4956db(0x1ad)]]});return _0xf2540b?{'status':httpStatus['OK'],'message':_0x4956db(0x19e),'data':_0xf2540b['toJSON']()}:{'status':httpStatus['NOT_FOUND'],'message':'No\x20payout\x20schedule\x20plan\x20found\x20for\x20this\x20plan'};}catch(_0x5da479){return console[_0x4956db(0x19b)](_0x4956db(0x18c),_0x5da479),{'status':httpStatus[_0x4956db(0x1af)],'message':_0x4956db(0x199)+_0x5da479[_0x4956db(0x190)]};}},remove_payout_schedule_plan_by_merchant_id=async _0x1b0746=>{const _0x4c9df6=a25_0x5a68f7,_0x1674be={'deleted':0x1,'updated_at':new Date()};try{const _0x2ef1ff=await PayoutScheduleMasters[_0x4c9df6(0x1ab)](_0x1674be,{'where':{'sub_merchant_id':_0x1b0746}});if(_0x2ef1ff[0x0]===0x0)return{'status':httpStatus[_0x4c9df6(0x192)],'message':_0x4c9df6(0x19c)};return{'status':httpStatus['OK'],'message':_0x4c9df6(0x191)};}catch(_0x5cdc1f){return console['error'](_0x4c9df6(0x1b0),_0x5cdc1f),{'status':httpStatus[_0x4c9df6(0x1a4)],'message':_0x5cdc1f?.[_0x4c9df6(0x190)]};}};module[a25_0x5a68f7(0x1ac)]={'create_master_payout_schedule':create_master_payout_schedule,'get_payout_schedule_plan_by_merchant_id':get_payout_schedule_plan_by_merchant_id,'remove_payout_schedule_plan_by_merchant_id':remove_payout_schedule_plan_by_merchant_id};
+const httpStatus = require("http-status");
+const db = require("../models");
+const PayoutScheduleMasters = db.payout_schedule_master;
+const PayoutSchedulePlans = db.payout_schedule_plans;
+const PayoutScheduleItems = db.payout_schedule_items;
+const { Op, where } = require("sequelize");
+
+const create_master_payout_schedule = async (data) => {
+  try {
+    const [PayoutScheduleMaster, created] =
+      await PayoutScheduleMasters.findOrCreate({
+        where: {
+          sub_merchant_id: data?.sub_merchant_id,
+          deleted: 0,
+        },
+        defaults: {
+          super_merchant_id: data?.super_merchant_id,
+          sub_merchant_id: data?.sub_merchant_id,
+          plan_id: data?.plan_id,
+          is_default: data?.is_default || 0,
+          active: data?.active || 1,
+          deleted: data?.deleted || 0,
+        },
+      });
+
+    if (created) {
+      return {
+        status: httpStatus.OK,
+        message: "Payout schedule plan applied successfully",
+        data: PayoutScheduleMaster.toJSON(),
+      };
+    } else if (PayoutScheduleMaster) {
+      return {
+        status: httpStatus.BAD_REQUEST, // 409 Conflict is more accurate for "already exists"
+        message: "Payout schedule plan already applied",
+      };
+    } else {
+      return {
+        status: httpStatus.BAD_REQUEST,
+        message: "Payout schedule plan not applied",
+      };
+    }
+  } catch (error) {
+    console.error("Error finding or applying payout schedule plan:", error);
+    // throw error;
+    return {
+      status: httpStatus.INTERNAL_SERVER_ERROR,
+      message:
+        "Error finding or applying payout schedule plan:" + error.message,
+    };
+  }
+};
+
+const get_payout_schedule_plan_by_merchant_id = async (where) => {
+  try {
+    const plan = await PayoutScheduleMasters.findOne({
+      where: where,
+      attributes: [
+        ["id", "master_plan_id"],
+        ["plan_id", "plan_id"],
+        ["sub_merchant_id", "sub_merchant_id"],
+        ["active", "active"],
+        ["deleted", "deleted"],
+        ["created_at", "created_at"],
+        ["updated_at", "updated_at"],
+      ],
+    });
+    if (plan) {
+      return {
+        status: httpStatus.OK,
+        message: "Payout schedule plan fetched successfully",
+        data: plan.toJSON(),
+      };
+    } else {
+      return {
+        status: httpStatus.NOT_FOUND,
+        message: "No payout schedule plan found for this plan",
+      };
+    }
+  } catch (error) {
+    console.error("Error fetching payout schedule plan:", error);
+    return {
+      status: httpStatus.INTERNAL_SERVER_ERROR,
+      message: "Error fetching payout schedule plan: " + error.message,
+    };
+  }
+  // try {
+  //   const plans = await PayoutScheduleMasters.findAll({
+  //     where,
+  //     attributes: [
+  //       ["id", "master_plan_id"],
+  //       ["plan_id", "plan_id"],
+  //       ["sub_merchant_id", "sub_merchant_id"],
+  //       ["active", "active"],
+  //       ["deleted", "deleted"],
+  //       ["created_at", "created_at"],
+  //       ["updated_at", "updated_at"],
+  //     ],
+  //   });
+
+  //   if (plans && plans.length > 0) {
+  //     return {
+  //       status: httpStatus.OK,
+  //       message: "Payout schedule plans fetched successfully",
+  //       data: plans.map((plan) => plan.toJSON()),
+  //     };
+  //   } else {
+  //     return {
+  //       status: httpStatus.NOT_FOUND,
+  //       message: "No payout schedule plans found for this plan",
+  //     };
+  //   }
+  // } catch (error) {
+  //   console.error("❌ Error fetching payout schedule plans:", error);
+  //   return {
+  //     status: httpStatus.INTERNAL_SERVER_ERROR,
+  //     message: "Error fetching payout schedule plans: " + error.message,
+  //   };
+  // }
+};
+
+const remove_payout_schedule_plan_by_merchant_id = async (sub_merchant_id) => {
+  const updatedData = {
+    deleted: 1,
+    updated_at: new Date(),
+  };
+
+  try {
+    const result = await PayoutScheduleMasters.update(updatedData, {
+      where: { sub_merchant_id },
+    });
+
+    if (result[0] === 0) {
+      return {
+        status: httpStatus.NOT_FOUND,
+        message: "No payout schedule plan found or not updated",
+      };
+    }
+
+    return {
+      status: httpStatus.OK,
+      message: "Payout schedule plan removed",
+    };
+  } catch (error) {
+    console.error("Update Error:", error);
+    return {
+      status: httpStatus.BAD_REQUEST,
+      message: error?.message,
+    };
+  }
+};
+
+module.exports = {
+  create_master_payout_schedule,
+  get_payout_schedule_plan_by_merchant_id,
+  remove_payout_schedule_plan_by_merchant_id,
+};

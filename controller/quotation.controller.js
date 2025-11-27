@@ -1,1 +1,4428 @@
-function a6_0x2e1d(_0x224cbd,_0x502544){const _0x426863=a6_0x4268();return a6_0x2e1d=function(_0x2e1d21,_0x63f479){_0x2e1d21=_0x2e1d21-0x104;let _0x4fdaab=_0x426863[_0x2e1d21];return _0x4fdaab;},a6_0x2e1d(_0x224cbd,_0x502544);}const a6_0x35fecc=a6_0x2e1d;(function(_0x4c7de9,_0x238d26){const _0x1b679c=a6_0x2e1d,_0x148358=_0x4c7de9();while(!![]){try{const _0x32b2a4=-parseInt(_0x1b679c(0x1f2))/0x1*(-parseInt(_0x1b679c(0x122))/0x2)+parseInt(_0x1b679c(0x137))/0x3*(parseInt(_0x1b679c(0x1b4))/0x4)+-parseInt(_0x1b679c(0x1c6))/0x5*(parseInt(_0x1b679c(0x111))/0x6)+parseInt(_0x1b679c(0x15f))/0x7+parseInt(_0x1b679c(0x14a))/0x8*(parseInt(_0x1b679c(0x209))/0x9)+parseInt(_0x1b679c(0x116))/0xa*(parseInt(_0x1b679c(0x1f3))/0xb)+parseInt(_0x1b679c(0x180))/0xc*(-parseInt(_0x1b679c(0x154))/0xd);if(_0x32b2a4===_0x238d26)break;else _0x148358['push'](_0x148358['shift']());}catch(_0x21be93){_0x148358['push'](_0x148358['shift']());}}}(a6_0x4268,0x1c940));const quotationService=require('../service/quotation.service'),quotationValidation=require('../validations/quotation.validation'),transactionService=require(a6_0x35fecc(0x1b0)),accountDetailsService=require(a6_0x35fecc(0x171)),helperService=require(a6_0x35fecc(0x160)),payerService=require('../service/beneficiary.service'),receiverService=require(a6_0x35fecc(0x1df)),pspService=require('../service/psp.service'),catchAsync=require('../utils/catchAsync'),httpStatus=require(a6_0x35fecc(0x1e6)),ApiError=require(a6_0x35fecc(0x185)),quotationDbService=require(a6_0x35fecc(0x1ce)),attachmentDbService=require(a6_0x35fecc(0x1be)),nodeServerAPIService=require(a6_0x35fecc(0x106)),createGeneralApiClient=require(a6_0x35fecc(0x200)),{payout_mid,transaction}=require('../models'),{getAccessToken,initiateTransfer,getTransferStatus}=require(a6_0x35fecc(0x1d4)),alPayService=require(a6_0x35fecc(0x150)),mtnMockService=require('../service/mtn_mock.service'),orangeMockService=require(a6_0x35fecc(0x1b8)),alMockService=require('../service/al.service'),{initiateOrangeMoneyTransfer,getOrangeMoneyTransferStatus}=require(a6_0x35fecc(0x19b)),moment=require(a6_0x35fecc(0x1d8)),{string}=require('joi'),{v4:uuidv4}=require(a6_0x35fecc(0x164)),fs=require('fs'),path=require('path'),batch_payout=catchAsync(async(_0x59583c,_0x8f4c5e)=>{const _0x283617=a6_0x35fecc,{transactions:_0x35609d}=_0x59583c[_0x283617(0x123)];let _0x27645b;do{_0x27645b=await helperService[_0x283617(0x170)](0xa);var _0xeba42e=await quotationValidation['validateBatchIdExists'](_0x27645b);}while(_0xeba42e);var _0x1c6430={'batch_id':_0x27645b,'transactions':[]};await Promise['all'](_0x35609d[_0x283617(0x18a)](async _0x44b688=>{const _0x4b6ed1=_0x283617,{order_id:_0xc351,amount:_0x3d6ce3,confirmation_required:_0x5a5c67,purpose_of_remittance:_0x3a47b7,payout_reference:_0x3ac779,debit_amount:_0x54292a,debit_currency:_0x4c16e4,webhook_url:_0x462567}=_0x44b688;var _0x14c67d={'order_id':_0x44b688?.[_0x4b6ed1(0x1f0)],'payout_reference':_0x44b688?.['payout_reference'],'sub_merchant_id':_0x44b688?.[_0x4b6ed1(0x10f)],'receiver_id':_0x44b688?.['receiver_id'],'wallet_id':_0x44b688?.[_0x4b6ed1(0x112)],'currency':_0x44b688?.['currency'],'account_id':_0x44b688?.[_0x4b6ed1(0x136)],'amount':_0x44b688?.[_0x4b6ed1(0x17a)],'debit_amount':_0x44b688?.[_0x4b6ed1(0x1b2)],'debit_currency':_0x44b688?.[_0x4b6ed1(0x20b)],'confirmation_required':_0x44b688?.[_0x4b6ed1(0x10d)],'purpose_of_remittance':_0x44b688?.[_0x4b6ed1(0x1d1)],'webhook_url':_0x44b688?.[_0x4b6ed1(0x142)],'payout_details':'','payout_status':'','payout_status_message':''};let _0x91c0b4=_0x44b688?.['wallet_id'],_0x260a80=_0x44b688?.[_0x4b6ed1(0x1ef)],_0x193d26=_0x44b688?.[_0x4b6ed1(0x10f)],_0x1f5995=_0x44b688?.['receiver_id'],_0x120590=_0x44b688?.[_0x4b6ed1(0x136)];if(_0x91c0b4){let _0x5f1a84=await nodeServerAPIService[_0x4b6ed1(0x1a9)](_0x91c0b4);console[_0x4b6ed1(0x1ae)]('🚀\x20~\x20wallet:',_0x5f1a84);if(_0x5f1a84?.[_0x4b6ed1(0x133)]!==httpStatus['OK']){_0x14c67d[_0x4b6ed1(0x181)]=_0x4b6ed1(0x205),_0x14c67d[_0x4b6ed1(0x1e1)]=_0x5f1a84?.[_0x4b6ed1(0x1e0)],_0x1c6430[_0x4b6ed1(0x1ea)]['push'](_0x14c67d);return;}_0x260a80=_0x5f1a84?.[_0x4b6ed1(0x14c)]?.[_0x4b6ed1(0x1ef)],_0x1f5995=_0x5f1a84?.['data']?.['receiver_id'],_0x91c0b4=_0x5f1a84?.['data'][_0x4b6ed1(0x112)];}else{if(_0x193d26&&_0x260a80){let _0x2561ea={'sub_merchant_id':String(_0x193d26),'currency':_0x260a80},_0x556e8d=await nodeServerAPIService[_0x4b6ed1(0x131)](_0x2561ea);console['log'](_0x4b6ed1(0x203),_0x556e8d);if(_0x556e8d?.['status']!==httpStatus['OK']){_0x14c67d[_0x4b6ed1(0x181)]='failed',_0x14c67d[_0x4b6ed1(0x1e1)]=_0x556e8d?.[_0x4b6ed1(0x1e0)],_0x1c6430[_0x4b6ed1(0x1ea)][_0x4b6ed1(0x183)](_0x14c67d);return;}_0x260a80=_0x556e8d?.[_0x4b6ed1(0x14c)]?.[_0x4b6ed1(0x1ef)],_0x1f5995=_0x556e8d?.[_0x4b6ed1(0x14c)]?.['receiver_id'],_0x91c0b4=_0x556e8d?.[_0x4b6ed1(0x14c)][_0x4b6ed1(0x112)],!_0x14c67d?.[_0x4b6ed1(0x112)]&&(_0x14c67d['wallet_id']=_0x556e8d?.[_0x4b6ed1(0x14c)][_0x4b6ed1(0x112)]);}else{if(_0x1f5995&&_0x260a80){let _0x502276={'receiver_id':String(_0x1f5995),'currency':_0x260a80},_0x5e9263=await nodeServerAPIService[_0x4b6ed1(0x131)](_0x502276);console[_0x4b6ed1(0x1ae)]('🚀\x20~\x20wallet3:',_0x5e9263);if(_0x5e9263?.['status']!==httpStatus['OK']){_0x14c67d['payout_status']='failed',_0x14c67d[_0x4b6ed1(0x1e1)]=_0x5e9263?.[_0x4b6ed1(0x1e0)],_0x1c6430[_0x4b6ed1(0x1ea)][_0x4b6ed1(0x183)](_0x14c67d);return;}_0x260a80=_0x5e9263?.[_0x4b6ed1(0x14c)]?.['currency'],_0x1f5995=_0x5e9263?.[_0x4b6ed1(0x14c)]?.[_0x4b6ed1(0x14f)],_0x91c0b4=_0x5e9263?.['data']['wallet_id'],!_0x14c67d?.[_0x4b6ed1(0x112)]&&(_0x14c67d[_0x4b6ed1(0x112)]=_0x5e9263?.[_0x4b6ed1(0x14c)][_0x4b6ed1(0x112)]);}}}try{parseFloat(_0x3d6ce3);}catch(_0x5b1011){_0x14c67d[_0x4b6ed1(0x181)]='failed',_0x14c67d[_0x4b6ed1(0x1e1)]=_0x4b6ed1(0x192),_0x1c6430['transactions'][_0x4b6ed1(0x183)](_0x14c67d);return;}let _0x4e5ceb=null;helperService[_0x4b6ed1(0x110)](_0x193d26)&&(_0x4e5ceb=await nodeServerAPIService[_0x4b6ed1(0x105)]());let _0x3efbe4=await receiverService[_0x4b6ed1(0x1cc)](_0x1f5995);if(undefined!=_0x3efbe4?.[_0x4b6ed1(0x133)]&&_0x3efbe4?.[_0x4b6ed1(0x133)]!=httpStatus['OK']){_0x14c67d['payout_status']=_0x4b6ed1(0x205),_0x14c67d['payout_status_message']=_0x3efbe4?.['message'],_0x1c6430['transactions'][_0x4b6ed1(0x183)](_0x14c67d);return;}if(helperService[_0x4b6ed1(0x13f)](_0x3efbe4)){_0x14c67d[_0x4b6ed1(0x181)]='failed',_0x14c67d[_0x4b6ed1(0x1e1)]='Receiver\x20not\x20found!',_0x1c6430[_0x4b6ed1(0x1ea)][_0x4b6ed1(0x183)](_0x14c67d);return;}if(_0x3efbe4?.[_0x4b6ed1(0x16d)]!==_0x4b6ed1(0x118)){_0x14c67d[_0x4b6ed1(0x181)]=_0x4b6ed1(0x205),_0x14c67d[_0x4b6ed1(0x1e1)]=_0x4b6ed1(0x1fb),_0x1c6430[_0x4b6ed1(0x1ea)]['push'](_0x14c67d);return;}if(_0x3efbe4?.[_0x4b6ed1(0x1b7)]!==0x1){_0x14c67d[_0x4b6ed1(0x181)]=_0x4b6ed1(0x205),_0x14c67d['payout_status_message']=_0x4b6ed1(0x1c0),_0x1c6430[_0x4b6ed1(0x1ea)]['push'](_0x14c67d);return;}const _0x17ea61={};if(_0x120590)_0x17ea61[_0x4b6ed1(0x136)]=_0x120590;else{if(_0x3efbe4?.[_0x4b6ed1(0x10f)]&&_0x260a80)_0x17ea61[_0x4b6ed1(0x1ca)]=String(_0x3efbe4?.['sub_merchant_id']),_0x17ea61[_0x4b6ed1(0x1ef)]=_0x260a80;else _0x3efbe4?.[_0x4b6ed1(0x14f)]&&_0x260a80&&(_0x17ea61[_0x4b6ed1(0x14f)]=String(_0x3efbe4?.[_0x4b6ed1(0x14f)]),_0x17ea61['currency']=_0x260a80);}console[_0x4b6ed1(0x1ae)](_0x4b6ed1(0x14b),_0x17ea61);var _0x32ae4a=await nodeServerAPIService['get_funding_details'](_0x17ea61);console[_0x4b6ed1(0x1ae)](_0x4b6ed1(0x1c5),_0x32ae4a);if(_0x32ae4a?.['status']!=httpStatus['OK']){_0x14c67d[_0x4b6ed1(0x181)]=_0x4b6ed1(0x205),_0x14c67d['payout_status_message']=_0x32ae4a?.[_0x4b6ed1(0x1e0)],_0x1c6430[_0x4b6ed1(0x1ea)][_0x4b6ed1(0x183)](_0x14c67d);return;}if(_0x32ae4a?.[_0x4b6ed1(0x14c)]?.[_0x4b6ed1(0x1d5)]!=0x1){_0x14c67d[_0x4b6ed1(0x181)]=_0x4b6ed1(0x205),_0x14c67d[_0x4b6ed1(0x1e1)]=_0x4b6ed1(0x175),_0x1c6430['transactions'][_0x4b6ed1(0x183)](_0x14c67d);return;}_0x32ae4a=_0x32ae4a?.[_0x4b6ed1(0x14c)];!_0x14c67d?.['account_id']&&(_0x14c67d['account_id']=_0x32ae4a?.[_0x4b6ed1(0x136)]);let _0x3c1e76={};if(_0x91c0b4)_0x3c1e76['wallet_id']=_0x91c0b4;else{if(_0x3efbe4?.[_0x4b6ed1(0x10f)]&&_0x260a80)_0x3c1e76[_0x4b6ed1(0x10f)]=_0x3efbe4?.['sub_merchant_id'],_0x3c1e76[_0x4b6ed1(0x1ef)]=_0x260a80;else _0x1f5995&&_0x260a80&&(_0x3c1e76[_0x4b6ed1(0x14f)]=_0x1f5995,_0x3c1e76['currency']=_0x260a80);}console[_0x4b6ed1(0x1ae)](_0x4b6ed1(0x10e),_0x3c1e76);let _0x162fa6=await quotationService[_0x4b6ed1(0x1bd)](_0x3c1e76);if(_0x162fa6?.[_0x4b6ed1(0x133)]!=httpStatus['OK']){console[_0x4b6ed1(0x1ae)](_0x4b6ed1(0x128),_0x162fa6),_0x14c67d[_0x4b6ed1(0x181)]=_0x4b6ed1(0x205),_0x14c67d[_0x4b6ed1(0x1e1)]='Account\x20not\x20found!',_0x1c6430[_0x4b6ed1(0x1ea)][_0x4b6ed1(0x183)](_0x14c67d);return;}let _0x37d08c=_0x162fa6?.[_0x4b6ed1(0x14c)]?.['data']?.[_0x4b6ed1(0x1dc)];console[_0x4b6ed1(0x1ae)](_0x4b6ed1(0x1de),_0x37d08c);if(helperService[_0x4b6ed1(0x153)](_0x37d08c)==0x0||helperService['parseFormattedNumber'](_0x37d08c)<helperService[_0x4b6ed1(0x153)](_0x3d6ce3)){_0x14c67d[_0x4b6ed1(0x181)]='failed',_0x14c67d[_0x4b6ed1(0x1e1)]=_0x4b6ed1(0x11b),_0x1c6430['transactions'][_0x4b6ed1(0x183)](_0x14c67d);return;}let _0x543810=await quotationService['payout_psp_routing'](_0x32ae4a);console[_0x4b6ed1(0x1ae)](_0x4b6ed1(0x177),_0x543810);if(_0x543810?.[_0x4b6ed1(0x133)]!==httpStatus['OK']){_0x14c67d[_0x4b6ed1(0x181)]=_0x4b6ed1(0x205),_0x14c67d[_0x4b6ed1(0x1e1)]=_0x543810?.['message'],_0x1c6430['transactions'][_0x4b6ed1(0x183)](_0x14c67d);return;}if(_0x32ae4a?.[_0x4b6ed1(0x18c)]==_0x4b6ed1(0x15a)){console[_0x4b6ed1(0x1ae)]('here\x20is\x20reciever\x20id\x20and\x20body'),console[_0x4b6ed1(0x1ae)](_0x59583c[_0x4b6ed1(0x123)],_0x32ae4a);let _0xbf8460=_0x543810?.[_0x4b6ed1(0x14c)];console['log'](_0xbf8460);if(_0x32ae4a?.[_0x4b6ed1(0x1ef)]!=_0x260a80){_0x14c67d[_0x4b6ed1(0x181)]=_0x4b6ed1(0x205),_0x14c67d[_0x4b6ed1(0x1e1)]=_0x4b6ed1(0x167)+_0x32ae4a?.['currency'],_0x1c6430['transactions'][_0x4b6ed1(0x183)](_0x14c67d);return;}if(helperService[_0x4b6ed1(0x13f)](_0xbf8460?.[_0x4b6ed1(0x1d2)])){_0x14c67d['payout_status']=_0x4b6ed1(0x205),_0x14c67d['payout_status_message']=_0x4b6ed1(0x1c4),_0x1c6430[_0x4b6ed1(0x1ea)]['push'](_0x14c67d);return;}if(helperService[_0x4b6ed1(0x13f)](_0xbf8460?.['api_key'])){_0x14c67d[_0x4b6ed1(0x181)]='failed',_0x14c67d[_0x4b6ed1(0x1e1)]=_0x4b6ed1(0x19d),_0x1c6430[_0x4b6ed1(0x1ea)][_0x4b6ed1(0x183)](_0x14c67d);return;}if(helperService[_0x4b6ed1(0x13f)](_0xbf8460?.[_0x4b6ed1(0x19e)])){_0x14c67d[_0x4b6ed1(0x181)]='failed',_0x14c67d[_0x4b6ed1(0x1e1)]=_0x4b6ed1(0x20a),_0x1c6430['transactions']['push'](_0x14c67d);return;}let _0x2ebba6=await getAccessToken(_0xbf8460?.[_0x4b6ed1(0x1d2)],_0xbf8460?.[_0x4b6ed1(0x157)],_0xbf8460?.[_0x4b6ed1(0x19e)]);if(!_0x2ebba6){_0x14c67d[_0x4b6ed1(0x181)]=_0x4b6ed1(0x205),_0x14c67d[_0x4b6ed1(0x1e1)]=_0x4b6ed1(0x1bf),_0x1c6430[_0x4b6ed1(0x1ea)]['push'](_0x14c67d);return;}let _0x111a65={'amount':_0x3d6ce3,'currency':_0x260a80,'externalId':await helperService['make_unique_id'](),'payee':{'partyIdType':_0x4b6ed1(0x1eb),'partyId':_0x32ae4a?.['account_details']?.[_0x4b6ed1(0x1eb)]},'payerMessage':_0x4b6ed1(0x1b9),'payeeNote':_0x4b6ed1(0x161)+_0x260a80+'\x20'+_0x3d6ce3},_0x526ad7=await initiateTransfer(_0x2ebba6,_0x111a65,_0xbf8460['primary_key']);if(!_0x526ad7){_0x14c67d[_0x4b6ed1(0x181)]=_0x4b6ed1(0x205),_0x14c67d[_0x4b6ed1(0x1e1)]=_0x4b6ed1(0x191),_0x1c6430['transactions'][_0x4b6ed1(0x183)](_0x14c67d);return;}let _0x445535=await getTransferStatus(_0x2ebba6,_0x526ad7,_0xbf8460[_0x4b6ed1(0x1d2)]);console[_0x4b6ed1(0x1ae)](_0x4b6ed1(0x1f7),_0x445535);let _0x57d6fc={'transaction_id':_0x445535['financialTransactionId'],'external_id':_0x445535[_0x4b6ed1(0x208)],'receiver_id':_0x1f5995,'wallet_id':_0x91c0b4,'account_id':_0x120590,'mid_id':_0x543810?.[_0x4b6ed1(0x14c)]?.['id'],'batch_id':_0x27645b,'super_merchant_id':'','sub_merchant_id':helperService[_0x4b6ed1(0x110)](_0x3efbe4?.['sub_merchant_id'])?_0x3efbe4?.[_0x4b6ed1(0x10f)]:null,'transaction_type':'B2B','wholesale_fx_rate':parseFloat(0x0),'destination_amount':parseFloat(_0x3d6ce3),'destination_currency':_0x260a80,'sent_amount':parseFloat(_0x3d6ce3),'sent_currency':_0x260a80,'source_amount':parseFloat(_0x3d6ce3),'source_currency':_0x260a80,'source_country_iso_code':_0x32ae4a?.[_0x4b6ed1(0x14e)],'payer_country_iso_code':_0x4b6ed1(0x14d),'fee_amount':parseFloat(0x0),'fee_currency':'NA','creation_date':moment()[_0x4b6ed1(0x132)](_0x4b6ed1(0x1db)),'expiration_date':moment()[_0x4b6ed1(0x132)](_0x4b6ed1(0x1db)),'payer_id':_0x32ae4a[_0x4b6ed1(0x18c)],'payer_currency':_0x260a80,'service_id':_0x32ae4a?.[_0x4b6ed1(0x13e)],'service_name':'Mobile\x20Wallet','status_message':_0x445535?.[_0x4b6ed1(0x133)]==_0x4b6ed1(0x1e3)?_0x4b6ed1(0x12e):_0x4b6ed1(0x1f6),'callback_url':_0xbf8460[_0x4b6ed1(0x1aa)],'payer_name':'MSISDN','payout_reference':_0x3ac779,'reason':_0x445535?.[_0x4b6ed1(0x17f)]};console['log']('🚀\x20~\x20payout\x20~\x20transactionPayload:',_0x57d6fc),await transaction[_0x4b6ed1(0x159)](_0x57d6fc);const _0x5af8b5={'submerchant_id':helperService[_0x4b6ed1(0x13f)](_0x3efbe4?.[_0x4b6ed1(0x10f)])?null:_0x3efbe4?.[_0x4b6ed1(0x10f)],'receiver_id':helperService['isNotValid'](_0x1f5995)?null:String(_0x1f5995),'currecny':_0x260a80,'amount':String(_0x3d6ce3),'transaction_id':String(_0x445535[_0x4b6ed1(0x1a3)]),'order_id':_0x57d6fc?.[_0x4b6ed1(0x10a)],'order_status':_0x57d6fc?.[_0x4b6ed1(0x1bc)]};console[_0x4b6ed1(0x1ae)](_0x4b6ed1(0x1ed),_0x5af8b5);var _0x253359=await nodeServerAPIService['update_payout_status'](_0x59583c,_0x5af8b5);console['log'](_0x4b6ed1(0x148),_0x253359);let _0x255237={};if(helperService[_0x4b6ed1(0x13f)](_0x3efbe4?.[_0x4b6ed1(0x10f)]))_0x255237={'id':_0x3efbe4?.[_0x4b6ed1(0x14f)],'name':_0x3efbe4?.[_0x4b6ed1(0x134)],'country':_0x3efbe4?.[_0x4b6ed1(0x16a)],'webhook_url':_0x3efbe4?.[_0x4b6ed1(0x142)]};else helperService[_0x4b6ed1(0x110)](_0x3efbe4?.[_0x4b6ed1(0x10f)])&&helperService['isValid'](_0x3efbe4?.[_0x4b6ed1(0x14f)])&&(_0x255237={'id':null,'name':_0x4e5ceb?.['data']?.[_0x4b6ed1(0x138)],'country':_0x4e5ceb?.[_0x4b6ed1(0x14c)]?.['company_country'],'webhook_url':null});let _0x4e53b4={'account_id':_0x32ae4a?.[_0x4b6ed1(0x136)],..._0x32ae4a?.[_0x4b6ed1(0x190)]};const _0x418e89={'order_id':_0xc351,'external_id':_0x57d6fc?.[_0x4b6ed1(0x10a)],'transaction_id':_0x445535[_0x4b6ed1(0x1a3)],'sub_merchant_id':helperService[_0x4b6ed1(0x110)](_0x3efbe4?.['sub_merchant_id'])?_0x3efbe4?.[_0x4b6ed1(0x10f)]:null,'receiver_id':helperService[_0x4b6ed1(0x110)](_0x3efbe4?.[_0x4b6ed1(0x14f)])?_0x3efbe4?.[_0x4b6ed1(0x14f)]:null,'currency':_0x260a80,'wallet_id':_0x91c0b4,'debit_party':_0x255237,'credit_party':_0x4e53b4,'credit_party_identifier':{'MSISDN':_0x32ae4a?.['account_details']?.['MSISDN']},'debit_details':{'debit_amount':parseFloat(_0x3d6ce3),'currency':_0x260a80},'credit_details':{'amount':parseFloat(_0x3d6ce3),'currency':_0x260a80},'payout_reference':helperService[_0x4b6ed1(0x110)](_0x3ac779)?_0x3ac779:null,'webhook_url':helperService[_0x4b6ed1(0x110)](_0x462567)?_0x462567:null,'purpose_of_remittance':helperService[_0x4b6ed1(0x110)](_0x3a47b7)?_0x3a47b7:null,'transaction_status':_0x445535?.[_0x4b6ed1(0x133)]==_0x4b6ed1(0x1e3)?_0x4b6ed1(0x12e):_0x4b6ed1(0x1f6),'transaction_status_code':_0x445535?.[_0x4b6ed1(0x133)]=='SUCCESSFUL'?0x4e20:0x9c40,'order_created_date':moment(_0x57d6fc?.['creation_date'])['format'](_0x4b6ed1(0x1db)),'order_updated_date':moment(_0x57d6fc?.[_0x4b6ed1(0x16f)])[_0x4b6ed1(0x132)]('YYYY-MM-DD\x20hh:mm:ss'),'batch_id':_0x27645b};_0x14c67d[_0x4b6ed1(0x14c)]=_0x418e89,_0x14c67d['payout_status']=_0x4b6ed1(0x201),_0x14c67d[_0x4b6ed1(0x1e1)]='success';const _0x505b49={..._0x14c67d?.[_0x4b6ed1(0x14c)],'payout_status':_0x14c67d[_0x4b6ed1(0x181)],'payout_status_message':_0x14c67d['payout_status_message']};delete _0x505b49[_0x4b6ed1(0x140)],_0x1c6430[_0x4b6ed1(0x1ea)][_0x4b6ed1(0x183)](_0x505b49);}else{if(_0x32ae4a?.[_0x4b6ed1(0x18c)]==_0x4b6ed1(0x1a7)){console[_0x4b6ed1(0x1ae)]('here\x20is\x20reciever\x20id\x20and\x20body\x20in\x20orange\x20money'),console[_0x4b6ed1(0x1ae)](_0x59583c['body'],_0x3efbe4);let _0x28b3d4=_0x543810?.[_0x4b6ed1(0x14c)];console[_0x4b6ed1(0x1ae)](_0x28b3d4);if(_0x32ae4a?.['currency']!=_0x260a80){_0x14c67d[_0x4b6ed1(0x181)]=_0x4b6ed1(0x205),_0x14c67d[_0x4b6ed1(0x1e1)]=_0x4b6ed1(0x167)+_0x32ae4a?.[_0x4b6ed1(0x1ef)],_0x1c6430[_0x4b6ed1(0x1ea)][_0x4b6ed1(0x183)](_0x14c67d);return;}if(helperService[_0x4b6ed1(0x13f)](_0x28b3d4?.[_0x4b6ed1(0x157)])){_0x14c67d[_0x4b6ed1(0x181)]=_0x4b6ed1(0x205),_0x14c67d[_0x4b6ed1(0x1e1)]=_0x4b6ed1(0x19d),_0x1c6430[_0x4b6ed1(0x1ea)]['push'](_0x14c67d);return;}if(helperService[_0x4b6ed1(0x13f)](_0x28b3d4?.[_0x4b6ed1(0x19e)])){_0x14c67d[_0x4b6ed1(0x181)]=_0x4b6ed1(0x205),_0x14c67d[_0x4b6ed1(0x1e1)]=_0x4b6ed1(0x20a),_0x1c6430[_0x4b6ed1(0x1ea)][_0x4b6ed1(0x183)](_0x14c67d);return;}let _0x3a12e4=await helperService[_0x4b6ed1(0x170)](),_0xae7c00={'auth':{'user':_0x28b3d4?.[_0x4b6ed1(0x157)],'pwd':_0x28b3d4?.[_0x4b6ed1(0x19e)]},'param':{'MSISDN':_0x32ae4a?.[_0x4b6ed1(0x190)]?.['MSISDN'],'Amount':_0x3d6ce3,'Currency':_0x260a80,'EXTERNALID':_0x3a12e4}},_0xaf5398=await initiateOrangeMoneyTransfer(_0xae7c00);if(!_0xaf5398){_0x14c67d[_0x4b6ed1(0x181)]=_0x4b6ed1(0x205),_0x14c67d[_0x4b6ed1(0x1e1)]=_0x4b6ed1(0x191),_0x1c6430['transactions'][_0x4b6ed1(0x183)](_0x14c67d);return;}let _0x57fa3d=await getOrangeMoneyTransferStatus(_0xaf5398,_0x28b3d4?.['api_key'],_0x28b3d4?.[_0x4b6ed1(0x19e)],_0x260a80);_0x14c67d[_0x4b6ed1(0x181)]=_0x4b6ed1(0x205);let _0x3f23ab=_0x4b6ed1(0x1f6);_0x57fa3d[_0x4b6ed1(0x1f1)][_0x4b6ed1(0x1da)]=='TS'&&(_0x3f23ab='COMPLETED',_0x14c67d[_0x4b6ed1(0x181)]='success');_0x57fa3d[_0x4b6ed1(0x1f1)][_0x4b6ed1(0x1da)]=='TI'&&(_0x3f23ab=_0x4b6ed1(0x124),_0x14c67d['payout_status']=_0x4b6ed1(0x1c3));let _0x5be5aa={'transaction_id':_0xaf5398,'external_id':_0x3a12e4,'receiver_id':_0x1f5995,'wallet_id':_0x91c0b4,'account_id':_0x120590,'mid_id':_0x543810?.['data']?.['id'],'batch_id':_0x27645b,'super_merchant_id':'','sub_merchant_id':_0x3efbe4[_0x4b6ed1(0x10f)],'transaction_type':'B2B','wholesale_fx_rate':parseFloat(0x0),'destination_amount':parseFloat(_0x3d6ce3),'destination_currency':_0x260a80,'sent_amount':parseFloat(_0x3d6ce3),'sent_currency':_0x260a80,'source_amount':parseFloat(_0x3d6ce3),'source_currency':_0x260a80,'source_country_iso_code':_0x32ae4a?.[_0x4b6ed1(0x14e)],'payer_country_iso_code':_0x4b6ed1(0x14d),'fee_amount':parseFloat(0x0),'fee_currency':'NA','creation_date':moment()['format'](_0x4b6ed1(0x1db)),'expiration_date':moment()[_0x4b6ed1(0x132)](_0x4b6ed1(0x1db)),'payer_id':_0x32ae4a[_0x4b6ed1(0x18c)],'payer_currency':_0x260a80,'service_id':_0x32ae4a?.[_0x4b6ed1(0x13e)],'service_name':_0x4b6ed1(0x104),'status_message':_0x3f23ab,'callback_url':_0x28b3d4['callback'],'payer_name':_0x4b6ed1(0x1eb),'payout_reference':_0x3ac779};console[_0x4b6ed1(0x1ae)](_0x4b6ed1(0x11e),_0x5be5aa),await transaction[_0x4b6ed1(0x159)](_0x5be5aa);const _0x144e7f={'submerchant_id':helperService[_0x4b6ed1(0x13f)](_0x3efbe4?.['sub_merchant_id'])?null:_0x3efbe4?.[_0x4b6ed1(0x10f)],'receiver_id':helperService[_0x4b6ed1(0x13f)](_0x1f5995)?null:String(_0x1f5995),'currecny':_0x260a80,'amount':String(_0x3d6ce3),'transaction_id':String(_0xaf5398),'order_id':_0x5be5aa?.[_0x4b6ed1(0x10a)],'order_status':_0x5be5aa?.['status_message']};console[_0x4b6ed1(0x1ae)]('🚀\x20~\x20constpayout_webhook=catchAsync\x20~\x20payload:',_0x144e7f);var _0x253359=await nodeServerAPIService[_0x4b6ed1(0x17c)](_0x59583c,_0x144e7f);console[_0x4b6ed1(0x1ae)](_0x4b6ed1(0x148),_0x253359);let _0x9a2b35={};if(helperService[_0x4b6ed1(0x13f)](_0x3efbe4?.[_0x4b6ed1(0x10f)]))_0x9a2b35={'id':_0x3efbe4?.[_0x4b6ed1(0x14f)],'name':_0x3efbe4?.[_0x4b6ed1(0x134)],'country':_0x3efbe4?.[_0x4b6ed1(0x16a)],'webhook_url':_0x3efbe4?.['webhook_url']};else helperService[_0x4b6ed1(0x110)](_0x3efbe4?.[_0x4b6ed1(0x10f)])&&helperService['isValid'](_0x3efbe4?.[_0x4b6ed1(0x14f)])&&(_0x9a2b35={'id':null,'name':_0x4e5ceb?.[_0x4b6ed1(0x14c)]?.['company_name'],'country':_0x4e5ceb?.[_0x4b6ed1(0x14c)]?.[_0x4b6ed1(0x20e)],'webhook_url':null});let _0xd9da05={'account_id':_0x32ae4a?.[_0x4b6ed1(0x136)],..._0x32ae4a?.[_0x4b6ed1(0x190)]};const _0x5573cc={'order_id':_0xc351,'external_id':_0x5be5aa?.['external_id'],'transaction_id':_0x57fa3d[_0x4b6ed1(0x1a3)],'sub_merchant_id':helperService['isValid'](_0x3efbe4?.[_0x4b6ed1(0x10f)])?_0x3efbe4?.[_0x4b6ed1(0x10f)]:null,'receiver_id':helperService['isValid'](_0x3efbe4?.[_0x4b6ed1(0x14f)])?_0x3efbe4?.['receiver_id']:null,'currency':_0x260a80,'wallet_id':_0x91c0b4,'debit_party':_0x9a2b35,'credit_party':_0xd9da05,'credit_party_identifier':{'MSISDN':_0x32ae4a?.[_0x4b6ed1(0x190)]?.[_0x4b6ed1(0x1eb)]},'debit_details':{'debit_amount':parseFloat(_0x3d6ce3),'currency':_0x260a80},'credit_details':{'amount':parseFloat(_0x3d6ce3),'currency':_0x260a80},'payout_reference':helperService[_0x4b6ed1(0x110)](_0x3ac779)?_0x3ac779:null,'webhook_url':helperService[_0x4b6ed1(0x110)](_0x462567)?_0x462567:null,'purpose_of_remittance':helperService[_0x4b6ed1(0x110)](_0x3a47b7)?_0x3a47b7:null,'transaction_status':_0x57fa3d?.[_0x4b6ed1(0x133)]=='SUCCESSFUL'?_0x4b6ed1(0x12e):_0x4b6ed1(0x1f6),'transaction_status_code':_0x57fa3d?.[_0x4b6ed1(0x133)]=='SUCCESSFUL'?0x4e20:0x9c40,'order_created_date':moment(_0x5be5aa?.[_0x4b6ed1(0x16f)])[_0x4b6ed1(0x132)](_0x4b6ed1(0x1db)),'order_updated_date':moment(_0x5be5aa?.[_0x4b6ed1(0x16f)])[_0x4b6ed1(0x132)](_0x4b6ed1(0x1db)),'batch_id':_0x27645b};_0x8f4c5e[_0x4b6ed1(0x133)](httpStatus['OK'])[_0x4b6ed1(0x15e)]({'status':httpStatus['OK'],'message':_0x4b6ed1(0x141),'data':_0x5573cc}),_0x14c67d['data']=_0x5573cc,_0x14c67d[_0x4b6ed1(0x1e1)]=_0x4b6ed1(0x201);const _0xfb3817={..._0x14c67d?.[_0x4b6ed1(0x14c)],'payout_status':_0x14c67d[_0x4b6ed1(0x181)],'payout_status_message':_0x14c67d[_0x4b6ed1(0x1e1)]};delete _0xfb3817[_0x4b6ed1(0x140)],_0x1c6430[_0x4b6ed1(0x1ea)][_0x4b6ed1(0x183)](_0xfb3817);}else try{const _0x298ff4=await payerService['getById'](_0x32ae4a?.['payer_id'],_0x543810?.[_0x4b6ed1(0x14c)]);if(_0x298ff4?.['status']!==httpStatus['OK']){_0x14c67d['payout_status']=_0x4b6ed1(0x205),(_0x14c67d[_0x4b6ed1(0x1e1)]=_0x298ff4?.[_0x4b6ed1(0x1e0)],_0x1c6430['transactions'][_0x4b6ed1(0x183)](_0x14c67d));return;}if(_0x298ff4?.['data']?.[_0x4b6ed1(0x1ef)]!==_0x260a80){_0x14c67d[_0x4b6ed1(0x181)]=_0x4b6ed1(0x205),(_0x14c67d['payout_status_message']=_0x4b6ed1(0x167)+_0x298ff4?.[_0x4b6ed1(0x14c)]?.['currency'],_0x1c6430[_0x4b6ed1(0x1ea)]['push'](_0x14c67d));return;}_0x32ae4a[_0x4b6ed1(0x12a)]=_0x298ff4?.[_0x4b6ed1(0x14c)]?.[_0x4b6ed1(0x149)];let _0xa1270d={'data':_0x32ae4a,'purpose_of_remittance':_0x3a47b7},_0x532b4d=await receiverService[_0x4b6ed1(0x204)](_0xa1270d,_0x543810?.['data']);console['log'](_0x4b6ed1(0x1a2),_0x532b4d);if(_0x532b4d?.[_0x4b6ed1(0x133)]!==httpStatus['OK']){console[_0x4b6ed1(0x1ae)](_0x4b6ed1(0x1ac),_0x532b4d),_0x14c67d[_0x4b6ed1(0x181)]='failed',_0x14c67d[_0x4b6ed1(0x1e1)]=_0x532b4d?.['message'],_0x1c6430['transactions'][_0x4b6ed1(0x183)](_0x14c67d);return;}var _0x21c68d={'receiver_id':_0x1f5995,'account_details':_0x32ae4a,'destination_amount':_0x3d6ce3,'destination_currency':_0x260a80,'debit_amount':_0x54292a,'debit_currency':_0x4c16e4,'extra':{'receiver':_0x3efbe4,'payer':_0x298ff4?.[_0x4b6ed1(0x14c)],'MID':_0x543810?.[_0x4b6ed1(0x14c)]}};const _0x143956=await quotationService[_0x4b6ed1(0x1ba)](_0x21c68d);if(_0x143956?.[_0x4b6ed1(0x133)]!==httpStatus['OK']){_0x14c67d['payout_status']='failed',_0x14c67d[_0x4b6ed1(0x1e1)]=_0x143956?.['message'],_0x1c6430[_0x4b6ed1(0x1ea)][_0x4b6ed1(0x183)](_0x14c67d);return;}_0x143956[_0x4b6ed1(0x14c)][_0x4b6ed1(0x163)]={'order_id':_0xc351,'wallet_id':_0x91c0b4,'account_id':helperService[_0x4b6ed1(0x13f)](_0x120590)?_0x32ae4a?.['account_id']:_0x120590,'purpose_of_remittance':_0x3a47b7,'payout_reference':_0x3ac779,'webhook_url':_0x462567},_0x14c67d[_0x4b6ed1(0x14f)]=_0x1f5995,_0x14c67d[_0x4b6ed1(0x1a6)]=_0x143956?.[_0x4b6ed1(0x14c)]?.['id'];const _0x276577=await quotationService[_0x4b6ed1(0x186)](_0x143956?.[_0x4b6ed1(0x14c)],_0x298ff4?.[_0x4b6ed1(0x14c)],_0x3efbe4,_0x32ae4a,_0x27645b,_0x543810?.[_0x4b6ed1(0x14c)]);if(_0x276577?.[_0x4b6ed1(0x133)]!==httpStatus['OK']){_0x14c67d[_0x4b6ed1(0x181)]=_0x4b6ed1(0x205),_0x14c67d['payout_status_message']=_0x276577?.[_0x4b6ed1(0x1e0)],_0x1c6430[_0x4b6ed1(0x1ea)][_0x4b6ed1(0x183)](_0x14c67d);return;}_0x14c67d[_0x4b6ed1(0x14c)]=_0x276577?.[_0x4b6ed1(0x14c)];if(!_0x5a5c67){_0x14c67d[_0x4b6ed1(0x181)]=_0x4b6ed1(0x201),_0x14c67d['payout_status_message']=_0x4b6ed1(0x201);const _0x33b5e4={..._0x14c67d?.['data'],'payout_status':_0x14c67d[_0x4b6ed1(0x181)],'payout_status_message':_0x14c67d['payout_status_message']};delete _0x33b5e4[_0x4b6ed1(0x140)],_0x1c6430[_0x4b6ed1(0x1ea)][_0x4b6ed1(0x183)](_0x33b5e4);return;}let _0x4c14be=_0x276577?.[_0x4b6ed1(0x14c)]?.[_0x4b6ed1(0x15c)];console['log'](_0x4b6ed1(0x16c),_0x4c14be);const _0x10beaf=await quotationService[_0x4b6ed1(0x1f9)](_0x4c14be,_0x27645b,_0x543810?.[_0x4b6ed1(0x14c)],_0x143956?.[_0x4b6ed1(0x14c)]?.['request'],_0x32ae4a);if(_0x10beaf?.[_0x4b6ed1(0x133)]!==httpStatus['OK']){_0x14c67d[_0x4b6ed1(0x181)]=_0x4b6ed1(0x205),_0x14c67d[_0x4b6ed1(0x1e1)]=_0x10beaf?.[_0x4b6ed1(0x1e0)],_0x1c6430['transactions'][_0x4b6ed1(0x183)](_0x14c67d);return;}_0x14c67d[_0x4b6ed1(0x14c)]=_0x10beaf?.[_0x4b6ed1(0x14c)],_0x14c67d['payout_status']=_0x4b6ed1(0x201),_0x14c67d[_0x4b6ed1(0x1e1)]=_0x4b6ed1(0x201);const _0x113660={..._0x14c67d?.[_0x4b6ed1(0x14c)],'payout_status':_0x14c67d['payout_status'],'payout_status_message':_0x14c67d['payout_status_message']};delete _0x113660['batch_id'],_0x1c6430['transactions']['push'](_0x113660);let _0x16aa8a=_0x10beaf?.[_0x4b6ed1(0x14c)];const _0x2eaa6f={'submerchant_id':helperService[_0x4b6ed1(0x13f)](_0x3efbe4?.[_0x4b6ed1(0x10f)])?null:_0x3efbe4?.['sub_merchant_id'],'receiver_id':helperService[_0x4b6ed1(0x13f)](_0x1f5995)?null:String(_0x1f5995),'currecny':_0x16aa8a?.['credit_details']?.['currency'],'amount':String(_0x16aa8a?.[_0x4b6ed1(0x1d9)]?.[_0x4b6ed1(0x17a)]),'transaction_id':String(_0x16aa8a?.[_0x4b6ed1(0x15c)]),'order_id':_0x16aa8a?.[_0x4b6ed1(0x10a)],'order_status':_0x4b6ed1(0x124)};console['log'](_0x4b6ed1(0x168),_0x2eaa6f);var _0x253359=await nodeServerAPIService[_0x4b6ed1(0x17c)](_0x59583c,_0x2eaa6f);console[_0x4b6ed1(0x1ae)](_0x4b6ed1(0x148),_0x253359);}catch(_0x3ae467){console['error']('Error\x20in\x20transaction\x20'+_0x44b688[_0x4b6ed1(0x1b6)]+':',_0x3ae467[_0x4b6ed1(0x1e0)]),(_0x14c67d[_0x4b6ed1(0x181)]=_0x4b6ed1(0x205),_0x14c67d[_0x4b6ed1(0x1e1)]=_0x3ae467[_0x4b6ed1(0x1e0)]),_0x1c6430[_0x4b6ed1(0x1ea)][_0x4b6ed1(0x183)](_0x14c67d);}}})),_0x8f4c5e[_0x283617(0x133)](httpStatus['OK'])[_0x283617(0x15e)]({'status':httpStatus['OK'],'message':_0x283617(0x127),'data':_0x1c6430});}),manage_batch_payout=catchAsync(async(_0x1d1988,_0x3fccbf)=>{const _0x5e6bd4=a6_0x35fecc,{action:_0x526d93,batch_id:_0x31b2db}=_0x1d1988[_0x5e6bd4(0x123)];if(_0x526d93==='CANCEL')cancel_batch(_0x31b2db,_0x3fccbf);else _0x526d93===_0x5e6bd4(0x1cd)&&confirm_batch(_0x31b2db,_0x3fccbf);}),cancel_batch_payout=catchAsync(async(_0x1d30a4,_0x3ac017)=>{const _0xd07e0d=a6_0x35fecc,_0x266358=_0x1d30a4[_0xd07e0d(0x182)][_0xd07e0d(0x140)];cancel_batch(_0x266358,_0x3ac017);}),cancel_batch=catchAsync(async(_0xc777dc,_0x5c009d)=>{const _0x47bd80=a6_0x35fecc,_0x4c56dc=await transactionService[_0x47bd80(0x197)](_0xc777dc);if(Array[_0x47bd80(0x18e)](_0x4c56dc?.[_0x47bd80(0x14c)])&&_0x4c56dc?.['data']?.['length']>0x0){}else{_0x5c009d['status'](httpStatus['OK'])[_0x47bd80(0x15e)]({'status':httpStatus[_0x47bd80(0x121)],'message':_0x47bd80(0x1fa)});return;}var _0x3f39e6=[];await Promise[_0x47bd80(0x13d)](_0x4c56dc?.[_0x47bd80(0x14c)][_0x47bd80(0x18a)](async _0x53aeb7=>{const _0x39003c=_0x47bd80;if(_0x53aeb7[_0x39003c(0x1bc)]===_0x39003c(0x1a5)){const _0x36d61c=await transactionService[_0x39003c(0x1dd)](_0x53aeb7?.[_0x39003c(0x15c)],_0x39003c(0x13c));if(Array[_0x39003c(0x18e)](_0x36d61c?.[_0x39003c(0x14c)])&&_0x36d61c?.[_0x39003c(0x14c)]?.['length']>0x0)return;const _0x4a7e70=await pspService[_0x39003c(0x1cf)](_0x53aeb7?.[_0x39003c(0x12c)]);if(_0x4a7e70?.[_0x39003c(0x133)]!==httpStatus['OK'])return _0x4a7e70;const _0x12a44a=await quotationService[_0x39003c(0x1fe)](_0x53aeb7?.[_0x39003c(0x15c)],_0x4a7e70?.[_0x39003c(0x14c)]),_0x49551b={'batch_id':_0xc777dc,'transaction_id':_0x53aeb7[_0x39003c(0x15c)],'data':_0x12a44a};_0x3f39e6[_0x39003c(0x183)](_0x49551b);}})),_0x5c009d[_0x47bd80(0x133)](httpStatus['OK'])[_0x47bd80(0x15e)]({'status':httpStatus['OK'],'message':_0x3f39e6?.[_0x47bd80(0x166)]>0x0?'Done':_0x47bd80(0x1e8),'data':_0x3f39e6});}),confirm_batch_payout=catchAsync(async(_0x3421da,_0x22eecf)=>{const _0x16e5d0=a6_0x35fecc,_0x55fce0=_0x3421da[_0x16e5d0(0x182)][_0x16e5d0(0x140)];confirm_batch(_0x55fce0,_0x22eecf);}),confirm_batch=catchAsync(async(_0x443cb7,_0x3633d6)=>{const _0x45a162=a6_0x35fecc,_0xab25a2=await transactionService['getByBatchId'](_0x443cb7);if(Array[_0x45a162(0x18e)](_0xab25a2?.[_0x45a162(0x14c)])&&_0xab25a2?.[_0x45a162(0x14c)]?.['length']>0x0){}else{_0x3633d6[_0x45a162(0x133)](httpStatus['OK'])[_0x45a162(0x15e)]({'status':httpStatus[_0x45a162(0x121)],'message':_0x45a162(0x1fa)});return;}var _0xd4c48b=[];await Promise['all'](_0xab25a2?.['data'][_0x45a162(0x18a)](async _0x3069a5=>{const _0x3b603d=_0x45a162;if(_0x3069a5?.[_0x3b603d(0x1bc)]===_0x3b603d(0x1a5)){const _0x16d830=await transactionService[_0x3b603d(0x1dd)](_0x3069a5?.['transaction_id'],_0x3b603d(0x13c));if(Array[_0x3b603d(0x18e)](_0x16d830?.['data'])&&_0x16d830?.['data']?.['length']>0x0)return;const _0x51d1aa=await transactionService['getById'](_0x3069a5?.[_0x3b603d(0x15c)]);console[_0x3b603d(0x1ae)](_0x3b603d(0x145),_0x51d1aa);if(_0x51d1aa[_0x3b603d(0x133)]!==httpStatus['OK'])return _0x51d1aa;const _0x14244a={};if(_0x51d1aa?.[_0x3b603d(0x14c)]?.[_0x3b603d(0x136)])_0x14244a[_0x3b603d(0x136)]=_0x51d1aa?.[_0x3b603d(0x14c)]?.['account_id'];else{if(_0x51d1aa?.['data']?.[_0x3b603d(0x10f)]&&_0x51d1aa?.[_0x3b603d(0x14c)]?.[_0x3b603d(0x114)])_0x14244a['submerchant_id']=String(_0x51d1aa?.[_0x3b603d(0x14c)]?.[_0x3b603d(0x10f)]),_0x14244a[_0x3b603d(0x1ef)]=_0x51d1aa?.[_0x3b603d(0x14c)]?.['payer_currency'];else _0x51d1aa?.[_0x3b603d(0x14c)]?.['receiver_id']&&_0x51d1aa?.[_0x3b603d(0x14c)]?.[_0x3b603d(0x114)]&&(_0x14244a[_0x3b603d(0x14f)]=String(_0x51d1aa?.[_0x3b603d(0x14c)]?.['receiver_id']),_0x14244a[_0x3b603d(0x1ef)]=_0x51d1aa?.[_0x3b603d(0x14c)]?.['payer_currency']);}console[_0x3b603d(0x1ae)](_0x3b603d(0x14b),_0x14244a);var _0x568022=await nodeServerAPIService[_0x3b603d(0x12b)](_0x14244a);console[_0x3b603d(0x1ae)]('🚀\x20~\x20account_details:',_0x568022);if(_0x568022?.['status']!=httpStatus['OK']){console[_0x3b603d(0x1ae)]('🚀\x20~\x20receiver_account_details:',_0x568022);return;}if(_0x568022?.['data']?.[_0x3b603d(0x1d5)]!=0x1){console[_0x3b603d(0x1ae)](_0x3b603d(0x1c1),{'status':0x190,'message':_0x3b603d(0x175)});return;}_0x568022=_0x568022?.['data'],_0x568022[_0x3b603d(0x12a)]=_0x51d1aa?.[_0x3b603d(0x14c)]?.[_0x3b603d(0x12a)];const _0x18f78f=await pspService['get_mid_by_id'](_0x3069a5?.[_0x3b603d(0x12c)]);if(_0x18f78f?.[_0x3b603d(0x133)]!==httpStatus['OK'])return _0x18f78f;let _0x468faf={'order_id':_0x51d1aa?.[_0x3b603d(0x14c)]?.['order_id'],'wallet_id':_0x51d1aa?.[_0x3b603d(0x14c)]?.[_0x3b603d(0x112)],'account_id':helperService[_0x3b603d(0x13f)](_0x51d1aa?.[_0x3b603d(0x14c)]?.[_0x3b603d(0x136)])?_0x568022?.['account_id']:_0x51d1aa?.[_0x3b603d(0x14c)]?.[_0x3b603d(0x136)],'purpose_of_remittance':_0x51d1aa?.[_0x3b603d(0x14c)]?.['purpose_of_remittance'],'payout_reference':_0x51d1aa?.['data']?.[_0x3b603d(0x195)],'webhook_url':_0x51d1aa?.[_0x3b603d(0x14c)]?.[_0x3b603d(0x1c8)]};console['log'](_0x3b603d(0x109),_0x468faf);const _0x33d4ef=await quotationService[_0x3b603d(0x1f9)](_0x3069a5['transaction_id'],_0x443cb7,_0x18f78f?.[_0x3b603d(0x14c)],_0x468faf,_0x568022);_0xd4c48b[_0x3b603d(0x183)](_0x33d4ef?.['data']);try{let _0x108070=_0x33d4ef?.['data'];const _0x258a75={'submerchant_id':helperService[_0x3b603d(0x13f)](_0x108070?.['sub_merchant_id'])?null:receiver?.[_0x3b603d(0x10f)],'receiver_id':helperService[_0x3b603d(0x13f)](_0x108070?.[_0x3b603d(0x14f)])?null:String(_0x108070?.[_0x3b603d(0x14f)]),'currecny':_0x108070?.[_0x3b603d(0x18d)]?.['currency'],'amount':String(_0x108070?.[_0x3b603d(0x18d)]?.['amount']),'transaction_id':String(_0x108070?.[_0x3b603d(0x15c)]),'order_id':_0x108070?.['external_id'],'order_status':_0x3b603d(0x124)};console[_0x3b603d(0x1ae)]('🚀\x20~\x20payout\x20~\x20payload:',_0x258a75);var _0x4e393b=await nodeServerAPIService[_0x3b603d(0x17c)](req,_0x258a75);console[_0x3b603d(0x1ae)](_0x3b603d(0x148),_0x4e393b);}catch(_0x23d07e){console['log'](_0x3b603d(0x1e2),_0x23d07e);}}})),_0x3633d6[_0x45a162(0x133)](httpStatus['OK'])[_0x45a162(0x15e)]({'status':httpStatus['OK'],'message':_0x45a162(0x189),'batch_id':_0x443cb7,'data':_0xd4c48b});}),get_batch_transaction_status=catchAsync(async(_0x259303,_0x8031c1)=>{const _0x166626=a6_0x35fecc,_0xa1d769=_0x259303[_0x166626(0x182)]['batch_id'],_0x4d714a=await transactionService[_0x166626(0x197)](_0xa1d769);if(Array[_0x166626(0x18e)](_0x4d714a?.[_0x166626(0x14c)])&&_0x4d714a?.[_0x166626(0x14c)]?.[_0x166626(0x166)]>0x0){}else{_0x8031c1[_0x166626(0x133)](httpStatus['OK'])['send']({'status':httpStatus[_0x166626(0x121)],'message':_0x166626(0x1fa)});return;}var _0x316005=[];await Promise[_0x166626(0x13d)](_0x4d714a?.[_0x166626(0x14c)][_0x166626(0x18a)](async _0x5ca2de=>{const _0x4b8dd1=_0x166626,_0x40410d=await pspService[_0x4b8dd1(0x1cf)](_0x5ca2de?.['mid_id']);if(_0x40410d?.[_0x4b8dd1(0x133)]!==httpStatus['OK']){_0x8031c1[_0x4b8dd1(0x133)](httpStatus[_0x4b8dd1(0x107)])[_0x4b8dd1(0x15e)](_0x40410d);return;}const _0x1a639f=await quotationService[_0x4b8dd1(0x1c9)](_0x5ca2de?.[_0x4b8dd1(0x15c)],_0x40410d?.[_0x4b8dd1(0x14c)]),_0x1f081b={..._0x1a639f?.[_0x4b8dd1(0x14c)],'status':_0x1a639f?.[_0x4b8dd1(0x133)],'message':_0x1a639f?.['message']};_0x316005['push'](_0x1f081b);})),_0x8031c1[_0x166626(0x133)](httpStatus['OK'])[_0x166626(0x15e)]({'status':httpStatus['OK'],'message':_0x316005?.[_0x166626(0x166)]>0x0?_0x166626(0x189):_0x166626(0x1e8),'batch_id':_0xa1d769,'data':_0x316005});}),payout=catchAsync(async(_0x484913,_0x224b76)=>{const _0x368e66=a6_0x35fecc,{order_id:_0xc02349,amount:_0x312257,confirmation_required:_0x3abb6e,purpose_of_remittance:_0x17e941,payout_reference:_0x248625,debit_amount:_0x43fe09,debit_currency:_0x2de800,webhook_url:_0xbd41f0}=_0x484913[_0x368e66(0x123)];let _0x379f88=_0x484913[_0x368e66(0x123)][_0x368e66(0x112)],_0x8f1f84=_0x484913['body'][_0x368e66(0x1ef)],_0x5bdf44=_0x484913[_0x368e66(0x123)][_0x368e66(0x10f)],_0x3235ca=_0x484913[_0x368e66(0x123)][_0x368e66(0x14f)],_0x44816a=_0x484913[_0x368e66(0x123)][_0x368e66(0x136)];if(_0x379f88){let _0x272bb9=await nodeServerAPIService['get_wallet_details_by_id'](_0x379f88);console[_0x368e66(0x1ae)](_0x368e66(0x1e5),_0x272bb9);if(_0x272bb9?.[_0x368e66(0x133)]!==httpStatus['OK']){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])['send'](_0x272bb9);return;}_0x8f1f84=_0x272bb9?.[_0x368e66(0x14c)]?.[_0x368e66(0x1ef)],_0x3235ca=_0x272bb9?.['data']?.[_0x368e66(0x14f)],_0x379f88=_0x272bb9?.[_0x368e66(0x14c)][_0x368e66(0x112)];}else{if(_0x5bdf44&&_0x8f1f84){let _0x29485a={'sub_merchant_id':String(_0x5bdf44),'currency':_0x8f1f84},_0x226a5f=await nodeServerAPIService[_0x368e66(0x131)](_0x29485a);console[_0x368e66(0x1ae)](_0x368e66(0x203),_0x226a5f);if(_0x226a5f?.[_0x368e66(0x133)]!==httpStatus['OK']){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])[_0x368e66(0x15e)](_0x226a5f);return;}_0x8f1f84=_0x226a5f?.[_0x368e66(0x14c)]?.[_0x368e66(0x1ef)],_0x3235ca=_0x226a5f?.[_0x368e66(0x14c)]?.['receiver_id'],_0x379f88=_0x226a5f?.['data'][_0x368e66(0x112)];}else{if(_0x3235ca&&_0x8f1f84){let _0x18798b={'receiver_id':String(_0x3235ca),'currency':_0x8f1f84},_0x52b473=await nodeServerAPIService[_0x368e66(0x131)](_0x18798b);console['log'](_0x368e66(0x179),_0x52b473);if(_0x52b473?.[_0x368e66(0x133)]!==httpStatus['OK']){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])['send'](_0x52b473);return;}_0x8f1f84=_0x52b473?.[_0x368e66(0x14c)]?.[_0x368e66(0x1ef)],_0x3235ca=_0x52b473?.[_0x368e66(0x14c)]?.['receiver_id'],_0x379f88=_0x52b473?.[_0x368e66(0x14c)][_0x368e66(0x112)];}}}let _0x5ddcbc=null;_0x5ddcbc=await nodeServerAPIService['get_company_details'](),console[_0x368e66(0x1ae)](_0x368e66(0x1f5),_0x5ddcbc);let _0x5de3ff=await receiverService[_0x368e66(0x1cc)](_0x3235ca);console[_0x368e66(0x1ae)](_0x368e66(0x13a),_0x5de3ff);if(undefined!=_0x5de3ff?.[_0x368e66(0x133)]&&_0x5de3ff?.[_0x368e66(0x133)]!=httpStatus['OK']){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])['send']({'status':0x190,'message':_0x5de3ff?.[_0x368e66(0x1e0)]});return;}if(helperService[_0x368e66(0x13f)](_0x5de3ff)){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])['send']({'status':0x190,'message':'Receiver\x20not\x20found!'});return;}if(_0x5de3ff?.[_0x368e66(0x16d)]!=='verified'){_0x224b76['status'](httpStatus['OK'])[_0x368e66(0x15e)]({'status':0x190,'message':_0x368e66(0x1fb)});return;}if(_0x5de3ff?.[_0x368e66(0x1b7)]!==0x1){_0x224b76['status'](httpStatus['OK'])[_0x368e66(0x15e)]({'status':0x190,'message':'Receiver\x20is\x20not\x20active!'});return;}const _0x466d2f={};if(_0x44816a)_0x466d2f[_0x368e66(0x136)]=_0x44816a;else{if(_0x5de3ff?.['sub_merchant_id']&&_0x8f1f84)_0x466d2f[_0x368e66(0x1ca)]=String(_0x5de3ff?.['sub_merchant_id']),_0x466d2f[_0x368e66(0x1ef)]=_0x8f1f84;else _0x5de3ff?.['receiver_id']&&_0x8f1f84&&(_0x466d2f['receiver_id']=String(_0x5de3ff?.[_0x368e66(0x14f)]),_0x466d2f['currency']=_0x8f1f84);}console[_0x368e66(0x1ae)]('🚀\x20~\x20get_funding_details_payload:',_0x466d2f);var _0x58afdd=await nodeServerAPIService[_0x368e66(0x12b)](_0x466d2f);console[_0x368e66(0x1ae)](_0x368e66(0x1c5),_0x58afdd);if(_0x58afdd?.['status']!=httpStatus['OK']){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])[_0x368e66(0x15e)](_0x58afdd);return;}if(_0x58afdd?.[_0x368e66(0x14c)]?.[_0x368e66(0x1d5)]!=0x1){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])[_0x368e66(0x15e)]({'status':0x190,'message':'Account\x20is\x20not\x20verified!'});return;}if(_0x58afdd?.[_0x368e66(0x14c)]?.[_0x368e66(0x147)]!=0x1){_0x224b76['status'](httpStatus['OK'])[_0x368e66(0x15e)]({'status':0x190,'message':_0x368e66(0x120)});return;}_0x58afdd=_0x58afdd?.['data'];try{parseFloat(_0x312257);}catch(_0x549e7f){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])[_0x368e66(0x15e)]({'status':0x190,'message':_0x368e66(0x192)});return;}let _0x320b87={};if(_0x379f88)_0x320b87[_0x368e66(0x112)]=_0x379f88;else{if(_0x5de3ff?.[_0x368e66(0x10f)]&&_0x8f1f84)_0x320b87['sub_merchant_id']=_0x5de3ff?.['sub_merchant_id'],_0x320b87[_0x368e66(0x1ef)]=_0x8f1f84;else _0x3235ca&&_0x8f1f84&&(_0x320b87['receiver_id']=_0x3235ca,_0x320b87[_0x368e66(0x1ef)]=_0x8f1f84);}console['log'](_0x368e66(0x10e),_0x320b87);let _0xe8661a=await quotationService[_0x368e66(0x1bd)](_0x320b87);if(_0xe8661a?.[_0x368e66(0x133)]!=httpStatus['OK']){console[_0x368e66(0x1ae)](_0x368e66(0x128),_0xe8661a),_0x224b76[_0x368e66(0x133)](httpStatus['OK'])[_0x368e66(0x15e)]({'status':0x190,'message':_0xe8661a?.[_0x368e66(0x1e0)]});return;}let _0xa17ec7=_0xe8661a?.[_0x368e66(0x14c)]?.[_0x368e66(0x14c)]?.['balance'];console['log'](_0x368e66(0x1de),_0xa17ec7);if(helperService[_0x368e66(0x153)](_0xa17ec7)==0x0||helperService[_0x368e66(0x153)](_0xa17ec7)<helperService[_0x368e66(0x153)](_0x312257)){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])['send']({'status':0x190,'message':_0x368e66(0x11b)});return;}let _0x173d00=await quotationService['payout_psp_routing'](_0x58afdd);console['log']('🚀\x20~\x20payout\x20~\x20MID:',_0x173d00),console[_0x368e66(0x1ae)]('🚀\x20~\x20receiver_account_details?.payer_id\x20~\x20MID:',_0x58afdd?.[_0x368e66(0x18c)]);if(_0x173d00?.[_0x368e66(0x133)]!==httpStatus['OK']){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])[_0x368e66(0x15e)](_0x173d00);return;}if(_0x58afdd?.[_0x368e66(0x18c)]==_0x368e66(0x15a)){console['log'](_0x368e66(0x207)),console[_0x368e66(0x1ae)](_0x484913[_0x368e66(0x123)],_0x58afdd);let _0x1f69f6=_0x173d00?.[_0x368e66(0x14c)];console['log'](_0x1f69f6);if(_0x58afdd?.[_0x368e66(0x1ef)]!=_0x8f1f84){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])[_0x368e66(0x15e)]({'status':0x190,'message':_0x368e66(0x167)+_0x58afdd?.[_0x368e66(0x1ef)]});return;}if(helperService['isNotValid'](_0x1f69f6?.[_0x368e66(0x1d2)])){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])['send']({'status':0x190,'message':_0x368e66(0x1c4)});return;}if(helperService[_0x368e66(0x13f)](_0x1f69f6?.[_0x368e66(0x157)])){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])[_0x368e66(0x15e)]({'status':0x190,'message':_0x368e66(0x19d)});return;}if(helperService[_0x368e66(0x13f)](_0x1f69f6?.[_0x368e66(0x19e)])){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])['send']({'status':0x190,'message':_0x368e66(0x20a)});return;}let _0x3c8ee7=await getAccessToken(_0x1f69f6?.['primary_key'],_0x1f69f6?.[_0x368e66(0x157)],_0x1f69f6?.[_0x368e66(0x19e)]);if(!_0x3c8ee7){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])[_0x368e66(0x15e)]({'status':0x190,'message':_0x368e66(0x1bf)});return;}let _0x1696f3=await helperService[_0x368e66(0x170)](),_0x5271fc={'amount':_0x312257,'currency':_0x8f1f84,'externalId':_0x1696f3,'payee':{'partyIdType':'MSISDN','partyId':_0x58afdd?.['account_details']?.['MSISDN']},'payerMessage':_0x368e66(0x1b9),'payeeNote':_0x368e66(0x161)+_0x8f1f84+'\x20'+_0x312257},_0x27dcb6=await initiateTransfer(_0x3c8ee7,_0x5271fc,_0x1f69f6['primary_key']);if(!_0x27dcb6){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])[_0x368e66(0x15e)]({'status':0x190,'message':_0x368e66(0x191)});return;}let _0x17c357=await getTransferStatus(_0x3c8ee7,_0x27dcb6,_0x1f69f6[_0x368e66(0x1d2)]);console[_0x368e66(0x1ae)](_0x368e66(0x1f7),_0x17c357);let _0x2097b0='PENDING';if(_0x17c357?.['status']==='SUCCESSFUL')_0x2097b0=_0x368e66(0x12e);else _0x17c357?.[_0x368e66(0x133)]===_0x368e66(0x1f6)&&(_0x2097b0=_0x368e66(0x1f6));let _0x271d84={'transaction_id':_0x27dcb6,'external_id':_0x1696f3,'receiver_id':_0x3235ca,'order_id':_0xc02349,'wallet_id':_0x379f88,'account_id':_0x58afdd?.[_0x368e66(0x136)],'mid_id':_0x173d00?.[_0x368e66(0x14c)]?.['id'],'batch_id':'','super_merchant_id':'','sub_merchant_id':helperService[_0x368e66(0x110)](_0x5de3ff?.['sub_merchant_id'])?_0x5de3ff?.[_0x368e66(0x10f)]:null,'transaction_type':_0x368e66(0x158),'wholesale_fx_rate':parseFloat(0x0),'destination_amount':parseFloat(_0x312257),'destination_currency':_0x8f1f84,'sent_amount':parseFloat(_0x312257),'sent_currency':_0x8f1f84,'source_amount':parseFloat(_0x312257),'source_currency':_0x8f1f84,'source_country_iso_code':_0x58afdd?.[_0x368e66(0x14e)],'payer_country_iso_code':_0x368e66(0x14d),'fee_amount':parseFloat(0x0),'fee_currency':'NA','creation_date':moment()[_0x368e66(0x132)](_0x368e66(0x1db)),'expiration_date':moment()[_0x368e66(0x132)](_0x368e66(0x1db)),'payer_id':_0x58afdd?.[_0x368e66(0x18c)],'payer_currency':_0x8f1f84,'service_id':_0x58afdd?.[_0x368e66(0x13e)],'service_name':'Mobile\x20Wallet','status_message':_0x2097b0,'callback_url':_0x1f69f6[_0x368e66(0x1aa)],'payer_name':_0x368e66(0x1eb),'payout_reference':helperService[_0x368e66(0x13f)](_0x248625)?null:_0x248625,'reason':helperService[_0x368e66(0x13f)](_0x17c357?.['reason'])?null:_0x17c357?.['reason']};console[_0x368e66(0x1ae)](_0x368e66(0x11e),_0x271d84),await transaction[_0x368e66(0x159)](_0x271d84);let _0x4f1278='';helperService[_0x368e66(0x13f)](_0x58afdd?.[_0x368e66(0x10f)])&&helperService[_0x368e66(0x110)](_0x58afdd?.[_0x368e66(0x14f)])?_0x4f1278=_0x368e66(0x1c2):_0x4f1278=_0x368e66(0x1ec);let _0xf8b497={'transaction_id':helperService['isNotValid'](_0x271d84?.[_0x368e66(0x15c)])?'':_0x271d84?.[_0x368e66(0x15c)],'order_id':_0x271d84?.[_0x368e66(0x1f0)],'external_id':_0x271d84?.[_0x368e66(0x10a)],'receiver_id':_0x271d84?.[_0x368e66(0x14f)],'sub_merchant_id':helperService[_0x368e66(0x13f)](_0x271d84?.[_0x368e66(0x10f)])?0x0:_0x271d84?.[_0x368e66(0x10f)],'transaction_date':_0x271d84?.['creation_date'],'account_id':_0x271d84?.[_0x368e66(0x136)],'account_type':_0x58afdd?.['customer_type']?.['toLowerCase']()==='business'?0x2:0x1,'account_for':_0x4f1278,'account_data':JSON['stringify'](_0x58afdd),'payer_id':_0x271d84?.['payer_id'],'payer_name':_0x271d84?.[_0x368e66(0x12a)],'payer_currency':_0x271d84?.[_0x368e66(0x114)],'payer_data':JSON[_0x368e66(0x130)]({'MSISDN':_0x58afdd?.['account_details']?.[_0x368e66(0x1eb)],'payer_id':_0x58afdd?.[_0x368e66(0x18c)],'payer_name':'MTN-MOMO'})};console[_0x368e66(0x1ae)](_0x368e66(0x1b5),_0xf8b497);let _0x5c02c4=await accountDetailsService[_0x368e66(0x146)](_0xf8b497);console['log'](_0x368e66(0x202),_0x5c02c4);const _0x31f41f={'submerchant_id':helperService[_0x368e66(0x110)](_0x5de3ff?.[_0x368e66(0x10f)])?_0x5de3ff?.['sub_merchant_id']:null,'receiver_id':helperService[_0x368e66(0x110)](_0x3235ca)?String(_0x3235ca):null,'currecny':_0x8f1f84,'amount':String(_0x312257),'transaction_id':String(_0x17c357?.['financialTransactionId']),'order_id':_0x271d84?.[_0x368e66(0x10a)],'order_status':_0x271d84?.['status_message']};console[_0x368e66(0x1ae)](_0x368e66(0x1ed),_0x31f41f);var _0x4678bf=await nodeServerAPIService[_0x368e66(0x17c)](_0x484913,_0x31f41f);console[_0x368e66(0x1ae)](_0x368e66(0x148),_0x4678bf);let _0x340392={};if(helperService[_0x368e66(0x13f)](_0x5de3ff?.[_0x368e66(0x10f)]))_0x340392={'id':_0x5de3ff?.['receiver_id'],'name':_0x5de3ff?.[_0x368e66(0x134)],'country':_0x5de3ff?.[_0x368e66(0x16a)],'webhook_url':_0x5de3ff?.['webhook_url']};else helperService[_0x368e66(0x110)](_0x5de3ff?.[_0x368e66(0x10f)])&&helperService['isValid'](_0x5de3ff?.[_0x368e66(0x14f)])&&(_0x340392={'id':null,'name':_0x5ddcbc?.[_0x368e66(0x14c)]?.[_0x368e66(0x138)],'country':_0x5ddcbc?.[_0x368e66(0x14c)]?.[_0x368e66(0x20e)],'webhook_url':null});let _0x1d7fd={'account_id':_0x58afdd?.[_0x368e66(0x136)],..._0x58afdd?.[_0x368e66(0x190)]};const _0x1acddc={'order_id':_0xc02349,'external_id':_0x271d84?.['external_id'],'transaction_id':_0x17c357?.[_0x368e66(0x1a3)],'sub_merchant_id':helperService[_0x368e66(0x110)](_0x5de3ff?.[_0x368e66(0x10f)])?_0x5de3ff?.[_0x368e66(0x10f)]:null,'receiver_id':helperService[_0x368e66(0x110)](_0x5de3ff?.[_0x368e66(0x14f)])?_0x5de3ff?.['receiver_id']:null,'currency':_0x8f1f84,'wallet_id':_0x379f88,'debit_party':_0x340392,'credit_party':_0x1d7fd,'credit_party_identifier':{'MSISDN':_0x58afdd?.[_0x368e66(0x190)]?.[_0x368e66(0x1eb)],'payer_id':_0x58afdd?.['payer_id'],'payer_name':'MTN-MOMO'},'debit_details':{'debit_amount':parseFloat(_0x312257),'currency':_0x8f1f84},'credit_details':{'amount':parseFloat(_0x312257),'currency':_0x8f1f84},'payout_reference':helperService[_0x368e66(0x110)](_0x248625)?_0x248625:null,'webhook_url':helperService['isValid'](_0xbd41f0)?_0xbd41f0:null,'purpose_of_remittance':helperService[_0x368e66(0x110)](_0x17e941)?_0x17e941:null,'document_reference_number':null,'transaction_status':_0x2097b0,'transaction_status_code':_0x2097b0==_0x368e66(0x1e3)?0x4e20:_0x2097b0=='PENDING'?0x7530:0x9c40,'order_created_date':moment(_0x271d84?.[_0x368e66(0x16f)])[_0x368e66(0x132)](_0x368e66(0x1db)),'order_updated_date':moment(_0x271d84?.[_0x368e66(0x16f)])[_0x368e66(0x132)](_0x368e66(0x1db)),'batch_id':null};_0x224b76[_0x368e66(0x133)](httpStatus['OK'])['send']({'status':httpStatus['OK'],'message':_0x368e66(0x141),'data':_0x1acddc});}else{if(_0x58afdd?.['payer_id']==_0x368e66(0x162)){console[_0x368e66(0x1ae)]('here\x20is\x20reciever\x20id\x20and\x20body'),console[_0x368e66(0x1ae)](_0x484913[_0x368e66(0x123)],_0x58afdd);let _0x4a3a73=_0x173d00?.[_0x368e66(0x14c)];console[_0x368e66(0x1ae)](_0x4a3a73);if(_0x58afdd?.[_0x368e66(0x1ef)]!=_0x8f1f84){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])[_0x368e66(0x15e)]({'status':0x190,'message':'Invalid\x20currency\x20selected!\x20The\x20receiver\x20only\x20accepts\x20payouts\x20in\x20'+_0x58afdd?.[_0x368e66(0x1ef)]});return;}if(helperService[_0x368e66(0x13f)](_0x4a3a73?.[_0x368e66(0x1d2)])){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])[_0x368e66(0x15e)]({'status':0x190,'message':_0x368e66(0x1c4)});return;}if(helperService[_0x368e66(0x13f)](_0x4a3a73?.[_0x368e66(0x157)])){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])[_0x368e66(0x15e)]({'status':0x190,'message':_0x368e66(0x19d)});return;}if(helperService[_0x368e66(0x13f)](_0x4a3a73?.[_0x368e66(0x19e)])){_0x224b76['status'](httpStatus['OK'])[_0x368e66(0x15e)]({'status':0x190,'message':_0x368e66(0x20a)});return;}let _0x4f6b11=await mtnMockService[_0x368e66(0x143)](_0x4a3a73?.[_0x368e66(0x1d2)],_0x4a3a73?.[_0x368e66(0x157)],_0x4a3a73?.[_0x368e66(0x19e)]);if(!_0x4f6b11){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])['send']({'status':0x190,'message':_0x368e66(0x1bf)});return;}let _0x388182=await helperService['make_unique_id'](),_0x454c94={'amount':_0x312257,'currency':_0x8f1f84,'externalId':_0x388182,'payee':{'partyIdType':_0x368e66(0x1eb),'partyId':_0x58afdd?.[_0x368e66(0x190)]?.[_0x368e66(0x1eb)]},'payerMessage':_0x368e66(0x1b9),'payeeNote':_0x368e66(0x161)+_0x8f1f84+'\x20'+_0x312257},_0x4b8cdf=await mtnMockService[_0x368e66(0x1d3)](_0x4f6b11,_0x454c94,_0x4a3a73[_0x368e66(0x1d2)]);if(!_0x4b8cdf){_0x224b76['status'](httpStatus['OK'])[_0x368e66(0x15e)]({'status':0x190,'message':_0x368e66(0x191)});return;}let _0x29ada7=await mtnMockService[_0x368e66(0x1c7)](_0x4f6b11,_0x4b8cdf,_0x4a3a73[_0x368e66(0x1d2)]);console[_0x368e66(0x1ae)](_0x368e66(0x1f7),_0x29ada7);let _0x14ea07=_0x368e66(0x124);if(_0x29ada7?.[_0x368e66(0x133)]===_0x368e66(0x1e3))_0x14ea07='COMPLETED';else _0x29ada7?.[_0x368e66(0x133)]===_0x368e66(0x1f6)&&(_0x14ea07='FAILED');let _0x492f9e={'transaction_id':_0x4b8cdf,'external_id':_0x388182,'receiver_id':_0x3235ca,'order_id':_0xc02349,'wallet_id':_0x379f88,'account_id':_0x58afdd?.[_0x368e66(0x136)],'mid_id':_0x173d00?.[_0x368e66(0x14c)]?.['id'],'batch_id':'','super_merchant_id':'','sub_merchant_id':helperService[_0x368e66(0x110)](_0x5de3ff?.['sub_merchant_id'])?_0x5de3ff?.[_0x368e66(0x10f)]:null,'transaction_type':_0x368e66(0x158),'wholesale_fx_rate':parseFloat(0x0),'destination_amount':parseFloat(_0x312257),'destination_currency':_0x8f1f84,'sent_amount':parseFloat(_0x312257),'sent_currency':_0x8f1f84,'source_amount':parseFloat(_0x312257),'source_currency':_0x8f1f84,'source_country_iso_code':_0x58afdd?.[_0x368e66(0x14e)],'payer_country_iso_code':'LBR','fee_amount':parseFloat(0x0),'fee_currency':'NA','creation_date':moment()['format'](_0x368e66(0x1db)),'expiration_date':moment()[_0x368e66(0x132)]('YYYY-MM-DD\x20hh:mm:ss'),'payer_id':_0x58afdd?.[_0x368e66(0x18c)],'payer_currency':_0x8f1f84,'service_id':_0x58afdd?.[_0x368e66(0x13e)],'service_name':_0x368e66(0x104),'status_message':_0x14ea07,'callback_url':_0x4a3a73[_0x368e66(0x1aa)],'payer_name':_0x368e66(0x1eb),'payout_reference':_0x248625};console[_0x368e66(0x1ae)](_0x368e66(0x11e),_0x492f9e),await transaction[_0x368e66(0x159)](_0x492f9e);let _0x125210='';helperService[_0x368e66(0x13f)](_0x58afdd?.[_0x368e66(0x10f)])&&helperService['isValid'](_0x58afdd?.[_0x368e66(0x14f)])?_0x125210='payout':_0x125210=_0x368e66(0x1ec);let _0x502668={'transaction_id':_0x492f9e?.[_0x368e66(0x15c)],'order_id':_0x492f9e?.[_0x368e66(0x1f0)],'external_id':_0x492f9e?.[_0x368e66(0x10a)],'receiver_id':_0x492f9e?.['receiver_id'],'sub_merchant_id':helperService[_0x368e66(0x13f)](_0x492f9e?.[_0x368e66(0x10f)])?0x0:_0x492f9e?.[_0x368e66(0x10f)],'transaction_date':_0x492f9e?.[_0x368e66(0x16f)],'account_id':_0x492f9e?.[_0x368e66(0x136)],'account_type':_0x58afdd?.[_0x368e66(0x19c)]?.[_0x368e66(0x1a4)]()===_0x368e66(0x15b)?0x2:0x1,'account_for':_0x125210,'account_data':JSON[_0x368e66(0x130)](_0x58afdd),'payer_id':_0x492f9e?.[_0x368e66(0x18c)],'payer_name':_0x492f9e?.[_0x368e66(0x12a)],'payer_currency':_0x492f9e?.[_0x368e66(0x114)],'payer_data':JSON[_0x368e66(0x130)]({'MSISDN':_0x58afdd?.[_0x368e66(0x190)]?.[_0x368e66(0x1eb)],'payer_id':_0x58afdd?.['payer_id'],'payer_name':_0x368e66(0x162)})};console[_0x368e66(0x1ae)](_0x368e66(0x1b5),_0x502668);let _0x502761=await accountDetailsService['add'](_0x502668);console[_0x368e66(0x1ae)]('🚀\x20~\x20create_transaction_API_Call\x20~\x20account_result:',_0x502761);const _0x206a74={'submerchant_id':helperService['isValid'](_0x5de3ff?.[_0x368e66(0x10f)])?_0x5de3ff?.['sub_merchant_id']:null,'receiver_id':helperService[_0x368e66(0x110)](_0x3235ca)?String(_0x3235ca):null,'currecny':_0x8f1f84,'amount':String(_0x312257),'transaction_id':String(_0x29ada7[_0x368e66(0x1a3)]),'order_id':_0x492f9e?.[_0x368e66(0x10a)],'order_status':_0x492f9e?.[_0x368e66(0x1bc)]};console[_0x368e66(0x1ae)]('🚀\x20~\x20constpayout_webhook=catchAsync\x20~\x20payload:',_0x206a74);var _0x4678bf=await nodeServerAPIService['update_payout_status'](_0x484913,_0x206a74);console[_0x368e66(0x1ae)](_0x368e66(0x148),_0x4678bf);let _0x263741={};if(helperService[_0x368e66(0x13f)](_0x5de3ff?.[_0x368e66(0x10f)]))_0x263741={'id':_0x5de3ff?.['receiver_id'],'name':_0x5de3ff?.[_0x368e66(0x134)],'country':_0x5de3ff?.[_0x368e66(0x16a)],'webhook_url':_0x5de3ff?.[_0x368e66(0x142)]};else helperService[_0x368e66(0x110)](_0x5de3ff?.['sub_merchant_id'])&&helperService[_0x368e66(0x110)](_0x5de3ff?.['receiver_id'])&&(_0x263741={'id':null,'name':_0x5ddcbc?.[_0x368e66(0x14c)]?.[_0x368e66(0x138)],'country':_0x5ddcbc?.[_0x368e66(0x14c)]?.[_0x368e66(0x20e)],'webhook_url':null});let _0x2d9099={'account_id':_0x58afdd?.[_0x368e66(0x136)],..._0x58afdd?.[_0x368e66(0x190)]};const _0x9e12df={'order_id':_0xc02349,'external_id':_0x492f9e?.[_0x368e66(0x10a)],'transaction_id':_0x29ada7[_0x368e66(0x1a3)],'sub_merchant_id':helperService[_0x368e66(0x110)](_0x5de3ff?.[_0x368e66(0x10f)])?_0x5de3ff?.[_0x368e66(0x10f)]:null,'receiver_id':helperService['isValid'](_0x5de3ff?.[_0x368e66(0x14f)])?_0x5de3ff?.['receiver_id']:null,'currency':_0x8f1f84,'wallet_id':_0x379f88,'debit_party':_0x263741,'credit_party':_0x2d9099,'credit_party_identifier':{'MSISDN':_0x58afdd?.[_0x368e66(0x190)]?.[_0x368e66(0x1eb)],'payer_id':_0x58afdd?.[_0x368e66(0x18c)],'payer_name':'MTN'},'debit_details':{'debit_amount':parseFloat(_0x312257),'currency':_0x8f1f84},'credit_details':{'amount':parseFloat(_0x312257),'currency':_0x8f1f84},'payout_reference':helperService[_0x368e66(0x110)](_0x248625)?_0x248625:null,'webhook_url':helperService[_0x368e66(0x110)](_0xbd41f0)?_0xbd41f0:null,'purpose_of_remittance':helperService[_0x368e66(0x110)](_0x17e941)?_0x17e941:null,'document_reference_number':null,'transaction_status':_0x29ada7?.[_0x368e66(0x133)]==_0x368e66(0x1e3)?_0x368e66(0x12e):_0x368e66(0x1f6),'transaction_status_code':_0x29ada7?.[_0x368e66(0x133)]=='SUCCESSFUL'?0x4e20:0x9c40,'order_created_date':moment(_0x492f9e?.['creation_date'])[_0x368e66(0x132)](_0x368e66(0x1db)),'order_updated_date':moment(_0x492f9e?.[_0x368e66(0x16f)])[_0x368e66(0x132)](_0x368e66(0x1db)),'batch_id':null};_0x224b76[_0x368e66(0x133)](httpStatus['OK'])[_0x368e66(0x15e)]({'status':httpStatus['OK'],'message':_0x368e66(0x141),'data':_0x9e12df});}else{if(_0x58afdd?.['payer_id']==_0x368e66(0x1a7)){console[_0x368e66(0x1ae)](_0x368e66(0x155)),console[_0x368e66(0x1ae)](_0x484913[_0x368e66(0x123)],_0x5de3ff);let _0x4aad0a=_0x173d00?.[_0x368e66(0x14c)];console[_0x368e66(0x1ae)](_0x4aad0a);if(_0x58afdd?.[_0x368e66(0x1ef)]!=_0x8f1f84){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])[_0x368e66(0x15e)]({'status':0x190,'message':_0x368e66(0x167)+_0x58afdd?.['currency']});return;}if(helperService[_0x368e66(0x13f)](_0x4aad0a?.[_0x368e66(0x157)])){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])[_0x368e66(0x15e)]({'status':0x190,'message':_0x368e66(0x19d)});return;}if(helperService[_0x368e66(0x13f)](_0x4aad0a?.[_0x368e66(0x19e)])){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])['send']({'status':0x190,'message':_0x368e66(0x20a)});return;}let _0x13aee3=await helperService[_0x368e66(0x170)](),_0x1ffe18={'auth':{'user':_0x4aad0a?.[_0x368e66(0x157)],'pwd':_0x4aad0a?.[_0x368e66(0x19e)]},'param':{'msisdn':_0x58afdd?.[_0x368e66(0x190)]?.[_0x368e66(0x1eb)],'Amount':_0x312257,'Currency':_0x8f1f84,'ExternalID':_0x13aee3}};console[_0x368e66(0x1ae)]('🚀\x20~\x20data:',_0x1ffe18);let _0x11ee1f=await initiateOrangeMoneyTransfer(_0x1ffe18);console[_0x368e66(0x1ae)](_0x368e66(0x1af),_0x11ee1f);let _0x2c6d2c=_0x368e66(0x1f6),_0x19803e='';if(_0x11ee1f?.[_0x368e66(0x133)]!=0xc8)_0x19803e=_0x11ee1f?.[_0x368e66(0x1f1)]?.[_0x368e66(0x198)];else{let _0x27fd91=_0x11ee1f?.[_0x368e66(0x1f1)]?.['TXNID'],_0x47035d=await getOrangeMoneyTransferStatus(_0x27fd91,_0x4aad0a?.[_0x368e66(0x157)],_0x4aad0a?.[_0x368e66(0x19e)],_0x8f1f84);console['log'](_0x368e66(0x117),_0x47035d);if(_0x47035d[_0x368e66(0x1f1)][_0x368e66(0x1da)]=='TS')_0x2c6d2c=_0x368e66(0x12e);else _0x47035d[_0x368e66(0x1f1)][_0x368e66(0x1da)]=='TI'&&(_0x2c6d2c=_0x368e66(0x124));}let _0x3d88d5={'transaction_id':_0x19803e,'external_id':_0x13aee3,'receiver_id':_0x3235ca,'order_id':_0xc02349,'wallet_id':_0x379f88,'account_id':_0x44816a,'mid_id':_0x173d00?.['data']?.['id'],'batch_id':'','super_merchant_id':'','sub_merchant_id':_0x5de3ff?.[_0x368e66(0x10f)],'transaction_type':_0x368e66(0x158),'wholesale_fx_rate':parseFloat(0x0),'destination_amount':parseFloat(_0x312257),'destination_currency':_0x8f1f84,'sent_amount':parseFloat(_0x312257),'sent_currency':_0x8f1f84,'source_amount':parseFloat(_0x312257),'source_currency':_0x8f1f84,'source_country_iso_code':_0x58afdd?.[_0x368e66(0x14e)],'payer_country_iso_code':'LBR','fee_amount':parseFloat(0x0),'fee_currency':'NA','creation_date':moment()[_0x368e66(0x132)](_0x368e66(0x1db)),'expiration_date':moment()['format'](_0x368e66(0x1db)),'payer_id':_0x58afdd?.[_0x368e66(0x18c)],'payer_currency':_0x8f1f84,'service_id':_0x58afdd?.[_0x368e66(0x13e)],'service_name':'Mobile\x20Wallet','status_message':_0x2c6d2c,'callback_url':_0x4aad0a[_0x368e66(0x1aa)],'payer_name':_0x368e66(0x1eb),'payout_reference':_0x248625};console[_0x368e66(0x1ae)](_0x368e66(0x11e),_0x3d88d5),await transaction[_0x368e66(0x159)](_0x3d88d5);let _0x40490a='';helperService[_0x368e66(0x13f)](_0x58afdd?.[_0x368e66(0x10f)])&&helperService[_0x368e66(0x110)](_0x58afdd?.[_0x368e66(0x14f)])?_0x40490a=_0x368e66(0x1c2):_0x40490a=_0x368e66(0x1ec);let _0x578843={'transaction_id':_0x3d88d5?.[_0x368e66(0x15c)],'order_id':_0x3d88d5?.[_0x368e66(0x1f0)],'external_id':_0x3d88d5?.['external_id'],'receiver_id':_0x3d88d5?.[_0x368e66(0x14f)],'sub_merchant_id':helperService[_0x368e66(0x13f)](_0x3d88d5?.['sub_merchant_id'])?0x0:_0x3d88d5?.[_0x368e66(0x10f)],'transaction_date':_0x3d88d5?.[_0x368e66(0x16f)],'account_id':_0x3d88d5?.[_0x368e66(0x136)],'account_type':_0x58afdd?.[_0x368e66(0x19c)]?.[_0x368e66(0x1a4)]()===_0x368e66(0x15b)?0x2:0x1,'account_for':_0x40490a,'account_data':JSON[_0x368e66(0x130)](_0x58afdd),'payer_id':_0x3d88d5?.[_0x368e66(0x18c)],'payer_name':_0x3d88d5?.['payer_name'],'payer_currency':_0x3d88d5?.['payer_currency'],'payer_data':JSON['stringify']({'MSISDN':_0x58afdd?.[_0x368e66(0x190)]?.['MSISDN'],'payer_id':_0x58afdd?.[_0x368e66(0x18c)],'payer_name':_0x368e66(0x1ab)})};console[_0x368e66(0x1ae)](_0x368e66(0x1b5),_0x578843);let _0x284c66=await accountDetailsService['add'](_0x578843);console[_0x368e66(0x1ae)](_0x368e66(0x202),_0x284c66);const _0xb86793={'submerchant_id':helperService[_0x368e66(0x13f)](_0x5de3ff?.[_0x368e66(0x10f)])?null:_0x5de3ff?.[_0x368e66(0x10f)],'receiver_id':helperService[_0x368e66(0x13f)](_0x3235ca)?null:String(_0x3235ca),'currecny':_0x8f1f84,'amount':String(_0x312257),'transaction_id':String(_0x19803e),'order_id':_0x13aee3,'order_status':_0x2c6d2c};console['log'](_0x368e66(0x1ed),_0xb86793);var _0x4678bf=await nodeServerAPIService[_0x368e66(0x17c)](_0x484913,_0xb86793);console[_0x368e66(0x1ae)](_0x368e66(0x148),_0x4678bf);let _0x4a7d15={};if(helperService[_0x368e66(0x13f)](_0x5de3ff?.[_0x368e66(0x10f)]))_0x4a7d15={'id':_0x5de3ff?.[_0x368e66(0x14f)],'name':_0x5de3ff?.[_0x368e66(0x134)],'country':_0x5de3ff?.[_0x368e66(0x16a)],'webhook_url':_0x5de3ff?.[_0x368e66(0x142)]};else helperService[_0x368e66(0x110)](_0x5de3ff?.[_0x368e66(0x10f)])&&helperService['isValid'](_0x5de3ff?.[_0x368e66(0x14f)])&&(_0x4a7d15={'id':null,'name':_0x5ddcbc?.[_0x368e66(0x14c)]?.['company_name'],'country':_0x5ddcbc?.[_0x368e66(0x14c)]?.[_0x368e66(0x20e)],'webhook_url':null});let _0x50c982={'account_id':_0x58afdd?.[_0x368e66(0x136)],..._0x58afdd?.[_0x368e66(0x190)]};const _0x5b3154={'order_id':_0xc02349,'external_id':_0x3d88d5?.[_0x368e66(0x10a)],'transaction_id':_0x19803e,'sub_merchant_id':helperService[_0x368e66(0x110)](_0x5de3ff?.[_0x368e66(0x10f)])?_0x5de3ff?.[_0x368e66(0x10f)]:null,'receiver_id':helperService['isValid'](_0x5de3ff?.[_0x368e66(0x14f)])?_0x5de3ff?.[_0x368e66(0x14f)]:null,'currency':_0x8f1f84,'wallet_id':_0x379f88,'debit_party':_0x4a7d15,'credit_party':_0x50c982,'credit_party_identifier':{'MSISDN':_0x58afdd?.[_0x368e66(0x190)]?.['MSISDN'],'payer_id':_0x58afdd?.[_0x368e66(0x18c)],'payer_name':_0x368e66(0x1ab)},'debit_details':{'debit_amount':parseFloat(_0x312257),'currency':_0x8f1f84},'credit_details':{'amount':parseFloat(_0x312257),'currency':_0x8f1f84},'payout_reference':helperService[_0x368e66(0x110)](_0x248625)?_0x248625:null,'webhook_url':helperService[_0x368e66(0x110)](_0xbd41f0)?_0xbd41f0:null,'purpose_of_remittance':helperService['isValid'](_0x17e941)?_0x17e941:null,'document_reference_number':null,'transaction_status':_0x2c6d2c,'transaction_status_code':_0x2c6d2c==_0x368e66(0x1e3)?0x4e20:_0x2c6d2c==_0x368e66(0x124)?0x7530:0x9c40,'order_created_date':moment(_0x3d88d5?.[_0x368e66(0x16f)])[_0x368e66(0x132)](_0x368e66(0x1db)),'order_updated_date':moment(_0x3d88d5?.[_0x368e66(0x16f)])['format'](_0x368e66(0x1db)),'batch_id':null};_0x224b76['status'](httpStatus['OK'])['send']({'status':httpStatus['OK'],'message':_0x368e66(0x141),'data':_0x5b3154});}else{if(_0x58afdd?.['payer_id']=='ORANGE'){console[_0x368e66(0x1ae)](_0x368e66(0x155)),console[_0x368e66(0x1ae)](_0x484913[_0x368e66(0x123)],_0x5de3ff);let _0x5c6a78=_0x173d00?.[_0x368e66(0x14c)];console[_0x368e66(0x1ae)](_0x5c6a78);if(_0x58afdd?.[_0x368e66(0x1ef)]!=_0x8f1f84){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])['send']({'status':0x190,'message':'Invalid\x20currency\x20selected!\x20The\x20receiver\x20only\x20accepts\x20payouts\x20in\x20'+_0x58afdd?.[_0x368e66(0x1ef)]});return;}if(helperService['isNotValid'](_0x5c6a78?.[_0x368e66(0x157)])){_0x224b76['status'](httpStatus['OK'])[_0x368e66(0x15e)]({'status':0x190,'message':'Invalid\x20\x27api_key\x27'});return;}if(helperService['isNotValid'](_0x5c6a78?.[_0x368e66(0x19e)])){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])[_0x368e66(0x15e)]({'status':0x190,'message':_0x368e66(0x20a)});return;}let _0x1370c8=await helperService[_0x368e66(0x170)](),_0x5e55bb={'auth':{'user':_0x5c6a78?.['api_key'],'pwd':_0x5c6a78?.[_0x368e66(0x19e)]},'param':{'MSISDN':_0x58afdd?.[_0x368e66(0x190)]?.['MSISDN'],'Amount':_0x312257,'Currency':_0x8f1f84,'EXTERNALID':_0x1370c8}},_0x426ddd=await orangeMockService[_0x368e66(0x19f)](_0x5e55bb);if(!_0x426ddd){_0x224b76['status'](httpStatus['OK'])['send']({'status':0x190,'message':_0x368e66(0x191)});return;}let _0x280353=await orangeMockService[_0x368e66(0x11a)](_0x426ddd,_0x5c6a78?.[_0x368e66(0x157)],_0x5c6a78?.['password'],_0x8f1f84);console['log'](_0x368e66(0x117),_0x280353);let _0x181b0b='FAILED';_0x280353[_0x368e66(0x1f1)][_0x368e66(0x1da)]=='TS'&&(_0x181b0b='COMPLETED');_0x280353[_0x368e66(0x1f1)][_0x368e66(0x1da)]=='TI'&&(_0x181b0b=_0x368e66(0x124));let _0x2c3176={'transaction_id':helperService[_0x368e66(0x13f)](_0x426ddd)?'':_0x426ddd,'external_id':_0x1370c8,'receiver_id':_0x3235ca,'order_id':_0xc02349,'wallet_id':_0x379f88,'account_id':_0x44816a,'mid_id':_0x173d00?.[_0x368e66(0x14c)]?.['id'],'batch_id':'','super_merchant_id':'','sub_merchant_id':_0x5de3ff?.[_0x368e66(0x10f)],'transaction_type':_0x368e66(0x158),'wholesale_fx_rate':parseFloat(0x0),'destination_amount':parseFloat(_0x312257),'destination_currency':_0x8f1f84,'sent_amount':parseFloat(_0x312257),'sent_currency':_0x8f1f84,'source_amount':parseFloat(_0x312257),'source_currency':_0x8f1f84,'source_country_iso_code':_0x58afdd?.[_0x368e66(0x14e)],'payer_country_iso_code':_0x368e66(0x14d),'fee_amount':parseFloat(0x0),'fee_currency':'NA','creation_date':moment()[_0x368e66(0x132)](_0x368e66(0x1db)),'expiration_date':moment()['format']('YYYY-MM-DD\x20hh:mm:ss'),'payer_id':_0x58afdd?.[_0x368e66(0x18c)],'payer_currency':_0x8f1f84,'service_id':_0x58afdd?.[_0x368e66(0x13e)],'service_name':_0x368e66(0x104),'status_message':_0x181b0b,'callback_url':_0x5c6a78[_0x368e66(0x1aa)],'payer_name':'MSISDN','payout_reference':_0x248625};console[_0x368e66(0x1ae)](_0x368e66(0x11e),_0x2c3176),await transaction['create'](_0x2c3176);let _0x4f4205='';helperService[_0x368e66(0x13f)](_0x58afdd?.[_0x368e66(0x10f)])&&helperService['isValid'](_0x58afdd?.['receiver_id'])?_0x4f4205=_0x368e66(0x1c2):_0x4f4205=_0x368e66(0x1ec);let _0x3c2348={'transaction_id':_0x2c3176?.['transaction_id'],'order_id':_0x2c3176?.[_0x368e66(0x1f0)],'external_id':_0x2c3176?.[_0x368e66(0x10a)],'receiver_id':_0x2c3176?.['receiver_id'],'sub_merchant_id':helperService[_0x368e66(0x13f)](_0x2c3176?.[_0x368e66(0x10f)])?0x0:_0x2c3176?.[_0x368e66(0x10f)],'transaction_date':_0x2c3176?.[_0x368e66(0x16f)],'account_id':_0x2c3176?.[_0x368e66(0x136)],'account_type':_0x58afdd?.[_0x368e66(0x19c)]?.[_0x368e66(0x1a4)]()===_0x368e66(0x15b)?0x2:0x1,'account_for':_0x4f4205,'account_data':JSON['stringify'](_0x58afdd),'payer_id':_0x2c3176?.[_0x368e66(0x18c)],'payer_name':_0x2c3176?.['payer_name'],'payer_currency':_0x2c3176?.[_0x368e66(0x114)],'payer_data':JSON[_0x368e66(0x130)]({'MSISDN':_0x58afdd?.[_0x368e66(0x190)]?.[_0x368e66(0x1eb)],'payer_id':_0x58afdd?.[_0x368e66(0x18c)],'payer_name':'ORANGE'})};console[_0x368e66(0x1ae)](_0x368e66(0x1b5),_0x3c2348);let _0xd22615=await accountDetailsService[_0x368e66(0x146)](_0x3c2348);console[_0x368e66(0x1ae)](_0x368e66(0x202),_0xd22615);const _0x35a234={'submerchant_id':helperService[_0x368e66(0x13f)](_0x5de3ff?.[_0x368e66(0x10f)])?null:_0x5de3ff?.[_0x368e66(0x10f)],'receiver_id':helperService[_0x368e66(0x13f)](_0x3235ca)?null:String(_0x3235ca),'currecny':_0x8f1f84,'amount':String(_0x312257),'transaction_id':String(_0x426ddd),'order_id':_0x1370c8,'order_status':_0x181b0b};console[_0x368e66(0x1ae)](_0x368e66(0x1ed),_0x35a234);var _0x4678bf=await nodeServerAPIService[_0x368e66(0x17c)](_0x484913,_0x35a234);console[_0x368e66(0x1ae)](_0x368e66(0x148),_0x4678bf);let _0x1f0441={};if(helperService[_0x368e66(0x13f)](_0x5de3ff?.[_0x368e66(0x10f)]))_0x1f0441={'id':_0x5de3ff?.['receiver_id'],'name':_0x5de3ff?.['receiver_name'],'country':_0x5de3ff?.['registered_business_address'],'webhook_url':_0x5de3ff?.[_0x368e66(0x142)]};else helperService[_0x368e66(0x110)](_0x5de3ff?.[_0x368e66(0x10f)])&&helperService[_0x368e66(0x110)](_0x5de3ff?.[_0x368e66(0x14f)])&&(_0x1f0441={'id':null,'name':_0x5ddcbc?.[_0x368e66(0x14c)]?.['company_name'],'country':_0x5ddcbc?.[_0x368e66(0x14c)]?.[_0x368e66(0x20e)],'webhook_url':null});let _0x4fdc4d={'account_id':_0x58afdd?.['account_id'],..._0x58afdd?.['account_details']};const _0xf5614e={'order_id':_0xc02349,'external_id':_0x2c3176?.['external_id'],'transaction_id':_0x280353[_0x368e66(0x1a3)],'sub_merchant_id':helperService['isValid'](_0x5de3ff?.['sub_merchant_id'])?_0x5de3ff?.['sub_merchant_id']:null,'receiver_id':helperService[_0x368e66(0x110)](_0x5de3ff?.[_0x368e66(0x14f)])?_0x5de3ff?.[_0x368e66(0x14f)]:null,'currency':_0x8f1f84,'wallet_id':_0x379f88,'debit_party':_0x1f0441,'credit_party':_0x4fdc4d,'credit_party_identifier':{'MSISDN':_0x58afdd?.['account_details']?.[_0x368e66(0x1eb)],'payer_id':_0x58afdd?.['payer_id'],'payer_name':'ORANGE'},'debit_details':{'debit_amount':parseFloat(_0x312257),'currency':_0x8f1f84},'credit_details':{'amount':parseFloat(_0x312257),'currency':_0x8f1f84},'payout_reference':helperService[_0x368e66(0x110)](_0x248625)?_0x248625:null,'webhook_url':helperService[_0x368e66(0x110)](_0xbd41f0)?_0xbd41f0:null,'purpose_of_remittance':helperService[_0x368e66(0x110)](_0x17e941)?_0x17e941:null,'document_reference_number':null,'transaction_status':_0x181b0b,'transaction_status_code':_0x181b0b==_0x368e66(0x1e3)?0x4e20:_0x181b0b==_0x368e66(0x124)?0x7530:0x9c40,'order_created_date':moment(_0x2c3176?.[_0x368e66(0x16f)])[_0x368e66(0x132)](_0x368e66(0x1db)),'order_updated_date':moment(_0x2c3176?.[_0x368e66(0x16f)])[_0x368e66(0x132)](_0x368e66(0x1db)),'batch_id':null};_0x224b76[_0x368e66(0x133)](httpStatus['OK'])[_0x368e66(0x15e)]({'status':httpStatus['OK'],'message':_0x368e66(0x141),'data':_0xf5614e});}else{if(_0x58afdd?.[_0x368e66(0x18c)]['includes']('AP_')){console[_0x368e66(0x1ae)]('initiateInternationalTransfer...',_0x58afdd),console[_0x368e66(0x1ae)](_0x368e66(0x119)),console[_0x368e66(0x1ae)](_0x484913['body'],_0x5de3ff);let _0x781bef=_0x173d00?.[_0x368e66(0x14c)];console[_0x368e66(0x1ae)](_0x781bef);if(_0x58afdd?.[_0x368e66(0x1ef)]!=_0x8f1f84){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])[_0x368e66(0x15e)]({'status':0x190,'message':_0x368e66(0x167)+_0x58afdd?.[_0x368e66(0x1ef)]});return;}if(helperService[_0x368e66(0x13f)](_0x781bef?.['api_key'])){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])[_0x368e66(0x15e)]({'status':0x190,'message':_0x368e66(0x19d)});return;}if(helperService[_0x368e66(0x13f)](_0x781bef?.[_0x368e66(0x19e)])){_0x224b76['status'](httpStatus['OK'])[_0x368e66(0x15e)]({'status':0x190,'message':_0x368e66(0x20a)});return;}let _0x31e6e7={'username':_0x781bef?.[_0x368e66(0x157)],'password':_0x781bef?.[_0x368e66(0x19e)]},_0x2e3f67=await alPayService[_0x368e66(0x143)](_0x31e6e7);if(!_0x2e3f67){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])[_0x368e66(0x15e)]({'status':0x191,'message':'Invalid\x20access'});return;}let _0x3e94fe=await helperService['make_unique_id'](),_0x3b6bd9={'accountNumber':_0x58afdd?.[_0x368e66(0x190)]?.[_0x368e66(0x17e)],'channel':_0x58afdd?.[_0x368e66(0x13e)]==0x1?_0x368e66(0x165):_0x368e66(0x113),'institutionCode':_0x58afdd?.[_0x368e66(0x190)]?.[_0x368e66(0x1ad)],'transactionId':_0x3e94fe};console['log'](_0x368e66(0x1d6),_0x3b6bd9);let _0x194c1e=await alPayService[_0x368e66(0x187)](_0x2e3f67,_0x3b6bd9);console['log'](_0x368e66(0x11f),_0x194c1e);if(_0x194c1e?.[_0x368e66(0x133)]!=0xc8){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])[_0x368e66(0x15e)]({'status':0x190,'message':_0x194c1e?.[_0x368e66(0x1e0)]||'Unable\x20to\x20initiate\x20transfer'});return;}_0x3e94fe=await helperService[_0x368e66(0x170)]();const _0xaa34f=uuidv4();console[_0x368e66(0x1ae)](_0x368e66(0x169),_0xaa34f);let _0x1a7f5e=null;if(_0x58afdd?.[_0x368e66(0x1ef)]===_0x368e66(0x1f4)){let _0x4e229e={'accountName':_0x58afdd?.['account_details']?.['accountName'],'accountNumber':_0x58afdd?.[_0x368e66(0x190)]?.[_0x368e66(0x17e)],'amount':_0x312257,'channel':_0x368e66(0x165),'institutionCode':_0x58afdd?.[_0x368e66(0x190)]?.[_0x368e66(0x1ad)],'transactionId':_0x3e94fe,'CreditNaration':_0x248625||'Payout\x20transaction','currency':_0x8f1f84};console[_0x368e66(0x1ae)](_0x368e66(0x1a0),_0x4e229e),_0x1a7f5e=await alPayService['initiateLocalTransfer'](_0x2e3f67,_0x4e229e),console['log'](_0x368e66(0x144),_0x1a7f5e);}else{let _0x104ec2={'accountNumber':_0x58afdd?.[_0x368e66(0x190)]?.[_0x368e66(0x17e)],'amount':_0x312257,'channel':_0x368e66(0x113),'transactionId':_0x3e94fe,'creditNarration':_0x248625,'currency':_0x8f1f84,'currencyAmount':_0x312257,'originCountryCode':'GH','senderName':_0x5ddcbc?.[_0x368e66(0x14c)]?.[_0x368e66(0x138)]};console['log'](_0x368e66(0x152),_0x104ec2),_0x1a7f5e=await alPayService[_0x368e66(0x129)](_0x2e3f67,_0x104ec2),console[_0x368e66(0x1ae)](_0x368e66(0x144),_0x1a7f5e);}if(_0x1a7f5e?.[_0x368e66(0x133)]!=0xc8){_0x224b76['status'](httpStatus['OK'])[_0x368e66(0x15e)]({'status':0x190,'message':_0x1a7f5e?.[_0x368e66(0x1e0)]||_0x368e66(0x191)});return;}let _0x5cfdb9=await alPayService[_0x368e66(0x1c7)](_0x2e3f67,_0x1a7f5e?.[_0x368e66(0x14c)]?.[_0x368e66(0x17b)],_0x368e66(0x20d));console[_0x368e66(0x1ae)](_0x368e66(0x1cb),_0x5cfdb9);if(_0x5cfdb9?.['status']!=0xc8){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])[_0x368e66(0x15e)]({'status':0x190,'message':_0x5cfdb9?.[_0x368e66(0x1e0)]||'Unable\x20to\x20get\x20a\x20transaction\x20status'});return;}let _0x263f51=_0x368e66(0x124);if(_0x5cfdb9?.[_0x368e66(0x1e0)]===_0x368e66(0x1e3))_0x263f51=_0x368e66(0x12e);else _0x5cfdb9?.['message']==='FAILED'&&(_0x263f51=_0x368e66(0x1f6));let _0x18b6b8={'transaction_id':helperService['isNotValid'](_0x5cfdb9?.['data']?.[_0x368e66(0x17b)])?'':_0x5cfdb9?.['data']?.[_0x368e66(0x17b)],'external_id':_0x3e94fe,'receiver_id':_0x3235ca,'order_id':_0xc02349,'wallet_id':_0x379f88,'account_id':_0x44816a,'mid_id':_0x173d00?.[_0x368e66(0x14c)]?.['id'],'batch_id':'','super_merchant_id':'','sub_merchant_id':_0x5de3ff?.[_0x368e66(0x10f)],'transaction_type':_0x368e66(0x158),'wholesale_fx_rate':parseFloat(0x0),'destination_amount':parseFloat(_0x312257),'destination_currency':_0x8f1f84,'sent_amount':parseFloat(_0x312257),'sent_currency':_0x8f1f84,'source_amount':parseFloat(_0x312257),'source_currency':_0x8f1f84,'source_country_iso_code':_0x58afdd?.[_0x368e66(0x14e)],'payer_country_iso_code':'GHA','fee_amount':parseFloat(0x0),'fee_currency':'NA','creation_date':moment()[_0x368e66(0x132)](_0x368e66(0x1db)),'expiration_date':moment()[_0x368e66(0x132)](_0x368e66(0x1db)),'payer_id':_0x58afdd?.['payer_id'],'payer_currency':_0x8f1f84,'service_id':_0x58afdd?.[_0x368e66(0x13e)],'service_name':_0x368e66(0x104),'status_message':_0x263f51,'callback_url':_0x781bef[_0x368e66(0x1aa)],'payer_name':_0x5cfdb9?.[_0x368e66(0x14c)]?.[_0x368e66(0x115)],'payout_reference':_0x248625};console[_0x368e66(0x1ae)](_0x368e66(0x11e),_0x18b6b8),await transaction[_0x368e66(0x159)](_0x18b6b8);let _0x3b56d1='';helperService[_0x368e66(0x13f)](_0x58afdd?.['sub_merchant_id'])&&helperService['isValid'](_0x58afdd?.[_0x368e66(0x14f)])?_0x3b56d1='payout':_0x3b56d1=_0x368e66(0x1ec);let _0x5eea04={'transaction_id':_0x18b6b8?.[_0x368e66(0x15c)],'order_id':_0x18b6b8?.[_0x368e66(0x1f0)],'external_id':_0x18b6b8?.[_0x368e66(0x10a)],'receiver_id':_0x18b6b8?.[_0x368e66(0x14f)],'sub_merchant_id':helperService[_0x368e66(0x13f)](_0x18b6b8?.['sub_merchant_id'])?0x0:_0x18b6b8?.[_0x368e66(0x10f)],'transaction_date':_0x18b6b8?.['creation_date'],'account_id':_0x18b6b8?.['account_id'],'account_type':_0x58afdd?.['customer_type']?.['toLowerCase']()==='business'?0x2:0x1,'account_for':_0x3b56d1,'account_data':JSON[_0x368e66(0x130)](_0x58afdd),'payer_id':_0x18b6b8?.[_0x368e66(0x18c)],'payer_name':_0x18b6b8?.[_0x368e66(0x12a)],'payer_currency':_0x18b6b8?.[_0x368e66(0x114)],'payer_data':JSON['stringify']({'accountName':_0x58afdd?.[_0x368e66(0x190)]?.[_0x368e66(0x115)],'accountNumber':_0x58afdd?.['account_details']?.[_0x368e66(0x17e)],'payer_id':_0x58afdd?.[_0x368e66(0x18c)],'payer_name':_0x368e66(0x156)})};console[_0x368e66(0x1ae)]('🚀\x20~\x20create_transaction_API_Call\x20~\x20account_data:',_0x5eea04);let _0x2e5852=await accountDetailsService[_0x368e66(0x146)](_0x5eea04);console['log'](_0x368e66(0x202),_0x2e5852);const _0x27f580={'submerchant_id':helperService[_0x368e66(0x13f)](_0x5de3ff?.['sub_merchant_id'])?null:_0x5de3ff?.[_0x368e66(0x10f)],'receiver_id':helperService[_0x368e66(0x13f)](_0x3235ca)?null:String(_0x3235ca),'currecny':_0x8f1f84,'amount':String(_0x312257),'transaction_id':String(_0x18b6b8?.['transaction_id']),'order_id':_0x3e94fe,'order_status':_0x263f51};console[_0x368e66(0x1ae)](_0x368e66(0x1ed),_0x27f580);var _0x4678bf=await nodeServerAPIService['update_payout_status'](_0x484913,_0x27f580);console[_0x368e66(0x1ae)](_0x368e66(0x148),_0x4678bf);let _0x44371b={};if(helperService[_0x368e66(0x13f)](_0x5de3ff?.[_0x368e66(0x10f)]))_0x44371b={'id':_0x5de3ff?.[_0x368e66(0x14f)],'name':_0x5de3ff?.[_0x368e66(0x134)],'country':_0x5de3ff?.[_0x368e66(0x16a)],'webhook_url':_0x5de3ff?.[_0x368e66(0x142)]};else helperService[_0x368e66(0x110)](_0x5de3ff?.[_0x368e66(0x10f)])&&helperService[_0x368e66(0x110)](_0x5de3ff?.['receiver_id'])&&(_0x44371b={'id':null,'name':_0x5ddcbc?.[_0x368e66(0x14c)]?.[_0x368e66(0x138)],'country':_0x5ddcbc?.[_0x368e66(0x14c)]?.[_0x368e66(0x20e)],'webhook_url':null});let _0x1f3464={'account_id':_0x58afdd?.[_0x368e66(0x136)],..._0x58afdd?.[_0x368e66(0x190)]};const _0x32142e={'order_id':_0xc02349,'external_id':_0x18b6b8?.['external_id'],'transaction_id':_0x5cfdb9?.[_0x368e66(0x14c)]?.[_0x368e66(0x17b)],'sub_merchant_id':helperService[_0x368e66(0x110)](_0x5de3ff?.[_0x368e66(0x10f)])?_0x5de3ff?.[_0x368e66(0x10f)]:null,'receiver_id':helperService[_0x368e66(0x110)](_0x5de3ff?.[_0x368e66(0x14f)])?_0x5de3ff?.[_0x368e66(0x14f)]:null,'currency':_0x8f1f84,'wallet_id':_0x379f88,'debit_party':_0x44371b,'credit_party':_0x1f3464,'credit_party_identifier':{'accountName':_0x58afdd?.[_0x368e66(0x190)]?.['accountName'],'accountNumber':_0x58afdd?.[_0x368e66(0x190)]?.['accountNumber'],'payer_id':_0x58afdd?.[_0x368e66(0x18c)],'payer_name':_0x368e66(0x151)},'debit_details':{'debit_amount':parseFloat(_0x312257),'currency':_0x8f1f84},'credit_details':{'amount':parseFloat(_0x312257),'currency':_0x8f1f84},'payout_reference':helperService[_0x368e66(0x110)](_0x248625)?_0x248625:null,'webhook_url':helperService[_0x368e66(0x110)](_0xbd41f0)?_0xbd41f0:null,'purpose_of_remittance':helperService['isValid'](_0x17e941)?_0x17e941:null,'document_reference_number':null,'transaction_status':_0x263f51,'transaction_status_code':_0x263f51==_0x368e66(0x1e3)?0x4e20:_0x263f51==_0x368e66(0x124)?0x7530:0x9c40,'order_created_date':moment(_0x18b6b8?.[_0x368e66(0x16f)])[_0x368e66(0x132)](_0x368e66(0x1db)),'order_updated_date':moment(_0x18b6b8?.[_0x368e66(0x16f)])[_0x368e66(0x132)](_0x368e66(0x1db)),'batch_id':null};_0x224b76['status'](httpStatus['OK'])['send']({'status':httpStatus['OK'],'message':_0x368e66(0x141),'data':_0x32142e});}else{if(_0x58afdd?.[_0x368e66(0x18c)]=='AL'){console[_0x368e66(0x1ae)](_0x368e66(0x1b1),_0x58afdd),console['log'](_0x368e66(0x119)),console['log'](_0x484913[_0x368e66(0x123)],_0x5de3ff);let _0x30217e=_0x173d00?.[_0x368e66(0x14c)];console[_0x368e66(0x1ae)](_0x30217e);if(_0x58afdd?.['currency']!=_0x8f1f84){_0x224b76['status'](httpStatus['OK'])[_0x368e66(0x15e)]({'status':0x190,'message':_0x368e66(0x167)+_0x58afdd?.[_0x368e66(0x1ef)]});return;}if(helperService[_0x368e66(0x13f)](_0x30217e?.[_0x368e66(0x157)])){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])[_0x368e66(0x15e)]({'status':0x190,'message':_0x368e66(0x19d)});return;}if(helperService['isNotValid'](_0x30217e?.[_0x368e66(0x19e)])){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])[_0x368e66(0x15e)]({'status':0x190,'message':_0x368e66(0x20a)});return;}let _0x3b720c={'username':_0x30217e?.[_0x368e66(0x157)],'password':_0x30217e?.['password']},_0x407dc1=await alMockService[_0x368e66(0x143)](_0x3b720c);if(!_0x407dc1){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])[_0x368e66(0x15e)]({'status':0x191,'message':'Invalid\x20access'});return;}let _0x162305=await helperService['make_unique_id'](),_0x48637b={'accountNumber':_0x58afdd?.['account_details']?.[_0x368e66(0x17e)],'channel':_0x58afdd?.[_0x368e66(0x13e)]==0x1?_0x368e66(0x165):'INTERBANK','institutionCode':_0x58afdd?.[_0x368e66(0x190)]?.[_0x368e66(0x1ad)],'transactionId':_0x162305};console['log']('🚀\x20~\x20nameEnquiryServicePayload:',_0x48637b);let _0x2aaa82=await alMockService[_0x368e66(0x187)](_0x407dc1,_0x48637b);console[_0x368e66(0x1ae)](_0x368e66(0x11f),_0x2aaa82);if(_0x2aaa82?.['status']!=0xc8){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])[_0x368e66(0x15e)]({'status':0x190,'message':_0x2aaa82?.[_0x368e66(0x1e0)]||_0x368e66(0x191)});return;}_0x162305=await helperService['make_unique_id']();const _0xa612e5=uuidv4();console[_0x368e66(0x1ae)](_0x368e66(0x169),_0xa612e5);let _0x3b4023=null;if(_0x58afdd?.[_0x368e66(0x1ef)]===_0x368e66(0x1f4)){let _0x382890={'accountName':_0x2aaa82?.['data']?.['accountName'],'accountNumber':_0x2aaa82?.[_0x368e66(0x14c)]?.[_0x368e66(0x17e)],'amount':_0x312257,'channel':'MNO','institutionCode':_0x58afdd?.[_0x368e66(0x190)]?.[_0x368e66(0x1ad)],'transactionId':_0x162305,'CreditNaration':_0x248625||_0x368e66(0x184),'currency':_0x8f1f84};console['log'](_0x368e66(0x1a0),_0x382890),_0x3b4023=await alMockService['initiateLocalTransfer'](_0x407dc1,_0x382890),console[_0x368e66(0x1ae)]('🚀\x20~\x20initiateTransferResponse:',_0x3b4023);}else{let _0x524743={'accountNumber':_0x58afdd?.['account_details']?.[_0x368e66(0x17e)],'amount':_0x312257,'channel':_0x368e66(0x113),'transactionId':_0x162305,'creditNarration':_0x248625,'currency':_0x8f1f84,'currencyAmount':_0x312257,'originCountryCode':'GH','senderName':_0x5ddcbc?.['data']?.[_0x368e66(0x138)]};console[_0x368e66(0x1ae)](_0x368e66(0x152),_0x524743),_0x3b4023=await alMockService['initiateInternationalTransfer'](_0x407dc1,_0x524743),console['log'](_0x368e66(0x144),_0x3b4023);}if(_0x3b4023?.['status']!=0xc8){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])[_0x368e66(0x15e)]({'status':0x190,'message':_0x3b4023?.[_0x368e66(0x1e0)]||_0x368e66(0x191)});return;}let _0x106de6=await alMockService['getTransferStatus'](_0x407dc1,_0x3b4023?.[_0x368e66(0x14c)]?.['transactionId'],_0x368e66(0x20d));console[_0x368e66(0x1ae)](_0x368e66(0x1cb),_0x106de6);if(_0x106de6?.[_0x368e66(0x133)]!=0xc8){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])['send']({'status':0x190,'message':_0x106de6?.['message']||'Unable\x20to\x20get\x20a\x20transaction\x20status'});return;}let _0x2a9618='PENDING';if(_0x106de6?.['message']===_0x368e66(0x1e3))_0x2a9618=_0x368e66(0x12e);else _0x106de6?.['message']===_0x368e66(0x1f6)&&(_0x2a9618=_0x368e66(0x1f6));let _0x41e903=helperService[_0x368e66(0x13f)](_0x106de6?.[_0x368e66(0x14c)]?.[_0x368e66(0x17b)])?'':_0x106de6?.[_0x368e66(0x14c)]?.['transactionId'],_0x3b571e={'transaction_id':_0x41e903,'external_id':_0x162305,'receiver_id':_0x3235ca,'order_id':_0xc02349,'wallet_id':_0x379f88,'account_id':_0x44816a,'mid_id':_0x173d00?.['data']?.['id'],'batch_id':'','super_merchant_id':'','sub_merchant_id':_0x5de3ff?.[_0x368e66(0x10f)],'transaction_type':'B2B','wholesale_fx_rate':parseFloat(0x0),'destination_amount':parseFloat(_0x312257),'destination_currency':_0x8f1f84,'sent_amount':parseFloat(_0x312257),'sent_currency':_0x8f1f84,'source_amount':parseFloat(_0x312257),'source_currency':_0x8f1f84,'source_country_iso_code':_0x58afdd?.[_0x368e66(0x14e)],'payer_country_iso_code':_0x368e66(0x1e9),'fee_amount':parseFloat(0x0),'fee_currency':'NA','creation_date':moment()[_0x368e66(0x132)](_0x368e66(0x1db)),'expiration_date':moment()[_0x368e66(0x132)](_0x368e66(0x1db)),'payer_id':_0x58afdd?.[_0x368e66(0x18c)],'payer_currency':_0x8f1f84,'service_id':_0x58afdd?.['funding_source_type'],'service_name':_0x368e66(0x104),'status_message':_0x2a9618,'callback_url':_0x30217e[_0x368e66(0x1aa)],'payer_name':_0x106de6?.['data']?.[_0x368e66(0x115)],'payout_reference':_0x248625};console[_0x368e66(0x1ae)](_0x368e66(0x11e),_0x3b571e),await transaction[_0x368e66(0x159)](_0x3b571e);let _0x266097='';helperService[_0x368e66(0x13f)](_0x58afdd?.[_0x368e66(0x10f)])&&helperService[_0x368e66(0x110)](_0x58afdd?.[_0x368e66(0x14f)])?_0x266097='payout':_0x266097=_0x368e66(0x1ec);let _0x377379={'transaction_id':_0x41e903,'order_id':_0x3b571e?.['order_id'],'external_id':_0x3b571e?.[_0x368e66(0x10a)],'receiver_id':_0x3b571e?.['receiver_id'],'sub_merchant_id':helperService['isNotValid'](_0x3b571e?.[_0x368e66(0x10f)])?0x0:_0x3b571e?.['sub_merchant_id'],'transaction_date':_0x3b571e?.[_0x368e66(0x16f)],'account_id':_0x3b571e?.[_0x368e66(0x136)],'account_type':_0x58afdd?.[_0x368e66(0x19c)]?.[_0x368e66(0x1a4)]()==='business'?0x2:0x1,'account_for':_0x266097,'account_data':JSON[_0x368e66(0x130)](_0x58afdd),'payer_id':_0x3b571e?.[_0x368e66(0x18c)],'payer_name':_0x3b571e?.[_0x368e66(0x12a)],'payer_currency':_0x3b571e?.[_0x368e66(0x114)],'payer_data':JSON[_0x368e66(0x130)]({'accountName':_0x58afdd?.[_0x368e66(0x190)]?.[_0x368e66(0x115)],'accountNumber':_0x58afdd?.[_0x368e66(0x190)]?.[_0x368e66(0x17e)],'payer_id':_0x58afdd?.[_0x368e66(0x18c)],'payer_name':'AL'})};console['log'](_0x368e66(0x1b5),_0x377379);let _0x3ac7bf=await accountDetailsService['add'](_0x377379);console[_0x368e66(0x1ae)]('🚀\x20~\x20create_transaction_API_Call\x20~\x20account_result:',_0x3ac7bf);const _0x373d44={'submerchant_id':helperService[_0x368e66(0x13f)](_0x5de3ff?.['sub_merchant_id'])?null:_0x5de3ff?.[_0x368e66(0x10f)],'receiver_id':helperService[_0x368e66(0x13f)](_0x3235ca)?null:String(_0x3235ca),'currecny':_0x8f1f84,'amount':String(_0x312257),'transaction_id':String(_0x41e903),'order_id':_0x162305,'order_status':_0x2a9618};console['log']('🚀\x20~\x20constpayout_webhook=catchAsync\x20~\x20payload:',_0x373d44);var _0x4678bf=await nodeServerAPIService['update_payout_status'](_0x484913,_0x373d44);console[_0x368e66(0x1ae)](_0x368e66(0x148),_0x4678bf);let _0x2223a7={};if(helperService[_0x368e66(0x13f)](_0x5de3ff?.[_0x368e66(0x10f)]))_0x2223a7={'id':_0x5de3ff?.[_0x368e66(0x14f)],'name':_0x5de3ff?.[_0x368e66(0x134)],'country':_0x5de3ff?.[_0x368e66(0x16a)],'webhook_url':_0x5de3ff?.[_0x368e66(0x142)]};else helperService['isValid'](_0x5de3ff?.[_0x368e66(0x10f)])&&helperService['isValid'](_0x5de3ff?.['receiver_id'])&&(_0x2223a7={'id':null,'name':_0x5ddcbc?.[_0x368e66(0x14c)]?.[_0x368e66(0x138)],'country':_0x5ddcbc?.[_0x368e66(0x14c)]?.[_0x368e66(0x20e)],'webhook_url':null});let _0x320ce7={'account_id':_0x58afdd?.['account_id'],..._0x58afdd?.['account_details']};const _0xa86b02={'order_id':_0xc02349,'external_id':_0x3b571e?.['external_id'],'transaction_id':_0x106de6?.[_0x368e66(0x14c)]?.[_0x368e66(0x17b)],'sub_merchant_id':helperService[_0x368e66(0x110)](_0x5de3ff?.[_0x368e66(0x10f)])?_0x5de3ff?.['sub_merchant_id']:null,'receiver_id':helperService[_0x368e66(0x110)](_0x5de3ff?.[_0x368e66(0x14f)])?_0x5de3ff?.['receiver_id']:null,'currency':_0x8f1f84,'wallet_id':_0x379f88,'debit_party':_0x2223a7,'credit_party':_0x320ce7,'credit_party_identifier':{'accountName':_0x58afdd?.[_0x368e66(0x190)]?.[_0x368e66(0x115)],'accountNumber':_0x58afdd?.[_0x368e66(0x190)]?.['accountNumber'],'payer_id':_0x58afdd?.[_0x368e66(0x18c)],'payer_name':_0x368e66(0x151)},'debit_details':{'debit_amount':parseFloat(_0x312257),'currency':_0x8f1f84},'credit_details':{'amount':parseFloat(_0x312257),'currency':_0x8f1f84},'payout_reference':helperService['isValid'](_0x248625)?_0x248625:null,'webhook_url':helperService[_0x368e66(0x110)](_0xbd41f0)?_0xbd41f0:null,'purpose_of_remittance':helperService[_0x368e66(0x110)](_0x17e941)?_0x17e941:null,'document_reference_number':null,'transaction_status':_0x2a9618,'transaction_status_code':_0x2a9618=='SUCCESSFUL'?0x4e20:_0x2a9618=='PENDING'?0x2710:0x9c40,'order_created_date':moment(_0x3b571e?.[_0x368e66(0x16f)])[_0x368e66(0x132)](_0x368e66(0x1db)),'order_updated_date':moment(_0x3b571e?.[_0x368e66(0x16f)])[_0x368e66(0x132)]('YYYY-MM-DD\x20hh:mm:ss'),'batch_id':null};_0x224b76[_0x368e66(0x133)](httpStatus['OK'])[_0x368e66(0x15e)]({'status':httpStatus['OK'],'message':_0x368e66(0x141),'data':_0xa86b02});}else{const _0x4cdc31=await payerService['getById'](_0x58afdd?.[_0x368e66(0x18c)],_0x173d00?.['data']);if(_0x4cdc31?.[_0x368e66(0x133)]!==httpStatus['OK']){_0x224b76['status'](httpStatus['OK'])[_0x368e66(0x15e)](_0x4cdc31);return;}if(_0x4cdc31?.[_0x368e66(0x14c)]?.[_0x368e66(0x1ef)]!==_0x8f1f84){_0x224b76['status'](httpStatus['OK'])[_0x368e66(0x15e)]({'status':0x190,'message':_0x368e66(0x167)+_0x4cdc31?.['data']?.[_0x368e66(0x1ef)]});return;}_0x58afdd[_0x368e66(0x12a)]=_0x4cdc31?.[_0x368e66(0x14c)]?.[_0x368e66(0x149)];let _0x5c3455={'data':_0x58afdd,'purpose_of_remittance':_0x17e941},_0x1d68ef=await receiverService['check_valid_bank_details'](_0x5c3455,_0x173d00?.[_0x368e66(0x14c)]);console[_0x368e66(0x1ae)](_0x368e66(0x1a2),_0x1d68ef);if(_0x1d68ef?.[_0x368e66(0x133)]!==httpStatus['OK']){console['log'](_0x368e66(0x1ac),_0x1d68ef),_0x224b76[_0x368e66(0x133)](httpStatus['OK'])[_0x368e66(0x15e)](_0x1d68ef);return;}var _0x442722={'receiver_id':_0x3235ca,'account_details':_0x58afdd,'destination_amount':_0x312257,'destination_currency':_0x8f1f84,'debit_amount':_0x43fe09,'debit_currency':_0x2de800,'extra':{'receiver':_0x5de3ff,'payer':_0x4cdc31?.['data'],'MID':_0x173d00?.[_0x368e66(0x14c)]}};const _0x2493f3=await quotationService['create_quotations'](_0x442722);if(_0x2493f3?.[_0x368e66(0x133)]!==httpStatus['OK']){_0x224b76['status'](httpStatus['OK'])['send'](_0x2493f3);return;}_0x2493f3[_0x368e66(0x14c)][_0x368e66(0x163)]={'order_id':_0xc02349,'wallet_id':_0x379f88,'account_id':helperService[_0x368e66(0x13f)](_0x44816a)?_0x58afdd?.[_0x368e66(0x136)]:_0x44816a,'purpose_of_remittance':_0x17e941,'payout_reference':_0x248625,'webhook_url':_0xbd41f0};const _0x33f171=await quotationService['post_transaction'](_0x2493f3?.[_0x368e66(0x14c)],_0x4cdc31?.['data'],_0x5de3ff,_0x58afdd,'',_0x173d00?.['data']);if(_0x33f171?.[_0x368e66(0x133)]!==httpStatus['OK']){_0x224b76['status'](httpStatus['OK'])[_0x368e66(0x15e)](_0x33f171);return;}if(!_0x3abb6e){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])[_0x368e66(0x15e)](_0x33f171);return;}console['log']('🚀\x20~\x20payout\x20~\x20createTransactionResponse:',_0x33f171);const _0x444d4e=await quotationService[_0x368e66(0x1f9)](_0x33f171?.['data']?.[_0x368e66(0x15c)],null,_0x173d00?.[_0x368e66(0x14c)],_0x2493f3?.[_0x368e66(0x14c)]?.[_0x368e66(0x163)],_0x58afdd);if(_0x444d4e?.[_0x368e66(0x133)]!==httpStatus['OK']){_0x224b76[_0x368e66(0x133)](httpStatus['OK'])[_0x368e66(0x15e)](_0x444d4e);return;}let _0x1b0747=_0x444d4e?.[_0x368e66(0x14c)];const _0x4728a9={'submerchant_id':helperService[_0x368e66(0x13f)](_0x5de3ff?.[_0x368e66(0x10f)])?null:_0x5de3ff?.['sub_merchant_id'],'receiver_id':helperService[_0x368e66(0x13f)](_0x3235ca)?null:String(_0x3235ca),'currecny':_0x1b0747?.['credit_details']?.[_0x368e66(0x1ef)],'amount':String(_0x1b0747?.[_0x368e66(0x1d9)]?.[_0x368e66(0x17a)]),'transaction_id':String(_0x1b0747?.['transaction_id']),'order_id':_0x1b0747?.['external_id'],'order_status':'PENDING'};console['log'](_0x368e66(0x168),_0x4728a9);var _0x4678bf=await nodeServerAPIService['update_payout_status'](_0x484913,_0x4728a9);console[_0x368e66(0x1ae)](_0x368e66(0x148),_0x4678bf),_0x224b76[_0x368e66(0x133)](httpStatus['OK'])['send'](_0x444d4e);}}}}}}}),manage_payout=catchAsync(async(_0x321166,_0x5566f2)=>{const _0x5e2dae=a6_0x35fecc,{action:_0x2924e0,transaction_id:_0x97fe3}=_0x321166[_0x5e2dae(0x123)];if(_0x2924e0===_0x5e2dae(0x139)){const _0x3d7d8a=await transactionService[_0x5e2dae(0x17d)](_0x97fe3);console['log']('🚀\x20~\x20stored_transaction:',_0x3d7d8a);if(_0x3d7d8a[_0x5e2dae(0x133)]!==httpStatus['OK'])return _0x3d7d8a;const _0x135531={};if(_0x3d7d8a?.[_0x5e2dae(0x14c)]?.[_0x5e2dae(0x136)])_0x135531['account_id']=_0x3d7d8a?.[_0x5e2dae(0x14c)]?.['account_id'];else{if(_0x3d7d8a?.[_0x5e2dae(0x14c)]?.['sub_merchant_id']&&_0x3d7d8a?.[_0x5e2dae(0x14c)]?.['payer_currency'])_0x135531['submerchant_id']=String(_0x3d7d8a?.[_0x5e2dae(0x14c)]?.[_0x5e2dae(0x10f)]),_0x135531[_0x5e2dae(0x1ef)]=_0x3d7d8a?.[_0x5e2dae(0x14c)]?.['payer_currency'];else _0x3d7d8a?.[_0x5e2dae(0x14c)]?.[_0x5e2dae(0x14f)]&&_0x3d7d8a?.[_0x5e2dae(0x14c)]?.['payer_currency']&&(_0x135531[_0x5e2dae(0x14f)]=String(_0x3d7d8a?.[_0x5e2dae(0x14c)]?.['receiver_id']),_0x135531[_0x5e2dae(0x1ef)]=_0x3d7d8a?.['data']?.[_0x5e2dae(0x114)]);}console['log']('🚀\x20~\x20get_funding_details_payload:',_0x135531);var _0x223b00=await nodeServerAPIService['get_funding_details'](_0x135531);console['log'](_0x5e2dae(0x1c5),_0x223b00);if(_0x223b00?.[_0x5e2dae(0x133)]!=httpStatus['OK']){_0x5566f2[_0x5e2dae(0x133)](httpStatus['OK'])['send'](_0x223b00);return;}if(_0x223b00?.[_0x5e2dae(0x14c)]?.['is_verified']!=0x1){_0x5566f2[_0x5e2dae(0x133)](httpStatus['OK'])['send']({'status':0x190,'message':_0x5e2dae(0x175)});return;}_0x223b00=_0x223b00?.[_0x5e2dae(0x14c)],_0x223b00['payer_name']=_0x3d7d8a?.[_0x5e2dae(0x14c)]?.[_0x5e2dae(0x12a)];const _0xa74d7a=await pspService[_0x5e2dae(0x1cf)](_0x3d7d8a?.[_0x5e2dae(0x14c)]?.[_0x5e2dae(0x12c)]);if(_0xa74d7a?.[_0x5e2dae(0x133)]!==httpStatus['OK']){_0x5566f2[_0x5e2dae(0x133)](httpStatus['OK'])[_0x5e2dae(0x15e)](_0xa74d7a);return;}let _0x55734a={'order_id':_0x3d7d8a?.[_0x5e2dae(0x14c)]?.[_0x5e2dae(0x1f0)],'wallet_id':_0x3d7d8a?.[_0x5e2dae(0x14c)]?.[_0x5e2dae(0x112)],'account_id':helperService['isNotValid'](_0x3d7d8a?.[_0x5e2dae(0x14c)]?.['account_id'])?_0x223b00?.[_0x5e2dae(0x136)]:_0x3d7d8a?.[_0x5e2dae(0x14c)]?.['account_id'],'purpose_of_remittance':_0x3d7d8a?.[_0x5e2dae(0x14c)]?.['purpose_of_remittance'],'payout_reference':_0x3d7d8a?.[_0x5e2dae(0x14c)]?.[_0x5e2dae(0x195)],'webhook_url':_0x3d7d8a?.['data']?.[_0x5e2dae(0x1c8)]};console[_0x5e2dae(0x1ae)](_0x5e2dae(0x109),_0x55734a);const _0x386798=await quotationService[_0x5e2dae(0x1f9)](_0x97fe3,null,_0xa74d7a?.[_0x5e2dae(0x14c)],_0x55734a,_0x223b00);if(_0x386798[_0x5e2dae(0x133)]!==httpStatus['OK']){_0x5566f2[_0x5e2dae(0x133)](httpStatus['OK'])[_0x5e2dae(0x15e)](_0x386798);return;}let _0x935ecd=_0x386798?.[_0x5e2dae(0x14c)];const _0x3291c2={'submerchant_id':helperService[_0x5e2dae(0x13f)](_0x935ecd?.[_0x5e2dae(0x10f)])?null:_0x935ecd?.['sub_merchant_id'],'receiver_id':helperService[_0x5e2dae(0x13f)](_0x935ecd?.[_0x5e2dae(0x14f)])?null:String(_0x935ecd?.[_0x5e2dae(0x14f)]),'currecny':_0x935ecd?.[_0x5e2dae(0x18d)]?.[_0x5e2dae(0x1ef)],'amount':String(_0x935ecd?.[_0x5e2dae(0x18d)]?.[_0x5e2dae(0x17a)]),'transaction_id':String(_0x935ecd?.[_0x5e2dae(0x15c)]),'order_id':_0x935ecd?.[_0x5e2dae(0x10a)],'order_status':_0x5e2dae(0x124)};console[_0x5e2dae(0x1ae)](_0x5e2dae(0x168),_0x3291c2);var _0x14fbb8=await nodeServerAPIService[_0x5e2dae(0x17c)](_0x321166,_0x3291c2);console['log'](_0x5e2dae(0x148),_0x14fbb8),_0x5566f2[_0x5e2dae(0x133)](httpStatus['OK'])['send'](_0x386798);}else{if(_0x2924e0===_0x5e2dae(0x1ee)){const _0x385356=await transactionService['getById'](_0x97fe3);if(_0x385356[_0x5e2dae(0x133)]!==httpStatus['OK'])return _0x385356;const _0x518875=await pspService['get_mid_by_id'](_0x385356?.['data']?.[_0x5e2dae(0x12c)]);if(_0x518875?.[_0x5e2dae(0x133)]!==httpStatus['OK'])return _0x518875;const _0x55afa1=await quotationService[_0x5e2dae(0x1fe)](_0x97fe3,_0x518875?.[_0x5e2dae(0x14c)]);if(_0x55afa1?.[_0x5e2dae(0x133)]!==httpStatus['OK']){_0x5566f2[_0x5e2dae(0x133)](httpStatus['OK'])['send'](_0x55afa1);return;}_0x5566f2[_0x5e2dae(0x133)](httpStatus['OK'])[_0x5e2dae(0x15e)](_0x55afa1);}else _0x5566f2[_0x5e2dae(0x133)](httpStatus['OK'])[_0x5e2dae(0x15e)]({'status':0x190,'message':_0x5e2dae(0x196)});}}),create_quotations=catchAsync(async(_0x5ed481,_0xee9e57)=>{const _0x51b770=a6_0x35fecc,{receiver_id:_0x197a72,payer_id:_0x41397a,source_amount:_0x5d1833,source_currency:_0x12c994,source_country_iso_code:_0x1e991e}=_0x5ed481[_0x51b770(0x123)];let _0x285d80='AED',_0x304d48=_0x51b770(0x176);if(_0x12c994==='USD')_0x304d48=_0x51b770(0x176);else _0x285d80===_0x51b770(0x1b3)&&(_0x304d48=_0x51b770(0x1a1));var _0x3aa564={'payer_id':_0x41397a,'receiver_id':_0x197a72,'mode':_0x304d48,'source_amount':_0x304d48=='SOURCE_AMOUNT'?_0x5d1833:null,'source_currency':_0x12c994,'source_country_iso_code':_0x1e991e,'destination_amount':_0x304d48==_0x51b770(0x1a1)?_0x5d1833:null,'destination_currency':_0x285d80};const _0x3069b8=await quotationService[_0x51b770(0x1ba)](_0x3aa564);if(_0x3069b8?.[_0x51b770(0x133)]!==httpStatus['OK']){_0xee9e57[_0x51b770(0x133)](httpStatus['OK'])[_0x51b770(0x15e)](_0x3069b8);return;}_0xee9e57[_0x51b770(0x133)](httpStatus['OK'])[_0x51b770(0x15e)](_0x3069b8);}),create_transaction=catchAsync(async(_0x332995,_0x208c16)=>{const _0x202aa3=a6_0x35fecc,{quotation_id:_0x5dd2c6}=_0x332995[_0x202aa3(0x123)];var _0x5cefbf=await quotationDbService[_0x202aa3(0x11d)](_0x5dd2c6);if(helperService[_0x202aa3(0x13f)](_0x5cefbf)){_0x208c16[_0x202aa3(0x133)](httpStatus['OK'])['send']({'status':0x190,'message':_0x202aa3(0x1fc)});return;}let _0x5ef26a=await receiverService[_0x202aa3(0x1cc)](_0x5cefbf?.[_0x202aa3(0x14f)]);if(helperService[_0x202aa3(0x13f)](_0x5ef26a)){_0x208c16[_0x202aa3(0x133)](httpStatus['OK'])[_0x202aa3(0x15e)]({'status':0x190,'message':'Receiver\x20not\x20found!'});return;}if(_0x5ef26a?.['verification']!==_0x202aa3(0x118)){_0x208c16['status'](httpStatus['OK'])[_0x202aa3(0x15e)]({'status':0x190,'message':_0x202aa3(0x1fb)});return;}if(_0x5ef26a?.['active']!==0x1){_0x208c16[_0x202aa3(0x133)](httpStatus['OK'])[_0x202aa3(0x15e)]({'status':0x190,'message':'Receiver\x20is\x20not\x20active!'});return;}let _0x26a9ff=await quotationService[_0x202aa3(0x16e)](_0x5ef26a);console[_0x202aa3(0x1ae)](_0x202aa3(0x177),_0x26a9ff);if(_0x26a9ff?.[_0x202aa3(0x133)]!==httpStatus['OK']){_0x208c16[_0x202aa3(0x133)](httpStatus['OK'])['send']({'status':0x190,'message':_0x202aa3(0x1e7)});return;}const _0x18d32d=await payerService[_0x202aa3(0x17d)](_0x5ef26a?.[_0x202aa3(0x18c)],_0x26a9ff?.[_0x202aa3(0x14c)]);if(_0x18d32d?.['status']!==httpStatus['OK']){_0x208c16[_0x202aa3(0x133)](httpStatus['OK'])[_0x202aa3(0x15e)](_0x18d32d);return;}if(_0x18d32d?.['data']?.[_0x202aa3(0x1ef)]!==_0x5cefbf?.[_0x202aa3(0x1a8)]){_0x208c16[_0x202aa3(0x133)](httpStatus['OK'])['send']({'status':0x190,'message':_0x202aa3(0x167)+_0x18d32d?.[_0x202aa3(0x14c)]?.['currency']});return;}const _0x14a1d8=await quotationService[_0x202aa3(0x186)](_0x5cefbf,_0x18d32d?.[_0x202aa3(0x14c)],_0x5ef26a,'','',_0x26a9ff?.[_0x202aa3(0x14c)]);if(_0x14a1d8['status']!==httpStatus['OK']){_0x208c16[_0x202aa3(0x133)](httpStatus['OK'])[_0x202aa3(0x15e)](_0x14a1d8);return;}_0x208c16['status'](httpStatus['OK'])[_0x202aa3(0x15e)](_0x14a1d8);}),confirm_transaction=catchAsync(async(_0x9c7090,_0x5ef82f)=>{const _0x8e6baa=a6_0x35fecc,{transaction_id:_0x3a91ee}=_0x9c7090[_0x8e6baa(0x123)],_0x3be9db=await transactionService['getById'](_0x3a91ee);if(_0x3be9db[_0x8e6baa(0x133)]!==httpStatus['OK'])return _0x3be9db;const _0xc5ed66=await pspService[_0x8e6baa(0x1cf)](_0x3be9db?.[_0x8e6baa(0x14c)]?.['mid_id']);if(_0xc5ed66?.[_0x8e6baa(0x133)]!==httpStatus['OK'])return _0xc5ed66;const _0x3caf98=await quotationService[_0x8e6baa(0x1f9)](_0x3a91ee,null,_0xc5ed66?.['data']);if(_0x3caf98[_0x8e6baa(0x133)]!==httpStatus['OK']){_0x5ef82f['status'](httpStatus['OK'])[_0x8e6baa(0x15e)](_0x3caf98);return;}let _0x27677c=_0x3caf98?.[_0x8e6baa(0x14c)];const _0x402a8e={'submerchant_id':helperService['isNotValid'](_0x27677c?.['sub_merchant_id'])?null:_0x27677c?.[_0x8e6baa(0x10f)],'receiver_id':helperService[_0x8e6baa(0x13f)](_0x27677c?.[_0x8e6baa(0x14f)])?null:String(_0x27677c?.[_0x8e6baa(0x14f)]),'currecny':_0x27677c?.[_0x8e6baa(0x18d)]?.[_0x8e6baa(0x1ef)],'amount':String(_0x27677c?.[_0x8e6baa(0x18d)]?.[_0x8e6baa(0x17a)]),'transaction_id':String(_0x27677c?.[_0x8e6baa(0x15c)]),'order_id':_0x27677c?.['external_id'],'order_status':'PENDING'};console[_0x8e6baa(0x1ae)](_0x8e6baa(0x168),_0x402a8e);var _0x6accea=await nodeServerAPIService[_0x8e6baa(0x17c)](_0x9c7090,_0x402a8e);console['log']('🚀\x20~\x20constpayout_webhook=catchAsync\x20~\x20result:',_0x6accea),_0x5ef82f[_0x8e6baa(0x133)](httpStatus['OK'])['send'](_0x3caf98);}),transaction_status=catchAsync(async(_0x9ce3df,_0x112af4)=>{const _0x3c80bc=a6_0x35fecc,_0x2abf9b=_0x9ce3df['params'][_0x3c80bc(0x15c)];var _0x52e5d8=await transactionService['getById'](_0x2abf9b);if(_0x52e5d8?.[_0x3c80bc(0x133)]!==httpStatus['OK']){console['log'](_0x3c80bc(0x1f8),_0x52e5d8),_0x112af4[_0x3c80bc(0x133)](httpStatus['OK'])[_0x3c80bc(0x15e)](_0x52e5d8);return;}const _0x45bb88=await pspService[_0x3c80bc(0x1cf)](_0x52e5d8?.[_0x3c80bc(0x14c)]?.[_0x3c80bc(0x12c)]);if(_0x45bb88?.[_0x3c80bc(0x133)]!==httpStatus['OK']){_0x112af4[_0x3c80bc(0x133)](httpStatus[_0x3c80bc(0x107)])[_0x3c80bc(0x15e)](_0x45bb88);return;}const _0x43e5f4=await quotationService['transaction_status'](_0x2abf9b,_0x45bb88?.['data']);if(_0x43e5f4?.[_0x3c80bc(0x133)]!==httpStatus['OK']){_0x112af4[_0x3c80bc(0x133)](httpStatus['OK'])['send'](_0x43e5f4);return;}_0x112af4[_0x3c80bc(0x133)](httpStatus['OK'])[_0x3c80bc(0x15e)](_0x43e5f4);}),transaction_cancel=catchAsync(async(_0x1ab919,_0x5c8bd9)=>{const _0x21e9a3=a6_0x35fecc,{transaction_id:_0x22cb86}=_0x1ab919['body'],_0x467003=await transactionService[_0x21e9a3(0x17d)](_0x22cb86);if(_0x467003[_0x21e9a3(0x133)]!==httpStatus['OK'])return _0x467003;const _0x1f883a=await pspService[_0x21e9a3(0x1cf)](_0x467003?.[_0x21e9a3(0x14c)]?.['mid_id']);if(_0x1f883a?.['status']!==httpStatus['OK'])return _0x1f883a;const _0x50491c=await quotationService['transaction_cancel'](_0x22cb86,_0x1f883a?.['data']);if(_0x50491c?.[_0x21e9a3(0x133)]!==httpStatus['OK']){_0x5c8bd9[_0x21e9a3(0x133)](httpStatus['OK'])[_0x21e9a3(0x15e)](_0x50491c);return;}_0x5c8bd9[_0x21e9a3(0x133)](httpStatus['OK'])['send'](_0x50491c);}),payout_list=catchAsync(async(_0x22feb3,_0x3e3f9c)=>{const _0x25982f=a6_0x35fecc,_0x4e9939=await quotationService['get_payout_list'](_0x22feb3,_0x3e3f9c);if(_0x4e9939?.[_0x25982f(0x133)]!==httpStatus['OK']){_0x3e3f9c[_0x25982f(0x133)](httpStatus[_0x25982f(0x107)])[_0x25982f(0x15e)](_0x4e9939);return;}_0x3e3f9c[_0x25982f(0x133)](httpStatus['OK'])['send'](_0x4e9939);}),payout_webhook=catchAsync(async(_0x4fde8b,_0x48338b)=>{const _0x29f3ed=a6_0x35fecc,_0x3f53cd=_0x4fde8b[_0x29f3ed(0x123)];console[_0x29f3ed(0x1ae)]('🚀\x20~\x20transaction:',_0x3f53cd);if(helperService['isNotValid'](_0x3f53cd)){console['log'](_0x29f3ed(0x108),_0x3f53cd),_0x48338b[_0x29f3ed(0x133)](httpStatus[_0x29f3ed(0x107)])[_0x29f3ed(0x15e)]({'status':0x190,'message':_0x29f3ed(0x15d)});return;}var _0x5411a9=await transactionService[_0x29f3ed(0x17d)](_0x3f53cd?.['id']);console[_0x29f3ed(0x1ae)](_0x29f3ed(0x145),_0x5411a9);_0x5411a9?.[_0x29f3ed(0x133)]!==httpStatus['OK']&&console[_0x29f3ed(0x1ae)](_0x29f3ed(0x1f8),_0x5411a9);let _0x2bf11e=await receiverService[_0x29f3ed(0x1cc)](_0x5411a9?.[_0x29f3ed(0x14c)]?.[_0x29f3ed(0x14f)]);console[_0x29f3ed(0x1ae)](_0x29f3ed(0x18b),_0x2bf11e);let _0x5ebd54=null;helperService[_0x29f3ed(0x110)](_0x5411a9?.[_0x29f3ed(0x14c)]?.[_0x29f3ed(0x10f)])&&(_0x5ebd54=await nodeServerAPIService[_0x29f3ed(0x105)](),console['log'](_0x29f3ed(0x1f5),_0x5ebd54));let _0x5c2867=null;const _0x335b44={};if(_0x5411a9?.[_0x29f3ed(0x14c)]?.['account_id'])_0x335b44[_0x29f3ed(0x136)]=_0x5411a9?.['data']?.['account_id'];else{if(_0x5411a9?.[_0x29f3ed(0x14c)]?.[_0x29f3ed(0x10f)]&&_0x3f53cd?.[_0x29f3ed(0x18f)]?.[_0x29f3ed(0x1ef)])_0x335b44[_0x29f3ed(0x1ca)]=String(_0x5411a9?.['data']?.[_0x29f3ed(0x10f)]),_0x335b44[_0x29f3ed(0x1ef)]=_0x3f53cd?.[_0x29f3ed(0x18f)]?.['currency'];else _0x5411a9?.[_0x29f3ed(0x14c)]?.[_0x29f3ed(0x14f)]&&_0x3f53cd?.[_0x29f3ed(0x18f)]?.[_0x29f3ed(0x1ef)]&&(_0x335b44[_0x29f3ed(0x14f)]=String(_0x5411a9?.['data']?.[_0x29f3ed(0x14f)]),_0x335b44['currency']=_0x3f53cd?.[_0x29f3ed(0x18f)]?.['currency']);}_0x5c2867=await nodeServerAPIService[_0x29f3ed(0x12b)](_0x335b44,''),console['log']('🚀\x20~\x20account_details:',_0x5c2867);let _0x609522;try{let _0x558afb={};if(helperService[_0x29f3ed(0x13f)](_0x5411a9?.[_0x29f3ed(0x14c)]?.[_0x29f3ed(0x10f)]))_0x558afb={'id':_0x2bf11e?.[_0x29f3ed(0x14f)],'name':_0x2bf11e?.[_0x29f3ed(0x134)],'country':_0x2bf11e?.[_0x29f3ed(0x16a)],'webhook_url':_0x2bf11e?.['webhook_url']};else helperService[_0x29f3ed(0x110)](_0x2bf11e?.['sub_merchant_id'])&&helperService['isValid'](_0x2bf11e?.['receiver_id'])&&(_0x558afb={'id':null,'name':_0x5ebd54?.['data']?.['company_name'],'country':_0x5ebd54?.[_0x29f3ed(0x14c)]?.['company_country'],'webhook_url':null});let _0x18207d=_0x5c2867?.[_0x29f3ed(0x14c)],_0x4c755a={'account_id':_0x18207d?.[_0x29f3ed(0x136)],..._0x18207d?.[_0x29f3ed(0x190)]},_0xf51041={..._0x3f53cd?.[_0x29f3ed(0x174)],'payer_id':_0x3f53cd?.['payer']?.['id'],'payer_name':_0x3f53cd?.['payer']?.[_0x29f3ed(0x149)]};_0x609522={'order_id':_0x5411a9?.['data']?.['order_id'],'external_id':_0x5411a9?.[_0x29f3ed(0x14c)]?.[_0x29f3ed(0x10a)],'transaction_id':_0x5411a9?.[_0x29f3ed(0x14c)]?.[_0x29f3ed(0x15c)],'sub_merchant_id':helperService[_0x29f3ed(0x110)](_0x5411a9?.[_0x29f3ed(0x14c)]?.[_0x29f3ed(0x10f)])?_0x5411a9?.[_0x29f3ed(0x14c)]?.[_0x29f3ed(0x10f)]:null,'receiver_id':helperService[_0x29f3ed(0x110)](_0x5411a9?.[_0x29f3ed(0x14c)]?.['receiver_id'])?_0x5411a9?.[_0x29f3ed(0x14c)]?.['receiver_id']:null,'currency':_0x3f53cd?.[_0x29f3ed(0x18f)]?.[_0x29f3ed(0x1ef)],'wallet_id':_0x5411a9?.[_0x29f3ed(0x14c)]?.['wallet_id'],'debit_party':_0x558afb,'credit_party':_0x4c755a,'credit_party_identifier':_0xf51041,'debit_details':{'debit_amount':parseFloat(_0x3f53cd?.[_0x29f3ed(0x188)][_0x29f3ed(0x17a)]),'currency':_0x3f53cd?.['source']['currency']},'credit_details':{'amount':parseFloat(_0x3f53cd?.[_0x29f3ed(0x18d)]?.[_0x29f3ed(0x17a)]),'currency':_0x3f53cd?.['destination']?.[_0x29f3ed(0x1ef)]},'payout_reference':helperService[_0x29f3ed(0x110)](_0x5411a9?.['data']?.[_0x29f3ed(0x195)])?_0x5411a9?.['data']?.['payout_reference']:null,'purpose_of_remittance':helperService[_0x29f3ed(0x110)](_0x3f53cd?.[_0x29f3ed(0x1d1)])?_0x3f53cd?.[_0x29f3ed(0x1d1)]:null,'webhook_url':helperService[_0x29f3ed(0x110)](_0x5411a9?.['data']?.[_0x29f3ed(0x1c8)])?_0x5411a9?.['data']?.[_0x29f3ed(0x1c8)]:null,'document_reference_number':_0x5411a9?.[_0x29f3ed(0x14c)]?.['document_reference_number'],'transaction_status':_0x3f53cd?.[_0x29f3ed(0x20c)],'transaction_status_code':'','order_created_date':moment(_0x3f53cd?.[_0x29f3ed(0x16f)])['format'](_0x29f3ed(0x1db)),'order_updated_date':moment(_0x3f53cd?.[_0x29f3ed(0x16f)])['format'](_0x29f3ed(0x1db)),'batch_id':null},console['log'](_0x29f3ed(0x12f),_0x609522);let _0xd3794c=null,_0x136b7f=null;if(helperService[_0x29f3ed(0x13f)](_0x5411a9?.[_0x29f3ed(0x14c)]?.[_0x29f3ed(0x1c8)])){if(helperService[_0x29f3ed(0x110)](_0x5411a9?.[_0x29f3ed(0x14c)]?.[_0x29f3ed(0x10f)])){const _0xc26f9=await nodeServerAPIService[_0x29f3ed(0x1fd)](_0x5411a9?.['data']?.[_0x29f3ed(0x10f)]);console[_0x29f3ed(0x1ae)](_0x29f3ed(0x172),_0xc26f9),_0xd3794c=_0xc26f9?.[_0x29f3ed(0x14c)]['notification_url'],_0x136b7f=_0xc26f9?.['data'][_0x29f3ed(0x1ff)];}else{if(helperService[_0x29f3ed(0x110)](_0x5411a9?.['data']?.[_0x29f3ed(0x14f)])){const _0x11b66f=await receiverService[_0x29f3ed(0x1cc)](_0x5411a9?.[_0x29f3ed(0x14c)]?.['receiver_id']);_0xd3794c=_0x11b66f?.[_0x29f3ed(0x142)],_0x136b7f=_0x11b66f?.[_0x29f3ed(0x1bb)];}}}else _0xd3794c=_0x5411a9?.[_0x29f3ed(0x14c)]?.[_0x29f3ed(0x1c8)];console[_0x29f3ed(0x1ae)](_0x29f3ed(0x125),_0xd3794c);if(helperService[_0x29f3ed(0x110)](_0xd3794c)){var _0x429a36=createGeneralApiClient();let _0x12881a=await _0x429a36[_0x29f3ed(0x178)](_0xd3794c,_0x609522,{'headers':{'notification-secret':_0x136b7f}});console[_0x29f3ed(0x1ae)](_0x29f3ed(0x126),_0x12881a);}}catch(_0x58f81d){console[_0x29f3ed(0x1ae)]('🚀\x20~\x20Merchant\x20constpayout_webhook=catchAsync\x20~\x20error:',_0x58f81d);}let _0x27ac5e=_0x3f53cd?.['status_class_message']||_0x5411a9?.[_0x29f3ed(0x14c)]?.[_0x29f3ed(0x1bc)];if(_0x3f53cd?.[_0x29f3ed(0x20c)]===_0x29f3ed(0x12d))_0x27ac5e=_0x29f3ed(0x1f6);else{if(_0x3f53cd?.[_0x29f3ed(0x20c)]==='REJECTED')_0x27ac5e=_0x29f3ed(0x1f6);else{if(_0x3f53cd?.[_0x29f3ed(0x20c)]==='CANCELLED')_0x27ac5e='FAILED';else{if(_0x3f53cd?.[_0x29f3ed(0x20c)]===_0x29f3ed(0x13b))_0x27ac5e=_0x29f3ed(0x124);else _0x3f53cd?.[_0x29f3ed(0x20c)]===_0x29f3ed(0x13c)&&(_0x27ac5e='PENDING');}}}const _0x48fe1a={'submerchant_id':_0x5411a9?.['data']?.['sub_merchant_id'],'receiver_id':String(_0x5411a9?.[_0x29f3ed(0x14c)]?.[_0x29f3ed(0x14f)]),'currecny':_0x5411a9?.[_0x29f3ed(0x14c)]?.[_0x29f3ed(0x1a8)],'amount':String(_0x5411a9?.[_0x29f3ed(0x14c)]?.['destination_amount']),'transaction_id':String(_0x5411a9?.['data']?.[_0x29f3ed(0x15c)]),'order_id':_0x5411a9?.['data']?.['external_id'],'order_status':_0x27ac5e};console['log']('🚀\x20~\x20constpayout_webhook=catchAsync\x20~\x20payload:',_0x48fe1a);var _0x187405=await nodeServerAPIService[_0x29f3ed(0x17c)](_0x4fde8b,_0x48fe1a);console[_0x29f3ed(0x1ae)](_0x29f3ed(0x148),_0x187405);const _0x1547ed={'transaction':_0x3f53cd,'super_merchant_id':_0x5411a9?.[_0x29f3ed(0x14c)]?.[_0x29f3ed(0x173)],'sub_merchant_id':_0x5411a9?.[_0x29f3ed(0x14c)]?.[_0x29f3ed(0x10f)],'quotation_id':_0x5411a9?.[_0x29f3ed(0x14c)]?.[_0x29f3ed(0x1a6)],'receiver_id':_0x5411a9?.[_0x29f3ed(0x14c)]?.[_0x29f3ed(0x14f)],'order_id':_0x5411a9?.[_0x29f3ed(0x14c)]?.[_0x29f3ed(0x1f0)],'wallet_id':_0x5411a9?.[_0x29f3ed(0x14c)]?.[_0x29f3ed(0x112)],'account_id':_0x5411a9?.['data']?.[_0x29f3ed(0x136)],'batch_id':_0x5411a9?.['data']?.['batch_id'],'mid_id':_0x5411a9?.[_0x29f3ed(0x14c)]?.[_0x29f3ed(0x12c)],'payout_reference':_0x5411a9?.[_0x29f3ed(0x14c)]?.[_0x29f3ed(0x195)],'webhook_url':_0x5411a9?.[_0x29f3ed(0x14c)]?.['callback_url']};var _0x187405=await transactionService[_0x29f3ed(0x11c)](_0x1547ed);_0x187405[_0x29f3ed(0x133)]!==httpStatus['OK']&&new ApiError(httpStatus[_0x29f3ed(0x206)],_0x187405[_0x29f3ed(0x1e0)]),_0x609522['transaction_ref_id']=_0x187405?.['data']?.['id'],_0x48338b[_0x29f3ed(0x133)](httpStatus['OK'])['send'](_0x609522);}),add_transaction_attachment=catchAsync(async(_0xb888c9,_0x97154)=>{const _0x134149=a6_0x35fecc,{type:_0x35aa6f,order_id:_0x21af07}=_0xb888c9['body'],_0x47c96e=_0xb888c9[_0x134149(0x16b)];console['log'](_0x134149(0x1d0),_0x47c96e);if(!_0x47c96e)return _0x97154[_0x134149(0x133)](httpStatus['OK'])[_0x134149(0x15e)]({'status':0x190,'message':_0x134149(0x199)});const _0x187d47=await transactionService['getByExternalId'](_0x21af07);console['log'](_0x134149(0x145),_0x187d47);if(_0x187d47[_0x134149(0x133)]!==httpStatus['OK']){let _0x31d373={'transaction_id':'','external_id':_0x21af07,'receiver_id':'','file_name':path[_0x134149(0x1e4)](_0x47c96e[_0x134149(0x135)]),'original_name':_0x47c96e[_0x134149(0x10b)],'file_path':_0x47c96e[_0x134149(0x135)],'mimetype':_0x47c96e[_0x134149(0x194)],'type':_0x35aa6f};console[_0x134149(0x1ae)]('🚀\x20~\x20save_payload:',_0x31d373);let _0x1d72c3=await attachmentDbService['add'](_0x31d373);_0x97154[_0x134149(0x133)](httpStatus['OK'])['send'](_0x1d72c3);}else{const _0x2fcbe1=await pspService[_0x134149(0x1cf)](_0x187d47?.['data']?.['mid_id']);if(_0x2fcbe1?.[_0x134149(0x133)]!==httpStatus['OK'])return _0x97154['status'](httpStatus['OK'])[_0x134149(0x15e)](_0x2fcbe1);let _0xabbfe3={'transaction_id':_0x187d47?.['data']?.[_0x134149(0x15c)],'external_id':_0x21af07,'receiver_id':_0x187d47?.[_0x134149(0x14c)]?.[_0x134149(0x14f)],'file_name':path[_0x134149(0x1e4)](_0x47c96e[_0x134149(0x135)]),'original_name':_0x47c96e[_0x134149(0x10b)],'file_path':_0x47c96e[_0x134149(0x135)],'mimetype':_0x47c96e[_0x134149(0x194)],'type':_0x35aa6f},_0x569313=await attachmentDbService[_0x134149(0x146)](_0xabbfe3);const _0x1990dc=[_0x134149(0x15a),_0x134149(0x1a7),_0x134149(0x1d7),_0x134149(0x162),'ORANGE'];if(!_0x1990dc[_0x134149(0x193)](_0x187d47?.[_0x134149(0x14c)]?.[_0x134149(0x18c)])){const _0x1a4c74=await quotationService[_0x134149(0x19a)](_0x2fcbe1?.[_0x134149(0x14c)],_0x47c96e,_0x35aa6f,_0x187d47?.['data']?.[_0x134149(0x15c)]);if(_0x1a4c74?.[_0x134149(0x133)]!==httpStatus['OK']){_0x97154['status'](httpStatus[_0x134149(0x107)])[_0x134149(0x15e)](_0x1a4c74);return;}}_0x97154['status'](httpStatus['OK'])[_0x134149(0x15e)](_0x569313);}});function a6_0x4268(){const _0x35c3b8=['receiver_name','path','account_id','3OhUTxo','company_name','confirm','🚀\x20~\x20payout\x20~\x20receiver:','SUBMITTED','CONFIRMED','all','funding_source_type','isNotValid','batch_id','Transaction\x20confirmed\x20successfully','webhook_url','getAccessToken','🚀\x20~\x20initiateTransferResponse:','🚀\x20~\x20stored_transaction:','add','is_active','🚀\x20~\x20constpayout_webhook=catchAsync\x20~\x20result:','name','425328jhpbEO','🚀\x20~\x20get_funding_details_payload:','data','LBR','country','receiver_id','../service/alpay.service','AlPay','🚀\x20~\x20initiateInternationalTransfer\x20data:','parseFormattedNumber','13LlzZhb','here\x20is\x20reciever\x20id\x20and\x20body\x20in\x20orange\x20money','AL\x20PAY','api_key','B2B','create','MTN_MOMO','business','transaction_id','Invalid\x20request','send','1459108TXuEkG','../service/helper.service','Payout\x20to\x20merchant\x20of\x20','MTN','request','uuid','MNO','length','Invalid\x20currency\x20selected!\x20The\x20receiver\x20only\x20accepts\x20payouts\x20in\x20','🚀\x20~\x20payout\x20~\x20payload:','Transfer\x20initiated,\x20Reference\x20ID:','registered_business_address','file','🚀\x20~\x20transactions.map\x20~\x20txn_id:','verification','payout_psp_routing','creation_date','make_unique_id','../service/account_details.service','🚀\x20~\x20MERCHANT:','super_merchant_id','credit_party_identifier','Account\x20is\x20not\x20verified!','SOURCE_AMOUNT','🚀\x20~\x20payout\x20~\x20MID:','post','🚀\x20~\x20wallet3:','amount','transactionId','update_payout_status','getById','accountNumber','reason','2796084rIzoaQ','payout_status','params','push','Payout\x20transaction','../utils/ApiError','post_transaction','nameEnquiryService','source','Done','map','🚀\x20~\x20receiver:','payer_id','destination','isArray','payer','account_details','Unable\x20to\x20initiate\x20transfer','Invalid\x20value\x20entered\x20in\x20amount\x20field','includes','mimetype','payout_reference','Invalid\x20value\x20entered\x20in\x20action\x20field','getByBatchId','TXNID','File\x20is\x20required','add_transaction_attachment','../service/orange.service','customer_type','Invalid\x20\x27api_key\x27','password','initiateOrangeMoneyTransfer','🚀\x20~\x20initiateLocalTransfer\x20data:','DESTINATION_AMOUNT','🚀\x20~\x20isValidBankDetails:','financialTransactionId','toLowerCase','CREATED','quotation_id','ORANGE_MONEY','destination_currency','get_wallet_details_by_id','callback','ORANGE-MONEY','🚀\x20~\x20payout\x20~\x20isValidBankDetails:','institutionCode','log','🚀\x20~\x20payoutResponse:','../service/transactions.service','initiateInternationalTransfer...','debit_amount','AED','62764dNzPdX','🚀\x20~\x20create_transaction_API_Call\x20~\x20account_data:','tx_id','active','../service/orange_mock.service','Payout','create_quotations','webhook_secret','status_message','get_wallet_balance','../service/attachment.db.service','Invalid\x20MID\x20credentials','Receiver\x20is\x20not\x20active!','🚀\x20~\x20receiver_account_details:','payout','pending','Invalid\x20\x27primary_key\x27','🚀\x20~\x20account_details:','5bRVvRS','getTransferStatus','callback_url','transaction_status','submerchant_id','🚀\x20~\x20transactionStatusResponse:','get_receiver_by_id','CONFIRM','../service/quotation.db.service','get_mid_by_id','🚀\x20~\x20req.file:','purpose_of_remittance','primary_key','initiateTransfer','../service/mtn.service','is_verified','🚀\x20~\x20nameEnquiryServicePayload:','AL_PAY','moment','credit_details','TXNSTATUS','YYYY-MM-DD\x20hh:mm:ss','balance','checkConfirmTransaction','🚀\x20~\x20balance:','../service/receiver.service','message','payout_status_message','🚀\x20~\x20error:','SUCCESSFUL','basename','🚀\x20~\x20wallet2:','http-status','MID\x20is\x20not\x20found!','Transaction\x20not\x20found!','GHA','transactions','MSISDN','settlement','🚀\x20~\x20constpayout_webhook=catchAsync\x20~\x20payload:','cancel','currency','order_id','resultset','6MxKhbV','11XJtUdN','GHS','🚀\x20~\x20company_details:','FAILED','🚀\x20~\x20payout\x20~\x20getTransactionStatus:','stored_transaction:','confirm_transaction','Transactions\x20not\x20found.','Receiver\x20is\x20not\x20verified!','Quotation\x20not\x20found!','get_merchant_webhook_settings','transaction_cancel','notification_secret','../service/api_client.service','success','🚀\x20~\x20create_transaction_API_Call\x20~\x20account_result:','🚀\x20~\x20wallet1:','check_valid_bank_details','failed','INTERNAL_SERVER_ERROR','here\x20is\x20reciever\x20id\x20and\x20body','externalId','9xedpFf','Invalid\x20\x27password\x27','debit_currency','status_class_message','CREDIT','company_country','Mobile\x20Wallet','get_company_details','../service/node_server_api.service','BAD_REQUEST','Received\x20webhook....isNotValid:','🚀\x20~\x20quotation_data_request:','external_id','originalname','exports','confirmation_required','🚀\x20~\x20get_wallet_balance_payload:','sub_merchant_id','isValid','528774aJMize','wallet_id','INTERBANK','payer_currency','accountName','1311010QBucAT','🚀\x20~\x20getTransactionStatus:','verified','here\x20is\x20reciever\x20id\x20and\x20body\x20in\x20AlPay','getOrangeMoneyTransferStatus','Insufficient\x20Balance!','addNewTransaction','getQuotationById','🚀\x20~\x20payout\x20~\x20transactionPayload:','🚀\x20~\x20nameEnquiryServiceResponse:','Account\x20is\x20not\x20active!','NOT_FOUND','9930YwMXde','body','PENDING','🚀\x20~\x20Merchant\x20webhook_url:','🚀\x20~\x20Merchant\x20webhook_result:','Payout\x20done!','🚀\x20~\x20wallet_balance_response:','initiateInternationalTransfer','payer_name','get_funding_details','mid_id','DECLINED','COMPLETED','🚀\x20~\x20webhookPayload:','stringify','get_wallet_details_by_sub_id','format','status'];a6_0x4268=function(){return _0x35c3b8;};return a6_0x4268();}module[a6_0x35fecc(0x10c)]={'payout_webhook':payout_webhook,'cancel_batch_payout':cancel_batch_payout,'get_batch_transaction_status':get_batch_transaction_status,'payout':payout,'manage_payout':manage_payout,'batch_payout':batch_payout,'confirm_batch_payout':confirm_batch_payout,'create_quotations':create_quotations,'create_transaction':create_transaction,'confirm_transaction':confirm_transaction,'transaction_status':transaction_status,'transaction_cancel':transaction_cancel,'payout_list':payout_list,'manage_batch_payout':manage_batch_payout,'add_transaction_attachment':add_transaction_attachment};
+const quotationService = require("../service/quotation.service");
+const quotationValidation = require("../validations/quotation.validation");
+const transactionService = require("../service/transactions.service");
+const accountDetailsService = require("../service/account_details.service");
+const helperService = require("../service/helper.service");
+const payerService = require("../service/beneficiary.service");
+const receiverService = require("../service/receiver.service");
+const pspService = require("../service/psp.service");
+const catchAsync = require("../utils/catchAsync");
+const httpStatus = require("http-status");
+const ApiError = require("../utils/ApiError");
+const quotationDbService = require("../service/quotation.db.service");
+const attachmentDbService = require("../service/attachment.db.service");
+const nodeServerAPIService = require("../service/node_server_api.service");
+const createGeneralApiClient = require("../service/api_client.service");
+const { payout_mid, transaction } = require("../models");
+const {
+  getAccessToken,
+  initiateTransfer,
+  getTransferStatus,
+} = require("../service/mtn.service");
+const alPayService = require("../service/alpay.service");
+const mtnMockService = require("../service/mtn_mock.service");
+const orangeMockService = require("../service/orange_mock.service");
+const alMockService = require("../service/al.service");
+const {
+  initiateOrangeMoneyTransfer,
+  getOrangeMoneyTransferStatus,
+} = require("../service/orange.service");
+const moment = require("moment");
+const { string } = require("joi");
+const { v4: uuidv4 } = require("uuid");
+const fs = require("fs");
+const path = require("path");
+
+/**
+ * Create Batch Payout
+ */
+const batch_payout = catchAsync(async (req, res) => {
+  const { transactions } = req.body;
+
+  let batch_id;
+
+  do {
+    batch_id = await helperService.make_unique_id(10);
+    var batchIsExists = await quotationValidation.validateBatchIdExists(
+      batch_id
+    );
+  } while (batchIsExists);
+
+  var batchResponse = {
+    batch_id: batch_id,
+    transactions: [],
+  };
+
+  // ==============================================================================
+  // Promise All
+  await Promise.all(
+    transactions.map(async (txn) => {
+      const {
+        order_id,
+        amount,
+        confirmation_required,
+        purpose_of_remittance,
+        payout_reference,
+        debit_amount,
+        debit_currency,
+        webhook_url,
+      } = txn;
+
+      var transaction_response = {
+        order_id: txn?.order_id,
+        payout_reference: txn?.payout_reference,
+
+        sub_merchant_id: txn?.sub_merchant_id,
+        receiver_id: txn?.receiver_id,
+        wallet_id: txn?.wallet_id,
+        currency: txn?.currency,
+
+        account_id: txn?.account_id,
+
+        amount: txn?.amount,
+        debit_amount: txn?.debit_amount,
+        debit_currency: txn?.debit_currency,
+
+        confirmation_required: txn?.confirmation_required,
+        purpose_of_remittance: txn?.purpose_of_remittance,
+        webhook_url: txn?.webhook_url,
+
+        payout_details: "",
+        payout_status: "", // success, failed
+        payout_status_message: "",
+      };
+
+      let wallet_id = txn?.wallet_id;
+      let currency = txn?.currency;
+      let sub_merchant_id = txn?.sub_merchant_id;
+      let receiver_id = txn?.receiver_id;
+      let account_id = txn?.account_id;
+
+      if (wallet_id) {
+        let wallet = await nodeServerAPIService.get_wallet_details_by_id(
+          wallet_id
+        );
+        console.log("🚀 ~ wallet:", wallet);
+        if (wallet?.status !== httpStatus.OK) {
+          transaction_response.payout_status = "failed"; // success, failed
+          transaction_response.payout_status_message = wallet?.message;
+          batchResponse.transactions.push(transaction_response);
+          return;
+        }
+        currency = wallet?.data?.currency;
+        receiver_id = wallet?.data?.receiver_id;
+        wallet_id = wallet?.data.wallet_id;
+      } else if (sub_merchant_id && currency) {
+        let payload = {
+          sub_merchant_id: String(sub_merchant_id),
+          currency: currency,
+        };
+        let wallet = await nodeServerAPIService.get_wallet_details_by_sub_id(
+          payload
+        );
+        console.log("🚀 ~ wallet1:", wallet);
+        if (wallet?.status !== httpStatus.OK) {
+          transaction_response.payout_status = "failed"; // success, failed
+          transaction_response.payout_status_message = wallet?.message;
+          batchResponse.transactions.push(transaction_response);
+          return;
+        }
+        currency = wallet?.data?.currency;
+        receiver_id = wallet?.data?.receiver_id;
+        wallet_id = wallet?.data.wallet_id;
+        if (!transaction_response?.wallet_id) {
+          transaction_response.wallet_id = wallet?.data.wallet_id;
+        }
+      } else if (receiver_id && currency) {
+        let payload = {
+          receiver_id: String(receiver_id),
+          currency: currency,
+        };
+        let wallet = await nodeServerAPIService.get_wallet_details_by_sub_id(
+          payload
+        );
+        console.log("🚀 ~ wallet3:", wallet);
+        if (wallet?.status !== httpStatus.OK) {
+          transaction_response.payout_status = "failed"; // success, failed
+          transaction_response.payout_status_message = wallet?.message;
+          batchResponse.transactions.push(transaction_response);
+          return;
+        }
+        currency = wallet?.data?.currency;
+        receiver_id = wallet?.data?.receiver_id;
+        wallet_id = wallet?.data.wallet_id;
+        if (!transaction_response?.wallet_id) {
+          transaction_response.wallet_id = wallet?.data.wallet_id;
+        }
+      }
+
+      // ==============================================================================
+      // Check Payout Amount
+
+      try {
+        parseFloat(amount);
+      } catch (error) {
+        transaction_response.payout_status = "failed"; // success, failed
+        transaction_response.payout_status_message =
+          "Invalid value entered in amount field";
+        batchResponse.transactions.push(transaction_response);
+        return;
+      }
+
+      //=============================================================================================
+      // Get merchant details by id
+      let company_details = null;
+      if (helperService.isValid(sub_merchant_id)) {
+        company_details = await nodeServerAPIService.get_company_details();
+      }
+
+      // ==============================================================================
+      // Get Receiver Details
+
+      let receiver = await receiverService.get_receiver_by_id(receiver_id);
+
+      if (undefined != receiver?.status && receiver?.status != httpStatus.OK) {
+        transaction_response.payout_status = "failed"; // success, failed
+        transaction_response.payout_status_message = receiver?.message;
+        batchResponse.transactions.push(transaction_response);
+        return;
+      }
+
+      // Check receiver created
+      if (helperService.isNotValid(receiver)) {
+        transaction_response.payout_status = "failed"; // success, failed
+        transaction_response.payout_status_message = "Receiver not found!";
+        batchResponse.transactions.push(transaction_response);
+        return;
+      }
+      if (receiver?.verification !== "verified") {
+        transaction_response.payout_status = "failed"; // success, failed
+        transaction_response.payout_status_message =
+          "Receiver is not verified!";
+        batchResponse.transactions.push(transaction_response);
+        return;
+      }
+      if (receiver?.active !== 1) {
+        transaction_response.payout_status = "failed"; // success, failed
+        transaction_response.payout_status_message = "Receiver is not active!";
+        batchResponse.transactions.push(transaction_response);
+        return;
+      }
+
+      // ==============================================================================
+      // Get Funding Details
+
+      const get_funding_details_payload = {};
+      if (account_id) {
+        get_funding_details_payload.account_id = account_id;
+      } else if (receiver?.sub_merchant_id && currency) {
+        get_funding_details_payload.submerchant_id = String(
+          receiver?.sub_merchant_id
+        );
+        get_funding_details_payload.currency = currency;
+      } else if (receiver?.receiver_id && currency) {
+        get_funding_details_payload.receiver_id = String(receiver?.receiver_id);
+        get_funding_details_payload.currency = currency;
+      }
+      console.log(
+        "🚀 ~ get_funding_details_payload:",
+        get_funding_details_payload
+      );
+
+      var receiver_account_details =
+        await nodeServerAPIService.get_funding_details(
+          get_funding_details_payload
+        );
+      console.log("🚀 ~ account_details:", receiver_account_details);
+      if (receiver_account_details?.status != httpStatus.OK) {
+        transaction_response.payout_status = "failed"; // success, failed
+        transaction_response.payout_status_message =
+          receiver_account_details?.message;
+        batchResponse.transactions.push(transaction_response);
+        return;
+      }
+
+      if (receiver_account_details?.data?.is_verified != 1) {
+        transaction_response.payout_status = "failed"; // success, failed
+        transaction_response.payout_status_message = "Account is not verified!";
+        batchResponse.transactions.push(transaction_response);
+        return;
+      }
+
+      receiver_account_details = receiver_account_details?.data;
+      if (!transaction_response?.account_id) {
+        transaction_response.account_id = receiver_account_details?.account_id;
+      }
+
+      // ==============================================================================
+      // Check wallet balance
+
+      let get_wallet_balance_payload = {};
+      if (wallet_id) {
+        get_wallet_balance_payload.wallet_id = wallet_id;
+      } else if (receiver?.sub_merchant_id && currency) {
+        get_wallet_balance_payload.sub_merchant_id = receiver?.sub_merchant_id;
+        get_wallet_balance_payload.currency = currency;
+      } else if (receiver_id && currency) {
+        get_wallet_balance_payload.receiver_id = receiver_id;
+        get_wallet_balance_payload.currency = currency;
+      }
+
+      console.log(
+        "🚀 ~ get_wallet_balance_payload:",
+        get_wallet_balance_payload
+      );
+      let wallet_balance_response = await quotationService.get_wallet_balance(
+        get_wallet_balance_payload
+      );
+      if (wallet_balance_response?.status != httpStatus.OK) {
+        console.log("🚀 ~ wallet_balance_response:", wallet_balance_response);
+        transaction_response.payout_status = "failed"; // success, failed
+        transaction_response.payout_status_message = "Account not found!";
+        batchResponse.transactions.push(transaction_response);
+        return;
+      }
+      let balance = wallet_balance_response?.data?.data?.balance;
+      console.log("🚀 ~ balance:", balance);
+
+      if (
+        helperService.parseFormattedNumber(balance) == 0 ||
+        helperService.parseFormattedNumber(balance) <
+          helperService.parseFormattedNumber(amount)
+      ) {
+        transaction_response.payout_status = "failed"; // success, failed
+        transaction_response.payout_status_message = "Insufficient Balance!";
+        batchResponse.transactions.push(transaction_response);
+        return;
+      }
+
+      // ==============================================================================
+      // MID Routing
+
+      let MID = await quotationService.payout_psp_routing(
+        receiver_account_details
+      );
+      console.log("🚀 ~ payout ~ MID:", MID);
+      if (MID?.status !== httpStatus.OK) {
+        transaction_response.payout_status = "failed"; // success, failed
+        transaction_response.payout_status_message = MID?.message;
+        batchResponse.transactions.push(transaction_response);
+        return;
+      }
+
+      // ==============================================================================
+      // Payer Selection
+
+      if (receiver_account_details?.payer_id == "MTN_MOMO") {
+        console.log(`here is reciever id and body`);
+        console.log(req.body, receiver_account_details);
+        // fetch mid
+        let payout_mid_details = MID?.data;
+        // let payout_mid_details = await payout_mid.findOne({
+        //   where: { sub_merchant_id: receiver?.sub_merchant_id },
+        // });
+        console.log(payout_mid_details);
+        // Check payer currency and request payout currency
+        if (receiver_account_details?.currency != currency) {
+          transaction_response.payout_status = "failed"; // success, failed
+          transaction_response.payout_status_message =
+            "Invalid currency selected! The receiver only accepts payouts in " +
+            receiver_account_details?.currency;
+          batchResponse.transactions.push(transaction_response);
+          return;
+        }
+
+        if (helperService.isNotValid(payout_mid_details?.primary_key)) {
+          transaction_response.payout_status = "failed"; // success, failed
+          transaction_response.payout_status_message = "Invalid 'primary_key'";
+          batchResponse.transactions.push(transaction_response);
+          return;
+        }
+
+        if (helperService.isNotValid(payout_mid_details?.api_key)) {
+          transaction_response.payout_status = "failed"; // success, failed
+          transaction_response.payout_status_message = "Invalid 'api_key'";
+          batchResponse.transactions.push(transaction_response);
+          return;
+        }
+
+        if (helperService.isNotValid(payout_mid_details?.password)) {
+          transaction_response.payout_status = "failed"; // success, failed
+          transaction_response.payout_status_message = "Invalid 'password'";
+          batchResponse.transactions.push(transaction_response);
+          return;
+        }
+
+        //call mtn service for token
+        let token = await getAccessToken(
+          payout_mid_details?.primary_key,
+          payout_mid_details?.api_key,
+          payout_mid_details?.password
+        );
+        if (!token) {
+          transaction_response.payout_status = "failed"; // success, failed
+          transaction_response.payout_status_message =
+            "Invalid MID credentials";
+          batchResponse.transactions.push(transaction_response);
+          return;
+        }
+
+        // make transfer payload
+        let data = {
+          amount: amount,
+          currency: currency,
+          externalId: await helperService.make_unique_id(),
+          payee: {
+            partyIdType: "MSISDN",
+            partyId: receiver_account_details?.account_details?.MSISDN,
+          },
+          payerMessage: "Payout",
+          payeeNote: `Payout to merchant of ${currency} ${amount}`,
+        };
+        let payoutReferenceId = await initiateTransfer(
+          token,
+          data,
+          payout_mid_details.primary_key
+        );
+        if (!payoutReferenceId) {
+          transaction_response.payout_status = "failed"; // success, failed
+          transaction_response.payout_status_message =
+            "Unable to initiate transfer";
+          batchResponse.transactions.push(transaction_response);
+          return;
+        }
+        let getTransactionStatus = await getTransferStatus(
+          token,
+          payoutReferenceId,
+          payout_mid_details.primary_key
+        );
+        console.log(
+          "🚀 ~ payout ~ getTransactionStatus:",
+          getTransactionStatus
+        );
+        let transactionPayload = {
+          transaction_id: getTransactionStatus.financialTransactionId,
+          external_id: getTransactionStatus.externalId,
+          receiver_id: receiver_id,
+          wallet_id: wallet_id,
+          account_id: account_id,
+          mid_id: MID?.data?.id,
+          batch_id: batch_id,
+          super_merchant_id: "",
+          sub_merchant_id: helperService.isValid(receiver?.sub_merchant_id)
+            ? receiver?.sub_merchant_id
+            : null,
+          transaction_type: "B2B",
+          wholesale_fx_rate: parseFloat(0),
+          destination_amount: parseFloat(amount),
+          destination_currency: currency,
+          sent_amount: parseFloat(amount),
+          sent_currency: currency,
+          source_amount: parseFloat(amount),
+          source_currency: currency,
+          source_country_iso_code: receiver_account_details?.country,
+          payer_country_iso_code: "LBR",
+          fee_amount: parseFloat(0),
+          fee_currency: "NA",
+          creation_date: moment().format("YYYY-MM-DD hh:mm:ss"),
+          expiration_date: moment().format("YYYY-MM-DD hh:mm:ss"),
+          payer_id: receiver_account_details.payer_id,
+          payer_currency: currency,
+          service_id: receiver_account_details?.funding_source_type,
+          service_name: "Mobile Wallet",
+          status_message:
+            getTransactionStatus?.status == "SUCCESSFUL"
+              ? "COMPLETED"
+              : "FAILED",
+          callback_url: payout_mid_details.callback,
+          payer_name: "MSISDN",
+          payout_reference: payout_reference,
+          reason: getTransactionStatus?.reason,
+        };
+        console.log("🚀 ~ payout ~ transactionPayload:", transactionPayload);
+        await transaction.create(transactionPayload);
+        // call to node server to update charges
+        const payload = {
+          submerchant_id: helperService.isNotValid(receiver?.sub_merchant_id)
+            ? null
+            : receiver?.sub_merchant_id,
+          receiver_id: helperService.isNotValid(receiver_id)
+            ? null
+            : String(receiver_id),
+          currecny: currency,
+          amount: String(amount),
+          transaction_id: String(getTransactionStatus.financialTransactionId),
+          order_id: transactionPayload?.external_id,
+          order_status: transactionPayload?.status_message,
+        };
+        console.log("🚀 ~ constpayout_webhook=catchAsync ~ payload:", payload);
+        var result = await nodeServerAPIService.update_payout_status(
+          req,
+          payload
+        );
+        console.log("🚀 ~ constpayout_webhook=catchAsync ~ result:", result);
+        // const momoResponsePayload = {
+        //   transaction_id: getTransactionStatus.financialTransactionId,
+        //   transaction_status:
+        //     getTransactionStatus?.status == "SUCCESSFUL"
+        //       ? "COMPLETED"
+        //       : "FAILED",
+        //   status_code: httpStatus.OK,
+        //   receiver_id: receiver_id,
+        //   wallet_id: wallet_id,
+        //   account_id: account_id,
+        //   mid_id: MID?.data?.id,
+        //   destination: {
+        //     amount: parseFloat(amount),
+        //     currency: currency,
+        //   },
+        //   sent_amount: {
+        //     amount: parseFloat(amount),
+        //     currency: currency,
+        //   },
+        //   quotation_id: "",
+        //   batch_id: batch_id,
+        //   super_merchant_id: "",
+        //   sub_merchant_id: helperService.isValid(receiver?.sub_merchant_id)
+        //     ? receiver?.sub_merchant_id
+        //     : null,
+        //   payout_reference: helperService.isValid(payout_reference)
+        //     ? payout_reference
+        //     : null,
+        // };
+
+        let debit_party = {};
+        // Check Type Of Transation (Settelment OR Payout)
+        if (helperService.isNotValid(receiver?.sub_merchant_id)) {
+          // THis is payout
+          debit_party = {
+            id: receiver?.receiver_id,
+            name: receiver?.receiver_name,
+            country: receiver?.registered_business_address,
+            webhook_url: receiver?.webhook_url,
+          };
+        } else if (
+          helperService.isValid(receiver?.sub_merchant_id) &&
+          helperService.isValid(receiver?.receiver_id)
+        ) {
+          // THis is settelment
+          debit_party = {
+            id: null,
+            name: company_details?.data?.company_name,
+            country: company_details?.data?.company_country,
+            webhook_url: null,
+          };
+        }
+
+        let credit_party = {
+          account_id: receiver_account_details?.account_id,
+          ...receiver_account_details?.account_details,
+        };
+
+        const momoResponsePayload = {
+          order_id: order_id,
+          external_id: transactionPayload?.external_id,
+          transaction_id: getTransactionStatus.financialTransactionId,
+          sub_merchant_id: helperService.isValid(receiver?.sub_merchant_id)
+            ? receiver?.sub_merchant_id
+            : null,
+          receiver_id: helperService.isValid(receiver?.receiver_id)
+            ? receiver?.receiver_id
+            : null,
+          currency: currency,
+          wallet_id: wallet_id,
+          debit_party: debit_party,
+          credit_party: credit_party,
+          credit_party_identifier: {
+            MSISDN: receiver_account_details?.account_details?.MSISDN,
+          },
+          debit_details: {
+            debit_amount: parseFloat(amount),
+            currency: currency,
+          },
+          credit_details: {
+            amount: parseFloat(amount),
+            currency: currency,
+          },
+          payout_reference: helperService.isValid(payout_reference)
+            ? payout_reference
+            : null,
+          webhook_url: helperService.isValid(webhook_url) ? webhook_url : null,
+          purpose_of_remittance: helperService.isValid(purpose_of_remittance)
+            ? purpose_of_remittance
+            : null,
+          transaction_status:
+            getTransactionStatus?.status == "SUCCESSFUL"
+              ? "COMPLETED"
+              : "FAILED",
+          transaction_status_code:
+            getTransactionStatus?.status == "SUCCESSFUL" ? 20000 : 40000,
+          order_created_date: moment(transactionPayload?.creation_date).format(
+            "YYYY-MM-DD hh:mm:ss"
+          ),
+          order_updated_date: moment(transactionPayload?.creation_date).format(
+            "YYYY-MM-DD hh:mm:ss"
+          ),
+          batch_id: batch_id,
+        };
+
+        transaction_response.data = momoResponsePayload;
+        transaction_response.payout_status = "success"; // success, failed
+        transaction_response.payout_status_message = "success";
+
+        const responsePayload = {
+          ...transaction_response?.data,
+          payout_status: transaction_response.payout_status,
+          payout_status_message: transaction_response.payout_status_message,
+        };
+
+        delete responsePayload.batch_id;
+
+        batchResponse.transactions.push(responsePayload);
+      } else if (receiver_account_details?.payer_id == "ORANGE_MONEY") {
+        console.log(`here is reciever id and body in orange money`);
+        console.log(req.body, receiver);
+        // fetch mid
+        let payout_mid_details = MID?.data;
+        // let payout_mid_details = await payout_mid.findOne({
+        //   where: { sub_merchant_id: receiver?.sub_merchant_id },
+        // });
+        console.log(payout_mid_details);
+        // Check payer currency and request payout currency
+        if (receiver_account_details?.currency != currency) {
+          transaction_response.payout_status = "failed"; // success, failed
+          transaction_response.payout_status_message =
+            "Invalid currency selected! The receiver only accepts payouts in " +
+            receiver_account_details?.currency;
+          batchResponse.transactions.push(transaction_response);
+          return;
+        }
+        if (helperService.isNotValid(payout_mid_details?.api_key)) {
+          transaction_response.payout_status = "failed"; // success, failed
+          transaction_response.payout_status_message = "Invalid 'api_key'";
+          batchResponse.transactions.push(transaction_response);
+          return;
+        }
+
+        if (helperService.isNotValid(payout_mid_details?.password)) {
+          transaction_response.payout_status = "failed"; // success, failed
+          transaction_response.payout_status_message = "Invalid 'password'";
+          batchResponse.transactions.push(transaction_response);
+          return;
+        }
+        let externalTransactionId = await helperService.make_unique_id();
+        // make transfer payload
+        let data = {
+          auth: {
+            user: payout_mid_details?.api_key,
+            pwd: payout_mid_details?.password,
+          },
+          param: {
+            MSISDN: receiver_account_details?.account_details?.MSISDN,
+            Amount: amount,
+            Currency: currency,
+            EXTERNALID: externalTransactionId,
+          },
+        };
+        // initiate payout
+        let payoutReferenceId = await initiateOrangeMoneyTransfer(data);
+        //send response if reference id is fals
+        if (!payoutReferenceId) {
+          transaction_response.payout_status = "failed"; // success, failed
+          transaction_response.payout_status_message =
+            "Unable to initiate transfer";
+          batchResponse.transactions.push(transaction_response);
+          return;
+        }
+        //get transaction status
+        let getTransactionStatus = await getOrangeMoneyTransferStatus(
+          payoutReferenceId,
+          payout_mid_details?.api_key,
+          payout_mid_details?.password,
+          currency
+        );
+        transaction_response.payout_status = "failed"; // success, failed
+        let transactionStatus = "FAILED";
+        if (getTransactionStatus.resultset.TXNSTATUS == "TS") {
+          transactionStatus = "COMPLETED";
+          transaction_response.payout_status = "success"; // success, failed
+        }
+        if (getTransactionStatus.resultset.TXNSTATUS == "TI") {
+          transactionStatus = "PENDING";
+          transaction_response.payout_status = "pending"; // success, failed, pending
+        }
+        let transactionPayload = {
+          transaction_id: payoutReferenceId,
+          external_id: externalTransactionId,
+          receiver_id: receiver_id,
+          wallet_id: wallet_id,
+          account_id: account_id,
+          mid_id: MID?.data?.id,
+          batch_id: batch_id,
+          super_merchant_id: "",
+          sub_merchant_id: receiver.sub_merchant_id,
+          transaction_type: "B2B",
+          wholesale_fx_rate: parseFloat(0),
+          destination_amount: parseFloat(amount),
+          destination_currency: currency,
+          sent_amount: parseFloat(amount),
+          sent_currency: currency,
+          source_amount: parseFloat(amount),
+          source_currency: currency,
+          source_country_iso_code: receiver_account_details?.country,
+          payer_country_iso_code: "LBR",
+          fee_amount: parseFloat(0),
+          fee_currency: "NA",
+          creation_date: moment().format("YYYY-MM-DD hh:mm:ss"),
+          expiration_date: moment().format("YYYY-MM-DD hh:mm:ss"),
+          payer_id: receiver_account_details.payer_id,
+          payer_currency: currency,
+          service_id: receiver_account_details?.funding_source_type,
+          service_name: "Mobile Wallet",
+          status_message: transactionStatus,
+          callback_url: payout_mid_details.callback,
+          payer_name: "MSISDN",
+          payout_reference: payout_reference,
+        };
+        console.log("🚀 ~ payout ~ transactionPayload:", transactionPayload);
+        await transaction.create(transactionPayload);
+        // call to node server to update charges
+        const payload = {
+          submerchant_id: helperService.isNotValid(receiver?.sub_merchant_id)
+            ? null
+            : receiver?.sub_merchant_id,
+          receiver_id: helperService.isNotValid(receiver_id)
+            ? null
+            : String(receiver_id),
+          currecny: currency,
+          amount: String(amount),
+          transaction_id: String(payoutReferenceId),
+          order_id: transactionPayload?.external_id,
+          order_status: transactionPayload?.status_message,
+        };
+        console.log("🚀 ~ constpayout_webhook=catchAsync ~ payload:", payload);
+        var result = await nodeServerAPIService.update_payout_status(
+          req,
+          payload
+        );
+        console.log("🚀 ~ constpayout_webhook=catchAsync ~ result:", result);
+        // const responsePayload = {
+        //   transaction_id: payoutReferenceId,
+        //   transaction_status: transactionStatus,
+        //   status_code: httpStatus.OK,
+        //   receiver_id: receiver_id,
+        //   wallet_id: wallet_id,
+        //   account_id: account_id,
+        //   mid_id: MID?.data?.id,
+        //   destination: {
+        //     amount: parseFloat(amount),
+        //     currency: currency,
+        //   },
+        //   sent_amount: {
+        //     amount: parseFloat(amount),
+        //     currency: currency,
+        //   },
+        //   quotation_id: "",
+        //   batch_id: batch_id,
+        //   super_merchant_id: receiver.super_merchant_id,
+        //   sub_merchant_id: receiver.sub_merchant_id,
+        //   payout_reference: payout_reference,
+        // };
+
+        let debit_party = {};
+        // Check Type Of Transation (Settelment OR Payout)
+        if (helperService.isNotValid(receiver?.sub_merchant_id)) {
+          // THis is payout
+          debit_party = {
+            id: receiver?.receiver_id,
+            name: receiver?.receiver_name,
+            country: receiver?.registered_business_address,
+            webhook_url: receiver?.webhook_url,
+          };
+        } else if (
+          helperService.isValid(receiver?.sub_merchant_id) &&
+          helperService.isValid(receiver?.receiver_id)
+        ) {
+          // THis is settelment
+          debit_party = {
+            id: null,
+            name: company_details?.data?.company_name,
+            country: company_details?.data?.company_country,
+            webhook_url: null,
+          };
+        }
+
+        let credit_party = {
+          account_id: receiver_account_details?.account_id,
+          ...receiver_account_details?.account_details,
+        };
+
+        const responsePayload = {
+          order_id: order_id,
+          external_id: transactionPayload?.external_id,
+          transaction_id: getTransactionStatus.financialTransactionId,
+          sub_merchant_id: helperService.isValid(receiver?.sub_merchant_id)
+            ? receiver?.sub_merchant_id
+            : null,
+          receiver_id: helperService.isValid(receiver?.receiver_id)
+            ? receiver?.receiver_id
+            : null,
+          currency: currency,
+          wallet_id: wallet_id,
+          debit_party: debit_party,
+          credit_party: credit_party,
+          credit_party_identifier: {
+            MSISDN: receiver_account_details?.account_details?.MSISDN,
+          },
+          debit_details: {
+            debit_amount: parseFloat(amount),
+            currency: currency,
+          },
+          credit_details: {
+            amount: parseFloat(amount),
+            currency: currency,
+          },
+          payout_reference: helperService.isValid(payout_reference)
+            ? payout_reference
+            : null,
+          webhook_url: helperService.isValid(webhook_url) ? webhook_url : null,
+          purpose_of_remittance: helperService.isValid(purpose_of_remittance)
+            ? purpose_of_remittance
+            : null,
+          transaction_status:
+            getTransactionStatus?.status == "SUCCESSFUL"
+              ? "COMPLETED"
+              : "FAILED",
+          transaction_status_code:
+            getTransactionStatus?.status == "SUCCESSFUL" ? 20000 : 40000,
+          order_created_date: moment(transactionPayload?.creation_date).format(
+            "YYYY-MM-DD hh:mm:ss"
+          ),
+          order_updated_date: moment(transactionPayload?.creation_date).format(
+            "YYYY-MM-DD hh:mm:ss"
+          ),
+          batch_id: batch_id,
+        };
+
+        res.status(httpStatus.OK).send({
+          status: httpStatus.OK,
+          message: "Transaction confirmed successfully",
+          data: responsePayload,
+        });
+
+        transaction_response.data = responsePayload;
+        transaction_response.payout_status_message = "success";
+
+        const finalResponsePayload = {
+          ...transaction_response?.data,
+          payout_status: transaction_response.payout_status,
+          payout_status_message: transaction_response.payout_status_message,
+        };
+
+        delete finalResponsePayload.batch_id;
+
+        batchResponse.transactions.push(finalResponsePayload);
+      } else {
+        try {
+          // Get payer details by id
+          const payerResponse = await payerService.getById(
+            receiver_account_details?.payer_id,
+            MID?.data
+          );
+          if (payerResponse?.status !== httpStatus.OK) {
+            transaction_response.payout_status = "failed"; // success, failed
+            (transaction_response.payout_status_message =
+              payerResponse?.message),
+              batchResponse.transactions.push(transaction_response);
+            return;
+          }
+
+          // Check payer currency and request payout currency
+          if (payerResponse?.data?.currency !== currency) {
+            transaction_response.payout_status = "failed"; // success, failed
+            (transaction_response.payout_status_message =
+              "Invalid currency selected! The receiver only accepts payouts in " +
+              payerResponse?.data?.currency),
+              batchResponse.transactions.push(transaction_response);
+            return;
+          }
+
+          // Add Payer Name with account details
+          receiver_account_details.payer_name = payerResponse?.data?.name;
+
+          // ==============================================================================
+          // Check valid bank details
+
+          let receiver_details = {
+            data: receiver_account_details,
+            purpose_of_remittance: purpose_of_remittance,
+          };
+
+          let isValidBankDetails =
+            await receiverService.check_valid_bank_details(
+              receiver_details,
+              MID?.data
+            );
+          console.log("🚀 ~ isValidBankDetails:", isValidBankDetails);
+
+          if (isValidBankDetails?.status !== httpStatus.OK) {
+            console.log(
+              "🚀 ~ payout ~ isValidBankDetails:",
+              isValidBankDetails
+            );
+            transaction_response.payout_status = "failed"; // success, failed
+            transaction_response.payout_status_message =
+              isValidBankDetails?.message;
+            batchResponse.transactions.push(transaction_response);
+            return;
+          }
+
+          // check payer id
+          // 1. Create quotation payload
+          var quotationPayload = {
+            receiver_id: receiver_id,
+            account_details: receiver_account_details,
+            destination_amount: amount,
+            destination_currency: currency,
+            debit_amount: debit_amount,
+            debit_currency: debit_currency,
+            extra: {
+              receiver: receiver,
+              payer: payerResponse?.data,
+              MID: MID?.data,
+            },
+          };
+
+          //1. Create quotation
+          const quotation = await quotationService.create_quotations(
+            quotationPayload
+          );
+          if (quotation?.status !== httpStatus.OK) {
+            transaction_response.payout_status = "failed"; // success, failed
+            transaction_response.payout_status_message = quotation?.message;
+            batchResponse.transactions.push(transaction_response);
+            return;
+          }
+
+          // Adding request parameters for DB
+          quotation.data.request = {
+            order_id: order_id,
+            wallet_id: wallet_id,
+            account_id: helperService.isNotValid(account_id)
+              ? receiver_account_details?.account_id
+              : account_id,
+            purpose_of_remittance: purpose_of_remittance,
+            payout_reference: payout_reference,
+            webhook_url: webhook_url,
+          };
+
+          transaction_response.receiver_id = receiver_id;
+          transaction_response.quotation_id = quotation?.data?.id;
+
+          // 2. Create transaction payload
+          const createTransactionResponse =
+            await quotationService.post_transaction(
+              quotation?.data,
+              payerResponse?.data,
+              receiver,
+              receiver_account_details,
+              batch_id,
+              MID?.data
+            );
+
+          if (createTransactionResponse?.status !== httpStatus.OK) {
+            transaction_response.payout_status = "failed"; // success, failed
+            transaction_response.payout_status_message =
+              createTransactionResponse?.message;
+            batchResponse.transactions.push(transaction_response);
+            return;
+          }
+
+          transaction_response.data = createTransactionResponse?.data;
+
+          // Transaction confirmation required
+          if (!confirmation_required) {
+            transaction_response.payout_status = "success"; // success, failed
+            transaction_response.payout_status_message = "success";
+
+            const responsePayload = {
+              ...transaction_response?.data,
+              payout_status: transaction_response.payout_status,
+              payout_status_message: transaction_response.payout_status_message,
+            };
+
+            delete responsePayload.batch_id;
+
+            batchResponse.transactions.push(responsePayload);
+            return;
+          }
+
+          let txn_id = createTransactionResponse?.data?.transaction_id;
+          console.log("🚀 ~ transactions.map ~ txn_id:", txn_id);
+
+          // 3. Confirm transaction payload
+          const confirmTransactionResponse =
+            await quotationService.confirm_transaction(
+              txn_id,
+              batch_id,
+              MID?.data,
+              quotation?.data?.request,
+              receiver_account_details
+            );
+          if (confirmTransactionResponse?.status !== httpStatus.OK) {
+            (transaction_response.payout_status = "failed"), // success, failed
+              (transaction_response.payout_status_message =
+                confirmTransactionResponse?.message);
+            batchResponse.transactions.push(transaction_response);
+            return;
+          }
+
+          transaction_response.data = confirmTransactionResponse?.data;
+          transaction_response.payout_status = "success"; // success, failed
+          transaction_response.payout_status_message = "success";
+
+          const responsePayload = {
+            ...transaction_response?.data,
+            payout_status: transaction_response.payout_status,
+            payout_status_message: transaction_response.payout_status_message,
+          };
+
+          delete responsePayload.batch_id;
+
+          batchResponse.transactions.push(responsePayload);
+
+          // 4. Update Payout status
+          let confirmResponse = confirmTransactionResponse?.data;
+          const payload = {
+            submerchant_id: helperService.isNotValid(receiver?.sub_merchant_id)
+              ? null
+              : receiver?.sub_merchant_id,
+            receiver_id: helperService.isNotValid(receiver_id)
+              ? null
+              : String(receiver_id),
+            currecny: confirmResponse?.credit_details?.currency,
+            amount: String(confirmResponse?.credit_details?.amount),
+            transaction_id: String(confirmResponse?.transaction_id),
+            order_id: confirmResponse?.external_id,
+            order_status: "PENDING",
+          };
+
+          console.log("🚀 ~ payout ~ payload:", payload);
+          var result = await nodeServerAPIService.update_payout_status(
+            req,
+            payload
+          );
+          console.log("🚀 ~ constpayout_webhook=catchAsync ~ result:", result);
+        } catch (err) {
+          console.error(`Error in transaction ${txn.tx_id}:`, err.message);
+          (transaction_response.payout_status = "failed"), // success, failed
+            (transaction_response.payout_status_message = err.message);
+          batchResponse.transactions.push(transaction_response);
+        }
+      }
+    })
+  );
+
+  // Send Final Success Response
+  res.status(httpStatus.OK).send({
+    status: httpStatus.OK,
+    message: "Payout done!",
+    data: batchResponse,
+  });
+});
+
+/**
+ * Manage Batch Payout
+ */
+const manage_batch_payout = catchAsync(async (req, res) => {
+  const { action, batch_id } = req.body;
+  if (action === "CANCEL") {
+    cancel_batch(batch_id, res);
+  } else if (action === "CONFIRM") {
+    confirm_batch(batch_id, res);
+  }
+});
+
+/**
+ * Cancel Batch Payout
+ */
+const cancel_batch_payout = catchAsync(async (req, res) => {
+  const batch_id = req.params.batch_id;
+  cancel_batch(batch_id, res);
+});
+
+/**
+ * Cancel Batch Payout
+ */
+const cancel_batch = catchAsync(async (batch_id, res) => {
+  const transactions = await transactionService.getByBatchId(batch_id);
+
+  if (Array.isArray(transactions?.data) && transactions?.data?.length > 0) {
+  } else {
+    res.status(httpStatus.OK).send({
+      status: httpStatus.NOT_FOUND,
+      message: "Transactions not found.",
+    });
+    return;
+  }
+
+  var confirm_transaction = [];
+
+  await Promise.all(
+    transactions?.data.map(async (transaction) => {
+      if (transaction.status_message === "CREATED") {
+        const transactions = await transactionService.checkConfirmTransaction(
+          transaction?.transaction_id,
+          "CONFIRMED"
+        );
+        if (
+          Array.isArray(transactions?.data) &&
+          transactions?.data?.length > 0
+        ) {
+          return;
+        }
+
+        // Get Transaction MID
+        const MID = await pspService.get_mid_by_id(transaction?.mid_id);
+        if (MID?.status !== httpStatus.OK) {
+          return MID;
+        }
+
+        const transactionResponse = await quotationService.transaction_cancel(
+          transaction?.transaction_id,
+          MID?.data
+        );
+
+        const finalResponse = {
+          batch_id: batch_id,
+          transaction_id: transaction.transaction_id,
+          data: transactionResponse,
+        };
+        confirm_transaction.push(finalResponse);
+      }
+    })
+  );
+
+  // Send Final Success Response
+  res.status(httpStatus.OK).send({
+    status: httpStatus.OK,
+    message:
+      confirm_transaction?.length > 0 ? "Done" : "Transaction not found!",
+    data: confirm_transaction,
+  });
+});
+
+/**
+ * Confirm Batch Payout
+ */
+const confirm_batch_payout = catchAsync(async (req, res) => {
+  const batch_id = req.params.batch_id;
+  confirm_batch(batch_id, res);
+});
+
+/**
+ * Confirm Batch Payout
+ */
+const confirm_batch = catchAsync(async (batch_id, res) => {
+  const transactions = await transactionService.getByBatchId(batch_id);
+
+  if (Array.isArray(transactions?.data) && transactions?.data?.length > 0) {
+  } else {
+    res.status(httpStatus.OK).send({
+      status: httpStatus.NOT_FOUND,
+      message: "Transactions not found.",
+    });
+    return;
+  }
+
+  var confirm_transaction = [];
+
+  await Promise.all(
+    transactions?.data.map(async (transaction) => {
+      if (transaction?.status_message === "CREATED") {
+        const transactions = await transactionService.checkConfirmTransaction(
+          transaction?.transaction_id,
+          "CONFIRMED"
+        );
+        if (
+          Array.isArray(transactions?.data) &&
+          transactions?.data?.length > 0
+        ) {
+          return;
+        }
+
+        // ==============================================================================
+        // Get Last Transaction By ID
+        const stored_transaction = await transactionService.getById(
+          transaction?.transaction_id
+        );
+        console.log("🚀 ~ stored_transaction:", stored_transaction);
+        if (stored_transaction.status !== httpStatus.OK) {
+          return stored_transaction;
+        }
+
+        // ==============================================================================
+        // Get Funding Details
+
+        const get_funding_details_payload = {};
+        if (stored_transaction?.data?.account_id) {
+          get_funding_details_payload.account_id =
+            stored_transaction?.data?.account_id;
+        } else if (
+          stored_transaction?.data?.sub_merchant_id &&
+          stored_transaction?.data?.payer_currency
+        ) {
+          get_funding_details_payload.submerchant_id = String(
+            stored_transaction?.data?.sub_merchant_id
+          );
+          get_funding_details_payload.currency =
+            stored_transaction?.data?.payer_currency;
+        } else if (
+          stored_transaction?.data?.receiver_id &&
+          stored_transaction?.data?.payer_currency
+        ) {
+          get_funding_details_payload.receiver_id = String(
+            stored_transaction?.data?.receiver_id
+          );
+          get_funding_details_payload.currency =
+            stored_transaction?.data?.payer_currency;
+        }
+        console.log(
+          "🚀 ~ get_funding_details_payload:",
+          get_funding_details_payload
+        );
+
+        var receiver_account_details =
+          await nodeServerAPIService.get_funding_details(
+            get_funding_details_payload
+          );
+        console.log("🚀 ~ account_details:", receiver_account_details);
+        if (receiver_account_details?.status != httpStatus.OK) {
+          console.log(
+            "🚀 ~ receiver_account_details:",
+            receiver_account_details
+          );
+          return;
+        }
+
+        if (receiver_account_details?.data?.is_verified != 1) {
+          console.log("🚀 ~ receiver_account_details:", {
+            status: 400,
+            message: "Account is not verified!",
+          });
+          return;
+        }
+
+        receiver_account_details = receiver_account_details?.data;
+        // Added payer name with account details
+        receiver_account_details.payer_name =
+          stored_transaction?.data?.payer_name;
+
+        // ==============================================================================
+        // Get Transaction MID
+        const MID = await pspService.get_mid_by_id(transaction?.mid_id);
+        if (MID?.status !== httpStatus.OK) {
+          return MID;
+        }
+
+        let quotation_data_request = {
+          order_id: stored_transaction?.data?.order_id,
+          wallet_id: stored_transaction?.data?.wallet_id,
+          account_id: helperService.isNotValid(
+            stored_transaction?.data?.account_id
+          )
+            ? receiver_account_details?.account_id
+            : stored_transaction?.data?.account_id,
+          purpose_of_remittance:
+            stored_transaction?.data?.purpose_of_remittance,
+          payout_reference: stored_transaction?.data?.payout_reference,
+          webhook_url: stored_transaction?.data?.callback_url,
+        };
+        console.log("🚀 ~ quotation_data_request:", quotation_data_request);
+
+        const confirmTransactionResponse =
+          await quotationService.confirm_transaction(
+            transaction.transaction_id,
+            batch_id,
+            MID?.data,
+            quotation_data_request,
+            receiver_account_details
+          );
+
+        confirm_transaction.push(confirmTransactionResponse?.data);
+
+        try {
+          //Update status
+          let confirmResponse = confirmTransactionResponse?.data;
+          const payload = {
+            submerchant_id: helperService.isNotValid(
+              confirmResponse?.sub_merchant_id
+            )
+              ? null
+              : receiver?.sub_merchant_id,
+            receiver_id: helperService.isNotValid(confirmResponse?.receiver_id)
+              ? null
+              : String(confirmResponse?.receiver_id),
+            currecny: confirmResponse?.destination?.currency,
+            amount: String(confirmResponse?.destination?.amount),
+            transaction_id: String(confirmResponse?.transaction_id),
+            order_id: confirmResponse?.external_id,
+            order_status: "PENDING",
+          };
+
+          console.log("🚀 ~ payout ~ payload:", payload);
+          var result = await nodeServerAPIService.update_payout_status(
+            req,
+            payload
+          );
+          console.log("🚀 ~ constpayout_webhook=catchAsync ~ result:", result);
+        } catch (error) {
+          console.log("🚀 ~ error:", error);
+        }
+      }
+    })
+  );
+
+  // Send Final Success Response
+  res.status(httpStatus.OK).send({
+    status: httpStatus.OK,
+    message: "Done",
+    batch_id: batch_id,
+    data: confirm_transaction,
+  });
+});
+
+/**
+ * Get Batch Transaction Status
+ */
+const get_batch_transaction_status = catchAsync(async (req, res) => {
+  const batch_id = req.params.batch_id;
+
+  const transactions = await transactionService.getByBatchId(batch_id);
+
+  if (Array.isArray(transactions?.data) && transactions?.data?.length > 0) {
+  } else {
+    res.status(httpStatus.OK).send({
+      status: httpStatus.NOT_FOUND,
+      message: "Transactions not found.",
+    });
+    return;
+  }
+
+  var transaction_status = [];
+
+  await Promise.all(
+    transactions?.data.map(async (transaction) => {
+      const MID = await pspService.get_mid_by_id(transaction?.mid_id);
+      if (MID?.status !== httpStatus.OK) {
+        res.status(httpStatus.BAD_REQUEST).send(MID);
+        return;
+      }
+
+      const transactionResponse = await quotationService.transaction_status(
+        transaction?.transaction_id,
+        MID?.data
+      );
+
+      const finalResponse = {
+        ...transactionResponse?.data,
+        status: transactionResponse?.status,
+        message: transactionResponse?.message,
+      };
+      transaction_status.push(finalResponse);
+    })
+  );
+
+  // Send Final Success Response
+  res.status(httpStatus.OK).send({
+    status: httpStatus.OK,
+    message: transaction_status?.length > 0 ? "Done" : "Transaction not found!",
+    batch_id: batch_id,
+    data: transaction_status,
+  });
+});
+
+/**
+ * Create Payout
+ */
+const payout = catchAsync(async (req, res) => {
+  const {
+    order_id,
+    amount,
+    confirmation_required,
+    purpose_of_remittance,
+    payout_reference,
+    debit_amount,
+    debit_currency,
+    webhook_url,
+  } = req.body;
+
+  let wallet_id = req.body.wallet_id;
+  let currency = req.body.currency;
+  let sub_merchant_id = req.body.sub_merchant_id;
+  let receiver_id = req.body.receiver_id;
+  let account_id = req.body.account_id;
+
+  if (wallet_id) {
+    let wallet = await nodeServerAPIService.get_wallet_details_by_id(wallet_id);
+    console.log("🚀 ~ wallet2:", wallet);
+    if (wallet?.status !== httpStatus.OK) {
+      res.status(httpStatus.OK).send(wallet);
+      return;
+    }
+    currency = wallet?.data?.currency;
+    receiver_id = wallet?.data?.receiver_id;
+    wallet_id = wallet?.data.wallet_id;
+  } else if (sub_merchant_id && currency) {
+    let payload = {
+      sub_merchant_id: String(sub_merchant_id),
+      currency: currency,
+    };
+    let wallet = await nodeServerAPIService.get_wallet_details_by_sub_id(
+      payload
+    );
+    console.log("🚀 ~ wallet1:", wallet);
+    if (wallet?.status !== httpStatus.OK) {
+      res.status(httpStatus.OK).send(wallet);
+      return;
+    }
+    currency = wallet?.data?.currency;
+    receiver_id = wallet?.data?.receiver_id;
+    wallet_id = wallet?.data.wallet_id;
+  } else if (receiver_id && currency) {
+    let payload = {
+      receiver_id: String(receiver_id),
+      currency: currency,
+    };
+    let wallet = await nodeServerAPIService.get_wallet_details_by_sub_id(
+      payload
+    );
+    console.log("🚀 ~ wallet3:", wallet);
+    if (wallet?.status !== httpStatus.OK) {
+      res.status(httpStatus.OK).send(wallet);
+      return;
+    }
+    currency = wallet?.data?.currency;
+    receiver_id = wallet?.data?.receiver_id;
+    wallet_id = wallet?.data.wallet_id;
+  }
+
+  //=============================================================================================
+  // Get merchant details by id
+  let company_details = null;
+  // if (helperService.isValid(sub_merchant_id)) {
+  company_details = await nodeServerAPIService.get_company_details();
+  console.log("🚀 ~ company_details:", company_details);
+  // }
+
+  // ==============================================================================
+  // Get Receiver Details
+  let receiver = await receiverService.get_receiver_by_id(receiver_id);
+  console.log("🚀 ~ payout ~ receiver:", receiver);
+
+  if (undefined != receiver?.status && receiver?.status != httpStatus.OK) {
+    res.status(httpStatus.OK).send({
+      status: 400,
+      message: receiver?.message,
+    });
+    return;
+  }
+
+  // Check receiver created
+  if (helperService.isNotValid(receiver)) {
+    res.status(httpStatus.OK).send({
+      status: 400,
+      message: "Receiver not found!",
+    });
+    return;
+  }
+
+  if (receiver?.verification !== "verified") {
+    res.status(httpStatus.OK).send({
+      status: 400,
+      message: "Receiver is not verified!",
+    });
+    return;
+  }
+
+  if (receiver?.active !== 1) {
+    res.status(httpStatus.OK).send({
+      status: 400,
+      message: "Receiver is not active!",
+    });
+    return;
+  }
+
+  // if (helperService.isNotValid(receiver?.sub_merchant_id) && helperService.isNotValid(account_id)) {
+  //   res.status(httpStatus.OK).send({
+  //     status: 400,
+  //     message: "Account ID required!",
+  //   });
+  //   return;
+  // }
+
+  // ==============================================================================
+  // Get Funding Details
+
+  const get_funding_details_payload = {};
+  if (account_id) {
+    get_funding_details_payload.account_id = account_id;
+  } else if (receiver?.sub_merchant_id && currency) {
+    get_funding_details_payload.submerchant_id = String(
+      receiver?.sub_merchant_id
+    );
+    get_funding_details_payload.currency = currency;
+  } else if (receiver?.receiver_id && currency) {
+    get_funding_details_payload.receiver_id = String(receiver?.receiver_id);
+    get_funding_details_payload.currency = currency;
+  }
+  console.log("🚀 ~ get_funding_details_payload:", get_funding_details_payload);
+
+  var receiver_account_details = await nodeServerAPIService.get_funding_details(
+    get_funding_details_payload
+  );
+  console.log("🚀 ~ account_details:", receiver_account_details);
+  if (receiver_account_details?.status != httpStatus.OK) {
+    res.status(httpStatus.OK).send(receiver_account_details);
+    return;
+  }
+
+  if (receiver_account_details?.data?.is_verified != 1) {
+    res.status(httpStatus.OK).send({
+      status: 400,
+      message: "Account is not verified!",
+    });
+    return;
+  }
+
+  if (receiver_account_details?.data?.is_active != 1) {
+    res.status(httpStatus.OK).send({
+      status: 400,
+      message: "Account is not active!",
+    });
+    return;
+  }
+
+  receiver_account_details = receiver_account_details?.data;
+
+  // ==============================================================================
+  // Check Payout Amount
+
+  try {
+    parseFloat(amount);
+  } catch (error) {
+    res.status(httpStatus.OK).send({
+      status: 400,
+      message: "Invalid value entered in amount field",
+    });
+    return;
+  }
+
+  // ==============================================================================
+  // Check wallet balance
+
+  let get_wallet_balance_payload = {};
+  if (wallet_id) {
+    get_wallet_balance_payload.wallet_id = wallet_id;
+  } else if (receiver?.sub_merchant_id && currency) {
+    get_wallet_balance_payload.sub_merchant_id = receiver?.sub_merchant_id;
+    get_wallet_balance_payload.currency = currency;
+  } else if (receiver_id && currency) {
+    get_wallet_balance_payload.receiver_id = receiver_id;
+    get_wallet_balance_payload.currency = currency;
+  }
+
+  console.log("🚀 ~ get_wallet_balance_payload:", get_wallet_balance_payload);
+  let wallet_balance_response = await quotationService.get_wallet_balance(
+    get_wallet_balance_payload
+  );
+  if (wallet_balance_response?.status != httpStatus.OK) {
+    console.log("🚀 ~ wallet_balance_response:", wallet_balance_response);
+    res.status(httpStatus.OK).send({
+      status: 400,
+      message: wallet_balance_response?.message,
+    });
+    return;
+  }
+  let balance = wallet_balance_response?.data?.data?.balance;
+  console.log("🚀 ~ balance:", balance);
+
+  if (
+    helperService.parseFormattedNumber(balance) == 0 ||
+    helperService.parseFormattedNumber(balance) <
+      helperService.parseFormattedNumber(amount)
+  ) {
+    res.status(httpStatus.OK).send({
+      status: 400,
+      message: "Insufficient Balance!",
+    });
+    return;
+  }
+
+  // ==============================================================================
+  // MID Routing
+
+  let MID = await quotationService.payout_psp_routing(receiver_account_details);
+  console.log("🚀 ~ payout ~ MID:", MID);
+  console.log("🚀 ~ receiver_account_details?.payer_id ~ MID:", receiver_account_details?.payer_id);
+  if (MID?.status !== httpStatus.OK) {
+    res.status(httpStatus.OK).send(MID);
+    return;
+  }
+
+  // ==============================================================================
+  // ******************************************************************************
+  // ==============================================================================
+  // Payer Selection, PSP
+
+  if (receiver_account_details?.payer_id == "MTN_MOMO") {
+    console.log(`here is reciever id and body`);
+    console.log(req.body, receiver_account_details);
+    // fetch mid
+    let payout_mid_details = MID?.data;
+    // let payout_mid_details = await payout_mid.findOne({
+    //   where: { sub_merchant_id: receiver?.sub_merchant_id },
+    // });
+    console.log(payout_mid_details);
+    // Check payer currency and request payout currency
+    if (receiver_account_details?.currency != currency) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message:
+          "Invalid currency selected! The receiver only accepts payouts in " +
+          receiver_account_details?.currency,
+      });
+      return;
+    }
+
+    if (helperService.isNotValid(payout_mid_details?.primary_key)) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message: "Invalid 'primary_key'",
+      });
+      return;
+    }
+
+    if (helperService.isNotValid(payout_mid_details?.api_key)) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message: "Invalid 'api_key'",
+      });
+      return;
+    }
+
+    if (helperService.isNotValid(payout_mid_details?.password)) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message: "Invalid 'password'",
+      });
+      return;
+    }
+
+    //call mtn service for token
+    let token = await getAccessToken(
+      payout_mid_details?.primary_key,
+      payout_mid_details?.api_key,
+      payout_mid_details?.password
+    );
+    if (!token) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message: "Invalid MID credentials",
+      });
+      return;
+    }
+
+    //=============================================================================================
+    // make transfer payload
+
+    let externalId = await helperService.make_unique_id();
+
+    let data = {
+      amount: amount,
+      currency: currency,
+      externalId: externalId,
+      payee: {
+        partyIdType: "MSISDN",
+        partyId: receiver_account_details?.account_details?.MSISDN,
+      },
+      payerMessage: "Payout",
+      payeeNote: `Payout to merchant of ${currency} ${amount}`,
+    };
+    let payoutReferenceId = await initiateTransfer(
+      token,
+      data,
+      payout_mid_details.primary_key
+    );
+    if (!payoutReferenceId) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message: "Unable to initiate transfer",
+      });
+      return;
+    }
+    let getTransactionStatus = await getTransferStatus(
+      token,
+      payoutReferenceId,
+      payout_mid_details.primary_key
+    );
+    console.log("🚀 ~ payout ~ getTransactionStatus:", getTransactionStatus);
+
+    let txnStatus = "PENDING";
+    if (getTransactionStatus?.status === "SUCCESSFUL") {
+      txnStatus = "COMPLETED";
+    } else if (getTransactionStatus?.status === "FAILED") {
+      txnStatus = "FAILED";
+    }
+
+    let transactionPayload = {
+      transaction_id: payoutReferenceId,
+      external_id: externalId,
+      receiver_id: receiver_id,
+      order_id: order_id,
+      wallet_id: wallet_id,
+      account_id: receiver_account_details?.account_id,
+      mid_id: MID?.data?.id,
+      batch_id: "",
+      super_merchant_id: "",
+      sub_merchant_id: helperService.isValid(receiver?.sub_merchant_id)
+        ? receiver?.sub_merchant_id
+        : null,
+      transaction_type: "B2B",
+      wholesale_fx_rate: parseFloat(0),
+      destination_amount: parseFloat(amount),
+      destination_currency: currency,
+      sent_amount: parseFloat(amount),
+      sent_currency: currency,
+      source_amount: parseFloat(amount),
+      source_currency: currency,
+      source_country_iso_code: receiver_account_details?.country,
+      payer_country_iso_code: "LBR",
+      fee_amount: parseFloat(0),
+      fee_currency: "NA",
+      creation_date: moment().format("YYYY-MM-DD hh:mm:ss"),
+      expiration_date: moment().format("YYYY-MM-DD hh:mm:ss"),
+      payer_id: receiver_account_details?.payer_id,
+      payer_currency: currency,
+      service_id: receiver_account_details?.funding_source_type,
+      service_name: "Mobile Wallet",
+      status_message: txnStatus,
+      callback_url: payout_mid_details.callback,
+      payer_name: "MSISDN",
+      payout_reference: helperService.isNotValid(payout_reference)
+        ? null
+        : payout_reference,
+      reason: helperService.isNotValid(getTransactionStatus?.reason)
+        ? null
+        : getTransactionStatus?.reason,
+    };
+    console.log("🚀 ~ payout ~ transactionPayload:", transactionPayload);
+    await transaction.create(transactionPayload);
+
+    //=============================================================================================
+    // DB Save account and payers data
+
+    let account_for = "";
+    if (
+      helperService.isNotValid(receiver_account_details?.sub_merchant_id) &&
+      helperService.isValid(receiver_account_details?.receiver_id)
+    ) {
+      account_for = "payout";
+    } else {
+      account_for = "settlement";
+    }
+
+    let account_data = {
+      transaction_id: helperService.isNotValid(
+        transactionPayload?.transaction_id
+      )
+        ? ""
+        : transactionPayload?.transaction_id,
+      order_id: transactionPayload?.order_id,
+      external_id: transactionPayload?.external_id,
+      receiver_id: transactionPayload?.receiver_id,
+      sub_merchant_id: helperService.isNotValid( transactionPayload?.sub_merchant_id
+      )
+        ? 0
+        : transactionPayload?.sub_merchant_id,
+      transaction_date: transactionPayload?.creation_date,
+      account_id: transactionPayload?.account_id,
+      account_type:
+        receiver_account_details?.customer_type?.toLowerCase() === "business"
+          ? 2
+          : 1,
+      account_for: account_for,
+      account_data: JSON.stringify(receiver_account_details),
+      payer_id: transactionPayload?.payer_id,
+      payer_name: transactionPayload?.payer_name,
+      payer_currency: transactionPayload?.payer_currency,
+      payer_data: JSON.stringify({
+        MSISDN: receiver_account_details?.account_details?.MSISDN,
+        payer_id: receiver_account_details?.payer_id,
+        payer_name: "MTN-MOMO",
+      }),
+    };
+    console.log(
+      "🚀 ~ create_transaction_API_Call ~ account_data:",
+      account_data
+    );
+
+    let account_result = await accountDetailsService.add(account_data);
+    console.log(
+      "🚀 ~ create_transaction_API_Call ~ account_result:",
+      account_result
+    );
+
+    //=============================================================================================
+    // call to node server to update charges
+    const payload = {
+      submerchant_id: helperService.isValid(receiver?.sub_merchant_id)
+        ? receiver?.sub_merchant_id
+        : null,
+      receiver_id: helperService.isValid(receiver_id)
+        ? String(receiver_id)
+        : null,
+      currecny: currency,
+      amount: String(amount),
+      transaction_id: String(getTransactionStatus?.financialTransactionId),
+      order_id: transactionPayload?.external_id,
+      order_status: transactionPayload?.status_message,
+    };
+    console.log("🚀 ~ constpayout_webhook=catchAsync ~ payload:", payload);
+    var result = await nodeServerAPIService.update_payout_status(req, payload);
+    console.log("🚀 ~ constpayout_webhook=catchAsync ~ result:", result);
+
+    //=============================================================================================
+    // Return Response
+
+    let debit_party = {};
+    // Check Type Of Transation (Settelment OR Payout)
+    if (helperService.isNotValid(receiver?.sub_merchant_id)) {
+      // THis is payout
+      debit_party = {
+        id: receiver?.receiver_id,
+        name: receiver?.receiver_name,
+        country: receiver?.registered_business_address,
+        webhook_url: receiver?.webhook_url,
+      };
+    } else if (
+      helperService.isValid(receiver?.sub_merchant_id) &&
+      helperService.isValid(receiver?.receiver_id)
+    ) {
+      // THis is settelment
+      debit_party = {
+        id: null,
+        name: company_details?.data?.company_name,
+        country: company_details?.data?.company_country,
+        webhook_url: null,
+      };
+    }
+
+    let credit_party = {
+      account_id: receiver_account_details?.account_id,
+      ...receiver_account_details?.account_details,
+    };
+
+    const responsePayload = {
+      order_id: order_id,
+      external_id: transactionPayload?.external_id,
+      transaction_id: getTransactionStatus?.financialTransactionId,
+      sub_merchant_id: helperService.isValid(receiver?.sub_merchant_id)
+        ? receiver?.sub_merchant_id
+        : null,
+      receiver_id: helperService.isValid(receiver?.receiver_id)
+        ? receiver?.receiver_id
+        : null,
+      currency: currency,
+      wallet_id: wallet_id,
+      debit_party: debit_party,
+      credit_party: credit_party,
+      credit_party_identifier: {
+        MSISDN: receiver_account_details?.account_details?.MSISDN,
+        payer_id: receiver_account_details?.payer_id,
+        payer_name: "MTN-MOMO",
+      },
+      debit_details: {
+        debit_amount: parseFloat(amount),
+        currency: currency,
+      },
+      credit_details: {
+        amount: parseFloat(amount),
+        currency: currency,
+      },
+      payout_reference: helperService.isValid(payout_reference)
+        ? payout_reference
+        : null,
+      webhook_url: helperService.isValid(webhook_url) ? webhook_url : null,
+      purpose_of_remittance: helperService.isValid(purpose_of_remittance)
+        ? purpose_of_remittance
+        : null,
+      document_reference_number: null,
+      transaction_status: txnStatus,
+      transaction_status_code:
+        txnStatus == "SUCCESSFUL"
+          ? 20000
+          : txnStatus == "PENDING"
+          ? 30000
+          : 40000,
+      order_created_date: moment(transactionPayload?.creation_date).format(
+        "YYYY-MM-DD hh:mm:ss"
+      ),
+      order_updated_date: moment(transactionPayload?.creation_date).format(
+        "YYYY-MM-DD hh:mm:ss"
+      ),
+      batch_id: null,
+    };
+
+    // ==============================================================================
+    // Send Webhook
+    // await quotationService.send_webhook(responsePayload);
+
+    // ==============================================================================
+    // Send final response
+    res.status(httpStatus.OK).send({
+      status: httpStatus.OK,
+      message: "Transaction confirmed successfully",
+      data: responsePayload,
+    });
+  } else if (receiver_account_details?.payer_id == "MTN") {
+    console.log(`here is reciever id and body`);
+    console.log(req.body, receiver_account_details);
+    // fetch mid
+    let payout_mid_details = MID?.data;
+    // let payout_mid_details = await payout_mid.findOne({
+    //   where: { sub_merchant_id: receiver?.sub_merchant_id },
+    // });
+    console.log(payout_mid_details);
+    // Check payer currency and request payout currency
+    if (receiver_account_details?.currency != currency) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message:
+          "Invalid currency selected! The receiver only accepts payouts in " +
+          receiver_account_details?.currency,
+      });
+      return;
+    }
+
+    if (helperService.isNotValid(payout_mid_details?.primary_key)) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message: "Invalid 'primary_key'",
+      });
+      return;
+    }
+
+    if (helperService.isNotValid(payout_mid_details?.api_key)) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message: "Invalid 'api_key'",
+      });
+      return;
+    }
+
+    if (helperService.isNotValid(payout_mid_details?.password)) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message: "Invalid 'password'",
+      });
+      return;
+    }
+
+    //call mtn service for token
+    let token = await mtnMockService.getAccessToken(
+      payout_mid_details?.primary_key,
+      payout_mid_details?.api_key,
+      payout_mid_details?.password
+    );
+    if (!token) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message: "Invalid MID credentials",
+      });
+      return;
+    }
+
+    //=============================================================================================
+    // make transfer payload
+
+    let externalId = await helperService.make_unique_id();
+
+    let data = {
+      amount: amount,
+      currency: currency,
+      externalId: externalId,
+      payee: {
+        partyIdType: "MSISDN",
+        partyId: receiver_account_details?.account_details?.MSISDN,
+      },
+      payerMessage: "Payout",
+      payeeNote: `Payout to merchant of ${currency} ${amount}`,
+    };
+
+    let payoutReferenceId = await mtnMockService.initiateTransfer(
+      token,
+      data,
+      payout_mid_details.primary_key
+    );
+
+    if (!payoutReferenceId) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message: "Unable to initiate transfer",
+      });
+      return;
+    }
+
+    let getTransactionStatus = await mtnMockService.getTransferStatus(
+      token,
+      payoutReferenceId,
+      payout_mid_details.primary_key
+    );
+
+    console.log("🚀 ~ payout ~ getTransactionStatus:", getTransactionStatus);
+
+    let txnStatus = "PENDING";
+    if (getTransactionStatus?.status === "SUCCESSFUL") {
+      txnStatus = "COMPLETED";
+    } else if (getTransactionStatus?.status === "FAILED") {
+      txnStatus = "FAILED";
+    }
+
+    let transactionPayload = {
+      transaction_id: payoutReferenceId,
+      external_id: externalId,
+      receiver_id: receiver_id,
+      order_id: order_id,
+      wallet_id: wallet_id,
+      account_id: receiver_account_details?.account_id,
+      mid_id: MID?.data?.id,
+      batch_id: "",
+      super_merchant_id: "",
+      sub_merchant_id: helperService.isValid(receiver?.sub_merchant_id)
+        ? receiver?.sub_merchant_id
+        : null,
+      transaction_type: "B2B",
+      wholesale_fx_rate: parseFloat(0),
+      destination_amount: parseFloat(amount),
+      destination_currency: currency,
+      sent_amount: parseFloat(amount),
+      sent_currency: currency,
+      source_amount: parseFloat(amount),
+      source_currency: currency,
+      source_country_iso_code: receiver_account_details?.country,
+      payer_country_iso_code: "LBR",
+      fee_amount: parseFloat(0),
+      fee_currency: "NA",
+      creation_date: moment().format("YYYY-MM-DD hh:mm:ss"),
+      expiration_date: moment().format("YYYY-MM-DD hh:mm:ss"),
+      payer_id: receiver_account_details?.payer_id,
+      payer_currency: currency,
+      service_id: receiver_account_details?.funding_source_type,
+      service_name: "Mobile Wallet",
+      status_message: txnStatus,
+      callback_url: payout_mid_details.callback,
+      payer_name: "MSISDN",
+      payout_reference: payout_reference,
+    };
+
+    console.log("🚀 ~ payout ~ transactionPayload:", transactionPayload);
+    await transaction.create(transactionPayload);
+
+    //=============================================================================================
+    // DB Save account and payers data
+
+    let account_for = "";
+    if (
+      helperService.isNotValid(receiver_account_details?.sub_merchant_id) &&
+      helperService.isValid(receiver_account_details?.receiver_id)
+    ) {
+      account_for = "payout";
+    } else {
+      account_for = "settlement";
+    }
+
+    let account_data = {
+      transaction_id: transactionPayload?.transaction_id,
+      order_id: transactionPayload?.order_id,
+      external_id: transactionPayload?.external_id,
+      receiver_id: transactionPayload?.receiver_id,
+      sub_merchant_id: helperService.isNotValid(
+        transactionPayload?.sub_merchant_id
+      )
+        ? 0
+        : transactionPayload?.sub_merchant_id,
+      transaction_date: transactionPayload?.creation_date,
+      account_id: transactionPayload?.account_id,
+      account_type:
+        receiver_account_details?.customer_type?.toLowerCase() === "business"
+          ? 2
+          : 1,
+      account_for: account_for,
+      account_data: JSON.stringify(receiver_account_details),
+      payer_id: transactionPayload?.payer_id,
+      payer_name: transactionPayload?.payer_name,
+      payer_currency: transactionPayload?.payer_currency,
+      payer_data: JSON.stringify({
+        MSISDN: receiver_account_details?.account_details?.MSISDN,
+        payer_id: receiver_account_details?.payer_id,
+        payer_name: "MTN",
+      }),
+    };
+    console.log(
+      "🚀 ~ create_transaction_API_Call ~ account_data:",
+      account_data
+    );
+
+    let account_result = await accountDetailsService.add(account_data);
+    console.log(
+      "🚀 ~ create_transaction_API_Call ~ account_result:",
+      account_result
+    );
+
+    //=============================================================================================
+    // call to node server to update charges
+    const payload = {
+      submerchant_id: helperService.isValid(receiver?.sub_merchant_id)
+        ? receiver?.sub_merchant_id
+        : null,
+      receiver_id: helperService.isValid(receiver_id)
+        ? String(receiver_id)
+        : null,
+      currecny: currency,
+      amount: String(amount),
+      transaction_id: String(getTransactionStatus.financialTransactionId),
+      order_id: transactionPayload?.external_id,
+      order_status: transactionPayload?.status_message,
+    };
+    console.log("🚀 ~ constpayout_webhook=catchAsync ~ payload:", payload);
+    var result = await nodeServerAPIService.update_payout_status(req, payload);
+    console.log("🚀 ~ constpayout_webhook=catchAsync ~ result:", result);
+
+    //=============================================================================================
+    // Return Response
+
+    let debit_party = {};
+    // Check Type Of Transation (Settelment OR Payout)
+    if (helperService.isNotValid(receiver?.sub_merchant_id)) {
+      // THis is payout
+      debit_party = {
+        id: receiver?.receiver_id,
+        name: receiver?.receiver_name,
+        country: receiver?.registered_business_address,
+        webhook_url: receiver?.webhook_url,
+      };
+    } else if (
+      helperService.isValid(receiver?.sub_merchant_id) &&
+      helperService.isValid(receiver?.receiver_id)
+    ) {
+      // THis is settelment
+      debit_party = {
+        id: null,
+        name: company_details?.data?.company_name,
+        country: company_details?.data?.company_country,
+        webhook_url: null,
+      };
+    }
+
+    let credit_party = {
+      account_id: receiver_account_details?.account_id,
+      ...receiver_account_details?.account_details,
+    };
+
+    const responsePayload = {
+      order_id: order_id,
+      external_id: transactionPayload?.external_id,
+      transaction_id: getTransactionStatus.financialTransactionId,
+      sub_merchant_id: helperService.isValid(receiver?.sub_merchant_id)
+        ? receiver?.sub_merchant_id
+        : null,
+      receiver_id: helperService.isValid(receiver?.receiver_id)
+        ? receiver?.receiver_id
+        : null,
+      currency: currency,
+      wallet_id: wallet_id,
+      debit_party: debit_party,
+      credit_party: credit_party,
+      credit_party_identifier: {
+        MSISDN: receiver_account_details?.account_details?.MSISDN,
+        payer_id: receiver_account_details?.payer_id,
+        payer_name: "MTN",
+      },
+      debit_details: {
+        debit_amount: parseFloat(amount),
+        currency: currency,
+      },
+      credit_details: {
+        amount: parseFloat(amount),
+        currency: currency,
+      },
+      payout_reference: helperService.isValid(payout_reference)
+        ? payout_reference
+        : null,
+      webhook_url: helperService.isValid(webhook_url) ? webhook_url : null,
+      purpose_of_remittance: helperService.isValid(purpose_of_remittance)
+        ? purpose_of_remittance
+        : null,
+      document_reference_number: null,
+      transaction_status:
+        getTransactionStatus?.status == "SUCCESSFUL" ? "COMPLETED" : "FAILED",
+      transaction_status_code:
+        getTransactionStatus?.status == "SUCCESSFUL" ? 20000 : 40000,
+      order_created_date: moment(transactionPayload?.creation_date).format(
+        "YYYY-MM-DD hh:mm:ss"
+      ),
+      order_updated_date: moment(transactionPayload?.creation_date).format(
+        "YYYY-MM-DD hh:mm:ss"
+      ),
+      batch_id: null,
+    };
+
+    // ==============================================================================
+    // Send Webhook
+    // await quotationService.send_webhook(responsePayload);
+
+    // ==============================================================================
+    // Send final response
+    res.status(httpStatus.OK).send({
+      status: httpStatus.OK,
+      message: "Transaction confirmed successfully",
+      data: responsePayload,
+    });
+  } else if (receiver_account_details?.payer_id == "ORANGE_MONEY") {
+    console.log(`here is reciever id and body in orange money`);
+    console.log(req.body, receiver);
+    // fetch mid
+    let payout_mid_details = MID?.data;
+    // let payout_mid_details = await payout_mid.findOne({
+    //   where: { sub_merchant_id: receiver?.sub_merchant_id },
+    // });
+    console.log(payout_mid_details);
+    // Check payer currency and request payout currency
+    if (receiver_account_details?.currency != currency) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message:
+          "Invalid currency selected! The receiver only accepts payouts in " +
+          receiver_account_details?.currency,
+      });
+      return;
+    }
+    if (helperService.isNotValid(payout_mid_details?.api_key)) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message: "Invalid 'api_key'",
+      });
+      return;
+    }
+
+    if (helperService.isNotValid(payout_mid_details?.password)) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message: "Invalid 'password'",
+      });
+      return;
+    }
+    let externalTransactionId = await helperService.make_unique_id();
+    // make transfer payload
+    let data = {
+      auth: {
+        user: payout_mid_details?.api_key,
+        pwd: payout_mid_details?.password,
+      },
+      param: {
+        msisdn: receiver_account_details?.account_details?.MSISDN,
+        Amount: amount,
+        Currency: currency,
+        ExternalID: externalTransactionId,
+      },
+    };
+    console.log("🚀 ~ data:", data)
+    // initiate payout
+    // let payoutReferenceId = await initiateOrangeMoneyTransfer(data);
+    let payoutResponse = await initiateOrangeMoneyTransfer(data);
+    console.log("🚀 ~ payoutResponse:", payoutResponse)
+
+    let transactionStatus = "FAILED";
+    let financialTransactionId = "";
+    //send response if reference id is fals
+    if (payoutResponse?.status != 200) {
+      financialTransactionId = payoutResponse?.resultset?.TXNID;
+    } else {
+      //=============================================================================================
+      //get transaction status
+      let payoutReferenceId = payoutResponse?.resultset?.TXNID;
+      let getTransactionStatus = await getOrangeMoneyTransferStatus(
+        payoutReferenceId,
+        payout_mid_details?.api_key,
+        payout_mid_details?.password,
+        currency
+      );
+      console.log("🚀 ~ getTransactionStatus:", getTransactionStatus);
+      if (getTransactionStatus.resultset.TXNSTATUS == "TS") {
+        transactionStatus = "COMPLETED";
+      } else if (getTransactionStatus.resultset.TXNSTATUS == "TI") {
+        transactionStatus = "PENDING";
+      }
+    }
+  
+    let transactionPayload = {
+      transaction_id: financialTransactionId,
+      external_id: externalTransactionId,
+      receiver_id: receiver_id,
+      order_id: order_id,
+      wallet_id: wallet_id,
+      account_id: account_id,
+      mid_id: MID?.data?.id,
+      batch_id: "",
+      super_merchant_id: "",
+      sub_merchant_id: receiver?.sub_merchant_id,
+      transaction_type: "B2B",
+      wholesale_fx_rate: parseFloat(0),
+      destination_amount: parseFloat(amount),
+      destination_currency: currency,
+      sent_amount: parseFloat(amount),
+      sent_currency: currency,
+      source_amount: parseFloat(amount),
+      source_currency: currency,
+      source_country_iso_code: receiver_account_details?.country,
+      payer_country_iso_code: "LBR",
+      fee_amount: parseFloat(0),
+      fee_currency: "NA",
+      creation_date: moment().format("YYYY-MM-DD hh:mm:ss"),
+      expiration_date: moment().format("YYYY-MM-DD hh:mm:ss"),
+      payer_id: receiver_account_details?.payer_id,
+      payer_currency: currency,
+      service_id: receiver_account_details?.funding_source_type,
+      service_name: "Mobile Wallet",
+      status_message: transactionStatus,
+      callback_url: payout_mid_details.callback,
+      payer_name: "MSISDN",
+      payout_reference: payout_reference,
+    };
+    console.log("🚀 ~ payout ~ transactionPayload:", transactionPayload);
+    await transaction.create(transactionPayload);
+
+    //=============================================================================================
+    // DB Save account and payers data
+
+    let account_for = "";
+    if (
+      helperService.isNotValid(receiver_account_details?.sub_merchant_id) &&
+      helperService.isValid(receiver_account_details?.receiver_id)
+    ) {
+      account_for = "payout";
+    } else {
+      account_for = "settlement";
+    }
+
+    let account_data = {
+      transaction_id: transactionPayload?.transaction_id,
+      order_id: transactionPayload?.order_id,
+      external_id: transactionPayload?.external_id,
+      receiver_id: transactionPayload?.receiver_id,
+      sub_merchant_id: helperService.isNotValid(
+        transactionPayload?.sub_merchant_id
+      )
+        ? 0
+        : transactionPayload?.sub_merchant_id,
+      transaction_date: transactionPayload?.creation_date,
+      account_id: transactionPayload?.account_id,
+      account_type:
+        receiver_account_details?.customer_type?.toLowerCase() === "business"
+          ? 2
+          : 1,
+      account_for: account_for,
+      account_data: JSON.stringify(receiver_account_details),
+      payer_id: transactionPayload?.payer_id,
+      payer_name: transactionPayload?.payer_name,
+      payer_currency: transactionPayload?.payer_currency,
+      payer_data: JSON.stringify({
+        MSISDN: receiver_account_details?.account_details?.MSISDN,
+        payer_id: receiver_account_details?.payer_id,
+        payer_name: "ORANGE-MONEY",
+      }),
+    };
+    console.log(
+      "🚀 ~ create_transaction_API_Call ~ account_data:",
+      account_data
+    );
+
+    let account_result = await accountDetailsService.add(account_data);
+    console.log(
+      "🚀 ~ create_transaction_API_Call ~ account_result:",
+      account_result
+    );
+
+    //=============================================================================================
+    // call to node server to update charges
+    const payload = {
+      submerchant_id: helperService.isNotValid(receiver?.sub_merchant_id)
+        ? null
+        : receiver?.sub_merchant_id,
+      receiver_id: helperService.isNotValid(receiver_id)
+        ? null
+        : String(receiver_id),
+      currecny: currency,
+      amount: String(amount),
+      transaction_id: String(financialTransactionId),
+      order_id: externalTransactionId,
+      order_status: transactionStatus,
+    };
+    console.log("🚀 ~ constpayout_webhook=catchAsync ~ payload:", payload);
+    var result = await nodeServerAPIService.update_payout_status(req, payload);
+    console.log("🚀 ~ constpayout_webhook=catchAsync ~ result:", result);
+
+    //=============================================================================================
+    // Resturn Response
+
+    let debit_party = {};
+    // Check Type Of Transation (Settelment OR Payout)
+    if (helperService.isNotValid(receiver?.sub_merchant_id)) {
+      // THis is payout
+      debit_party = {
+        id: receiver?.receiver_id,
+        name: receiver?.receiver_name,
+        country: receiver?.registered_business_address,
+        webhook_url: receiver?.webhook_url,
+      };
+    } else if (
+      helperService.isValid(receiver?.sub_merchant_id) &&
+      helperService.isValid(receiver?.receiver_id)
+    ) {
+      // THis is settelment
+      debit_party = {
+        id: null,
+        name: company_details?.data?.company_name,
+        country: company_details?.data?.company_country,
+        webhook_url: null,
+      };
+    }
+
+    let credit_party = {
+      account_id: receiver_account_details?.account_id,
+      ...receiver_account_details?.account_details,
+    };
+
+    const responsePayload = {
+      order_id: order_id,
+      external_id: transactionPayload?.external_id,
+      transaction_id: financialTransactionId,
+      sub_merchant_id: helperService.isValid(receiver?.sub_merchant_id)
+        ? receiver?.sub_merchant_id
+        : null,
+      receiver_id: helperService.isValid(receiver?.receiver_id)
+        ? receiver?.receiver_id
+        : null,
+      currency: currency,
+      wallet_id: wallet_id,
+      debit_party: debit_party,
+      credit_party: credit_party,
+      credit_party_identifier: {
+        MSISDN: receiver_account_details?.account_details?.MSISDN,
+        payer_id: receiver_account_details?.payer_id,
+        payer_name: "ORANGE-MONEY",
+      },
+      debit_details: {
+        debit_amount: parseFloat(amount),
+        currency: currency,
+      },
+      credit_details: {
+        amount: parseFloat(amount),
+        currency: currency,
+      },
+      payout_reference: helperService.isValid(payout_reference)
+        ? payout_reference
+        : null,
+      webhook_url: helperService.isValid(webhook_url) ? webhook_url : null,
+      purpose_of_remittance: helperService.isValid(purpose_of_remittance)
+        ? purpose_of_remittance
+        : null,
+      document_reference_number: null,
+      transaction_status: transactionStatus,
+      transaction_status_code:
+        transactionStatus == "SUCCESSFUL"
+          ? 20000
+          : transactionStatus == "PENDING"
+          ? 30000
+          : 40000,
+      order_created_date: moment(transactionPayload?.creation_date).format(
+        "YYYY-MM-DD hh:mm:ss"
+      ),
+      order_updated_date: moment(transactionPayload?.creation_date).format(
+        "YYYY-MM-DD hh:mm:ss"
+      ),
+      batch_id: null,
+    };
+
+    // ==============================================================================
+    // Send Webhook
+    // await quotationService.send_webhook(responsePayload);
+
+    // ==============================================================================
+    // Send final response
+    res.status(httpStatus.OK).send({
+      status: httpStatus.OK,
+      message: "Transaction confirmed successfully",
+      data: responsePayload,
+    });
+  } else if (receiver_account_details?.payer_id == "ORANGE") {
+    console.log(`here is reciever id and body in orange money`);
+    console.log(req.body, receiver);
+    // fetch mid
+    let payout_mid_details = MID?.data;
+    // let payout_mid_details = await payout_mid.findOne({
+    //   where: { sub_merchant_id: receiver?.sub_merchant_id },
+    // });
+    console.log(payout_mid_details);
+    // Check payer currency and request payout currency
+    if (receiver_account_details?.currency != currency) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message:
+          "Invalid currency selected! The receiver only accepts payouts in " +
+          receiver_account_details?.currency,
+      });
+      return;
+    }
+    if (helperService.isNotValid(payout_mid_details?.api_key)) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message: "Invalid 'api_key'",
+      });
+      return;
+    }
+
+    if (helperService.isNotValid(payout_mid_details?.password)) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message: "Invalid 'password'",
+      });
+      return;
+    }
+    let externalTransactionId = await helperService.make_unique_id();
+    // make transfer payload
+    let data = {
+      auth: {
+        user: payout_mid_details?.api_key,
+        pwd: payout_mid_details?.password,
+      },
+      param: {
+        MSISDN: receiver_account_details?.account_details?.MSISDN,
+        Amount: amount,
+        Currency: currency,
+        EXTERNALID: externalTransactionId,
+      },
+    };
+    // initiate payout
+    let payoutReferenceId = await orangeMockService.initiateOrangeMoneyTransfer(
+      data
+    );
+    //send response if reference id is fals
+    if (!payoutReferenceId) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message: "Unable to initiate transfer",
+      });
+      return;
+    }
+
+    //=============================================================================================
+    //get transaction status
+    let getTransactionStatus =
+      await orangeMockService.getOrangeMoneyTransferStatus(
+        payoutReferenceId,
+        payout_mid_details?.api_key,
+        payout_mid_details?.password,
+        currency
+      );
+    console.log("🚀 ~ getTransactionStatus:", getTransactionStatus);
+    let transactionStatus = "FAILED";
+    if (getTransactionStatus.resultset.TXNSTATUS == "TS") {
+      transactionStatus = "COMPLETED";
+    }
+    if (getTransactionStatus.resultset.TXNSTATUS == "TI") {
+      transactionStatus = "PENDING";
+    }
+    let transactionPayload = {
+      transaction_id: helperService.isNotValid(payoutReferenceId)
+        ? ""
+        : payoutReferenceId,
+      external_id: externalTransactionId,
+      receiver_id: receiver_id,
+      order_id: order_id,
+      wallet_id: wallet_id,
+      account_id: account_id,
+      mid_id: MID?.data?.id,
+      batch_id: "",
+      super_merchant_id: "",
+      sub_merchant_id: receiver?.sub_merchant_id,
+      transaction_type: "B2B",
+      wholesale_fx_rate: parseFloat(0),
+      destination_amount: parseFloat(amount),
+      destination_currency: currency,
+      sent_amount: parseFloat(amount),
+      sent_currency: currency,
+      source_amount: parseFloat(amount),
+      source_currency: currency,
+      source_country_iso_code: receiver_account_details?.country,
+      payer_country_iso_code: "LBR",
+      fee_amount: parseFloat(0),
+      fee_currency: "NA",
+      creation_date: moment().format("YYYY-MM-DD hh:mm:ss"),
+      expiration_date: moment().format("YYYY-MM-DD hh:mm:ss"),
+      payer_id: receiver_account_details?.payer_id,
+      payer_currency: currency,
+      service_id: receiver_account_details?.funding_source_type,
+      service_name: "Mobile Wallet",
+      status_message: transactionStatus,
+      callback_url: payout_mid_details.callback,
+      payer_name: "MSISDN",
+      payout_reference: payout_reference,
+    };
+    console.log("🚀 ~ payout ~ transactionPayload:", transactionPayload);
+    await transaction.create(transactionPayload);
+
+    //=============================================================================================
+    // DB Save account and payers data
+
+    let account_for = "";
+    if (
+      helperService.isNotValid(receiver_account_details?.sub_merchant_id) &&
+      helperService.isValid(receiver_account_details?.receiver_id)
+    ) {
+      account_for = "payout";
+    } else {
+      account_for = "settlement";
+    }
+
+    let account_data = {
+      transaction_id: transactionPayload?.transaction_id,
+      order_id: transactionPayload?.order_id,
+      external_id: transactionPayload?.external_id,
+      receiver_id: transactionPayload?.receiver_id,
+      sub_merchant_id: helperService.isNotValid(
+        transactionPayload?.sub_merchant_id
+      )
+        ? 0
+        : transactionPayload?.sub_merchant_id,
+      transaction_date: transactionPayload?.creation_date,
+      account_id: transactionPayload?.account_id,
+      account_type:
+        receiver_account_details?.customer_type?.toLowerCase() === "business"
+          ? 2
+          : 1,
+      account_for: account_for,
+      account_data: JSON.stringify(receiver_account_details),
+      payer_id: transactionPayload?.payer_id,
+      payer_name: transactionPayload?.payer_name,
+      payer_currency: transactionPayload?.payer_currency,
+      payer_data: JSON.stringify({
+        MSISDN: receiver_account_details?.account_details?.MSISDN,
+        payer_id: receiver_account_details?.payer_id,
+        payer_name: "ORANGE",
+      }),
+    };
+    console.log(
+      "🚀 ~ create_transaction_API_Call ~ account_data:",
+      account_data
+    );
+
+    let account_result = await accountDetailsService.add(account_data);
+    console.log(
+      "🚀 ~ create_transaction_API_Call ~ account_result:",
+      account_result
+    );
+
+    //=============================================================================================
+    // call to node server to update charges
+    const payload = {
+      submerchant_id: helperService.isNotValid(receiver?.sub_merchant_id)
+        ? null
+        : receiver?.sub_merchant_id,
+      receiver_id: helperService.isNotValid(receiver_id)
+        ? null
+        : String(receiver_id),
+      currecny: currency,
+      amount: String(amount),
+      transaction_id: String(payoutReferenceId),
+      order_id: externalTransactionId,
+      order_status: transactionStatus,
+    };
+    console.log("🚀 ~ constpayout_webhook=catchAsync ~ payload:", payload);
+    var result = await nodeServerAPIService.update_payout_status(req, payload);
+    console.log("🚀 ~ constpayout_webhook=catchAsync ~ result:", result);
+
+    //=============================================================================================
+    // Resturn Response
+
+    let debit_party = {};
+    // Check Type Of Transation (Settelment OR Payout)
+    if (helperService.isNotValid(receiver?.sub_merchant_id)) {
+      // THis is payout
+      debit_party = {
+        id: receiver?.receiver_id,
+        name: receiver?.receiver_name,
+        country: receiver?.registered_business_address,
+        webhook_url: receiver?.webhook_url,
+      };
+    } else if (
+      helperService.isValid(receiver?.sub_merchant_id) &&
+      helperService.isValid(receiver?.receiver_id)
+    ) {
+      // THis is settelment
+      debit_party = {
+        id: null,
+        name: company_details?.data?.company_name,
+        country: company_details?.data?.company_country,
+        webhook_url: null,
+      };
+    }
+
+    let credit_party = {
+      account_id: receiver_account_details?.account_id,
+      ...receiver_account_details?.account_details,
+    };
+
+    const responsePayload = {
+      order_id: order_id,
+      external_id: transactionPayload?.external_id,
+      transaction_id: getTransactionStatus.financialTransactionId,
+      sub_merchant_id: helperService.isValid(receiver?.sub_merchant_id)
+        ? receiver?.sub_merchant_id
+        : null,
+      receiver_id: helperService.isValid(receiver?.receiver_id)
+        ? receiver?.receiver_id
+        : null,
+      currency: currency,
+      wallet_id: wallet_id,
+      debit_party: debit_party,
+      credit_party: credit_party,
+      credit_party_identifier: {
+        MSISDN: receiver_account_details?.account_details?.MSISDN,
+        payer_id: receiver_account_details?.payer_id,
+        payer_name: "ORANGE",
+      },
+      debit_details: {
+        debit_amount: parseFloat(amount),
+        currency: currency,
+      },
+      credit_details: {
+        amount: parseFloat(amount),
+        currency: currency,
+      },
+      payout_reference: helperService.isValid(payout_reference)
+        ? payout_reference
+        : null,
+      webhook_url: helperService.isValid(webhook_url) ? webhook_url : null,
+      purpose_of_remittance: helperService.isValid(purpose_of_remittance)
+        ? purpose_of_remittance
+        : null,
+      document_reference_number: null,
+      transaction_status: transactionStatus,
+      transaction_status_code:
+        transactionStatus == "SUCCESSFUL"
+          ? 20000
+          : transactionStatus == "PENDING"
+          ? 30000
+          : 40000,
+      order_created_date: moment(transactionPayload?.creation_date).format(
+        "YYYY-MM-DD hh:mm:ss"
+      ),
+      order_updated_date: moment(transactionPayload?.creation_date).format(
+        "YYYY-MM-DD hh:mm:ss"
+      ),
+      batch_id: null,
+    };
+
+    // ==============================================================================
+    // Send Webhook
+    // await quotationService.send_webhook(responsePayload);
+
+    // ==============================================================================
+    // Send final response
+    res.status(httpStatus.OK).send({
+      status: httpStatus.OK,
+      message: "Transaction confirmed successfully",
+      data: responsePayload,
+    });
+  } else if (receiver_account_details?.payer_id.includes('AP_')) {
+    console.log(`initiateInternationalTransfer...`, receiver_account_details);
+    console.log(`here is reciever id and body in AlPay`);
+    console.log(req.body, receiver);
+    // fetch mid
+    let payout_mid_details = MID?.data;
+    // let payout_mid_details = await payout_mid.findOne({
+    //   where: { sub_merchant_id: receiver?.sub_merchant_id },
+    // });
+    console.log(payout_mid_details);
+    // Check payer currency and request payout currency
+    if (receiver_account_details?.currency != currency) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message:
+          "Invalid currency selected! The receiver only accepts payouts in " +
+          receiver_account_details?.currency,
+      });
+      return;
+    }
+    if (helperService.isNotValid(payout_mid_details?.api_key)) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message: "Invalid 'api_key'",
+      });
+      return;
+    }
+
+    if (helperService.isNotValid(payout_mid_details?.password)) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message: "Invalid 'password'",
+      });
+      return;
+    }
+
+    let getAccessTokenPayload = {
+      username: payout_mid_details?.api_key,
+      password: payout_mid_details?.password,
+    };
+    // get access token
+    let token = await alPayService.getAccessToken(getAccessTokenPayload);
+    //send response if reference id is fals
+    if (!token) {
+      res.status(httpStatus.OK).send({
+        status: 401,
+        message: "Invalid access",
+      });
+      return;
+    }
+
+    let externalTransactionId = await helperService.make_unique_id();
+
+    let nameEnquiryServicePayload = {
+      accountNumber: receiver_account_details?.account_details?.accountNumber,
+      channel:
+        receiver_account_details?.funding_source_type == 1
+          ? "MNO"
+          : "INTERBANK",
+      institutionCode:
+        receiver_account_details?.account_details?.institutionCode,
+      transactionId: externalTransactionId,
+    };
+    console.log("🚀 ~ nameEnquiryServicePayload:", nameEnquiryServicePayload);
+    let nameEnquiryServiceResponse = await alPayService.nameEnquiryService(
+      token,
+      nameEnquiryServicePayload
+    );
+    console.log("🚀 ~ nameEnquiryServiceResponse:", nameEnquiryServiceResponse);
+    if (nameEnquiryServiceResponse?.status != 200) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message:
+          nameEnquiryServiceResponse?.message || "Unable to initiate transfer",
+      });
+      return;
+    }
+
+    // Initiate Transfer
+    externalTransactionId = await helperService.make_unique_id();
+    const payoutReferenceId = uuidv4(); // Generate UUID
+    console.log("Transfer initiated, Reference ID:", payoutReferenceId);
+    let initiateTransferResponse = null;
+    if (receiver_account_details?.currency === "GHS") {
+      // make transfer payload
+      let data = {
+        accountName: receiver_account_details?.account_details?.accountName,
+        accountNumber: receiver_account_details?.account_details?.accountNumber,
+        amount: amount,
+        channel: "MNO",
+        institutionCode:
+          receiver_account_details?.account_details?.institutionCode,
+        transactionId: externalTransactionId,
+        CreditNaration: payout_reference || "Payout transaction",
+        currency: currency,
+      };
+      console.log("🚀 ~ initiateLocalTransfer data:", data);
+
+      // initiate payout
+      initiateTransferResponse = await alPayService.initiateLocalTransfer(
+        token,
+        data
+      );
+      console.log("🚀 ~ initiateTransferResponse:", initiateTransferResponse);
+    } else {
+      // make transfer payload
+      let data = {
+        accountNumber: receiver_account_details?.account_details?.accountNumber,
+        amount: amount,
+        channel: "INTERBANK",
+        transactionId: externalTransactionId,
+        creditNarration: payout_reference,
+        currency: currency,
+        currencyAmount: amount,
+        originCountryCode: "GH",
+        senderName: company_details?.data?.company_name,
+      };
+      console.log("🚀 ~ initiateInternationalTransfer data:", data);
+
+      // initiate payout
+      initiateTransferResponse =
+        await alPayService.initiateInternationalTransfer(token, data);
+      console.log("🚀 ~ initiateTransferResponse:", initiateTransferResponse);
+    }
+
+    //send response if reference id is fals
+    if (initiateTransferResponse?.status != 200) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message:
+          initiateTransferResponse?.message || "Unable to initiate transfer",
+      });
+      return;
+    }
+
+    //=============================================================================================
+    //get transaction status
+    let transactionStatusResponse = await alPayService.getTransferStatus(
+      token,
+      initiateTransferResponse?.data?.transactionId,
+      "CREDIT"
+    );
+    console.log("🚀 ~ transactionStatusResponse:", transactionStatusResponse);
+    if (transactionStatusResponse?.status != 200) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message:
+          transactionStatusResponse?.message ||
+          "Unable to get a transaction status",
+      });
+      return;
+    }
+
+    let transactionStatus = "PENDING";
+    if (transactionStatusResponse?.message === "SUCCESSFUL") {
+      transactionStatus = "COMPLETED";
+    } else if (transactionStatusResponse?.message === "FAILED") {
+      transactionStatus = "FAILED";
+    }
+    let transactionPayload = {
+      transaction_id: helperService.isNotValid(
+        transactionStatusResponse?.data?.transactionId
+      )
+        ? ""
+        : transactionStatusResponse?.data?.transactionId,
+      external_id: externalTransactionId,
+      receiver_id: receiver_id,
+      order_id: order_id,
+      wallet_id: wallet_id,
+      account_id: account_id,
+      mid_id: MID?.data?.id,
+      batch_id: "",
+      super_merchant_id: "",
+      sub_merchant_id: receiver?.sub_merchant_id,
+      transaction_type: "B2B",
+      wholesale_fx_rate: parseFloat(0),
+      destination_amount: parseFloat(amount),
+      destination_currency: currency,
+      sent_amount: parseFloat(amount),
+      sent_currency: currency,
+      source_amount: parseFloat(amount),
+      source_currency: currency,
+      source_country_iso_code: receiver_account_details?.country,
+      payer_country_iso_code: "GHA",
+      fee_amount: parseFloat(0),
+      fee_currency: "NA",
+      creation_date: moment().format("YYYY-MM-DD hh:mm:ss"),
+      expiration_date: moment().format("YYYY-MM-DD hh:mm:ss"),
+      payer_id: receiver_account_details?.payer_id,
+      payer_currency: currency,
+      service_id: receiver_account_details?.funding_source_type,
+      service_name: "Mobile Wallet",
+      status_message: transactionStatus,
+      callback_url: payout_mid_details.callback,
+      payer_name: transactionStatusResponse?.data?.accountName,
+      payout_reference: payout_reference,
+    };
+    console.log("🚀 ~ payout ~ transactionPayload:", transactionPayload);
+    await transaction.create(transactionPayload);
+
+    //=============================================================================================
+    // DB Save account and payers data
+
+    let account_for = "";
+    if (
+      helperService.isNotValid(receiver_account_details?.sub_merchant_id) &&
+      helperService.isValid(receiver_account_details?.receiver_id)
+    ) {
+      account_for = "payout";
+    } else {
+      account_for = "settlement";
+    }
+
+    let account_data = {
+      transaction_id: transactionPayload?.transaction_id,
+      order_id: transactionPayload?.order_id,
+      external_id: transactionPayload?.external_id,
+      receiver_id: transactionPayload?.receiver_id,
+      sub_merchant_id: helperService.isNotValid(
+        transactionPayload?.sub_merchant_id
+      )
+        ? 0
+        : transactionPayload?.sub_merchant_id,
+      transaction_date: transactionPayload?.creation_date,
+      account_id: transactionPayload?.account_id,
+      account_type:
+        receiver_account_details?.customer_type?.toLowerCase() === "business"
+          ? 2
+          : 1,
+      account_for: account_for,
+      account_data: JSON.stringify(receiver_account_details),
+      payer_id: transactionPayload?.payer_id,
+      payer_name: transactionPayload?.payer_name,
+      payer_currency: transactionPayload?.payer_currency,
+      payer_data: JSON.stringify({
+        accountName: receiver_account_details?.account_details?.accountName,
+        accountNumber: receiver_account_details?.account_details?.accountNumber,
+        payer_id: receiver_account_details?.payer_id,
+        payer_name: "AL PAY",
+      }),
+    };
+    console.log(
+      "🚀 ~ create_transaction_API_Call ~ account_data:",
+      account_data
+    );
+
+    let account_result = await accountDetailsService.add(account_data);
+    console.log(
+      "🚀 ~ create_transaction_API_Call ~ account_result:",
+      account_result
+    );
+
+    //=============================================================================================
+    // call to node server to update charges
+    const payload = {
+      submerchant_id: helperService.isNotValid(receiver?.sub_merchant_id)
+        ? null
+        : receiver?.sub_merchant_id,
+      receiver_id: helperService.isNotValid(receiver_id)
+        ? null
+        : String(receiver_id),
+      currecny: currency,
+      amount: String(amount),
+      transaction_id: String(transactionPayload?.transaction_id),
+      order_id: externalTransactionId,
+      order_status: transactionStatus,
+    };
+    console.log("🚀 ~ constpayout_webhook=catchAsync ~ payload:", payload);
+    var result = await nodeServerAPIService.update_payout_status(req, payload);
+    console.log("🚀 ~ constpayout_webhook=catchAsync ~ result:", result);
+
+    //=============================================================================================
+    // Resturn Response
+
+    let debit_party = {};
+    // Check Type Of Transation (Settelment OR Payout)
+    if (helperService.isNotValid(receiver?.sub_merchant_id)) {
+      // THis is payout
+      debit_party = {
+        id: receiver?.receiver_id,
+        name: receiver?.receiver_name,
+        country: receiver?.registered_business_address,
+        webhook_url: receiver?.webhook_url,
+      };
+    } else if (
+      helperService.isValid(receiver?.sub_merchant_id) &&
+      helperService.isValid(receiver?.receiver_id)
+    ) {
+      // THis is settelment
+      debit_party = {
+        id: null,
+        name: company_details?.data?.company_name,
+        country: company_details?.data?.company_country,
+        webhook_url: null,
+      };
+    }
+
+    let credit_party = {
+      account_id: receiver_account_details?.account_id,
+      ...receiver_account_details?.account_details,
+    };
+
+    const responsePayload = {
+      order_id: order_id,
+      external_id: transactionPayload?.external_id,
+      transaction_id: transactionStatusResponse?.data?.transactionId,
+      sub_merchant_id: helperService.isValid(receiver?.sub_merchant_id)
+        ? receiver?.sub_merchant_id
+        : null,
+      receiver_id: helperService.isValid(receiver?.receiver_id)
+        ? receiver?.receiver_id
+        : null,
+      currency: currency,
+      wallet_id: wallet_id,
+      debit_party: debit_party,
+      credit_party: credit_party,
+      credit_party_identifier: {
+        accountName: receiver_account_details?.account_details?.accountName,
+        accountNumber: receiver_account_details?.account_details?.accountNumber,
+        payer_id: receiver_account_details?.payer_id,
+        payer_name: "AlPay",
+      },
+      debit_details: {
+        debit_amount: parseFloat(amount),
+        currency: currency,
+      },
+      credit_details: {
+        amount: parseFloat(amount),
+        currency: currency,
+      },
+      payout_reference: helperService.isValid(payout_reference)
+        ? payout_reference
+        : null,
+      webhook_url: helperService.isValid(webhook_url) ? webhook_url : null,
+      purpose_of_remittance: helperService.isValid(purpose_of_remittance)
+        ? purpose_of_remittance
+        : null,
+      document_reference_number: null,
+      transaction_status: transactionStatus,
+      transaction_status_code:
+        transactionStatus == "SUCCESSFUL"
+          ? 20000
+          : transactionStatus == "PENDING"
+          ? 30000
+          : 40000,
+      order_created_date: moment(transactionPayload?.creation_date).format(
+        "YYYY-MM-DD hh:mm:ss"
+      ),
+      order_updated_date: moment(transactionPayload?.creation_date).format(
+        "YYYY-MM-DD hh:mm:ss"
+      ),
+      batch_id: null,
+    };
+
+    // ==============================================================================
+    // Send Webhook
+    // await quotationService.send_webhook(responsePayload);
+
+    // ==============================================================================
+    // Send final response
+    res.status(httpStatus.OK).send({
+      status: httpStatus.OK,
+      message: "Transaction confirmed successfully",
+      data: responsePayload,
+    });
+  } else if (receiver_account_details?.payer_id == "AL") {
+    console.log(`initiateInternationalTransfer...`, receiver_account_details);
+    console.log(`here is reciever id and body in AlPay`);
+    console.log(req.body, receiver);
+    // fetch mid
+    let payout_mid_details = MID?.data;
+    // let payout_mid_details = await payout_mid.findOne({
+    //   where: { sub_merchant_id: receiver?.sub_merchant_id },
+    // });
+    console.log(payout_mid_details);
+    // Check payer currency and request payout currency
+    if (receiver_account_details?.currency != currency) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message:
+          "Invalid currency selected! The receiver only accepts payouts in " +
+          receiver_account_details?.currency,
+      });
+      return;
+    }
+    if (helperService.isNotValid(payout_mid_details?.api_key)) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message: "Invalid 'api_key'",
+      });
+      return;
+    }
+
+    if (helperService.isNotValid(payout_mid_details?.password)) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message: "Invalid 'password'",
+      });
+      return;
+    }
+
+    let getAccessTokenPayload = {
+      username: payout_mid_details?.api_key,
+      password: payout_mid_details?.password,
+    };
+    // get access token
+    let token = await alMockService.getAccessToken(getAccessTokenPayload);
+    //send response if reference id is fals
+    if (!token) {
+      res.status(httpStatus.OK).send({
+        status: 401,
+        message: "Invalid access",
+      });
+      return;
+    }
+
+    let externalTransactionId = await helperService.make_unique_id();
+
+    let nameEnquiryServicePayload = {
+      accountNumber: receiver_account_details?.account_details?.accountNumber,
+      channel:
+        receiver_account_details?.funding_source_type == 1
+          ? "MNO"
+          : "INTERBANK",
+      institutionCode:
+        receiver_account_details?.account_details?.institutionCode,
+      transactionId: externalTransactionId,
+    };
+    console.log("🚀 ~ nameEnquiryServicePayload:", nameEnquiryServicePayload);
+    let nameEnquiryServiceResponse = await alMockService.nameEnquiryService(
+      token,
+      nameEnquiryServicePayload
+    );
+    console.log("🚀 ~ nameEnquiryServiceResponse:", nameEnquiryServiceResponse);
+    if (nameEnquiryServiceResponse?.status != 200) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message:
+          nameEnquiryServiceResponse?.message || "Unable to initiate transfer",
+      });
+      return;
+    }
+
+    // Initiate Transfer
+    externalTransactionId = await helperService.make_unique_id();
+    const payoutReferenceId = uuidv4(); // Generate UUID
+    console.log("Transfer initiated, Reference ID:", payoutReferenceId);
+    let initiateTransferResponse = null;
+    if (receiver_account_details?.currency === "GHS") {
+      // make transfer payload
+      let data = {
+        accountName: nameEnquiryServiceResponse?.data?.accountName,
+        accountNumber: nameEnquiryServiceResponse?.data?.accountNumber,
+        amount: amount,
+        channel: "MNO",
+        institutionCode:
+          receiver_account_details?.account_details?.institutionCode,
+        transactionId: externalTransactionId,
+        CreditNaration: payout_reference || "Payout transaction",
+        currency: currency,
+      };
+      console.log("🚀 ~ initiateLocalTransfer data:", data);
+
+      // initiate payout
+      initiateTransferResponse = await alMockService.initiateLocalTransfer(
+        token,
+        data
+      );
+      console.log("🚀 ~ initiateTransferResponse:", initiateTransferResponse);
+    } else {
+      // make transfer payload
+      let data = {
+        accountNumber: receiver_account_details?.account_details?.accountNumber,
+        amount: amount,
+        channel: "INTERBANK",
+        transactionId: externalTransactionId,
+        creditNarration: payout_reference,
+        currency: currency,
+        currencyAmount: amount,
+        originCountryCode: "GH",
+        senderName: company_details?.data?.company_name,
+      };
+      console.log("🚀 ~ initiateInternationalTransfer data:", data);
+
+      // initiate payout
+      initiateTransferResponse =
+        await alMockService.initiateInternationalTransfer(token, data);
+      console.log("🚀 ~ initiateTransferResponse:", initiateTransferResponse);
+    }
+
+    //send response if reference id is fals
+    if (initiateTransferResponse?.status != 200) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message:
+          initiateTransferResponse?.message || "Unable to initiate transfer",
+      });
+      return;
+    }
+
+    //=============================================================================================
+    //get transaction status
+    let transactionStatusResponse = await alMockService.getTransferStatus(
+      token,
+      initiateTransferResponse?.data?.transactionId,
+      "CREDIT"
+    );
+    console.log("🚀 ~ transactionStatusResponse:", transactionStatusResponse);
+    if (transactionStatusResponse?.status != 200) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message:
+          transactionStatusResponse?.message ||
+          "Unable to get a transaction status",
+      });
+      return;
+    }
+
+    let transactionStatus = "PENDING";
+    if (transactionStatusResponse?.message === "SUCCESSFUL") {
+      transactionStatus = "COMPLETED";
+    } else if (transactionStatusResponse?.message === "FAILED") {
+      transactionStatus = "FAILED";
+    }
+
+    let transaction_id = helperService.isNotValid(transactionStatusResponse?.data?.transactionId) ? "" : transactionStatusResponse?.data?.transactionId;
+    let transactionPayload = {
+      transaction_id: transaction_id,
+      external_id: externalTransactionId,
+      receiver_id: receiver_id,
+      order_id: order_id,
+      wallet_id: wallet_id,
+      account_id: account_id,
+      mid_id: MID?.data?.id,
+      batch_id: "",
+      super_merchant_id: "",
+      sub_merchant_id: receiver?.sub_merchant_id,
+      transaction_type: "B2B",
+      wholesale_fx_rate: parseFloat(0),
+      destination_amount: parseFloat(amount),
+      destination_currency: currency,
+      sent_amount: parseFloat(amount),
+      sent_currency: currency,
+      source_amount: parseFloat(amount),
+      source_currency: currency,
+      source_country_iso_code: receiver_account_details?.country,
+      payer_country_iso_code: "GHA",
+      fee_amount: parseFloat(0),
+      fee_currency: "NA",
+      creation_date: moment().format("YYYY-MM-DD hh:mm:ss"),
+      expiration_date: moment().format("YYYY-MM-DD hh:mm:ss"),
+      payer_id: receiver_account_details?.payer_id,
+      payer_currency: currency,
+      service_id: receiver_account_details?.funding_source_type,
+      service_name: "Mobile Wallet",
+      status_message: transactionStatus,
+      callback_url: payout_mid_details.callback,
+      payer_name: transactionStatusResponse?.data?.accountName,
+      payout_reference: payout_reference,
+    };
+    console.log("🚀 ~ payout ~ transactionPayload:", transactionPayload);
+    await transaction.create(transactionPayload);
+
+    //=============================================================================================
+    // DB Save account and payers data
+
+    let account_for = "";
+    if (
+      helperService.isNotValid(receiver_account_details?.sub_merchant_id) &&
+      helperService.isValid(receiver_account_details?.receiver_id)
+    ) {
+      account_for = "payout";
+    } else {
+      account_for = "settlement";
+    }
+
+    let account_data = {
+      transaction_id: transaction_id,
+      order_id: transactionPayload?.order_id,
+      external_id: transactionPayload?.external_id,
+      receiver_id: transactionPayload?.receiver_id,
+      sub_merchant_id: helperService.isNotValid(
+        transactionPayload?.sub_merchant_id
+      )
+        ? 0
+        : transactionPayload?.sub_merchant_id,
+      transaction_date: transactionPayload?.creation_date,
+      account_id: transactionPayload?.account_id,
+      account_type:
+        receiver_account_details?.customer_type?.toLowerCase() === "business"
+          ? 2
+          : 1,
+      account_for: account_for,
+      account_data: JSON.stringify(receiver_account_details),
+      payer_id: transactionPayload?.payer_id,
+      payer_name: transactionPayload?.payer_name,
+      payer_currency: transactionPayload?.payer_currency,
+      payer_data: JSON.stringify({
+        accountName: receiver_account_details?.account_details?.accountName,
+        accountNumber: receiver_account_details?.account_details?.accountNumber,
+        payer_id: receiver_account_details?.payer_id,
+        payer_name: "AL",
+      }),
+    };
+    console.log(
+      "🚀 ~ create_transaction_API_Call ~ account_data:",
+      account_data
+    );
+
+    let account_result = await accountDetailsService.add(account_data);
+    console.log(
+      "🚀 ~ create_transaction_API_Call ~ account_result:",
+      account_result
+    );
+
+    //=============================================================================================
+    // call to node server to update charges
+    const payload = {
+      submerchant_id: helperService.isNotValid(receiver?.sub_merchant_id)
+        ? null
+        : receiver?.sub_merchant_id,
+      receiver_id: helperService.isNotValid(receiver_id)
+        ? null
+        : String(receiver_id),
+      currecny: currency,
+      amount: String(amount),
+      transaction_id: String(transaction_id),
+      order_id: externalTransactionId,
+      order_status: transactionStatus,
+    };
+    console.log("🚀 ~ constpayout_webhook=catchAsync ~ payload:", payload);
+    var result = await nodeServerAPIService.update_payout_status(req, payload);
+    console.log("🚀 ~ constpayout_webhook=catchAsync ~ result:", result);
+
+    //=============================================================================================
+    // Resturn Response
+
+    let debit_party = {};
+    // Check Type Of Transation (Settelment OR Payout)
+    if (helperService.isNotValid(receiver?.sub_merchant_id)) {
+      // THis is payout
+      debit_party = {
+        id: receiver?.receiver_id,
+        name: receiver?.receiver_name,
+        country: receiver?.registered_business_address,
+        webhook_url: receiver?.webhook_url,
+      };
+    } else if (
+      helperService.isValid(receiver?.sub_merchant_id) &&
+      helperService.isValid(receiver?.receiver_id)
+    ) {
+      // THis is settelment
+      debit_party = {
+        id: null,
+        name: company_details?.data?.company_name,
+        country: company_details?.data?.company_country,
+        webhook_url: null,
+      };
+    }
+
+    let credit_party = {
+      account_id: receiver_account_details?.account_id,
+      ...receiver_account_details?.account_details,
+    };
+
+    const responsePayload = {
+      order_id: order_id,
+      external_id: transactionPayload?.external_id,
+      transaction_id: transactionStatusResponse?.data?.transactionId,
+      sub_merchant_id: helperService.isValid(receiver?.sub_merchant_id)
+        ? receiver?.sub_merchant_id
+        : null,
+      receiver_id: helperService.isValid(receiver?.receiver_id)
+        ? receiver?.receiver_id
+        : null,
+      currency: currency,
+      wallet_id: wallet_id,
+      debit_party: debit_party,
+      credit_party: credit_party,
+      credit_party_identifier: {
+        accountName: receiver_account_details?.account_details?.accountName,
+        accountNumber: receiver_account_details?.account_details?.accountNumber,
+        payer_id: receiver_account_details?.payer_id,
+        payer_name: "AlPay",
+      },
+      debit_details: {
+        debit_amount: parseFloat(amount),
+        currency: currency,
+      },
+      credit_details: {
+        amount: parseFloat(amount),
+        currency: currency,
+      },
+      payout_reference: helperService.isValid(payout_reference)
+        ? payout_reference
+        : null,
+      webhook_url: helperService.isValid(webhook_url) ? webhook_url : null,
+      purpose_of_remittance: helperService.isValid(purpose_of_remittance)
+        ? purpose_of_remittance
+        : null,
+      document_reference_number: null,
+      transaction_status: transactionStatus,
+      transaction_status_code:
+        transactionStatus == "SUCCESSFUL"
+          ? 20000
+          : transactionStatus == "PENDING"
+          ? 10000
+          : 40000,
+      order_created_date: moment(transactionPayload?.creation_date).format(
+        "YYYY-MM-DD hh:mm:ss"
+      ),
+      order_updated_date: moment(transactionPayload?.creation_date).format(
+        "YYYY-MM-DD hh:mm:ss"
+      ),
+      batch_id: null,
+    };
+
+    // ==============================================================================
+    // Send Webhook
+    // await quotationService.send_webhook(responsePayload);
+
+    // ==============================================================================
+    // Send final response
+    res.status(httpStatus.OK).send({
+      status: httpStatus.OK,
+      message: "Transaction confirmed successfully",
+      data: responsePayload,
+    });
+  } else {
+    // Get payer details by id
+    const payerResponse = await payerService.getById(
+      receiver_account_details?.payer_id,
+      MID?.data
+    );
+    if (payerResponse?.status !== httpStatus.OK) {
+      res.status(httpStatus.OK).send(payerResponse);
+      return;
+    }
+    // Check payer currency and request payout currency
+    if (payerResponse?.data?.currency !== currency) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message:
+          "Invalid currency selected! The receiver only accepts payouts in " +
+          payerResponse?.data?.currency,
+      });
+      return;
+    }
+
+    // Add Payer Name with account details
+    receiver_account_details.payer_name = payerResponse?.data?.name;
+
+    // ==============================================================================
+    // Check valid bank details
+
+    let receiver_details = {
+      data: receiver_account_details,
+      purpose_of_remittance: purpose_of_remittance,
+    };
+
+    let isValidBankDetails = await receiverService.check_valid_bank_details(
+      receiver_details,
+      MID?.data
+    );
+    console.log("🚀 ~ isValidBankDetails:", isValidBankDetails);
+
+    if (isValidBankDetails?.status !== httpStatus.OK) {
+      console.log("🚀 ~ payout ~ isValidBankDetails:", isValidBankDetails);
+      res.status(httpStatus.OK).send(isValidBankDetails);
+      return;
+    }
+
+    // check payer id
+    // 1. Create quotation payload
+    var quotationPayload = {
+      receiver_id: receiver_id,
+      account_details: receiver_account_details,
+      destination_amount: amount,
+      destination_currency: currency,
+      debit_amount: debit_amount,
+      debit_currency: debit_currency,
+      extra: {
+        receiver: receiver,
+        payer: payerResponse?.data,
+        MID: MID?.data,
+      },
+    };
+
+    //1. Create quotation
+    const quotation = await quotationService.create_quotations(
+      quotationPayload
+    );
+    if (quotation?.status !== httpStatus.OK) {
+      res.status(httpStatus.OK).send(quotation);
+      return;
+    }
+
+    // Adding request parameters for DB
+    quotation.data.request = {
+      order_id: order_id,
+      wallet_id: wallet_id,
+      account_id: helperService.isNotValid(account_id)
+        ? receiver_account_details?.account_id
+        : account_id,
+      purpose_of_remittance: purpose_of_remittance,
+      payout_reference: payout_reference,
+      webhook_url: webhook_url,
+    };
+
+    // 2. Create transaction payload
+    const createTransactionResponse = await quotationService.post_transaction(
+      quotation?.data,
+      payerResponse?.data,
+      receiver,
+      receiver_account_details,
+      "",
+      MID?.data
+    );
+
+    if (createTransactionResponse?.status !== httpStatus.OK) {
+      res.status(httpStatus.OK).send(createTransactionResponse);
+      return;
+    }
+
+    //If confirmation is not required then break the flow and return the transactions response
+    if (!confirmation_required) {
+      // Send Success Response
+      res.status(httpStatus.OK).send(createTransactionResponse);
+      return;
+    }
+
+    console.log(
+      "🚀 ~ payout ~ createTransactionResponse:",
+      createTransactionResponse
+    );
+
+    // 3. Confirm transaction payload
+    const confirmTransactionResponse =
+      await quotationService.confirm_transaction(
+        createTransactionResponse?.data?.transaction_id,
+        null,
+        MID?.data,
+        quotation?.data?.request,
+        receiver_account_details
+      );
+
+    if (confirmTransactionResponse?.status !== httpStatus.OK) {
+      res.status(httpStatus.OK).send(confirmTransactionResponse);
+      return;
+    }
+
+    // 4. Update status
+    let confirmResponse = confirmTransactionResponse?.data;
+    const payload = {
+      submerchant_id: helperService.isNotValid(receiver?.sub_merchant_id)
+        ? null
+        : receiver?.sub_merchant_id,
+      receiver_id: helperService.isNotValid(receiver_id)
+        ? null
+        : String(receiver_id),
+      currecny: confirmResponse?.credit_details?.currency,
+      amount: String(confirmResponse?.credit_details?.amount),
+      transaction_id: String(confirmResponse?.transaction_id),
+      order_id: confirmResponse?.external_id,
+      order_status: "PENDING",
+    };
+
+    console.log("🚀 ~ payout ~ payload:", payload);
+    var result = await nodeServerAPIService.update_payout_status(req, payload);
+    console.log("🚀 ~ constpayout_webhook=catchAsync ~ result:", result);
+
+    res.status(httpStatus.OK).send(confirmTransactionResponse);
+  }
+
+  // Send Final Success Response
+});
+
+/**
+ * Manage Payout Transaction
+ */
+const manage_payout = catchAsync(async (req, res) => {
+  const { action, transaction_id } = req.body;
+  if (action === "confirm") {
+    // ==============================================================================
+    // Get Last Transaction By ID
+    const stored_transaction = await transactionService.getById(transaction_id);
+    console.log("🚀 ~ stored_transaction:", stored_transaction);
+    if (stored_transaction.status !== httpStatus.OK) {
+      return stored_transaction;
+    }
+
+    // ==============================================================================
+    // Get Funding Details
+
+    const get_funding_details_payload = {};
+    if (stored_transaction?.data?.account_id) {
+      get_funding_details_payload.account_id =
+        stored_transaction?.data?.account_id;
+    } else if (
+      stored_transaction?.data?.sub_merchant_id &&
+      stored_transaction?.data?.payer_currency
+    ) {
+      get_funding_details_payload.submerchant_id = String(
+        stored_transaction?.data?.sub_merchant_id
+      );
+      get_funding_details_payload.currency =
+        stored_transaction?.data?.payer_currency;
+    } else if (
+      stored_transaction?.data?.receiver_id &&
+      stored_transaction?.data?.payer_currency
+    ) {
+      get_funding_details_payload.receiver_id = String(
+        stored_transaction?.data?.receiver_id
+      );
+      get_funding_details_payload.currency =
+        stored_transaction?.data?.payer_currency;
+    }
+    console.log(
+      "🚀 ~ get_funding_details_payload:",
+      get_funding_details_payload
+    );
+
+    var receiver_account_details =
+      await nodeServerAPIService.get_funding_details(
+        get_funding_details_payload
+      );
+    console.log("🚀 ~ account_details:", receiver_account_details);
+    if (receiver_account_details?.status != httpStatus.OK) {
+      res.status(httpStatus.OK).send(receiver_account_details);
+      return;
+    }
+
+    if (receiver_account_details?.data?.is_verified != 1) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message: "Account is not verified!",
+      });
+      return;
+    }
+
+    receiver_account_details = receiver_account_details?.data;
+    // Added payer name with account details
+    receiver_account_details.payer_name = stored_transaction?.data?.payer_name;
+
+    // ==============================================================================
+    // Get Transaction MID
+    const MID = await pspService.get_mid_by_id(
+      stored_transaction?.data?.mid_id
+    );
+
+    if (MID?.status !== httpStatus.OK) {
+      res.status(httpStatus.OK).send(MID);
+      return;
+    }
+
+    let quotation_data_request = {
+      order_id: stored_transaction?.data?.order_id,
+      wallet_id: stored_transaction?.data?.wallet_id,
+      account_id: helperService.isNotValid(stored_transaction?.data?.account_id)
+        ? receiver_account_details?.account_id
+        : stored_transaction?.data?.account_id,
+      purpose_of_remittance: stored_transaction?.data?.purpose_of_remittance,
+      payout_reference: stored_transaction?.data?.payout_reference,
+      webhook_url: stored_transaction?.data?.callback_url,
+    };
+    console.log("🚀 ~ quotation_data_request:", quotation_data_request);
+
+    const confirmTransactionResponse =
+      await quotationService.confirm_transaction(
+        transaction_id,
+        null,
+        MID?.data,
+        quotation_data_request,
+        receiver_account_details
+      );
+    if (confirmTransactionResponse.status !== httpStatus.OK) {
+      res.status(httpStatus.OK).send(confirmTransactionResponse);
+      return;
+    }
+
+    //Update status
+    let confirmResponse = confirmTransactionResponse?.data;
+    const payload = {
+      submerchant_id: helperService.isNotValid(confirmResponse?.sub_merchant_id)
+        ? null
+        : confirmResponse?.sub_merchant_id,
+      receiver_id: helperService.isNotValid(confirmResponse?.receiver_id)
+        ? null
+        : String(confirmResponse?.receiver_id),
+      currecny: confirmResponse?.destination?.currency,
+      amount: String(confirmResponse?.destination?.amount),
+      transaction_id: String(confirmResponse?.transaction_id),
+      order_id: confirmResponse?.external_id,
+      order_status: "PENDING",
+    };
+
+    console.log("🚀 ~ payout ~ payload:", payload);
+    var result = await nodeServerAPIService.update_payout_status(req, payload);
+    console.log("🚀 ~ constpayout_webhook=catchAsync ~ result:", result);
+
+    // Send Success Response
+    res.status(httpStatus.OK).send(confirmTransactionResponse);
+  } else if (action === "cancel") {
+    // Get Last Transaction By ID
+    const stored_transaction = await transactionService.getById(transaction_id);
+    if (stored_transaction.status !== httpStatus.OK) {
+      return stored_transaction;
+    }
+
+    // Get Transaction MID
+    const MID = await pspService.get_mid_by_id(
+      stored_transaction?.data?.mid_id
+    );
+    if (MID?.status !== httpStatus.OK) {
+      return MID;
+    }
+
+    const transactionResponse = await quotationService.transaction_cancel(
+      transaction_id,
+      MID?.data
+    );
+
+    // Check transaction
+    if (transactionResponse?.status !== httpStatus.OK) {
+      res.status(httpStatus.OK).send(transactionResponse);
+      return;
+    }
+
+    // Send Success Response
+    res.status(httpStatus.OK).send(transactionResponse);
+  } else {
+    // Send Error Response
+    res.status(httpStatus.OK).send({
+      status: 400,
+      message: "Invalid value entered in action field",
+    });
+  }
+});
+
+/**
+ * Create Quotation
+ */
+const create_quotations = catchAsync(async (req, res) => {
+  const {
+    receiver_id,
+    payer_id,
+    source_amount,
+    source_currency,
+    source_country_iso_code,
+  } = req.body;
+
+  let destination_currency = "AED";
+  let mode = "SOURCE_AMOUNT";
+  if (source_currency === "USD") {
+    mode = "SOURCE_AMOUNT";
+  } else if (destination_currency === "AED") {
+    mode = "DESTINATION_AMOUNT";
+  }
+
+  // Create quotation payload
+  var quotationPayload = {
+    payer_id: payer_id,
+    receiver_id: receiver_id,
+    mode: mode,
+    source_amount: mode == "SOURCE_AMOUNT" ? source_amount : null,
+    source_currency: source_currency,
+    source_country_iso_code: source_country_iso_code,
+    destination_amount: mode == "DESTINATION_AMOUNT" ? source_amount : null,
+    destination_currency: destination_currency,
+  };
+  const quotation = await quotationService.create_quotations(quotationPayload);
+  if (quotation?.status !== httpStatus.OK) {
+    res.status(httpStatus.OK).send(quotation);
+    return;
+  }
+  res.status(httpStatus.OK).send(quotation);
+});
+
+/**
+ * Create Transaction
+ */
+const create_transaction = catchAsync(async (req, res) => {
+  const { quotation_id } = req.body;
+
+  var quotation = await quotationDbService.getQuotationById(quotation_id);
+  // Check quotation created
+  if (helperService.isNotValid(quotation)) {
+    res.status(httpStatus.OK).send({
+      status: 400,
+      message: "Quotation not found!",
+    });
+    return;
+  }
+
+  // Get Receiver Details
+  let receiver = await receiverService.get_receiver_by_id(
+    quotation?.receiver_id
+  );
+
+  // Check receiver created
+  if (helperService.isNotValid(receiver)) {
+    res.status(httpStatus.OK).send({
+      status: 400,
+      message: "Receiver not found!",
+    });
+    return;
+  }
+  if (receiver?.verification !== "verified") {
+    res.status(httpStatus.OK).send({
+      status: 400,
+      message: "Receiver is not verified!",
+    });
+    return;
+  }
+  if (receiver?.active !== 1) {
+    res.status(httpStatus.OK).send({
+      status: 400,
+      message: "Receiver is not active!",
+    });
+    return;
+  }
+
+  // ==============================================================================
+  // MID Routing
+
+  let MID = await quotationService.payout_psp_routing(receiver);
+  console.log("🚀 ~ payout ~ MID:", MID);
+  if (MID?.status !== httpStatus.OK) {
+    res.status(httpStatus.OK).send({
+      status: 400,
+      message: "MID is not found!",
+    });
+    return;
+  }
+
+  // ==============================================================================
+
+  // Get payer details by id
+  const payerResponse = await payerService.getById(
+    receiver?.payer_id,
+    MID?.data
+  );
+  if (payerResponse?.status !== httpStatus.OK) {
+    res.status(httpStatus.OK).send(payerResponse);
+    return;
+  }
+
+  // Check payer currency and request payout currency
+  if (payerResponse?.data?.currency !== quotation?.destination_currency) {
+    res.status(httpStatus.OK).send({
+      status: 400,
+      message:
+        "Invalid currency selected! The receiver only accepts payouts in " +
+        payerResponse?.data?.currency,
+    });
+    return;
+  }
+
+  const createTransactionResponse = await quotationService.post_transaction(
+    quotation,
+    payerResponse?.data,
+    receiver,
+    "", // TODO: receiver_account_details
+    "",
+    MID?.data
+  );
+
+  if (createTransactionResponse.status !== httpStatus.OK) {
+    res.status(httpStatus.OK).send(createTransactionResponse);
+    return;
+  }
+
+  // Send Success Response
+  res.status(httpStatus.OK).send(createTransactionResponse);
+});
+
+/**
+ * Confirm Transaction
+ */
+const confirm_transaction = catchAsync(async (req, res) => {
+  const { transaction_id } = req.body;
+
+  // Get Last Transaction By ID
+  const stored_transaction = await transactionService.getById(transaction_id);
+  if (stored_transaction.status !== httpStatus.OK) {
+    return stored_transaction;
+  }
+
+  // Get Transaction MID
+  const MID = await pspService.get_mid_by_id(stored_transaction?.data?.mid_id);
+  if (MID?.status !== httpStatus.OK) {
+    return MID;
+  }
+
+  const confirmTransactionResponse = await quotationService.confirm_transaction(
+    transaction_id,
+    null,
+    MID?.data
+  );
+  if (confirmTransactionResponse.status !== httpStatus.OK) {
+    res.status(httpStatus.OK).send(confirmTransactionResponse);
+    return;
+  }
+
+  // 4. Update status
+  let confirmResponse = confirmTransactionResponse?.data;
+  const payload = {
+    submerchant_id: helperService.isNotValid(confirmResponse?.sub_merchant_id)
+      ? null
+      : confirmResponse?.sub_merchant_id,
+    receiver_id: helperService.isNotValid(confirmResponse?.receiver_id)
+      ? null
+      : String(confirmResponse?.receiver_id),
+    currecny: confirmResponse?.destination?.currency,
+    amount: String(confirmResponse?.destination?.amount),
+    transaction_id: String(confirmResponse?.transaction_id),
+    order_id: confirmResponse?.external_id,
+    order_status: "PENDING",
+  };
+
+  console.log("🚀 ~ payout ~ payload:", payload);
+  var result = await nodeServerAPIService.update_payout_status(req, payload);
+  console.log("🚀 ~ constpayout_webhook=catchAsync ~ result:", result);
+
+  // Send Success Response
+  res.status(httpStatus.OK).send(confirmTransactionResponse);
+});
+
+/**
+ * Transaction Status
+ */
+const transaction_status = catchAsync(async (req, res) => {
+  const transaction_id = req.params.transaction_id;
+
+  var stored_transaction = await transactionService.getById(transaction_id);
+  // Check transaction
+  if (stored_transaction?.status !== httpStatus.OK) {
+    console.log("stored_transaction:", stored_transaction);
+    res.status(httpStatus.OK).send(stored_transaction);
+    return;
+  }
+
+  const MID = await pspService.get_mid_by_id(stored_transaction?.data?.mid_id);
+  if (MID?.status !== httpStatus.OK) {
+    res.status(httpStatus.BAD_REQUEST).send(MID);
+    return;
+  }
+  const transactionResponse = await quotationService.transaction_status(
+    transaction_id,
+    MID?.data
+  );
+
+  // Check transaction
+  if (transactionResponse?.status !== httpStatus.OK) {
+    res.status(httpStatus.OK).send(transactionResponse);
+    return;
+  }
+
+  // Send Success Response
+  res.status(httpStatus.OK).send(transactionResponse);
+});
+
+/**
+ * Transaction Cancel
+ */
+const transaction_cancel = catchAsync(async (req, res) => {
+  const { transaction_id } = req.body;
+
+  // Get Last Transaction By ID
+  const stored_transaction = await transactionService.getById(transaction_id);
+  if (stored_transaction.status !== httpStatus.OK) {
+    return stored_transaction;
+  }
+
+  // Get Transaction MID
+  const MID = await pspService.get_mid_by_id(stored_transaction?.data?.mid_id);
+  if (MID?.status !== httpStatus.OK) {
+    return MID;
+  }
+
+  const transactionResponse = await quotationService.transaction_cancel(
+    transaction_id,
+    MID?.data
+  );
+
+  // Check transaction
+  if (transactionResponse?.status !== httpStatus.OK) {
+    res.status(httpStatus.OK).send(transactionResponse);
+    return;
+  }
+
+  // Send Success Response
+  res.status(httpStatus.OK).send(transactionResponse);
+});
+
+/**
+ * Payout List
+ */
+const payout_list = catchAsync(async (req, res) => {
+  const payoutListResponse = await quotationService.get_payout_list(req, res);
+  if (payoutListResponse?.status !== httpStatus.OK) {
+    res.status(httpStatus.BAD_REQUEST).send(payoutListResponse);
+    return;
+  }
+  res.status(httpStatus.OK).send(payoutListResponse);
+});
+
+/**
+ * Payout Webhook
+ */
+const payout_webhook = catchAsync(async (req, res) => {
+  const transaction = req.body;
+  console.log("🚀 ~ transaction:", transaction);
+
+  if (helperService.isNotValid(transaction)) {
+    console.log("Received webhook....isNotValid:", transaction);
+    res.status(httpStatus.BAD_REQUEST).send({
+      status: 400,
+      message: "Invalid request",
+    });
+    return;
+  }
+
+  //=============================================================================================
+  // Get last stored transaction for this payout
+  var stored_transaction = await transactionService.getById(transaction?.id);
+  console.log("🚀 ~ stored_transaction:", stored_transaction);
+  // Check transaction
+  if (stored_transaction?.status !== httpStatus.OK) {
+    console.log("stored_transaction:", stored_transaction);
+  }
+
+  //=============================================================================================
+  // Get receivers details by id
+  let receiver = await receiverService.get_receiver_by_id(
+    stored_transaction?.data?.receiver_id
+  );
+  console.log("🚀 ~ receiver:", receiver);
+
+  //=============================================================================================
+  // Get merchant details by id
+  let company_details = null;
+  if (helperService.isValid(stored_transaction?.data?.sub_merchant_id)) {
+    company_details = await nodeServerAPIService.get_company_details();
+    console.log("🚀 ~ company_details:", company_details);
+  }
+
+  //=============================================================================================
+  // Get merchant details by id
+  let account_details = null;
+  const get_funding_details_payload = {};
+  if (stored_transaction?.data?.account_id) {
+    get_funding_details_payload.account_id =
+      stored_transaction?.data?.account_id;
+  } else if (
+    stored_transaction?.data?.sub_merchant_id &&
+    transaction?.payer?.currency
+  ) {
+    get_funding_details_payload.submerchant_id = String(
+      stored_transaction?.data?.sub_merchant_id
+    );
+    get_funding_details_payload.currency = transaction?.payer?.currency;
+  } else if (
+    stored_transaction?.data?.receiver_id &&
+    transaction?.payer?.currency
+  ) {
+    get_funding_details_payload.receiver_id = String(
+      stored_transaction?.data?.receiver_id
+    );
+    get_funding_details_payload.currency = transaction?.payer?.currency;
+  }
+  account_details = await nodeServerAPIService.get_funding_details(
+    get_funding_details_payload,
+    ""
+  );
+  console.log("🚀 ~ account_details:", account_details);
+
+  // Post Merchant Webhook
+  //=============================================================================================
+  // Post received webhook from PSPs to merchant webhook
+  let webhookPayload;
+  try {
+    let debit_party = {};
+    // Check Type Of Transation (Settelment OR Payout)
+    if (helperService.isNotValid(stored_transaction?.data?.sub_merchant_id)) {
+      // THis is payout
+      debit_party = {
+        id: receiver?.receiver_id,
+        name: receiver?.receiver_name,
+        country: receiver?.registered_business_address,
+        webhook_url: receiver?.webhook_url,
+      };
+    } else if (
+      helperService.isValid(receiver?.sub_merchant_id) &&
+      helperService.isValid(receiver?.receiver_id)
+    ) {
+      // THis is settelment
+      debit_party = {
+        id: null,
+        name: company_details?.data?.company_name,
+        country: company_details?.data?.company_country,
+        webhook_url: null,
+      };
+    }
+
+    let receiver_account_details = account_details?.data;
+    let credit_party = {
+      account_id: receiver_account_details?.account_id,
+      ...receiver_account_details?.account_details,
+    };
+
+    let credit_party_identifier = {
+      ...transaction?.credit_party_identifier,
+      payer_id: transaction?.payer?.id,
+      payer_name: transaction?.payer?.name,
+    };
+
+    webhookPayload = {
+      order_id: stored_transaction?.data?.order_id,
+      external_id: stored_transaction?.data?.external_id,
+      transaction_id: stored_transaction?.data?.transaction_id,
+      sub_merchant_id: helperService.isValid(
+        stored_transaction?.data?.sub_merchant_id
+      )
+        ? stored_transaction?.data?.sub_merchant_id
+        : null,
+      receiver_id: helperService.isValid(stored_transaction?.data?.receiver_id)
+        ? stored_transaction?.data?.receiver_id
+        : null,
+      currency: transaction?.payer?.currency,
+      wallet_id: stored_transaction?.data?.wallet_id,
+      debit_party: debit_party,
+      credit_party: credit_party,
+      credit_party_identifier: credit_party_identifier,
+      debit_details: {
+        debit_amount: parseFloat(transaction?.source.amount),
+        currency: transaction?.source.currency,
+      },
+      credit_details: {
+        amount: parseFloat(transaction?.destination?.amount),
+        currency: transaction?.destination?.currency,
+      },
+      payout_reference: helperService.isValid(
+        stored_transaction?.data?.payout_reference
+      )
+        ? stored_transaction?.data?.payout_reference
+        : null,
+      purpose_of_remittance: helperService.isValid(
+        transaction?.purpose_of_remittance
+      )
+        ? transaction?.purpose_of_remittance
+        : null,
+      webhook_url: helperService.isValid(stored_transaction?.data?.callback_url)
+        ? stored_transaction?.data?.callback_url
+        : null,
+      document_reference_number:
+        stored_transaction?.data?.document_reference_number,
+      transaction_status: transaction?.status_class_message,
+      transaction_status_code: "",
+      order_created_date: moment(transaction?.creation_date).format(
+        "YYYY-MM-DD hh:mm:ss"
+      ),
+      order_updated_date: moment(transaction?.creation_date).format(
+        "YYYY-MM-DD hh:mm:ss"
+      ),
+      batch_id: null,
+    };
+    console.log("🚀 ~ webhookPayload:", webhookPayload);
+
+    let webhook_url = null;
+    let webhook_secret = null;
+    if (helperService.isNotValid(stored_transaction?.data?.callback_url)) {
+      if (helperService.isValid(stored_transaction?.data?.sub_merchant_id)) {
+        //****************
+        // Merchant
+        //****************
+        const MERCHANT =
+          await nodeServerAPIService.get_merchant_webhook_settings(
+            stored_transaction?.data?.sub_merchant_id
+          );
+        console.log("🚀 ~ MERCHANT:", MERCHANT);
+        webhook_url = MERCHANT?.data.notification_url;
+        webhook_secret = MERCHANT?.data.notification_secret;
+      } else if (helperService.isValid(stored_transaction?.data?.receiver_id)) {
+        //****************
+        // Receiver
+        //****************
+        const RECEIVER = await receiverService.get_receiver_by_id(
+          stored_transaction?.data?.receiver_id
+        );
+        webhook_url = RECEIVER?.webhook_url;
+        webhook_secret = RECEIVER?.webhook_secret;
+      }
+    } else {
+      webhook_url = stored_transaction?.data?.callback_url;
+    }
+
+    console.log("🚀 ~ Merchant webhook_url:", webhook_url);
+
+    // POST data on webhook url
+    if (helperService.isValid(webhook_url)) {
+      var client = createGeneralApiClient();
+      let webhook_result = await client.post(webhook_url, webhookPayload, {
+        headers: {
+          "notification-secret": webhook_secret,
+        },
+      });
+      console.log("🚀 ~ Merchant webhook_result:", webhook_result);
+    }
+  } catch (error) {
+    console.log("🚀 ~ Merchant constpayout_webhook=catchAsync ~ error:", error);
+  }
+
+  // update_payout_status
+  //=============================================================================================
+  // Post received webhook response to update_payout_status (Nodeserver)
+  let txn_status =
+    transaction?.status_class_message ||
+    stored_transaction?.data?.status_message;
+  if (transaction?.status_class_message === "DECLINED") {
+    txn_status = "FAILED";
+  } else if (transaction?.status_class_message === "REJECTED") {
+    txn_status = "FAILED";
+  } else if (transaction?.status_class_message === "CANCELLED") {
+    txn_status = "FAILED";
+  } else if (transaction?.status_class_message === "SUBMITTED") {
+    txn_status = "PENDING";
+  } else if (transaction?.status_class_message === "CONFIRMED") {
+    txn_status = "PENDING";
+  }
+
+  const payload = {
+    submerchant_id: stored_transaction?.data?.sub_merchant_id,
+    receiver_id: String(stored_transaction?.data?.receiver_id),
+    currecny: stored_transaction?.data?.destination_currency,
+    amount: String(stored_transaction?.data?.destination_amount),
+    transaction_id: String(stored_transaction?.data?.transaction_id),
+    order_id: stored_transaction?.data?.external_id,
+    order_status: txn_status,
+  };
+
+  console.log("🚀 ~ constpayout_webhook=catchAsync ~ payload:", payload);
+  var result = await nodeServerAPIService.update_payout_status(req, payload);
+  console.log("🚀 ~ constpayout_webhook=catchAsync ~ result:", result);
+
+  //=============================================================================================
+  // Save Transaction
+  const transactionData = {
+    transaction: transaction,
+    super_merchant_id: stored_transaction?.data?.super_merchant_id,
+    sub_merchant_id: stored_transaction?.data?.sub_merchant_id,
+    quotation_id: stored_transaction?.data?.quotation_id,
+    receiver_id: stored_transaction?.data?.receiver_id,
+    order_id: stored_transaction?.data?.order_id,
+    wallet_id: stored_transaction?.data?.wallet_id,
+    account_id: stored_transaction?.data?.account_id,
+    batch_id: stored_transaction?.data?.batch_id,
+    mid_id: stored_transaction?.data?.mid_id,
+    payout_reference: stored_transaction?.data?.payout_reference,
+    webhook_url: stored_transaction?.data?.callback_url,
+  };
+  // DB Add
+  var result = await transactionService.addNewTransaction(transactionData);
+  if (result.status !== httpStatus.OK) {
+    new ApiError(httpStatus.INTERNAL_SERVER_ERROR, result.message);
+  }
+
+  // Add DB TXN Record ID IN Response
+  webhookPayload.transaction_ref_id = result?.data?.id;
+
+  res.status(httpStatus.OK).send(webhookPayload);
+});
+
+/**
+ * Payout List
+ */
+const add_transaction_attachment = catchAsync(async (req, res) => {
+  const { type, order_id } = req.body;
+  const file = req.file;
+  console.log("🚀 ~ req.file:", file);
+
+  if (!file) {
+    return res
+      .status(httpStatus.OK)
+      .send({ status: 400, message: "File is required" });
+  }
+
+  // Get Last Transaction By ID
+  const stored_transaction = await transactionService.getByExternalId(order_id);
+  console.log("🚀 ~ stored_transaction:", stored_transaction);
+  if (stored_transaction.status !== httpStatus.OK) {
+    // return res.status(httpStatus.OK).send(stored_transaction);
+
+    let save_payload = {
+      transaction_id: "",
+      external_id: order_id,
+      receiver_id: "",
+      file_name: path.basename(file.path),
+      original_name: file.originalname,
+      file_path: file.path,
+      mimetype: file.mimetype,
+      type: type,
+    };
+    console.log("🚀 ~ save_payload:", save_payload);
+
+    let transaction_attachment_saved = await attachmentDbService.add(
+      save_payload
+    );
+
+    res.status(httpStatus.OK).send(transaction_attachment_saved);
+
+  } else {
+    // Get Transaction MID
+    const MID = await pspService.get_mid_by_id(
+      stored_transaction?.data?.mid_id
+    );
+    if (MID?.status !== httpStatus.OK) {
+      return res.status(httpStatus.OK).send(MID);
+    }
+
+    let save_payload = {
+      transaction_id: stored_transaction?.data?.transaction_id,
+      external_id: order_id,
+      receiver_id: stored_transaction?.data?.receiver_id,
+      file_name: path.basename(file.path),
+      original_name: file.originalname,
+      file_path: file.path,
+      mimetype: file.mimetype,
+      type: type,
+    };
+
+    let transaction_attachment_saved = await attachmentDbService.add(
+      save_payload
+    );
+
+    const allowedPayers = [
+      "MTN_MOMO",
+      "ORANGE_MONEY",
+      "AL_PAY",
+      "MTN",
+      "ORANGE",
+    ];
+
+    if (!allowedPayers.includes(stored_transaction?.data?.payer_id)) {
+      // Add attachment
+      const attachmentResponse =
+        await quotationService.add_transaction_attachment(
+          MID?.data,
+          file,
+          type,
+          stored_transaction?.data?.transaction_id
+        );
+
+      if (attachmentResponse?.status !== httpStatus.OK) {
+        res.status(httpStatus.BAD_REQUEST).send(attachmentResponse);
+        return;
+      }
+    }
+
+    res.status(httpStatus.OK).send(transaction_attachment_saved);
+  }
+});
+
+module.exports = {
+  payout_webhook,
+  cancel_batch_payout,
+  get_batch_transaction_status,
+  payout,
+  manage_payout,
+  batch_payout,
+  confirm_batch_payout,
+  create_quotations,
+  create_transaction,
+  confirm_transaction,
+  transaction_status,
+  transaction_cancel,
+  payout_list,
+  manage_batch_payout,
+  add_transaction_attachment,
+};

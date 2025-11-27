@@ -1,1 +1,677 @@
-const a16_0x117e53=a16_0x81ca;(function(_0x1cfcf0,_0x58e67e){const _0x4d8833=a16_0x81ca,_0x5bc979=_0x1cfcf0();while(!![]){try{const _0x3e5045=parseInt(_0x4d8833(0x14e))/0x1+parseInt(_0x4d8833(0x14a))/0x2*(parseInt(_0x4d8833(0x155))/0x3)+-parseInt(_0x4d8833(0x141))/0x4+parseInt(_0x4d8833(0x145))/0x5+parseInt(_0x4d8833(0x138))/0x6*(-parseInt(_0x4d8833(0x15b))/0x7)+-parseInt(_0x4d8833(0x156))/0x8+parseInt(_0x4d8833(0x142))/0x9*(-parseInt(_0x4d8833(0x147))/0xa);if(_0x3e5045===_0x58e67e)break;else _0x5bc979['push'](_0x5bc979['shift']());}catch(_0x2fcdda){_0x5bc979['push'](_0x5bc979['shift']());}}}(a16_0x209b,0x629a4));function a16_0x81ca(_0x2bbd40,_0x59bf69){const _0x209b7e=a16_0x209b();return a16_0x81ca=function(_0x81ca7e,_0x5e8796){_0x81ca7e=_0x81ca7e-0x12d;let _0x157e83=_0x209b7e[_0x81ca7e];return _0x157e83;},a16_0x81ca(_0x2bbd40,_0x59bf69);}const httpStatus=require(a16_0x117e53(0x13f)),helperService=require('./helper.service'),nodeServerService=require('./node_server.service'),pspDBService=require('./psp.db.service'),midDBService=require('./mid.db.service'),ApiError=require(a16_0x117e53(0x154)),createApiClient=require('./node_server_client.service'),get_sub_merchants=async _0x4b871f=>{const _0x21256b=a16_0x117e53,_0x2966b6={'status':_0x21256b(0x140)};var _0x442828='';try{let _0x46bfe4=_0x21256b(0x13c);const _0x3848ca=process[_0x21256b(0x158)][_0x21256b(0x14d)],_0x2f7123=process[_0x21256b(0x158)][_0x21256b(0x134)],_0x131b9b=createApiClient(_0x3848ca,_0x2f7123,_0x4b871f);_0x442828=await _0x131b9b[_0x21256b(0x12e)](_0x46bfe4,_0x2966b6);}catch(_0x65749){return console[_0x21256b(0x159)](_0x21256b(0x136),_0x65749[_0x21256b(0x13b)]),{'status':_0x65749[_0x21256b(0x14b)],'message':_0x65749[_0x21256b(0x13b)]};}if(helperService[_0x21256b(0x131)](_0x442828))return{'status':httpStatus[_0x21256b(0x150)],'message':_0x21256b(0x12d)};return _0x442828;},get_sub_merchant_profile=async(_0x11fed0,_0x46df88)=>{const _0x1536c0=a16_0x117e53,_0x2d76b6={'submerchant_id':_0x11fed0,'entity_id':'','document_for':''};var _0x56b060='';try{let _0x5bc408='merchant-ekyc/get-submerchant-profile';const _0x3888b1=process['env'][_0x1536c0(0x14d)],_0x4c3c92=process['env'][_0x1536c0(0x134)],_0x50955f=createApiClient(_0x3888b1,_0x4c3c92,_0x46df88);_0x56b060=await _0x50955f[_0x1536c0(0x12e)](_0x5bc408,_0x2d76b6);}catch(_0x40ef3b){return console[_0x1536c0(0x159)](_0x1536c0(0x136),_0x40ef3b[_0x1536c0(0x13b)]),{'status':_0x40ef3b[_0x1536c0(0x14b)],'message':_0x40ef3b[_0x1536c0(0x13b)]};}if(helperService[_0x1536c0(0x131)](_0x56b060))return{'status':httpStatus[_0x1536c0(0x150)],'message':_0x1536c0(0x12d)};return _0x56b060;},get_sub_merchant_details=async _0x29b66c=>{const _0x2a8982=a16_0x117e53,_0x16ac23={'submerchant_id':_0x29b66c};var _0x37a6f1='',_0x41d3d9='';try{let _0x419dfa='get-submerchant-details';const _0x2eed2c=process[_0x2a8982(0x158)]['A_X_USERNAME'],_0x7f1386=process['env'][_0x2a8982(0x134)],_0x300604=createApiClient(_0x2eed2c,_0x7f1386,_0x37a6f1);_0x41d3d9=await _0x300604['post'](_0x419dfa,_0x16ac23);}catch(_0x23b55a){return console['error'](_0x2a8982(0x136),_0x23b55a[_0x2a8982(0x13b)]),{'status':_0x23b55a[_0x2a8982(0x14b)],'message':_0x23b55a[_0x2a8982(0x13b)]};}if(helperService[_0x2a8982(0x131)](_0x41d3d9))return{'status':httpStatus[_0x2a8982(0x150)],'message':_0x2a8982(0x151)};return _0x41d3d9?.[_0x2a8982(0x14b)]==='success'?{'status':httpStatus['OK'],'message':_0x2a8982(0x13d),'data':_0x41d3d9?.[_0x2a8982(0x13e)]}:{'status':httpStatus['NOT_FOUND'],'message':_0x2a8982(0x151)};},get_company_details=async()=>{const _0x5c37c3=a16_0x117e53;var _0x1c0957='',_0x3a1b61='';try{let _0x2dac6=_0x5c37c3(0x148);const _0x462637=process[_0x5c37c3(0x158)]['A_X_USERNAME'],_0x145e25=process[_0x5c37c3(0x158)][_0x5c37c3(0x134)],_0x296da1=createApiClient(_0x462637,_0x145e25,_0x1c0957);_0x3a1b61=await _0x296da1[_0x5c37c3(0x130)](_0x2dac6);}catch(_0xfab471){return console[_0x5c37c3(0x159)](_0x5c37c3(0x136),_0xfab471['message']),{'status':_0xfab471['status'],'message':_0xfab471['message']};}if(helperService[_0x5c37c3(0x131)](_0x3a1b61))return{'status':httpStatus[_0x5c37c3(0x150)],'message':_0x5c37c3(0x12d)};return _0x3a1b61;},get_funding_details=async(_0x2551c3,_0xbb6c9f)=>{const _0x2f57d6=a16_0x117e53;var _0x237cb0='';try{let _0x332ee0=_0x2f57d6(0x13a);const _0x212a92=process['env'][_0x2f57d6(0x14d)],_0x8bed4d=process[_0x2f57d6(0x158)][_0x2f57d6(0x134)],_0x42c9f3=createApiClient(_0x212a92,_0x8bed4d,_0xbb6c9f);_0x237cb0=await _0x42c9f3['post'](_0x332ee0,_0x2551c3);}catch(_0x46b480){return console[_0x2f57d6(0x159)](_0x2f57d6(0x136),_0x46b480[_0x2f57d6(0x13b)]),{'status':_0x46b480[_0x2f57d6(0x14b)],'message':_0x46b480[_0x2f57d6(0x13b)]};}if(helperService[_0x2f57d6(0x131)](_0x237cb0))return{'status':httpStatus[_0x2f57d6(0x150)],'message':_0x2f57d6(0x135)};return _0x237cb0?.[_0x2f57d6(0x14b)]===_0x2f57d6(0x139)?{'status':httpStatus['OK'],'message':_0x237cb0?.[_0x2f57d6(0x13b)],'data':_0x237cb0?.['data']}:{'status':httpStatus[_0x2f57d6(0x14f)],'message':_0x237cb0?.[_0x2f57d6(0x13b)]};},update_payout_status=async(_0x290b8d,_0x3877d1)=>{const _0x58f333=a16_0x117e53;var _0x140107='';try{let _0x23a628='update-payout-status';const _0x3d394c=process[_0x58f333(0x158)][_0x58f333(0x14d)],_0x422949=process[_0x58f333(0x158)][_0x58f333(0x134)],_0xde423c='',_0x4cc855=createApiClient(_0x3d394c,_0x422949,_0xde423c);_0x140107=await _0x4cc855['post'](_0x23a628,_0x3877d1);}catch(_0xc922ec){return{'status':_0xc922ec['status'],'message':_0xc922ec[_0x58f333(0x13b)]};}if(helperService[_0x58f333(0x131)](_0x140107))return{'status':httpStatus['NOT_FOUND'],'message':_0x58f333(0x12d)};return _0x140107;},get_payout_countries=async()=>{const _0x349fb2=a16_0x117e53;var _0x48b38d='';try{let _0x340922=_0x349fb2(0x146);const _0x574a05=process['env'][_0x349fb2(0x14d)],_0x222e68=process[_0x349fb2(0x158)][_0x349fb2(0x134)],_0x1002db='',_0x4d532d=createApiClient(_0x574a05,_0x222e68,_0x1002db);_0x48b38d=await _0x4d532d['get'](_0x340922);}catch(_0x2f7d65){return console[_0x349fb2(0x159)](_0x349fb2(0x136),_0x2f7d65[_0x349fb2(0x13b)]),{'status':_0x2f7d65['status'],'message':_0x2f7d65[_0x349fb2(0x13b)]};}if(helperService[_0x349fb2(0x131)](_0x48b38d))return{'status':httpStatus[_0x349fb2(0x150)],'message':_0x349fb2(0x12d)};return _0x48b38d;},get_curencies=async _0x506541=>{const _0x5aca76=a16_0x117e53;var _0x4ff9d5='';try{let _0x273a50=_0x5aca76(0x149);const _0xbacff4=process[_0x5aca76(0x158)]['A_X_USERNAME'],_0x1f9eb9=process[_0x5aca76(0x158)][_0x5aca76(0x134)],_0x5868e5='',_0x1051ee=createApiClient(_0xbacff4,_0x1f9eb9,_0x5868e5);_0x4ff9d5=await _0x1051ee[_0x5aca76(0x12e)](_0x273a50,_0x506541);}catch(_0x1ce2c4){return console[_0x5aca76(0x159)](_0x5aca76(0x136),_0x1ce2c4[_0x5aca76(0x13b)]),{'status':_0x1ce2c4[_0x5aca76(0x14b)],'message':_0x1ce2c4[_0x5aca76(0x13b)]};}if(helperService[_0x5aca76(0x131)](_0x4ff9d5))return{'status':httpStatus['NOT_FOUND'],'message':_0x5aca76(0x12d)};return _0x4ff9d5;},get_wallet_details_by_id=async _0x3ec9ea=>{const _0x401375=a16_0x117e53;var _0x3fe978='';try{let _0x2833ae=_0x401375(0x144)+_0x3ec9ea;const _0xad3d62=process[_0x401375(0x158)]['A_X_USERNAME'],_0x23817b=process['env'][_0x401375(0x134)],_0x3a8e45='',_0x1a9035=createApiClient(_0xad3d62,_0x23817b,_0x3a8e45);_0x3fe978=await _0x1a9035['get'](_0x2833ae);}catch(_0x4c8a21){return console[_0x401375(0x159)]('Error\x20fetching\x20data:',_0x4c8a21[_0x401375(0x13b)]),{'status':_0x4c8a21[_0x401375(0x14b)],'message':_0x4c8a21['message']};}if(helperService['isNotValid'](_0x3fe978))return{'status':httpStatus['NOT_FOUND'],'message':_0x401375(0x133)};return _0x3fe978?.[_0x401375(0x14b)]===_0x401375(0x139)?{'status':httpStatus['OK'],'message':_0x3fe978?.[_0x401375(0x13b)],'data':_0x3fe978?.[_0x401375(0x13e)]}:{'status':httpStatus[_0x401375(0x14f)],'message':_0x3fe978?.['message']};},get_wallet_details_by_sub_id=async _0x2e3e31=>{const _0x567f3c=a16_0x117e53;var _0x1945e4='';try{let _0x15a7fa=_0x567f3c(0x14c);const _0x37f69b=process['env'][_0x567f3c(0x14d)],_0x1282bf=process['env']['A_X_PASSWORD'],_0x36a75e='',_0x2945ea=createApiClient(_0x37f69b,_0x1282bf,_0x36a75e);_0x1945e4=await _0x2945ea[_0x567f3c(0x12e)](_0x15a7fa,_0x2e3e31),console[_0x567f3c(0x157)](_0x567f3c(0x132),_0x1945e4);}catch(_0x3a3bc1){return console['error'](_0x567f3c(0x136),_0x3a3bc1[_0x567f3c(0x13b)]),{'status':_0x3a3bc1[_0x567f3c(0x14b)],'message':_0x3a3bc1[_0x567f3c(0x13b)]};}if(helperService[_0x567f3c(0x131)](_0x1945e4))return{'status':httpStatus['NOT_FOUND'],'message':_0x567f3c(0x133)};return _0x1945e4?.[_0x567f3c(0x14b)]===_0x567f3c(0x139)?{'status':httpStatus['OK'],'message':_0x1945e4?.['message'],'data':_0x1945e4?.[_0x567f3c(0x13e)]}:{'status':httpStatus[_0x567f3c(0x14f)],'message':_0x1945e4?.[_0x567f3c(0x13b)]};},get_business_reg_country_list=async()=>{const _0x35782c=a16_0x117e53;var _0x1d1207='';try{let _0x429297=_0x35782c(0x153);_0x1d1207=await nodeServerService[_0x35782c(0x12e)](_0x429297,{'status':_0x35782c(0x140)});}catch(_0x4f6076){return console['error']('Error\x20fetching\x20data:',_0x4f6076[_0x35782c(0x13b)]),{'status':_0x4f6076[_0x35782c(0x14b)],'message':_0x4f6076['message']};}if(helperService[_0x35782c(0x131)](_0x1d1207))return{'status':httpStatus[_0x35782c(0x150)],'message':_0x35782c(0x12f)};return _0x1d1207?.[_0x35782c(0x14b)]===_0x35782c(0x139)?{'status':0xc8,'message':_0x1d1207?.['message'],'data':_0x1d1207?.[_0x35782c(0x13e)]}:{'status':0x190,'message':_0x1d1207?.[_0x35782c(0x13b)],'data':_0x1d1207?.['data']};},get_mobile_code_country_list=async()=>{const _0x239fa3=a16_0x117e53;var _0x14fd7d='';try{let _0x585a1e=_0x239fa3(0x143);_0x14fd7d=await nodeServerService['post'](_0x585a1e,{});}catch(_0x6250e3){return console[_0x239fa3(0x159)](_0x239fa3(0x136),_0x6250e3[_0x239fa3(0x13b)]),{'status':_0x6250e3[_0x239fa3(0x14b)],'message':_0x6250e3[_0x239fa3(0x13b)]};}if(helperService[_0x239fa3(0x131)](_0x14fd7d))return{'status':httpStatus[_0x239fa3(0x150)],'message':_0x239fa3(0x12f)};return _0x14fd7d?.[_0x239fa3(0x14b)]==='success'?{'status':0xc8,'message':_0x14fd7d?.[_0x239fa3(0x13b)],'data':_0x14fd7d?.[_0x239fa3(0x13e)]}:{'status':0x190,'message':_0x14fd7d?.['message'],'data':_0x14fd7d?.['data']};},get_merchant_webhook_settings=async _0x3f622b=>{const _0x1d0c28=a16_0x117e53;var _0x297f8a='';try{let _0x2c2c29='merchant-webhook-details';_0x297f8a=await nodeServerService[_0x1d0c28(0x12e)](_0x2c2c29,{'merchant_id':_0x3f622b});}catch(_0x2b4f97){return console['error'](_0x1d0c28(0x136),_0x2b4f97[_0x1d0c28(0x13b)]),{'status':_0x2b4f97[_0x1d0c28(0x14b)],'message':_0x2b4f97[_0x1d0c28(0x13b)]};}if(helperService[_0x1d0c28(0x131)](_0x297f8a))return{'status':httpStatus[_0x1d0c28(0x150)],'message':_0x1d0c28(0x12f)};return _0x297f8a?.[_0x1d0c28(0x14b)]===_0x1d0c28(0x139)?{'status':0xc8,'message':_0x297f8a?.[_0x1d0c28(0x13b)],'data':_0x297f8a?.['data']}:{'status':0x190,'message':_0x297f8a?.[_0x1d0c28(0x13b)],'data':_0x297f8a?.[_0x1d0c28(0x13e)]};},check_merchant_key=async(_0x3cb841,_0x271674)=>{const _0x30943e=a16_0x117e53;var _0x2807bd='';try{let _0x21b165='check-merchant-keys';_0x2807bd=await nodeServerService['post'](_0x21b165,{'merchant_key':_0x3cb841,'merchant_secret':_0x271674}),console[_0x30943e(0x157)]('🚀\x20~\x20check_merchant_key\x20~\x20merchantKeyResponse:',_0x2807bd);}catch(_0x4bc306){return console[_0x30943e(0x159)](_0x30943e(0x136),_0x4bc306[_0x30943e(0x13b)]),{'status':_0x4bc306[_0x30943e(0x14b)],'message':_0x4bc306[_0x30943e(0x13b)]};}if(helperService[_0x30943e(0x131)](_0x2807bd))return{'status':httpStatus[_0x30943e(0x150)],'message':_0x30943e(0x137)};return _0x2807bd?.[_0x30943e(0x14b)]==='success'?{'status':0xc8,'message':_0x2807bd?.[_0x30943e(0x13b)],'data':_0x2807bd?.[_0x30943e(0x13e)]}:{'status':0x190,'message':_0x2807bd?.[_0x30943e(0x13b)]};},update_wallet=async(_0x30c5a4,_0x2531ee)=>{const _0x64ca75=a16_0x117e53;var _0x304c5c='';try{let _0x856582=_0x64ca75(0x152);_0x304c5c=await nodeServerService[_0x64ca75(0x12e)](_0x856582,{'sub_merchant_id':_0x30c5a4,'receiver_id':_0x2531ee});}catch(_0x31346a){return console[_0x64ca75(0x159)](_0x64ca75(0x136),_0x31346a[_0x64ca75(0x13b)]),{'status':_0x31346a[_0x64ca75(0x14b)],'message':_0x31346a['message']};}if(helperService[_0x64ca75(0x131)](_0x304c5c))return{'status':httpStatus['NOT_FOUND'],'message':_0x64ca75(0x137)};return _0x304c5c?.[_0x64ca75(0x14b)]===_0x64ca75(0x139)?{'status':0xc8,'message':_0x304c5c?.[_0x64ca75(0x13b)],'data':_0x304c5c?.[_0x64ca75(0x13e)]}:{'status':0x190,'message':_0x304c5c?.['message'],'data':_0x304c5c?.['data']};},update_charges=async(_0x235c7d,_0x5917b6)=>{const _0x3877cf=a16_0x117e53;var _0x45f63c='';try{let _0x571ec1=_0x3877cf(0x15a);_0x45f63c=await nodeServerService[_0x3877cf(0x12e)](_0x571ec1,{'sub_merchant_id':_0x235c7d,'receiver_id':_0x5917b6});}catch(_0x194ac3){return console[_0x3877cf(0x159)]('Error\x20fetching\x20data:',_0x194ac3[_0x3877cf(0x13b)]),{'status':_0x194ac3[_0x3877cf(0x14b)],'message':_0x194ac3['message']};}if(helperService['isNotValid'](_0x45f63c))return{'status':httpStatus['NOT_FOUND'],'message':'Key\x20not\x20found!'};return _0x45f63c?.['status']==='success'?{'status':0xc8,'message':_0x45f63c?.[_0x3877cf(0x13b)],'data':_0x45f63c?.[_0x3877cf(0x13e)]}:{'status':0x190,'message':_0x45f63c?.[_0x3877cf(0x13b)],'data':_0x45f63c?.[_0x3877cf(0x13e)]};};module['exports']={'get_sub_merchant_profile':get_sub_merchant_profile,'update_payout_status':update_payout_status,'get_funding_details':get_funding_details,'get_payout_countries':get_payout_countries,'get_curencies':get_curencies,'get_wallet_details_by_id':get_wallet_details_by_id,'get_business_reg_country_list':get_business_reg_country_list,'get_mobile_code_country_list':get_mobile_code_country_list,'get_merchant_webhook_settings':get_merchant_webhook_settings,'get_wallet_details_by_sub_id':get_wallet_details_by_sub_id,'get_sub_merchant_details':get_sub_merchant_details,'get_company_details':get_company_details,'check_merchant_key':check_merchant_key,'update_wallet':update_wallet,'update_charges':update_charges,'get_sub_merchants':get_sub_merchants};function a16_0x209b(){const _0x504c36=['update_charges','119vvDGMW','Receiver\x20details\x20not\x20found!','post','Countries\x20not\x20found!','get','isNotValid','🚀\x20~\x20get_wallet_details_by_sub_id\x20~\x20walletResponse:','Wallet\x20not\x20found!','A_X_PASSWORD','Funding\x20details\x20not\x20found!','Error\x20fetching\x20data:','Key\x20not\x20found!','61470OSDmJs','success','funding-details','message','submerchant/list','Submerchant\x20details\x20found!','data','http-status','Active','630120euezgT','117vEIzvK','ph-num-country/list','get-wallet-by-id/','3255775MKkzEN','fetch-payout-countries','540910MVcgOx','get-company-details','fetch-currency-by-country','2oefdiN','status','get-wallet','A_X_USERNAME','637368dPBgUB','BAD_REQUEST','NOT_FOUND','Submerchant\x20details\x20not\x20found!','update-wallet','bus-reg-country/list','../utils/ApiError','1446030kwNVWq','2654232wmcTbU','log','env','error'];a16_0x209b=function(){return _0x504c36;};return a16_0x209b();}
+const httpStatus = require("http-status");
+const helperService = require("./helper.service");
+const nodeServerService = require("./node_server.service");
+const pspDBService = require("./psp.db.service");
+const midDBService = require("./mid.db.service");
+const ApiError = require("../utils/ApiError");
+const createApiClient = require("./node_server_client.service");
+
+
+/**
+ * API Call Get Sub Merchant Profile Details
+ * @param {*} sub_merchant_id
+ * @param {*} token
+ * @returns Profile Details
+ */
+const get_sub_merchants = async (token) => {
+  const payload = {
+    status: "Active"
+  };
+
+  // Axios API request
+  var profileResponse = "";
+  try {
+    let url = "submerchant/list";
+    const username = process.env.A_X_USERNAME;
+    const password = process.env.A_X_PASSWORD;
+    const api = createApiClient(username, password, token);
+    profileResponse = await api.post(url, payload);
+  } catch (err) {
+    console.error("Error fetching data:", err.message);
+    return {
+      status: err.status,
+      message: err.message,
+    };
+  }
+
+  // Check transaction created
+  if (helperService.isNotValid(profileResponse)) {
+    return {
+      status: httpStatus.NOT_FOUND,
+      message: "Receiver details not found!",
+    };
+  }
+
+  // Send success response
+  return profileResponse;
+};
+
+/**
+ * API Call Get Sub Merchant Profile Details
+ * @param {*} sub_merchant_id
+ * @param {*} token
+ * @returns Profile Details
+ */
+const get_sub_merchant_profile = async (sub_merchant_id, token) => {
+  const payload = {
+    submerchant_id: sub_merchant_id,
+    entity_id: "",
+    document_for: "",
+  };
+
+  // Axios API request
+  var profileResponse = "";
+  try {
+    let url = "merchant-ekyc/get-submerchant-profile";
+    const username = process.env.A_X_USERNAME;
+    const password = process.env.A_X_PASSWORD;
+    const api = createApiClient(username, password, token);
+    profileResponse = await api.post(url, payload);
+  } catch (err) {
+    console.error("Error fetching data:", err.message);
+    return {
+      status: err.status,
+      message: err.message,
+    };
+  }
+
+  // Check transaction created
+  if (helperService.isNotValid(profileResponse)) {
+    return {
+      status: httpStatus.NOT_FOUND,
+      message: "Receiver details not found!",
+    };
+  }
+
+  // Send success response
+  return profileResponse;
+};
+
+/**
+ * API Call Get Sub Merchant Profile Details
+ * @param {*} sub_merchant_id
+ * @param {*} token
+ * @returns Profile Details
+ */
+const get_sub_merchant_details = async (sub_merchant_id) => {
+  const payload = {
+    submerchant_id: sub_merchant_id,
+  };
+
+  // Axios API request
+  var token = "";
+  var profileResponse = "";
+  try {
+    let url = "get-submerchant-details";
+    const username = process.env.A_X_USERNAME;
+    const password = process.env.A_X_PASSWORD;
+    const api = createApiClient(username, password, token);
+    profileResponse = await api.post(url, payload);
+  } catch (err) {
+    console.error("Error fetching data:", err.message);
+    return {
+      status: err.status,
+      message: err.message,
+    };
+  }
+
+  // Check transaction created
+  if (helperService.isNotValid(profileResponse)) {
+    return {
+      status: httpStatus.NOT_FOUND,
+      message: "Submerchant details not found!",
+    };
+  }
+
+  // Send success response
+  if (profileResponse?.status === 'success') {
+    return {
+      status: httpStatus.OK,
+      message: "Submerchant details found!",
+      data: profileResponse?.data
+    };
+  }else{
+    return {
+      status: httpStatus.NOT_FOUND,
+      message: "Submerchant details not found!",
+    };
+  }
+};
+
+/**
+ * API Call Get Sub Merchant Profile Details
+ * @param {*} sub_merchant_id
+ * @param {*} token
+ * @returns Profile Details
+ */
+const get_company_details = async () => {
+  // Axios API request
+  var token = "";
+  var profileResponse = "";
+  try {
+    let url = "get-company-details";
+    const username = process.env.A_X_USERNAME;
+    const password = process.env.A_X_PASSWORD;
+    const api = createApiClient(username, password, token);
+    profileResponse = await api.get(url);
+  } catch (err) {
+    console.error("Error fetching data:", err.message);
+    return {
+      status: err.status,
+      message: err.message,
+    };
+  }
+
+  // Check transaction created
+  if (helperService.isNotValid(profileResponse)) {
+    return {
+      status: httpStatus.NOT_FOUND,
+      message: "Receiver details not found!",
+    };
+  }
+
+  // Send success response
+  return profileResponse;
+};
+
+/**
+ * API Call Get Sub Merchant Profile Details
+ * @param {*} sub_merchant_id
+ * @param {*} token
+ * @returns Profile Details
+ */
+const get_funding_details = async (payload, token) => {
+  
+  // Axios API request
+  var accountResponse = "";
+  try {
+    let url = "funding-details";
+    const username = process.env.A_X_USERNAME;
+    const password = process.env.A_X_PASSWORD;
+    const api = createApiClient(username, password, token);
+    accountResponse = await api.post(url, payload);
+  } catch (err) {
+    console.error("Error fetching data:", err.message);
+    return {
+      status: err.status,
+      message: err.message,
+    };
+  }
+
+  // Check account data
+  if (helperService.isNotValid(accountResponse)) {
+    return {
+      status: httpStatus.NOT_FOUND,
+      message: "Funding details not found!",
+    };
+  }
+
+  if (accountResponse?.status === "success") {
+    return {
+      status: httpStatus.OK,
+      message: accountResponse?.message,
+      data: accountResponse?.data,
+    };
+  } else {
+    return {
+      status: httpStatus.BAD_REQUEST,
+      message: accountResponse?.message,
+    };
+  }
+};
+
+/**
+ * API Call Update Fun Details From Node Server
+ * @param {string} password
+ * @returns {Promise<User>}
+ */
+const update_payout_status = async (req, payload) => {
+  
+  // Axios API request
+  var profileResponse = "";
+  try {
+    let url = "update-payout-status";
+    const username = process.env.A_X_USERNAME;
+    const password = process.env.A_X_PASSWORD;
+    const token = "";
+    const api = createApiClient(username, password, token);
+    profileResponse = await api.post(url, payload);
+  } catch (err) {
+    // console.error("Error fetching data:", err.message);
+    return {
+      status: err.status,
+      message: err.message,
+    };
+  }
+
+  // Check transaction created
+  if (helperService.isNotValid(profileResponse)) {
+    return {
+      status: httpStatus.NOT_FOUND,
+      message: "Receiver details not found!",
+    };
+  }
+
+  // Send success response
+  return profileResponse;
+};
+
+/**
+ * API Call Update Fun Details From Node Server
+ * @param {string} password
+ * @returns {Promise<User>}
+ */
+const get_payout_countries = async () => {
+  
+  // Axios API request
+  var countriesResponse = "";
+  try {
+    let url = "fetch-payout-countries";
+    const username = process.env.A_X_USERNAME;
+    const password = process.env.A_X_PASSWORD;
+    const token = "";
+    const api = createApiClient(username, password, token);
+    countriesResponse = await api.get(url);
+  } catch (err) {
+    console.error("Error fetching data:", err.message);
+    return {
+      status: err.status,
+      message: err.message,
+    };
+  }
+
+  // Check transaction created
+  if (helperService.isNotValid(countriesResponse)) {
+    return {
+      status: httpStatus.NOT_FOUND,
+      message: "Receiver details not found!",
+    };
+  }
+
+  // Send success response
+  return countriesResponse;
+};
+
+/**
+ * API Call Update Fun Details From Node Server
+ * @param {string} password
+ * @returns {Promise<User>}
+ */
+const get_curencies = async (payload) => {
+  
+  // Axios API request
+  var curenciesResponse = "";
+  try {
+    let url = "fetch-currency-by-country";
+    const username = process.env.A_X_USERNAME;
+    const password = process.env.A_X_PASSWORD;
+    const token = "";
+    const api = createApiClient(username, password, token);
+    curenciesResponse = await api.post(url, payload);
+  } catch (err) {
+    console.error("Error fetching data:", err.message);
+    return {
+      status: err.status,
+      message: err.message,
+    };
+  }
+
+  // Check transaction created
+  if (helperService.isNotValid(curenciesResponse)) {
+    return {
+      status: httpStatus.NOT_FOUND,
+      message: "Receiver details not found!",
+    };
+  }
+
+  // Send success response
+  return curenciesResponse;
+};
+
+/**
+ * API Call Get Wallet Details From Node Server
+ * @param {string} wallet_id
+ * @returns {Promise<User>}
+ */
+const get_wallet_details_by_id = async (wallet_id) => {
+  
+  // Axios API request
+  var walletResponse = "";
+  try {
+    let url = "get-wallet-by-id/" + wallet_id;
+    const username = process.env.A_X_USERNAME;
+    const password = process.env.A_X_PASSWORD;
+    const token = "";
+    const api = createApiClient(username, password, token);
+    walletResponse = await api.get(url);
+  } catch (err) {
+    console.error("Error fetching data:", err.message);
+    return {
+      status: err.status,
+      message: err.message,
+    };
+  }
+
+  // Check transaction created
+  if (helperService.isNotValid(walletResponse)) {
+    return {
+      status: httpStatus.NOT_FOUND,
+      message: "Wallet not found!",
+    };
+  }
+
+  // Send success response
+  if (walletResponse?.status === "success") {
+    return {
+      status: httpStatus.OK,
+      message: walletResponse?.message,
+      data: walletResponse?.data,
+    };
+  } else {
+    return {
+      status: httpStatus.BAD_REQUEST,
+      message: walletResponse?.message,
+    };
+  }
+};
+
+/**
+ * API Call Get Wallet Details From Node Server
+ * @param {string} sub_merchant_id
+ * @param {string} currency
+ * @returns {Promise<User>}
+ */
+const get_wallet_details_by_sub_id = async (payload) => {
+  
+  // Axios API request
+  var walletResponse = "";
+  try {
+    let url = "get-wallet";
+    const username = process.env.A_X_USERNAME;
+    const password = process.env.A_X_PASSWORD;
+    const token = "";
+    const api = createApiClient(username, password, token);
+    walletResponse = await api.post(url, payload);
+    console.log("🚀 ~ get_wallet_details_by_sub_id ~ walletResponse:", walletResponse)
+  } catch (err) {
+    console.error("Error fetching data:", err.message);
+    return {
+      status: err.status,
+      message: err.message,
+    };
+  }
+
+  // Check transaction created
+  if (helperService.isNotValid(walletResponse)) {
+    return {
+      status: httpStatus.NOT_FOUND,
+      message: "Wallet not found!",
+    };
+  }
+
+  // Send success response
+  if (walletResponse?.status === "success") {
+    return {
+      status: httpStatus.OK,
+      message: walletResponse?.message,
+      data: walletResponse?.data,
+    };
+  } else {
+    return {
+      status: httpStatus.BAD_REQUEST,
+      message: walletResponse?.message,
+    };
+  }
+};
+
+/**
+ * API Call Countries From Node Server
+ * @param {string} password
+ * @returns {Promise<User>}
+ */
+const get_business_reg_country_list = async () => {
+  
+  // Axios API request
+  var countriesResponse = "";
+  try {
+    let url = "bus-reg-country/list";
+    countriesResponse = await nodeServerService.post(url, {status: 'Active'});
+  } catch (err) {
+    console.error("Error fetching data:", err.message);
+    return {
+      status: err.status,
+      message: err.message,
+    };
+  }
+
+  // Check transaction created
+  if (helperService.isNotValid(countriesResponse)) {
+    return {
+      status: httpStatus.NOT_FOUND,
+      message: "Countries not found!",
+    };
+  }
+
+  if (countriesResponse?.status === 'success') {
+    // Send success response
+  return {status: 200, message: countriesResponse?.message, data: countriesResponse?.data};
+  }else{
+    // Send success response
+  return {status: 400, message: countriesResponse?.message, data: countriesResponse?.data};
+  }
+};
+
+/**
+ * API Call Mobile Code Countries From Node Server
+ * @param {string} password
+ * @returns {Promise<User>}
+ */
+const get_mobile_code_country_list = async () => {
+  
+  // Axios API request
+  var countriesResponse = "";
+  try {
+    let url = "ph-num-country/list";
+    countriesResponse = await nodeServerService.post(url, {});
+  } catch (err) {
+    console.error("Error fetching data:", err.message);
+    return {
+      status: err.status,
+      message: err.message,
+    };
+  }
+
+  // Check transaction created
+  if (helperService.isNotValid(countriesResponse)) {
+    return {
+      status: httpStatus.NOT_FOUND,
+      message: "Countries not found!",
+    };
+  }
+
+  if (countriesResponse?.status === 'success') {
+    // Send success response
+  return {status: 200, message: countriesResponse?.message, data: countriesResponse?.data};
+  }else{
+    // Send success response
+  return {status: 400, message: countriesResponse?.message, data: countriesResponse?.data};
+  }
+};
+
+/**
+ * API Call Mobile Code Countries From Node Server
+ * @param {string} password
+ * @returns {Promise<User>}
+ */
+const get_merchant_webhook_settings = async (sub_merchant_id) => {
+  
+  // Axios API request
+  var merchantSettingsResponse = "";
+  try {
+    let url = "merchant-webhook-details";
+    merchantSettingsResponse = await nodeServerService.post(url, {merchant_id: sub_merchant_id});
+  } catch (err) {
+    console.error("Error fetching data:", err.message);
+    return {
+      status: err.status,
+      message: err.message,
+    };
+  }
+
+  // Check transaction created
+  if (helperService.isNotValid(merchantSettingsResponse)) {
+    return {
+      status: httpStatus.NOT_FOUND,
+      message: "Countries not found!",
+    };
+  }
+
+  if (merchantSettingsResponse?.status === "success") {
+    // Send success response
+    return {
+      status: 200,
+      message: merchantSettingsResponse?.message,
+      data: merchantSettingsResponse?.data,
+    };
+  } else {
+    // Send failed response
+    return {
+      status: 400,
+      message: merchantSettingsResponse?.message,
+      data: merchantSettingsResponse?.data,
+    };
+  }
+};
+
+
+/**
+ * API Call Mobile Code Countries From Node Server
+ * @param {string} password
+ * @returns {Promise<User>}
+ */
+const check_merchant_key = async (key, secret) => {
+  
+  // Axios API request
+  var merchantKeyResponse = "";
+  try {
+    let url = "check-merchant-keys";
+    merchantKeyResponse = await nodeServerService.post(url, {merchant_key: key, merchant_secret: secret});
+    console.log("🚀 ~ check_merchant_key ~ merchantKeyResponse:", merchantKeyResponse)
+  } catch (err) {
+    console.error("Error fetching data:", err.message);
+    return {
+      status: err.status,
+      message: err.message,
+    };
+  }
+
+  // Check transaction created
+  if (helperService.isNotValid(merchantKeyResponse)) {
+    return {
+      status: httpStatus.NOT_FOUND,
+      message: "Key not found!",
+    };
+  }
+
+  if (merchantKeyResponse?.status === 'success') {
+    // Send success response
+  return {status: 200, message: merchantKeyResponse?.message, data: merchantKeyResponse?.data};
+  }else{
+    // Send success response
+  return {status: 400, message: merchantKeyResponse?.message};
+  }
+};
+
+
+/**
+ * API Call Mobile Code Countries From Node Server
+ * @param {string} password
+ * @returns {Promise<User>}
+ */
+const update_wallet = async (sub_merchant_id, receiver_id) => {
+  
+  // Axios API request
+  var walletResponse = "";
+  try {
+    let url = "update-wallet";
+    walletResponse = await nodeServerService.post(url, {sub_merchant_id: sub_merchant_id, receiver_id: receiver_id});
+  } catch (err) {
+    console.error("Error fetching data:", err.message);
+    return {
+      status: err.status,
+      message: err.message,
+    };
+  }
+
+  // Check transaction created
+  if (helperService.isNotValid(walletResponse)) {
+    return {
+      status: httpStatus.NOT_FOUND,
+      message: "Key not found!",
+    };
+  }
+
+  if (walletResponse?.status === 'success') {
+    // Send success response
+  return {status: 200, message: walletResponse?.message, data: walletResponse?.data};
+  }else{
+    // Send success response
+  return {status: 400, message: walletResponse?.message, data: walletResponse?.data};
+  }
+};
+
+/**
+ * API Call Update Transaction Charges
+ * @param {string} 
+ * @returns {Promise<User>}
+ */
+const update_charges = async (sub_merchant_id, receiver_id) => {
+  
+  // Axios API request
+  var chargesResponse = "";
+  try {
+    let url = "update_charges";
+    chargesResponse = await nodeServerService.post(url, {sub_merchant_id: sub_merchant_id, receiver_id: receiver_id});
+  } catch (err) {
+    console.error("Error fetching data:", err.message);
+    return {
+      status: err.status,
+      message: err.message,
+    };
+  }
+
+  // Check transaction created
+  if (helperService.isNotValid(chargesResponse)) {
+    return {
+      status: httpStatus.NOT_FOUND,
+      message: "Key not found!",
+    };
+  }
+
+  if (chargesResponse?.status === 'success') {
+    // Send success response
+  return {status: 200, message: chargesResponse?.message, data: chargesResponse?.data};
+  }else{
+    // Send success response
+  return {status: 400, message: chargesResponse?.message, data: chargesResponse?.data};
+  }
+};
+
+module.exports = {
+  get_sub_merchant_profile,
+  update_payout_status,
+  get_funding_details,
+  get_payout_countries,
+  get_curencies,
+  get_wallet_details_by_id,
+  get_business_reg_country_list,
+  get_mobile_code_country_list,
+  get_merchant_webhook_settings,
+  get_wallet_details_by_sub_id,
+  get_sub_merchant_details,
+  get_company_details,
+  check_merchant_key,
+  update_wallet,
+  update_charges,
+  get_sub_merchants
+};

@@ -1,1 +1,58 @@
-const a8_0x123799=a8_0xb09d;(function(_0x1f38fb,_0xe00036){const _0x5ee52c=a8_0xb09d,_0x43a91a=_0x1f38fb();while(!![]){try{const _0xd77e52=-parseInt(_0x5ee52c(0x13b))/0x1+-parseInt(_0x5ee52c(0x132))/0x2+parseInt(_0x5ee52c(0x12e))/0x3+-parseInt(_0x5ee52c(0x123))/0x4+-parseInt(_0x5ee52c(0x12d))/0x5*(parseInt(_0x5ee52c(0x13d))/0x6)+-parseInt(_0x5ee52c(0x138))/0x7*(parseInt(_0x5ee52c(0x134))/0x8)+parseInt(_0x5ee52c(0x13c))/0x9;if(_0xd77e52===_0xe00036)break;else _0x43a91a['push'](_0x43a91a['shift']());}catch(_0xe61589){_0x43a91a['push'](_0x43a91a['shift']());}}}(a8_0xf468,0xd5215));const nodemailer=require('nodemailer'),config=require(a8_0x123799(0x139)),logger=require(a8_0x123799(0x13e)),transport=nodemailer['createTransport']({'host':process[a8_0x123799(0x133)][a8_0x123799(0x142)],'port':process[a8_0x123799(0x133)][a8_0x123799(0x12c)],'from':process['env'][a8_0x123799(0x128)],'auth':{'user':process[a8_0x123799(0x133)][a8_0x123799(0x12f)],'pass':process[a8_0x123799(0x133)][a8_0x123799(0x127)]}});process['env'][a8_0x123799(0x12b)]!==a8_0x123799(0x130)&&transport[a8_0x123799(0x13a)]()['then'](()=>logger[a8_0x123799(0x135)]('Connected\x20to\x20email\x20server'))[a8_0x123799(0x137)](()=>logger[a8_0x123799(0x126)]('Unable\x20to\x20connect\x20to\x20email\x20server.\x20Make\x20sure\x20you\x20have\x20configured\x20the\x20SMTP\x20options\x20in\x20.env'));const sendEmail=async(_0x426bea,_0x213ed4,_0x259feb)=>{const _0x2c8df7=a8_0x123799,_0x467c88={'from':process['env'][_0x2c8df7(0x128)],'to':_0x426bea,'subject':_0x213ed4,'text':_0x259feb};await transport[_0x2c8df7(0x140)](_0x467c88);},sendResetPasswordEmail=async(_0x2fa4c1,_0x29e01a)=>{const _0x399aa9=a8_0x123799,_0x42b085=_0x399aa9(0x124),_0x4b074f=_0x399aa9(0x129)+_0x29e01a,_0x244e0d=_0x399aa9(0x131)+_0x4b074f+_0x399aa9(0x13f);await sendEmail(_0x2fa4c1,_0x42b085,_0x244e0d);},sendVerificationEmail=async(_0xf61692,_0x2dcd7a)=>{const _0x4d3743=a8_0x123799,_0xc5e518=_0x4d3743(0x136),_0x279da2=_0x4d3743(0x12a)+_0x2dcd7a,_0x5c1f29='Dear\x20user,\x0aTo\x20verify\x20your\x20email,\x20click\x20on\x20this\x20link:\x20'+_0x279da2+_0x4d3743(0x125);await sendEmail(_0xf61692,_0xc5e518,_0x5c1f29);};function a8_0xb09d(_0xc2294b,_0x2bf18b){const _0xf46800=a8_0xf468();return a8_0xb09d=function(_0xb09dbc,_0x1e4bea){_0xb09dbc=_0xb09dbc-0x123;let _0x5405f9=_0xf46800[_0xb09dbc];return _0x5405f9;},a8_0xb09d(_0xc2294b,_0x2bf18b);}module[a8_0x123799(0x141)]={'transport':transport,'sendEmail':sendEmail,'sendResetPasswordEmail':sendResetPasswordEmail,'sendVerificationEmail':sendVerificationEmail};function a8_0xf468(){const _0x1d8c6a=['exports','SMTP_HOST','2551636mcLTUf','Reset\x20password','\x0aIf\x20you\x20did\x20not\x20create\x20an\x20account,\x20then\x20ignore\x20this\x20email.','warn','SMTP_PASSWORD','EMAIL_FROM','http://link-to-app/reset-password?token=','http://link-to-app/verify-email?token=','NODE_ENV','SMTP_PORT','10qlyImX','4120890nxERRE','SMTP_USERNAME','test','Dear\x20user,\x0aTo\x20reset\x20your\x20password,\x20click\x20on\x20this\x20link:\x20','1627596utmHYG','env','16568QoJgfc','info','Email\x20Verification','catch','1267LfZTsI','../config/config','verify','1618766CvrVNS','29207349yeRfsb','901758cPrZXn','../config/logger','\x0aIf\x20you\x20did\x20not\x20request\x20any\x20password\x20resets,\x20then\x20ignore\x20this\x20email.','sendMail'];a8_0xf468=function(){return _0x1d8c6a;};return a8_0xf468();}
+const nodemailer = require('nodemailer');
+const config = require('../config/config');
+const logger = require('../config/logger');
+
+const transport = nodemailer.createTransport(
+    {
+        host: process.env.SMTP_HOST,
+        port: process.env.SMTP_PORT,
+        from: process.env.EMAIL_FROM,
+        auth: {
+            user: process.env.SMTP_USERNAME,
+            pass: process.env.SMTP_PASSWORD,
+        },
+
+    },
+);
+
+// if (process.env.NODE_ENV !== 'test' || process.env.NODE_ENV !== 'development') {
+if (process.env.NODE_ENV !== 'test' ) {
+    transport
+        .verify()
+        .then(() => logger.info('Connected to email server'))
+        .catch(() => logger.warn('Unable to connect to email server. Make sure you have configured the SMTP options in .env'));
+}
+
+
+const sendEmail = async (to, subject, text) => {
+    const msg = {from: process.env.EMAIL_FROM, to, subject, text};
+    await transport.sendMail(msg);
+};
+
+const sendResetPasswordEmail = async (to, token) => {
+    const subject = 'Reset password';
+    // replace this url with the link to the reset password page of your front-end app
+    const resetPasswordUrl = `http://link-to-app/reset-password?token=${token}`;
+    const text = `Dear user,
+To reset your password, click on this link: ${resetPasswordUrl}
+If you did not request any password resets, then ignore this email.`;
+    await sendEmail(to, subject, text);
+};
+
+
+const sendVerificationEmail = async (to, token) => {
+    const subject = 'Email Verification';
+    // replace this url with the link to the email verification page of your front-end app
+    const verificationEmailUrl = `http://link-to-app/verify-email?token=${token}`;
+    const text = `Dear user,
+To verify your email, click on this link: ${verificationEmailUrl}
+If you did not create an account, then ignore this email.`;
+    await sendEmail(to, subject, text);
+};
+
+module.exports = {
+    transport,
+    sendEmail,
+    sendResetPasswordEmail,
+    sendVerificationEmail,
+};

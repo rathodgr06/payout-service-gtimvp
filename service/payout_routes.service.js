@@ -1,1 +1,59 @@
-const a22_0xb3ac26=a22_0x5756;(function(_0x524ba9,_0x4e367){const _0x35ae9f=a22_0x5756,_0xa0712b=_0x524ba9();while(!![]){try{const _0x5863a3=-parseInt(_0x35ae9f(0x1e8))/0x1*(parseInt(_0x35ae9f(0x1f0))/0x2)+-parseInt(_0x35ae9f(0x1eb))/0x3*(parseInt(_0x35ae9f(0x1f6))/0x4)+parseInt(_0x35ae9f(0x1e7))/0x5+-parseInt(_0x35ae9f(0x1f2))/0x6+parseInt(_0x35ae9f(0x1f1))/0x7*(-parseInt(_0x35ae9f(0x1f5))/0x8)+parseInt(_0x35ae9f(0x1f3))/0x9+parseInt(_0x35ae9f(0x1ef))/0xa*(parseInt(_0x35ae9f(0x1e9))/0xb);if(_0x5863a3===_0x4e367)break;else _0xa0712b['push'](_0xa0712b['shift']());}catch(_0x9074b8){_0xa0712b['push'](_0xa0712b['shift']());}}}(a22_0x5b64,0x3a556));const httpStatus=require('http-status'),payoutRouteDBService=require('./payout_routes.db.service'),add_payout_route=async _0x21855f=>{const _0x145774=a22_0x5756;let _0x3b1441=await payoutRouteDBService['addRoute'](_0x21855f);if(_0x3b1441?.[_0x145774(0x1f4)]!==httpStatus['OK'])return _0x3b1441;return _0x3b1441;},get_all_payout_routes=async()=>{const _0x3cfc2a=a22_0x5756;let _0x386780=await payoutRouteDBService[_0x3cfc2a(0x1ed)]();if(_0x386780?.[_0x3cfc2a(0x1f4)]!==httpStatus['OK'])return{'status':0x190,'message':_0x3cfc2a(0x1ec)};return _0x386780;},find_payout_routes=async _0xd2e7fe=>{const _0x4f4aca=a22_0x5756;console[_0x4f4aca(0x1f7)](_0x4f4aca(0x1f8),_0xd2e7fe);let _0x24c7f5=await payoutRouteDBService[_0x4f4aca(0x1ee)](_0xd2e7fe);if(_0x24c7f5?.['status']!==httpStatus['OK'])return{'status':0x190,'message':_0x4f4aca(0x1ec)};return _0x24c7f5;};function a22_0x5756(_0x46bd85,_0x6d7d7c){const _0x5b648e=a22_0x5b64();return a22_0x5756=function(_0x5756b4,_0x322900){_0x5756b4=_0x5756b4-0x1e7;let _0x5c85ad=_0x5b648e[_0x5756b4];return _0x5c85ad;},a22_0x5756(_0x46bd85,_0x6d7d7c);}module[a22_0xb3ac26(0x1ea)]={'add_payout_route':add_payout_route,'get_all_payout_routes':get_all_payout_routes,'find_payout_routes':find_payout_routes};function a22_0x5b64(){const _0x47bb62=['log','🚀\x20~\x20find_payout_routes\x20~\x20payload:','279775KLWUsV','21877EYuxwP','663223jPoBwd','exports','317001eEHNtE','Payout\x20route\x20not\x20found!','getAllRoutes','findRoutesByCriteria','210lpIJGq','32geMCPG','21HRVLTC','2526066xuYwZM','525204KPoWsf','status','424408hNKBMW','8vNcPnP'];a22_0x5b64=function(){return _0x47bb62;};return a22_0x5b64();}
+const httpStatus = require("http-status");
+const payoutRouteDBService = require("./payout_routes.db.service");
+
+/**
+ * Add New Payout Route
+ * @param {*} payload 
+ * @returns 
+ */
+const add_payout_route = async (payload) => {
+  let payout_route = await payoutRouteDBService.addRoute(payload);
+
+  if (payout_route?.status !== httpStatus.OK) {
+    return payout_route;
+  }
+
+  return payout_route;
+};
+
+/**
+ * Get All Payout Routes
+ * @param {*} payload 
+ * @returns 
+ */
+const get_all_payout_routes = async () => {
+  let payout_routes = await payoutRouteDBService.getAllRoutes();
+
+  if (payout_routes?.status !== httpStatus.OK) {
+    return {
+      status: 400,
+      message: "Payout route not found!",
+    };
+  }
+
+  return payout_routes;
+};
+
+/**
+ * Find Payout Routes
+ * @param {*} payload 
+ * @returns 
+ */
+const find_payout_routes = async (payload) => {
+  console.log("🚀 ~ find_payout_routes ~ payload:", payload)
+  let payout_routes = await payoutRouteDBService.findRoutesByCriteria(payload);
+  if (payout_routes?.status !== httpStatus.OK) {
+    return {
+      status: 400,
+      message: "Payout route not found!",
+    };
+  }
+
+  return payout_routes;
+};
+
+module.exports = {
+  add_payout_route,
+  get_all_payout_routes,
+  find_payout_routes
+};

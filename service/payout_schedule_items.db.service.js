@@ -1,1 +1,336 @@
-function a24_0x5d3a(_0x1ce058,_0x563866){const _0x12bcdf=a24_0x12bc();return a24_0x5d3a=function(_0x5d3a3a,_0x56e7ac){_0x5d3a3a=_0x5d3a3a-0x1b8;let _0x13fec9=_0x12bcdf[_0x5d3a3a];return _0x13fec9;},a24_0x5d3a(_0x1ce058,_0x563866);}const a24_0xbf814b=a24_0x5d3a;(function(_0x32b827,_0x15bda2){const _0x50fa75=a24_0x5d3a,_0x5604a0=_0x32b827();while(!![]){try{const _0x125301=parseInt(_0x50fa75(0x1ef))/0x1*(-parseInt(_0x50fa75(0x1d3))/0x2)+parseInt(_0x50fa75(0x1da))/0x3*(parseInt(_0x50fa75(0x1e9))/0x4)+-parseInt(_0x50fa75(0x1ea))/0x5*(-parseInt(_0x50fa75(0x1f7))/0x6)+-parseInt(_0x50fa75(0x1eb))/0x7+-parseInt(_0x50fa75(0x1cf))/0x8*(-parseInt(_0x50fa75(0x1f2))/0x9)+-parseInt(_0x50fa75(0x1be))/0xa*(parseInt(_0x50fa75(0x1d2))/0xb)+parseInt(_0x50fa75(0x1db))/0xc*(parseInt(_0x50fa75(0x1bb))/0xd);if(_0x125301===_0x15bda2)break;else _0x5604a0['push'](_0x5604a0['shift']());}catch(_0x34d491){_0x5604a0['push'](_0x5604a0['shift']());}}}(a24_0x12bc,0x2b17b));const httpStatus=require(a24_0xbf814b(0x1cc)),db=require(a24_0xbf814b(0x1c8)),PayoutScheduleItems=db[a24_0xbf814b(0x1ee)],PayoutSchedulePlans=db[a24_0xbf814b(0x1e0)],{Op}=require(a24_0xbf814b(0x1ec)),create_payout_schedule_item=async _0x2682c2=>{const _0x1c7b64=a24_0xbf814b;try{const [_0x3d7aa8,_0xe16e7e]=await PayoutScheduleItems[_0x1c7b64(0x1bc)]({'where':{'plan_id':_0x2682c2?.[_0x1c7b64(0x1f4)],'currency':_0x2682c2?.[_0x1c7b64(0x1f3)],'frequency':_0x2682c2?.['frequency']},'defaults':{'plan_id':_0x2682c2?.[_0x1c7b64(0x1f4)],'currency':_0x2682c2?.[_0x1c7b64(0x1f3)],'frequency':_0x2682c2?.[_0x1c7b64(0x1ba)],'occurrence':_0x2682c2?.[_0x1c7b64(0x1e7)],'start':_0x2682c2?.[_0x1c7b64(0x1c3)],'run_next_at':_0x2682c2?.[_0x1c7b64(0x1f5)],'min_amount':_0x2682c2?.[_0x1c7b64(0x1d7)],'payout_time':_0x2682c2?.[_0x1c7b64(0x1f1)],'active':_0x2682c2?.[_0x1c7b64(0x1cd)]||0x1,'deleted':_0x2682c2?.[_0x1c7b64(0x1c9)]||0x0}});if(_0xe16e7e)return{'status':httpStatus['OK'],'message':_0x1c7b64(0x1f8),'data':_0x3d7aa8[_0x1c7b64(0x1dd)]()};else return _0x3d7aa8?{'status':httpStatus['BAD_REQUEST'],'message':'Payout\x20schedule\x20item\x20already\x20added'}:{'status':httpStatus[_0x1c7b64(0x1cb)],'message':_0x1c7b64(0x1ed)};}catch(_0x57eadc){return console[_0x1c7b64(0x1e4)](_0x1c7b64(0x1c6),_0x57eadc),{'status':httpStatus[_0x1c7b64(0x1c5)],'message':_0x1c7b64(0x1c6)+_0x57eadc[_0x1c7b64(0x1e2)]};}},update_payout_schedule_item=async _0x250afe=>{const _0x50405f=a24_0xbf814b;try{if(_0x250afe?.['plan_item_id']==undefined||_0x250afe?.[_0x50405f(0x1d1)]=='')return await create_payout_schedule_item(_0x250afe);const _0x5b0aa7=await PayoutScheduleItems[_0x50405f(0x1d0)]({'where':{'id':_0x250afe?.[_0x50405f(0x1d1)]}});return _0x5b0aa7?(await _0x5b0aa7['update']({'currency':_0x250afe?.[_0x50405f(0x1f3)],'frequency':_0x250afe?.[_0x50405f(0x1ba)],'occurrence':_0x250afe?.[_0x50405f(0x1e7)],'start':_0x250afe?.[_0x50405f(0x1c3)],'run_next_at':_0x250afe?.[_0x50405f(0x1f5)],'min_amount':_0x250afe?.[_0x50405f(0x1d7)],'payout_time':_0x250afe?.[_0x50405f(0x1f1)],'updated_at':new Date()}),{'status':httpStatus['OK'],'message':_0x50405f(0x1e1),'data':_0x5b0aa7['toJSON']()}):{'status':httpStatus['NOT_FOUND'],'message':_0x50405f(0x1c0)};}catch(_0x1b789a){return console[_0x50405f(0x1e4)]('Error\x20creating\x20or\x20updating\x20payout\x20schedule\x20plan\x20item:',_0x1b789a),{'status':httpStatus[_0x50405f(0x1c5)],'message':_0x50405f(0x1df)+_0x1b789a[_0x50405f(0x1e2)]};}},get_payout_schedule_items_by_plan_id=async _0xaa4f47=>{const _0x5d5fda=a24_0xbf814b;try{const _0x157b98=await PayoutScheduleItems['findAll']({'where':{'plan_id':_0xaa4f47,'deleted':0x0},'order':[['id',_0x5d5fda(0x1bd)]],'attributes':[['id',_0x5d5fda(0x1d1)],['plan_id',_0x5d5fda(0x1f4)],[_0x5d5fda(0x1f3),_0x5d5fda(0x1f3)],[_0x5d5fda(0x1ba),_0x5d5fda(0x1ba)],[_0x5d5fda(0x1e7),'occurrence'],[_0x5d5fda(0x1c3),_0x5d5fda(0x1c3)],[_0x5d5fda(0x1f5),_0x5d5fda(0x1f5)],['min_amount',_0x5d5fda(0x1d7)],[_0x5d5fda(0x1f1),_0x5d5fda(0x1f1)],[_0x5d5fda(0x1cd),_0x5d5fda(0x1cd)],['deleted','deleted'],[_0x5d5fda(0x1c7),_0x5d5fda(0x1c7)],[_0x5d5fda(0x1d5),_0x5d5fda(0x1d5)]]});return _0x157b98&&_0x157b98[_0x5d5fda(0x1ce)]>0x0?{'status':httpStatus['OK'],'message':_0x5d5fda(0x1d8),'data':_0x157b98['map'](_0xaf5fbb=>{const _0x296239=_0xaf5fbb['toJSON']();return _0x296239;})}:{'status':httpStatus[_0x5d5fda(0x1d6)],'message':_0x5d5fda(0x1e3)};}catch(_0x4a105d){return console[_0x5d5fda(0x1e4)]('Error\x20fetching\x20payout\x20schedule\x20items:',_0x4a105d),{'status':httpStatus[_0x5d5fda(0x1c5)],'message':_0x5d5fda(0x1e6)+_0x4a105d[_0x5d5fda(0x1e2)]};}},check_payout_schedule=async _0xb7f260=>{const _0x3bdc10=a24_0xbf814b;try{const _0x5e4cee=await PayoutScheduleItems[_0x3bdc10(0x1e5)]({'where':{'run_next_at':_0xb7f260,'active':0x1,'deleted':0x0},'include':[{'model':PayoutSchedulePlans,'as':_0x3bdc10(0x1c1),'attributes':[['id',_0x3bdc10(0x1f4)],[_0x3bdc10(0x1d9),_0x3bdc10(0x1d9)],[_0x3bdc10(0x1c2),_0x3bdc10(0x1c2)],[_0x3bdc10(0x1de),_0x3bdc10(0x1de)],[_0x3bdc10(0x1cd),_0x3bdc10(0x1cd)],[_0x3bdc10(0x1c9),_0x3bdc10(0x1c9)],[_0x3bdc10(0x1c7),_0x3bdc10(0x1c7)],[_0x3bdc10(0x1d5),_0x3bdc10(0x1d5)]]}],'order':[['id',_0x3bdc10(0x1bd)]],'attributes':[['id',_0x3bdc10(0x1d1)],[_0x3bdc10(0x1f4),'plan_id'],[_0x3bdc10(0x1f3),_0x3bdc10(0x1f3)],['frequency',_0x3bdc10(0x1ba)],[_0x3bdc10(0x1e7),_0x3bdc10(0x1e7)],[_0x3bdc10(0x1c3),_0x3bdc10(0x1c3)],[_0x3bdc10(0x1f5),_0x3bdc10(0x1f5)],[_0x3bdc10(0x1d7),_0x3bdc10(0x1d7)],[_0x3bdc10(0x1f1),_0x3bdc10(0x1f1)],['active',_0x3bdc10(0x1cd)],[_0x3bdc10(0x1c9),_0x3bdc10(0x1c9)],['created_at','created_at'],[_0x3bdc10(0x1d5),'updated_at']]});return _0x5e4cee&&_0x5e4cee[_0x3bdc10(0x1ce)]>0x0?{'status':httpStatus['OK'],'message':'Payout\x20schedule\x20items\x20fetched\x20successfully','data':_0x5e4cee[_0x3bdc10(0x1b8)](_0x4b755b=>_0x4b755b[_0x3bdc10(0x1dd)]())}:{'status':httpStatus[_0x3bdc10(0x1d6)],'message':_0x3bdc10(0x1e3)};}catch(_0x498cec){return console['error'](_0x3bdc10(0x1ca),_0x498cec),{'status':httpStatus['INTERNAL_SERVER_ERROR'],'message':'Error\x20fetching\x20payout\x20schedule\x20items:\x20'+_0x498cec[_0x3bdc10(0x1e2)]};}},delete_payout_schedule_item_by_plan_id=async _0x579367=>{const _0x54f447=a24_0xbf814b;try{const _0x270a97=await PayoutScheduleItems['findAll']({'where':{'plan_id':_0x579367}});return _0x270a97[_0x54f447(0x1ce)]>0x0?(await Promise[_0x54f447(0x1f0)](_0x270a97[_0x54f447(0x1b8)](_0x770dc0=>_0x770dc0[_0x54f447(0x1f6)]({'deleted':0x1,'updated_at':new Date()}))),{'status':httpStatus['OK'],'message':_0x54f447(0x1e8),'data':_0x270a97['map'](_0x445f26=>_0x445f26[_0x54f447(0x1dd)]())}):{'status':httpStatus[_0x54f447(0x1d6)],'message':'No\x20payout\x20schedule\x20plan\x20items\x20found\x20for\x20this\x20plan_id'};}catch(_0x463575){return console[_0x54f447(0x1e4)](_0x54f447(0x1c4),_0x463575),{'status':httpStatus[_0x54f447(0x1c5)],'message':_0x54f447(0x1bf)+_0x463575[_0x54f447(0x1e2)]};}},delete_payout_schedule_item_by_item_id=async _0x8ffd45=>{const _0x56b5e0=a24_0xbf814b;try{const _0x85b93b=await PayoutScheduleItems[_0x56b5e0(0x1d0)]({'where':{'id':_0x8ffd45}});return _0x85b93b?(await _0x85b93b[_0x56b5e0(0x1f6)]({'deleted':0x1,'updated_at':new Date()}),{'status':httpStatus['OK'],'message':_0x56b5e0(0x1e1),'data':_0x85b93b[_0x56b5e0(0x1dd)]()}):{'status':httpStatus[_0x56b5e0(0x1d6)],'message':_0x56b5e0(0x1c0)};}catch(_0x428493){return console['error']('Error\x20creating\x20or\x20updating\x20payout\x20schedule\x20plan\x20item:',_0x428493),{'status':httpStatus['INTERNAL_SERVER_ERROR'],'message':_0x56b5e0(0x1df)+_0x428493[_0x56b5e0(0x1e2)]};}},active_disable_payout_schedule_item_by_item_id=async(_0x30b86d,_0x547152)=>{const _0x40cacf=a24_0xbf814b;try{const _0x57c716=await PayoutScheduleItems[_0x40cacf(0x1e5)]({'where':{'plan_id':_0x30b86d,'deleted':0x0}});return _0x57c716[_0x40cacf(0x1ce)]>0x0?(await Promise[_0x40cacf(0x1f0)](_0x57c716[_0x40cacf(0x1b8)](_0x259d86=>_0x259d86[_0x40cacf(0x1f6)]({'active':_0x547152,'updated_at':new Date()}))),{'status':httpStatus['OK'],'message':_0x40cacf(0x1b9),'data':_0x57c716[_0x40cacf(0x1b8)](_0x4c1ab6=>_0x4c1ab6[_0x40cacf(0x1dd)]())}):{'status':httpStatus['NOT_FOUND'],'message':'No\x20payout\x20schedule\x20plan\x20items\x20found\x20for\x20this\x20plan_id'};}catch(_0x5901c3){return console['error'](_0x40cacf(0x1d4),_0x5901c3),{'status':httpStatus[_0x40cacf(0x1c5)],'message':_0x40cacf(0x1dc)+_0x5901c3[_0x40cacf(0x1e2)]};}};function a24_0x12bc(){const _0x15db3=['Payout\x20schedule\x20plan\x20item\x20updated\x20successfully','message','No\x20payout\x20schedule\x20items\x20found\x20for\x20this\x20plan','error','findAll','Error\x20fetching\x20payout\x20schedule\x20items:\x20','occurrence','Payout\x20schedule\x20plan\x20items\x20deleted\x20successfully','4ekDTuD','63005LRaExp','2339925TjIixu','sequelize','Payout\x20schedule\x20item\x20not\x20created','payout_schedule_items','15308zPKlhw','all','payout_time','1035dyZlnj','currency','plan_id','run_next_at','update','6nopXmA','Payout\x20schedule\x20item\x20created\x20successfully','map','Payout\x20schedule\x20plan\x20items\x20status\x20updated\x20successfully','frequency','143EhqzyN','findOrCreate','ASC','10NleGLD','Error\x20deleting\x20payout\x20schedule\x20plan\x20items:\x20','Payout\x20schedule\x20plan\x20item\x20not\x20found','plan','country_iso_code','start','Error\x20deleting\x20payout\x20schedule\x20plan\x20items:','INTERNAL_SERVER_ERROR','Error\x20finding\x20or\x20creating\x20payout\x20schedule\x20item:','created_at','../models','deleted','Error\x20fetching\x20payout\x20schedule\x20items:','BAD_REQUEST','http-status','active','length','4616urXrOi','findOne','plan_item_id','1183127NPclcH','2djPlmo','Error\x20updating\x20payout\x20schedule\x20plan\x20items:','updated_at','NOT_FOUND','min_amount','Payout\x20schedule\x20items\x20fetched\x20successfully','plan_name','209631tsHkgL','528888VnKCcr','Error\x20updating\x20payout\x20schedule\x20plan\x20items:\x20','toJSON','is_default','Error\x20creating\x20or\x20updating\x20payout\x20schedule\x20plan\x20item:\x20','payout_schedule_plans'];a24_0x12bc=function(){return _0x15db3;};return a24_0x12bc();}module['exports']={'create_payout_schedule_item':create_payout_schedule_item,'update_payout_schedule_item':update_payout_schedule_item,'get_payout_schedule_items_by_plan_id':get_payout_schedule_items_by_plan_id,'check_payout_schedule':check_payout_schedule,'delete_payout_schedule_item_by_plan_id':delete_payout_schedule_item_by_plan_id,'delete_payout_schedule_item_by_item_id':delete_payout_schedule_item_by_item_id,'active_disable_payout_schedule_item_by_item_id':active_disable_payout_schedule_item_by_item_id};
+const httpStatus = require("http-status");
+const db = require("../models");
+const PayoutScheduleItems = db.payout_schedule_items;
+const PayoutSchedulePlans = db.payout_schedule_plans;
+const { Op } = require("sequelize");
+
+const create_payout_schedule_item = async (data) => {
+  try {
+    const [PayoutScheduleItem, created] =
+      await PayoutScheduleItems.findOrCreate({
+        where: {
+          plan_id: data?.plan_id,
+          currency: data?.currency,
+          frequency: data?.frequency,
+        },
+        defaults: {
+          plan_id: data?.plan_id,
+          currency: data?.currency,
+          frequency: data?.frequency,
+          occurrence: data?.occurrence,
+          start: data?.start,
+          run_next_at: data?.run_next_at,
+          min_amount: data?.min_amount,
+          payout_time: data?.payout_time,
+          active: data?.active || 1,
+          deleted: data?.deleted || 0,
+          // created_at: new Date(),
+          // updated_at: new Date(),
+        },
+      });
+
+    if (created) {
+      return {
+        status: httpStatus.OK,
+        message: "Payout schedule item created successfully",
+        data: PayoutScheduleItem.toJSON(),
+      };
+    } else if (PayoutScheduleItem) {
+      return {
+        status: httpStatus.BAD_REQUEST, // 409 Conflict is more accurate for "already exists"
+        message: "Payout schedule item already added",
+      };
+    } else {
+      return {
+        status: httpStatus.BAD_REQUEST,
+        message: "Payout schedule item not created",
+      };
+    }
+  } catch (error) {
+    console.error("Error finding or creating payout schedule item:", error);
+    // throw error;
+    return {
+      status: httpStatus.INTERNAL_SERVER_ERROR,
+      message:
+        "Error finding or creating payout schedule item:" + error.message,
+    };
+  }
+};
+
+const update_payout_schedule_item = async (data) => {
+  try {
+    if (data?.plan_item_id == undefined || data?.plan_item_id == '') {
+      // Create
+      return await create_payout_schedule_item(data);
+    }
+
+    const existingPlan = await PayoutScheduleItems.findOne({
+      where: { id: data?.plan_item_id },
+    });
+
+    if (existingPlan) {
+      // Update existing plan
+      await existingPlan.update({
+        currency: data?.currency,
+        frequency: data?.frequency,
+        occurrence: data?.occurrence,
+        start: data?.start,
+        run_next_at: data?.run_next_at,
+        min_amount: data?.min_amount,
+        payout_time: data?.payout_time,
+        updated_at: new Date(),
+      });
+
+      return {
+        status: httpStatus.OK,
+        message: "Payout schedule plan item updated successfully",
+        data: existingPlan.toJSON(),
+      };
+    } else {
+      return {
+        status: httpStatus.NOT_FOUND,
+        message: "Payout schedule plan item not found",
+      };
+    }
+  } catch (error) {
+    console.error(
+      "Error creating or updating payout schedule plan item:",
+      error
+    );
+    return {
+      status: httpStatus.INTERNAL_SERVER_ERROR,
+      message:
+        "Error creating or updating payout schedule plan item: " +
+        error.message,
+    };
+  }
+};
+
+const get_payout_schedule_items_by_plan_id = async (plan_id) => {
+  try {
+    const items = await PayoutScheduleItems.findAll({
+      where: {
+        plan_id: plan_id,
+        deleted: 0,
+      },
+      order: [["id", "ASC"]], // optional: sorts by id
+      attributes: [
+        ["id", "plan_item_id"],
+        ["plan_id", "plan_id"],
+        ["currency", "currency"],
+        ["frequency", "frequency"],
+        ["occurrence", "occurrence"],
+        ["start", "start"],
+        ["run_next_at", "run_next_at"],
+        ["min_amount", "min_amount"],
+        ["payout_time", "payout_time"],
+        ["active", "active"],
+        ["deleted", "deleted"],
+        ["created_at", "created_at"],
+        ["updated_at", "updated_at"],
+      ],
+    });
+
+    if (items && items.length > 0) {
+      return {
+        status: httpStatus.OK,
+        message: "Payout schedule items fetched successfully",
+        data: items.map((item) => {
+          const json = item.toJSON();
+          return json;
+        }),
+      };
+    } else {
+      return {
+        status: httpStatus.NOT_FOUND,
+        message: "No payout schedule items found for this plan",
+      };
+    }
+  } catch (error) {
+    console.error("Error fetching payout schedule items:", error);
+    return {
+      status: httpStatus.INTERNAL_SERVER_ERROR,
+      message: "Error fetching payout schedule items: " + error.message,
+    };
+  }
+};
+
+const check_payout_schedule = async (schedule_date) => {
+  try {
+    const items = await PayoutScheduleItems.findAll({
+      where: {
+        run_next_at: schedule_date,
+        active: 1,
+        deleted: 0,
+      },
+      include: [
+        {
+          model: PayoutSchedulePlans,
+          as: "plan", // adjust based on your alias
+          attributes: [
+            ["id", "plan_id"],
+            ["plan_name", "plan_name"], // Example: Add more fields as needed
+            ["country_iso_code", "country_iso_code"],
+            ["is_default", "is_default"],
+            ["active", "active"],
+            ["deleted", "deleted"],
+            ["created_at", "created_at"],
+            ["updated_at", "updated_at"],
+          ],
+        },
+      ],
+      order: [["id", "ASC"]],
+      attributes: [
+        ["id", "plan_item_id"],
+        ["plan_id", "plan_id"],
+        ["currency", "currency"],
+        ["frequency", "frequency"],
+        ["occurrence", "occurrence"],
+        ["start", "start"],
+        ["run_next_at", "run_next_at"],
+        ["min_amount", "min_amount"],
+        ["payout_time", "payout_time"],
+        ["active", "active"],
+        ["deleted", "deleted"],
+        ["created_at", "created_at"],
+        ["updated_at", "updated_at"],
+      ],
+    });
+
+    if (items && items.length > 0) {
+      return {
+        status: httpStatus.OK,
+        message: "Payout schedule items fetched successfully",
+        data: items.map((item) => item.toJSON()),
+      };
+    } else {
+      return {
+        status: httpStatus.NOT_FOUND,
+        message: "No payout schedule items found for this plan",
+      };
+    }
+  } catch (error) {
+    console.error("Error fetching payout schedule items:", error);
+    return {
+      status: httpStatus.INTERNAL_SERVER_ERROR,
+      message: "Error fetching payout schedule items: " + error.message,
+    };
+  }
+};
+
+const delete_payout_schedule_item_by_plan_id = async (plan_id) => {
+  try {
+    const existingPlans = await PayoutScheduleItems.findAll({
+      where: { plan_id: plan_id },
+    });
+
+    if (existingPlans.length > 0) {
+      // Update each plan item individually
+      await Promise.all(
+        existingPlans.map((item) =>
+          item.update({ deleted: 1, updated_at: new Date() })
+        )
+      );
+
+      return {
+        status: httpStatus.OK,
+        message: "Payout schedule plan items deleted successfully",
+        data: existingPlans.map((item) => item.toJSON()),
+      };
+    } else {
+      return {
+        status: httpStatus.NOT_FOUND,
+        message: "No payout schedule plan items found for this plan_id",
+      };
+    }
+  } catch (error) {
+    console.error("Error deleting payout schedule plan items:", error);
+    return {
+      status: httpStatus.INTERNAL_SERVER_ERROR,
+      message: "Error deleting payout schedule plan items: " + error.message,
+    };
+  }
+};
+
+const delete_payout_schedule_item_by_item_id = async (plan_item_id) => {
+  try {
+    const existingPlan = await PayoutScheduleItems.findOne({
+      where: { id: plan_item_id },
+    });
+
+    if (existingPlan) {
+      // Update existing plan
+      await existingPlan.update({
+        deleted: 1,
+        updated_at: new Date(),
+      });
+
+      return {
+        status: httpStatus.OK,
+        message: "Payout schedule plan item updated successfully",
+        data: existingPlan.toJSON(),
+      };
+    } else {
+      return {
+        status: httpStatus.NOT_FOUND,
+        message: "Payout schedule plan item not found",
+      };
+    }
+  } catch (error) {
+    console.error(
+      "Error creating or updating payout schedule plan item:",
+      error
+    );
+    return {
+      status: httpStatus.INTERNAL_SERVER_ERROR,
+      message:
+        "Error creating or updating payout schedule plan item: " +
+        error.message,
+    };
+  }
+};
+
+const active_disable_payout_schedule_item_by_item_id = async (plan_id, flag) => {
+  try {
+    const existingPlans = await PayoutScheduleItems.findAll({
+      where: { plan_id: plan_id, deleted: 0},
+    });
+
+    if (existingPlans.length > 0) {
+      // Update each plan item individually
+      await Promise.all(
+        existingPlans.map((item) =>
+          item.update({ active: flag, updated_at: new Date() })
+        )
+      );
+
+      return {
+        status: httpStatus.OK,
+        message: "Payout schedule plan items status updated successfully",
+        data: existingPlans.map((item) => item.toJSON()),
+      };
+    } else {
+      return {
+        status: httpStatus.NOT_FOUND,
+        message: "No payout schedule plan items found for this plan_id",
+      };
+    }
+  } catch (error) {
+    console.error("Error updating payout schedule plan items:", error);
+    return {
+      status: httpStatus.INTERNAL_SERVER_ERROR,
+      message: "Error updating payout schedule plan items: " + error.message,
+    };
+  }
+};
+
+module.exports = {
+  create_payout_schedule_item,
+  update_payout_schedule_item,
+  get_payout_schedule_items_by_plan_id,
+  check_payout_schedule,
+  delete_payout_schedule_item_by_plan_id,
+  delete_payout_schedule_item_by_item_id,
+  active_disable_payout_schedule_item_by_item_id
+};
+  

@@ -1,1 +1,50 @@
-var a9_0x1e73f1=a9_0xc651;(function(_0x2595b6,_0x5db53d){var _0x31f9f2=a9_0xc651,_0x34c862=_0x2595b6();while(!![]){try{var _0x243a42=parseInt(_0x31f9f2(0xdb))/0x1*(parseInt(_0x31f9f2(0xcb))/0x2)+parseInt(_0x31f9f2(0xd5))/0x3*(-parseInt(_0x31f9f2(0xd6))/0x4)+parseInt(_0x31f9f2(0xda))/0x5*(parseInt(_0x31f9f2(0xcd))/0x6)+-parseInt(_0x31f9f2(0xd2))/0x7+-parseInt(_0x31f9f2(0xdf))/0x8+parseInt(_0x31f9f2(0xe1))/0x9*(-parseInt(_0x31f9f2(0xdd))/0xa)+parseInt(_0x31f9f2(0xcf))/0xb;if(_0x243a42===_0x5db53d)break;else _0x34c862['push'](_0x34c862['shift']());}catch(_0x10d3ea){_0x34c862['push'](_0x34c862['shift']());}}}(a9_0xca1a,0x3bd41));function a9_0xc651(_0x59ddf3,_0xc872f4){var _0xca1af4=a9_0xca1a();return a9_0xc651=function(_0xc65171,_0x1d6b54){_0xc65171=_0xc65171-0xcb;var _0xd83a60=_0xca1af4[_0xc65171];return _0xd83a60;},a9_0xc651(_0x59ddf3,_0xc872f4);}function a9_0xca1a(){var _0x1d99d5=['6dzPTsB','SECRET_KEY','3396393FuLome','env','decode','1754095fPBagN','crypto-js/sha256','crypto-js/enc-base64','2127sXJFzo','692TbkONs','crypto-js/aes','encrypt','SECRET_IV','514355BuHbhK','23WejSDf','parse','49820hQaPDN','toString','582440mEEJJN','substr','135ESaIUo','30800kKYoIY','crypto-js/enc-utf8'];a9_0xca1a=function(){return _0x1d99d5;};return a9_0xca1a();}var Sha256=require(a9_0x1e73f1(0xd3)),Hex=require('crypto-js/enc-hex'),Utf8=require(a9_0x1e73f1(0xcc)),Base64=require(a9_0x1e73f1(0xd4)),AES=require(a9_0x1e73f1(0xd7)),base64=require('base-64');const encrypt=async _0x57ac5d=>{var _0x3260d4=a9_0x1e73f1;let _0x31dee5=_0x57ac5d[_0x3260d4(0xde)](),_0x2e866b=process[_0x3260d4(0xd0)][_0x3260d4(0xce)],_0x49cc9a=process[_0x3260d4(0xd0)][_0x3260d4(0xd9)];var _0x37c625=Sha256(_0x2e866b)[_0x3260d4(0xde)](Hex)['substr'](0x0,0x20),_0x2733d7=Sha256(_0x49cc9a)[_0x3260d4(0xde)](Hex)[_0x3260d4(0xe0)](0x0,0x10),_0x36b544=![];return _0x36b544=AES[_0x3260d4(0xd8)](_0x31dee5,Utf8[_0x3260d4(0xdc)](_0x37c625),{'iv':Utf8['parse'](_0x2733d7)})[_0x3260d4(0xde)](),_0x36b544=Utf8[_0x3260d4(0xdc)](_0x36b544)[_0x3260d4(0xde)](Base64),_0x36b544;},decrypt=async _0x4fcd3d=>{var _0x22d45a=a9_0x1e73f1;let _0x577288=_0x4fcd3d[_0x22d45a(0xde)](),_0x40132c=process[_0x22d45a(0xd0)][_0x22d45a(0xce)],_0x197b1e=process[_0x22d45a(0xd0)]['SECRET_IV'];var _0x5c73f7=Sha256(_0x40132c)[_0x22d45a(0xde)](Hex)[_0x22d45a(0xe0)](0x0,0x20),_0x18ec8d=Sha256(_0x197b1e)['toString'](Hex)[_0x22d45a(0xe0)](0x0,0x10),_0x20121d=![];return _0x577288=base64[_0x22d45a(0xd1)](_0x577288),_0x20121d=AES['decrypt'](_0x577288,Utf8[_0x22d45a(0xdc)](_0x5c73f7),{'iv':Utf8[_0x22d45a(0xdc)](_0x18ec8d)})[_0x22d45a(0xde)](Utf8),_0x20121d;};module['exports']={'encrypt':encrypt,'decrypt':decrypt};
+var Sha256 = require("crypto-js/sha256");
+var Hex = require("crypto-js/enc-hex");
+var Utf8 = require("crypto-js/enc-utf8");
+var Base64 = require("crypto-js/enc-base64");
+var AES = require("crypto-js/aes");
+var base64 = require("base-64");
+
+/**
+ *
+ * @param {*} inp_string string
+ * @returns encrypt string
+ */
+const encrypt = async (inp_string) => {
+  let string = inp_string.toString();
+  let secret_key = process.env.SECRET_KEY;
+  let secret_iv = process.env.SECRET_IV;
+  var key = Sha256(secret_key).toString(Hex).substr(0, 32); // Use the first 32 bytes (see 2.)
+  var iv = Sha256(secret_iv).toString(Hex).substr(0, 16);
+  var output = false;
+  output = AES.encrypt(string, Utf8.parse(key), {
+    iv: Utf8.parse(iv),
+  }).toString();
+  output = Utf8.parse(output).toString(Base64);
+  return output;
+};
+
+/**
+ *
+ * @param {*} inp_string string
+ * @returns decrypt string
+ */
+const decrypt = async (inp_string) => {
+  // console.log("🚀 ~ decrypt ~ inp_string:", inp_string)
+  let string = inp_string.toString();
+  let secret_key = process.env.SECRET_KEY;
+  let secret_iv = process.env.SECRET_IV;
+  var key = Sha256(secret_key).toString(Hex).substr(0, 32); // Use the first 32 bytes (see 2.)
+  var iv = Sha256(secret_iv).toString(Hex).substr(0, 16);
+  var output = false;
+  string = base64.decode(string);
+  output = AES.decrypt(string, Utf8.parse(key), {
+    iv: Utf8.parse(iv),
+  }).toString(Utf8);
+  return output;
+};
+
+module.exports = {
+  encrypt,
+  decrypt,
+};

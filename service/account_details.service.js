@@ -1,1 +1,39 @@
-const a1_0x46231b=a1_0x1508;(function(_0x46e5c4,_0x59643e){const _0x2aa11a=a1_0x1508,_0x4eaf8f=_0x46e5c4();while(!![]){try{const _0x25e731=-parseInt(_0x2aa11a(0x16a))/0x1*(-parseInt(_0x2aa11a(0x162))/0x2)+parseInt(_0x2aa11a(0x168))/0x3+parseInt(_0x2aa11a(0x173))/0x4+-parseInt(_0x2aa11a(0x163))/0x5*(-parseInt(_0x2aa11a(0x165))/0x6)+parseInt(_0x2aa11a(0x169))/0x7*(-parseInt(_0x2aa11a(0x16c))/0x8)+-parseInt(_0x2aa11a(0x16e))/0x9+-parseInt(_0x2aa11a(0x172))/0xa*(-parseInt(_0x2aa11a(0x164))/0xb);if(_0x25e731===_0x59643e)break;else _0x4eaf8f['push'](_0x4eaf8f['shift']());}catch(_0x4441a8){_0x4eaf8f['push'](_0x4eaf8f['shift']());}}}(a1_0x41e1,0xded1f));function a1_0x41e1(){const _0x22473c=['account\x20details\x20not\x20found!','668730erKnAb','6133540TQfdwZ','1048342oPJJGK','5hqzKmN','55hCNGFr','3567126GamAQA','http-status','status','1242828iCjIhU','7wgrgSw','1PsLGeg','exports','14487112ERvFCz','sequelize','6094422dZvPPM','findAll','add'];a1_0x41e1=function(){return _0x22473c;};return a1_0x41e1();}function a1_0x1508(_0x2a7450,_0x45257d){const _0x41e110=a1_0x41e1();return a1_0x1508=function(_0x15087b,_0x2d68da){_0x15087b=_0x15087b-0x162;let _0xd1f49=_0x41e110[_0x15087b];return _0xd1f49;},a1_0x1508(_0x2a7450,_0x45257d);}const httpStatus=require(a1_0x46231b(0x166)),accountDetailsDBService=require('./account_details.db.service'),{where}=require(a1_0x46231b(0x16d)),add=async _0x35ae6f=>{const _0x7ea936=a1_0x46231b;let _0x332e08=await accountDetailsDBService[_0x7ea936(0x170)](_0x35ae6f);return _0x332e08;},get_by_transaction_id=async _0x3c8656=>{const _0x340558=a1_0x46231b;let _0x31e7ab={'transaction_id':_0x3c8656},_0x39f1cf=await accountDetailsDBService[_0x340558(0x16f)](_0x31e7ab);if(_0x39f1cf?.[_0x340558(0x167)]!==httpStatus['OK'])return{'status':0x190,'message':_0x340558(0x171)};return _0x39f1cf;};module[a1_0x46231b(0x16b)]={'add':add,'get_by_transaction_id':get_by_transaction_id};
+const httpStatus = require("http-status");
+const accountDetailsDBService = require("./account_details.db.service");
+const { where } = require("sequelize");
+
+/**
+ * Add New Transaction Account Details
+ * @param {*} payload 
+ * @returns 
+ */
+const add = async (payload) => {
+  let result = await accountDetailsDBService.add(payload);
+  return result;
+};
+
+/**
+ * Get Account Details By TXN ID
+ * @param {*} transaction_id 
+ * @returns 
+ */
+const get_by_transaction_id = async (transaction_id) => {
+  let where = {
+    transaction_id: transaction_id
+  }
+  let result = await accountDetailsDBService.findAll(where);
+
+  if (result?.status !== httpStatus.OK) {
+    return {
+      status: 400,
+      message: "account details not found!",
+    };
+  }
+
+  return result;
+};
+
+module.exports = {
+  add,
+  get_by_transaction_id,
+};

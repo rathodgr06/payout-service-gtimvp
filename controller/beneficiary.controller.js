@@ -1,1 +1,154 @@
-function a1_0x32f0(_0x598218,_0x4bda0a){const _0x165ffb=a1_0x165f();return a1_0x32f0=function(_0x32f0e9,_0x419abb){_0x32f0e9=_0x32f0e9-0x107;let _0x487b9a=_0x165ffb[_0x32f0e9];return _0x487b9a;},a1_0x32f0(_0x598218,_0x4bda0a);}const a1_0x559eff=a1_0x32f0;(function(_0x1df0c8,_0x5a3175){const _0x22acec=a1_0x32f0,_0x4ee0c4=_0x1df0c8();while(!![]){try{const _0x18ebd3=-parseInt(_0x22acec(0x11e))/0x1*(-parseInt(_0x22acec(0x120))/0x2)+-parseInt(_0x22acec(0x107))/0x3*(-parseInt(_0x22acec(0x121))/0x4)+-parseInt(_0x22acec(0x11d))/0x5*(parseInt(_0x22acec(0x116))/0x6)+-parseInt(_0x22acec(0x10c))/0x7+-parseInt(_0x22acec(0x11f))/0x8+-parseInt(_0x22acec(0x10b))/0x9+parseInt(_0x22acec(0x117))/0xa;if(_0x18ebd3===_0x5a3175)break;else _0x4ee0c4['push'](_0x4ee0c4['shift']());}catch(_0x289b88){_0x4ee0c4['push'](_0x4ee0c4['shift']());}}}(a1_0x165f,0x99e10));function a1_0x165f(){const _0x13ec06=['add_receiver','../utils/catchAsync','send','params','Receiver\x20not\x20found!','BUSINESS','pending','354738ClZNfO','22546730qMkWpP','status','update_receiver','../service/token.service','body','delete_receiver','85FkepLs','459775lkstvw','3076320nkvnwi','2IxiCWU','782092WQEjNb','getById','9tfpESO','BAD_REQUEST','isNotValid','exports','2191635QVvVpl','7263081VONunH','receiver_id','Receiver\x20found!'];a1_0x165f=function(){return _0x13ec06;};return a1_0x165f();}const beneficiaryService=require('../service/beneficiary.service'),helperService=require('../service/helper.service'),{verifyAccessToken}=require(a1_0x559eff(0x11a)),catchAsync=require(a1_0x559eff(0x110)),httpStatus=require('http-status'),add_receiver=catchAsync(async(_0x32953c,_0x5e1add)=>{const _0x123ab6=a1_0x559eff,{sub_merchant_id:_0x50ee58}=_0x32953c[_0x123ab6(0x11b)],_0x3238bf={'sub_merchant_id':_0x50ee58,'account_types':_0x123ab6(0x114),'verification':'pending','active':0x1,'deleted':0x0},_0x111cfd=await beneficiaryService[_0x123ab6(0x10f)](_0x3238bf);if(_0x111cfd?.['status']!==httpStatus['OK']){_0x5e1add[_0x123ab6(0x118)](httpStatus[_0x123ab6(0x108)])[_0x123ab6(0x111)](_0x111cfd);return;}_0x5e1add[_0x123ab6(0x118)](httpStatus['OK'])[_0x123ab6(0x111)](_0x111cfd);}),verify_receiver=catchAsync(async(_0x27c4f9,_0x599d06)=>{const _0x1eec11=a1_0x559eff,_0x2b47a9=_0x27c4f9['params']['receiver_id'],_0x420530=await beneficiaryService['verify_sender'](_0x2b47a9);if(_0x420530?.[_0x1eec11(0x118)]!==httpStatus['OK']){_0x599d06[_0x1eec11(0x118)](httpStatus[_0x1eec11(0x108)])[_0x1eec11(0x111)](_0x420530);return;}_0x599d06[_0x1eec11(0x118)](httpStatus['OK'])[_0x1eec11(0x111)](_0x420530);}),delete_receiver=catchAsync(async(_0x1e8de0,_0x4cfea1)=>{const _0x202624=a1_0x559eff,_0x68bd06=_0x1e8de0[_0x202624(0x112)][_0x202624(0x10d)],_0x580b52=await beneficiaryService[_0x202624(0x11c)](_0x68bd06);if(_0x580b52?.[_0x202624(0x118)]!==httpStatus['OK']){_0x4cfea1[_0x202624(0x118)](httpStatus[_0x202624(0x108)])[_0x202624(0x111)](_0x580b52);return;}_0x4cfea1[_0x202624(0x118)](httpStatus['OK'])[_0x202624(0x111)](_0x580b52);}),get_receiver_by_id=catchAsync(async(_0x4b921a,_0x2696a2)=>{const _0x39754d=a1_0x559eff,_0x306c9c=_0x4b921a[_0x39754d(0x112)]['receiver_id'],_0x397ed0=await beneficiaryService['getBeneficiaryById'](_0x306c9c);if(helperService[_0x39754d(0x109)](_0x397ed0)){_0x2696a2[_0x39754d(0x118)](httpStatus['OK'])[_0x39754d(0x111)]({'status':httpStatus[_0x39754d(0x108)],'message':_0x39754d(0x113)});return;}_0x2696a2[_0x39754d(0x118)](httpStatus['OK'])[_0x39754d(0x111)]({'status':0xc8,'message':_0x39754d(0x10e),'receiver':_0x397ed0});}),update_receiver=catchAsync(async(_0x4ba78a,_0x2f9a80)=>{const _0x473f34=a1_0x559eff,{receiver_id:_0x338ae7,registered_name:_0x38fa11,iban:_0x2b6163,address:_0x210564,city:_0x3f9d1f,country_iso_code:_0x3a9463}=_0x4ba78a['body'],_0x52a0d8={'receiver_id':_0x338ae7,'registered_name':_0x38fa11,'country_iso_code':_0x3a9463,'address':_0x210564,'city':_0x3f9d1f,'iban':_0x2b6163,'verification':_0x473f34(0x115)},_0x5d94f8=await beneficiaryService[_0x473f34(0x119)](_0x52a0d8);if(_0x5d94f8?.['status']!==httpStatus['OK']){_0x2f9a80['status'](httpStatus[_0x473f34(0x108)])[_0x473f34(0x111)](_0x5d94f8);return;}_0x2f9a80[_0x473f34(0x118)](httpStatus['OK'])['send'](_0x5d94f8);}),getById=catchAsync(async(_0x59a87e,_0x266b49)=>{const _0x62265=a1_0x559eff,{payer_id:_0x2c6923}=_0x59a87e[_0x62265(0x11b)],_0x1204aa=await payerService[_0x62265(0x122)](_0x2c6923);if(_0x1204aa?.[_0x62265(0x118)]!==httpStatus['OK']){_0x266b49[_0x62265(0x118)](httpStatus[_0x62265(0x108)])[_0x62265(0x111)](_0x1204aa);return;}_0x266b49[_0x62265(0x118)](httpStatus['OK'])['send'](_0x1204aa);}),list=catchAsync(async(_0x1db597,_0x5a55f1)=>{const _0xa479c0=a1_0x559eff,_0x536400=await payerService['list'](_0x1db597);if(_0x536400?.[_0xa479c0(0x118)]!==httpStatus['OK']){_0x5a55f1[_0xa479c0(0x118)](httpStatus[_0xa479c0(0x108)])[_0xa479c0(0x111)](_0x536400);return;}_0x5a55f1['status'](httpStatus['OK'])[_0xa479c0(0x111)](_0x536400);});module[a1_0x559eff(0x10a)]={'add_receiver':add_receiver,'update_receiver':update_receiver,'get_receiver_by_id':get_receiver_by_id,'verify_receiver':verify_receiver,'delete_receiver':delete_receiver,'getById':getById,'list':list};
+const beneficiaryService = require("../service/beneficiary.service");
+const helperService = require("../service/helper.service");
+const { verifyAccessToken } = require("../service/token.service");
+const catchAsync = require("../utils/catchAsync");
+const httpStatus = require("http-status");
+
+/**
+ * Add Receiver
+ */
+const add_receiver = catchAsync(async (req, res) => {
+  const { sub_merchant_id } = req.body;
+  const payload = {
+    sub_merchant_id: sub_merchant_id,
+    account_types: "BUSINESS",
+    verification: "pending",
+    active: 1,
+    deleted: 0,
+  };
+  const sender_receiver = await beneficiaryService.add_receiver(payload);
+  if (sender_receiver?.status !== httpStatus.OK) {
+    res.status(httpStatus.BAD_REQUEST).send(sender_receiver);
+    return;
+  }
+  res.status(httpStatus.OK).send(sender_receiver);
+
+  // const {
+  //   super_merchant_id,
+  //   sub_merchant_id,
+  //   registered_name,
+  //   iban,
+  //   address,
+  //   city,
+  //   country_iso_code,
+  // } = req.body;
+  // const payload = {
+  //   super_merchant_id: super_merchant_id,
+  //   sub_merchant_id: sub_merchant_id,
+  //   registered_name: registered_name,
+  //   country_iso_code: country_iso_code,
+  //   address: address,
+  //   city: city,
+  //   iban: iban,
+  //   transaction_types: "B2B",
+  //   verification: "pending",
+  //   active: 1,
+  // };
+  // const sender_receiver = await beneficiaryService.add_sender_receiver(payload);
+  // if (sender_receiver?.status !== httpStatus.OK) {
+  //   res.status(httpStatus.BAD_REQUEST).send(sender_receiver);
+  //   return;
+  // }
+  // res.status(httpStatus.OK).send(sender_receiver);
+});
+
+/**
+ * Verify Receiver
+ */
+const verify_receiver = catchAsync(async (req, res) => {
+  const receiver_id = req.params.receiver_id;
+  const receiver = await beneficiaryService.verify_sender(receiver_id);
+  if (receiver?.status !== httpStatus.OK) {
+    res.status(httpStatus.BAD_REQUEST).send(receiver);
+    return;
+  }
+  res.status(httpStatus.OK).send(receiver);
+});
+
+/**
+ * Delete Receiver
+ */
+const delete_receiver = catchAsync(async (req, res) => {
+  const receiver_id = req.params.receiver_id;
+  const receiver = await beneficiaryService.delete_receiver(receiver_id);
+  if (receiver?.status !== httpStatus.OK) {
+    res.status(httpStatus.BAD_REQUEST).send(receiver);
+    return;
+  }
+  res.status(httpStatus.OK).send(receiver);
+});
+
+/**
+ * Get Receiver By ID
+ */
+const get_receiver_by_id = catchAsync(async (req, res) => {
+  const receiver_id = req.params.receiver_id;
+  const receiver = await beneficiaryService.getBeneficiaryById(receiver_id);
+  if (helperService.isNotValid(receiver)) {
+    res
+      .status(httpStatus.OK)
+      .send({ status: httpStatus.BAD_REQUEST, message: "Receiver not found!" });
+    return;
+  }
+  res
+    .status(httpStatus.OK)
+    .send({ status: 200, message: "Receiver found!", receiver: receiver });
+});
+
+/**
+ * Update Receiver
+ */
+const update_receiver = catchAsync(async (req, res) => {
+  const {
+    receiver_id,
+    registered_name,
+    iban,
+    address,
+    city,
+    country_iso_code,
+  } = req.body;
+  const payload = {
+    receiver_id: receiver_id,
+    registered_name: registered_name,
+    country_iso_code: country_iso_code,
+    address: address,
+    city: city,
+    iban: iban,
+    verification: "pending"
+  };
+  const sender_receiver = await beneficiaryService.update_receiver(payload);
+  if (sender_receiver?.status !== httpStatus.OK) {
+    res.status(httpStatus.BAD_REQUEST).send(sender_receiver);
+    return;
+  }
+  res.status(httpStatus.OK).send(sender_receiver);
+});
+
+const getById = catchAsync(async (req, res) => {
+  const { payer_id } = req.body;
+  const payer = await payerService.getById(payer_id);
+  if (payer?.status !== httpStatus.OK) {
+    res.status(httpStatus.BAD_REQUEST).send(payer);
+    return;
+  }
+  res.status(httpStatus.OK).send(payer);
+});
+
+const list = catchAsync(async (req, res) => {
+  const payers = await payerService.list(req);
+  if (payers?.status !== httpStatus.OK) {
+    res.status(httpStatus.BAD_REQUEST).send(payers);
+    return;
+  }
+  res.status(httpStatus.OK).send(payers);
+});
+
+module.exports = {
+  add_receiver,
+  update_receiver,
+  get_receiver_by_id,
+  verify_receiver,
+  delete_receiver,
+  getById,
+  list,
+};
