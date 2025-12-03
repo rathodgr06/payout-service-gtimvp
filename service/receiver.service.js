@@ -45,11 +45,13 @@ const add_receiver_with_fund_details = async (req) => {
 
   if (helperService.isValid(sub_merchant_id)) {
     let submerchant_response = await nodeServerApiService.get_sub_merchant_details(sub_merchant_id);
+    console.log("🚀 ~ add_receiver_with_fund_details ~ submerchant_response:", submerchant_response)
     if (submerchant_response?.status != httpStatus.OK) {
       return submerchant_response;
     }
 
     if (helperService.isValid(submerchant_response?.data)) {
+      addReceiverPayload.super_merchant_id = submerchant_response?.data?.super_merchant_id;
       addReceiverPayload.receiver_name = submerchant_response?.data?.company_name;
       addReceiverPayload.registered_business_address = submerchant_response?.data?.register_business_country;
       addReceiverPayload.email = submerchant_response?.data?.email;
@@ -130,58 +132,61 @@ const add_receiver_with_fund_details = async (req) => {
     !helperService.isNotValid(receiver?.data)
   ) {
     responseData = {
-      receiver_id: receiver.data.id,
-      sub_merchant_id: helperService.isNotValid(receiver.data.sub_merchant_id)
+      receiver_id: receiver?.data?.id,
+      sub_merchant_id: helperService.isNotValid(receiver?.data?.sub_merchant_id)
         ? null
-        : receiver.data.sub_merchant_id,
-      receiver_name: helperService.isNotValid(receiver.data.receiver_name)
+        : receiver?.data?.sub_merchant_id,
+      super_merchant_id: helperService.isNotValid(receiver?.data?.super_merchant_id)
         ? null
-        : receiver.data.receiver_name,
+        : receiver?.data?.super_merchant_id,
+      receiver_name: helperService.isNotValid(receiver?.data?.receiver_name)
+        ? null
+        : receiver?.data?.receiver_name,
       registered_business_address: helperService.isNotValid(
-        receiver.data.registered_business_address
+        receiver?.data?.registered_business_address
       )
         ? null
-        : receiver.data.registered_business_address,
-      email: helperService.isNotValid(receiver.data.email)
+        : receiver?.data?.registered_business_address,
+      email: helperService.isNotValid(receiver?.data?.email)
         ? null
-        : receiver.data.email,
-      code: helperService.isNotValid(receiver.data.code)
+        : receiver?.data?.email,
+      code: helperService.isNotValid(receiver?.data?.code)
         ? null
-        : receiver.data.code,
-      mobile_no: helperService.isNotValid(receiver.data.mobile_no)
+        : receiver?.data?.code,
+      mobile_no: helperService.isNotValid(receiver?.data?.mobile_no)
         ? null
-        : receiver.data.mobile_no,
-      referral_code: helperService.isNotValid(receiver.data.referral_code)
+        : receiver?.data?.mobile_no,
+      referral_code: helperService.isNotValid(receiver?.data?.referral_code)
         ? null
-        : receiver.data.referral_code,
-      webhook_url: helperService.isNotValid(receiver.data.webhook_url)
+        : receiver?.data?.referral_code,
+      webhook_url: helperService.isNotValid(receiver?.data?.webhook_url)
         ? null
-        : receiver.data.webhook_url,
-      webhook_secret: helperService.isNotValid(receiver.data.webhook_secret)
+        : receiver?.data?.webhook_url,
+      webhook_secret: helperService.isNotValid(receiver?.data?.webhook_secret)
         ? null
-        : receiver.data.webhook_secret,
-      verification: helperService.isNotValid(receiver.data.verification)
+        : receiver?.data?.webhook_secret,
+      verification: helperService.isNotValid(receiver?.data?.verification)
         ? null
-        : receiver.data.verification,
-      active: helperService.isNotValid(receiver.data.active)
+        : receiver?.data?.verification,
+      active: helperService.isNotValid(receiver?.data?.active)
         ? null
-        : receiver.data.active,
-      deleted: helperService.isNotValid(receiver.data.deleted)
+        : receiver?.data?.active,
+      deleted: helperService.isNotValid(receiver?.data?.deleted)
         ? null
-        : receiver.data.deleted,
-      created_at: helperService.isNotValid(receiver.data.created_at)
+        : receiver?.data?.deleted,
+      created_at: helperService.isNotValid(receiver?.data?.created_at)
         ? null
-        : receiver.data.created_at,
-      updated_at: helperService.isNotValid(receiver.data.updated_at)
+        : receiver?.data?.created_at,
+      updated_at: helperService.isNotValid(receiver?.data?.updated_at)
         ? null
-        : receiver.data.updated_at,
+        : receiver?.data?.updated_at,
       access: receivers_keys,
     };
 
-    if (sub_merchant_id && receiver.data.id) {
-      let update_response = await nodeServerApiService.update_wallet(sub_merchant_id, receiver.data.id);
+    if (sub_merchant_id && receiver?.data?.id) {
+      let update_response = await nodeServerApiService.update_wallet(sub_merchant_id, receiver?.data?.id);
       console.log("🚀 ~ add_receiver_with_fund_details ~ update_response:", update_response)
-      let update_charges_response = await nodeServerApiService.update_charges(sub_merchant_id, receiver.data.id);
+      let update_charges_response = await nodeServerApiService.update_charges(sub_merchant_id, receiver?.data?.id);
       console.log("🚀 ~ add_receiver_with_fund_details ~ update_charges_response:", update_charges_response)
     }
 
@@ -826,6 +831,22 @@ const delete_key_secret = async (id) => {
   }
 };
 
+/**
+ * Get Receiver Key & Secret List By Receiver Id
+ * @returns {Promise<User>}
+ */
+const get_receiver_key_secret_list = async (payload) => {
+  try {
+    return await receiverDBService.find_receiver_keys_list(payload);
+  } catch (error) {
+    console.error("Sequelize query failed:", error);
+    return {
+      status: 400,
+      message: error.message,
+    };
+  }
+};
+
 module.exports = {
   add_receiver_with_account_no,
   get_receiver_list,
@@ -845,5 +866,6 @@ module.exports = {
   get_receiver_count,
   update_receiver_key_secret,
   get_receiver_key_secret,
-  delete_key_secret
+  delete_key_secret,
+  get_receiver_key_secret_list
 };

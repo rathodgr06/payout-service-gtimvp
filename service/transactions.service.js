@@ -323,7 +323,7 @@ const list = async (req) => {
       
     let credit_party_identifiers_data;
     // if (transaction?.payer_id !== "MTN_MOMO" && transaction?.payer_id !== "ORANGE_MONEY") {
-    if (!["MTN_MOMO", "ORANGE_MONEY", "MTN", "ORANGE", "AL_PAY"].includes(transaction?.payer_id) && !transaction?.payer_id?.includes('AP_')) {
+    if (!["MTN_MOMO", "ORANGE_MONEY", "MTN", "ORANGE", "AL_PAY"].includes(transaction?.payer_id) && !transaction?.payer_id?.includes('AP_') && !transaction?.payer_id?.includes('MAP_')) {
 
       if (helperService.isNotValid(payer)) {
       // ==============================================================================
@@ -401,6 +401,12 @@ const list = async (req) => {
         payer_name: "ORANGE-MONEY",
       };
     } else if (transaction?.payer_id === "AL_PAY" || transaction?.payer_id?.includes('AP_')) {
+      credit_party_identifier = {
+        MSISDN: receiver_account_details?.account_details?.MSISDN,
+        payer_id: payer_details?.payer_id || payer?.id,
+        payer_name: payer_details?.payer_name || payer?.name,
+      };
+    }else if (transaction?.payer_id === "MOCK_AL_PAY" || transaction?.payer_id?.includes('MAP_')) {
       credit_party_identifier = {
         MSISDN: receiver_account_details?.account_details?.MSISDN,
         payer_id: payer_details?.payer_id || payer?.id,
@@ -697,6 +703,15 @@ const transaction_details = async (transaction_id) => {
       MSISDN: receiver_account_details?.account_details.MSISDN,
       payer_id: "ORANGE",
       payer_name: "ORANGE",
+    };
+  } else if (
+    transactionsResponse?.payer_id === "MOCK_AL_PAY" ||
+    transactionsResponse?.payer_id?.includes("MAP_")
+  ) {
+    credit_party_identifier = {
+      MSISDN: receiver_account_details?.account_details.MSISDN,
+      payer_id: payer_details?.payer_id || payer?.id,
+      payer_name: payer_details?.payer_name || payer?.name,
     };
   } else {
     credit_party_identifier = {

@@ -173,7 +173,8 @@ app.post('/api/NameEnquiry/NameEnquiryService', bearerAuth, (req, res) => {
     '233501234567': 'KWAME ASANTE',
     '1234567890': 'BUSINESS ACCOUNT LTD',
     '0987654321': 'MARY JOHNSON',
-    '1122334455': 'KOFI MENSAH'
+    '1122334455': 'KOFI MENSAH',
+    '233240000000': 'KOFI MENSAH'
   };
 
   const accountName = mockNames[accountNumber] || 'TEST ACCOUNT HOLDER';
@@ -500,7 +501,8 @@ app.post('/api/v2/NameEnquiry/NameEnquiryService', bearerAuth, (req, res) => {
     '233501234567': 'KWAME ASANTE',
     '1234567890': 'BUSINESS ACCOUNT LTD',
     '0987654321': 'MARY JOHNSON',
-    '1122334455': 'KOFI MENSAH'
+    '1122334455': 'KOFI MENSAH',
+    '233240000000': 'K MENSAH'
   };
 
   const accountName = mockNames[accountNumber] || 'TEST ACCOUNT HOLDER';

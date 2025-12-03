@@ -657,6 +657,43 @@ const update_charges = async (sub_merchant_id, receiver_id) => {
   }
 };
 
+/**
+ * API Call To Fetch Payer Details
+ * @param {string} 
+ * @returns {Promise<User>}
+ */
+const fetch_payer_details = async (payer_id) => {
+  
+  // Axios API request
+  var payerDetailsResponse = "";
+  try {
+    let url = "fetch-payer-details";
+    payerDetailsResponse = await nodeServerService.post(url, {payer_id: payer_id});
+  } catch (err) {
+    console.error("Error fetching data:", err.message);
+    return {
+      status: err.status,
+      message: err.message,
+    };
+  }
+
+  // Check transaction created
+  if (helperService.isNotValid(payerDetailsResponse)) {
+    return {
+      status: httpStatus.NOT_FOUND,
+      message: "Payer not found!",
+    };
+  }
+
+  if (payerDetailsResponse?.status === 'success') {
+    // Send success response
+  return {status: 200, message: payerDetailsResponse?.message, data: payerDetailsResponse};
+  }else{
+    // Send success response
+  return {status: 400, message: payerDetailsResponse?.message, data: payerDetailsResponse};
+  }
+};
+
 module.exports = {
   get_sub_merchant_profile,
   update_payout_status,
@@ -673,5 +710,6 @@ module.exports = {
   check_merchant_key,
   update_wallet,
   update_charges,
-  get_sub_merchants
+  get_sub_merchants,
+  fetch_payer_details
 };

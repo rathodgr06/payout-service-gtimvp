@@ -719,14 +719,15 @@ const payout_psp_routing = async (receiver_account_details) => {
   };
   console.log(conditionPayload);
   
-  if (conditionPayload?.payer_id?.includes("AP_")) {
+  if (conditionPayload?.payer_id?.includes("MAP_")) {
+    conditionPayload.payer_id = "MOCK_AL_PAY";
+  } else if (conditionPayload?.payer_id?.includes("AP_")) {
     conditionPayload.payer_id = "AL_PAY";
-  }else if (
+  } else if (
     conditionPayload.payer_id !== "MTN_MOMO" &&
     conditionPayload.payer_id !== "MTN" &&
     conditionPayload.payer_id != "ORANGE_MONEY" &&
-    conditionPayload.payer_id != "ORANGE" &&
-    conditionPayload.payer_id != "AL"
+    conditionPayload.payer_id != "ORANGE"
   ) {
     conditionPayload.payer_id = "NA";
   }
@@ -781,7 +782,7 @@ const payout_psp_routing = async (receiver_account_details) => {
       (MID?.status !== httpStatus.OK && payerID === "ORANGE_MONEY") ||
       (MID?.status !== httpStatus.OK && payerID === "ORANGE") ||
       (MID?.status !== httpStatus.OK && payerID?.includes("AP_")) ||
-      (MID?.status !== httpStatus.OK && payerID === "AL")
+      (MID?.status !== httpStatus.OK && payerID === "MAP_")
     ) {
       console.log("Retry...........");
 

@@ -19,8 +19,9 @@ const get_payers = {
 const name_verification = {
   body: Joi.object().keys({
     account_number: Joi.string().required(),
-    institution_code: Joi.string().required(),
-    funding_source_type: Joi.number().required()
+    payer_id: Joi.string().required(),
+    // institution_code: Joi.string().required(),
+    // funding_source_type: Joi.number().required()
   }),
 };
 

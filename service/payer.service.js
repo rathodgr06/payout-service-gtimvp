@@ -152,10 +152,24 @@ async function get_AL_Pay_MID_details() {
   }
 }
 
+async function get_MOCK_AL_Pay_MID_details() {
+  try {
+    let PSP_MOCK_AL_PAY = await pspService.get_psp_by_psp_key("al_pay_mock");
+    if (PSP_MOCK_AL_PAY?.status != httpStatus.OK) {
+      return PSP_MOCK_AL_PAY;
+    }
+    return await pspService.get_mid_by_psp_id(PSP_MOCK_AL_PAY?.data.id);
+  } catch (error) {
+    console.log("🚀 ~ get_MID_details ~ error:", error);
+    return { status: 400, message: error.message };
+  }
+}
+
 module.exports = {
   get_payers,
   get_payer_by_id,
   get_countries,
   get_MID_details,
-  get_AL_Pay_MID_details
+  get_AL_Pay_MID_details,
+  get_MOCK_AL_Pay_MID_details
 };
