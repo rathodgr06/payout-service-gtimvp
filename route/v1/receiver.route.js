@@ -124,4 +124,10 @@ router.post(
   receiverController.get_receiver_key_secret_list
 );
 
+
+router.get(
+  "/get-receiver-name-by-id/:receiver_id",
+  receiverController.get_receiver_name_by_id
+);
+
 module.exports = router;

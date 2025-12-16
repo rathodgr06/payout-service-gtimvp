@@ -321,8 +321,10 @@ const get_receiver_list = async (req, res) => {
   if (update_date) where.updated_at = parseDateRange(update_date);
 
 
-  if (where.sub_merchant_id && where.sub_merchant_id.length > 10) {
-    where.sub_merchant_id = await decrypt(where.sub_merchant_id);
+  if (where.sub_merchant_id) {
+    if (where.sub_merchant_id.length > 10) {
+      where.sub_merchant_id = await decrypt(where.sub_merchant_id);
+    }
   }
 
   console.log("🚀 ~ get_receiver_list ~ req?.user:", req?.user)
@@ -342,10 +344,26 @@ const get_receiver_list = async (req, res) => {
     // if (decryptedIds.length > 0) {
     //   where.sub_merchant_id = { [Op.in]: decryptedIds };
     // }
-    console.log("🚀 ~ get_receiver_list ~ where:", where);
     if (!where.sub_merchant_id && helperService.isValid(req?.user?.id)) {
       where.super_merchant_id = req?.user?.id;
     }
+  }
+
+  // Add search filter
+  if (req.body.search && req.body.search.trim() !== "") {
+    const s = req.body.search.trim();
+
+    where[Op.or] = [
+      { receiver_name: { [Op.like]: `%${s}%` } },
+      { email: { [Op.like]: `%${s}%` } },
+      { mobile_no: { [Op.like]: `%${s}%` } },
+      { registered_business_address: { [Op.like]: `%${s}%` } },
+      { sub_merchant_id: { [Op.like]: `%${s}%` } },
+      { super_merchant_id: { [Op.like]: `%${s}%` } },
+      { referral_code: { [Op.like]: `%${s}%` } },
+      { code: { [Op.like]: `%${s}%` } },
+    ];
+
   }
 
   console.log("🚀 ~ get_receiver_list ~ where:", where);
@@ -683,6 +701,23 @@ const find_receiver_keys_list = async (payload) => {
   }
 };
 
+
+/**
+ * Get Receiver Name By Id
+ * @param {*} id 
+ * @returns 
+ */
+const getReceiverNameById = async (id) => {
+  const receiver = await Receiver.findOne({
+    where: { id },
+    attributes: [
+      ["id", "receiver_id"],
+      "receiver_name",
+    ],
+  });
+  return receiver ? receiver.toJSON() : null;
+};
+
 module.exports = {
   addNewReceiver,
   get_receiver_list,
@@ -697,5 +732,6 @@ module.exports = {
   get_receiver_count,
   addOrUpdateReceiverKeyAndSecret,
   update_receiver_key,
-  find_receiver_keys_list
+  find_receiver_keys_list,
+  getReceiverNameById
 };

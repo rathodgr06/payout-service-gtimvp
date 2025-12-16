@@ -44,7 +44,7 @@ const check_access_token = catchAsync(async (req, res, next) => {
         let user = await verifyAccessToken(payload.payload);
         user.token = token;
         req.user = user;
-        console.log("🚀 ~ user:", user);
+        // console.log("🚀 ~ user:", user);
         if (req.user?.type === "admin" || req.user?.type === "merchant") {
           next();
         } else {

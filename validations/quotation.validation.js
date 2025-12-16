@@ -131,18 +131,21 @@ const payout_list = {
     sub_merchant_id: Joi.string().allow("", null),
     transaction_id: Joi.string().allow("", null),
     batch_id: Joi.string().allow("", null),
+    status: Joi.string().allow("", null),
     receiver_id: Joi.string().allow("", null),
     receiver_currency: Joi.string().max(10).allow("", null),
     receiver_country: Joi.string().length(3).allow("", null), // ISO 3-letter code
     create_date: Joi.string().pattern(dateRangeRegex).allow("", null).messages({
       "string.pattern.base":
-        "create_date must be in format YYYY-MM-DD HH:mm:ss/YYYY-MM-DD HH:mm:ss",
+      "create_date must be in format YYYY-MM-DD HH:mm:ss/YYYY-MM-DD HH:mm:ss",
     }),
-
+    
     update_date: Joi.string().pattern(dateRangeRegex).allow("", null).messages({
       "string.pattern.base":
-        "update_date must be in format YYYY-MM-DD HH:mm:ss/YYYY-MM-DD HH:mm:ss",
+      "update_date must be in format YYYY-MM-DD HH:mm:ss/YYYY-MM-DD HH:mm:ss",
     }),
+    from_date: Joi.string().allow("", null),
+    to_date: Joi.string().allow("", null),
   }),
 };
 

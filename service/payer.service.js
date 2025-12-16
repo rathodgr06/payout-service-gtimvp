@@ -65,8 +65,8 @@ const get_payer_by_id = async (id) => {
   } catch (error) {
     console.log("🚀 ~ constadd_receiver=catchAsync ~ error:", error);
     return {
-      status: err?.status,
-      message: err?.message,
+      status: error?.status,
+      message: error?.message,
     };
   }
 

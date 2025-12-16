@@ -348,6 +348,9 @@ const get_transaction_list = async (req, res) => {
     receiver_country,
     create_date,
     update_date,
+    status,
+    from_date,
+    to_date
   } = req.body;
 
   const limit = parseInt(per_page);
@@ -392,6 +395,32 @@ const get_transaction_list = async (req, res) => {
       replacements.transaction_id = transaction_id;
     }
 
+    // dynamic filters
+    if (receiver_id) {
+      conditions.push('t.receiver_id = :receiver_id');
+      replacements.receiver_id = receiver_id;
+    }
+
+    // dynamic filters
+    if (receiver_currency) {
+      conditions.push('t.payer_currency = :payer_currency');
+      replacements.payer_currency = receiver_currency;
+    }
+
+    // dynamic filters
+    if (receiver_country) {
+      conditions.push('t.payer_country_iso_code = :payer_country_iso_code');
+      if (receiver_country?.length > 10) {
+        receiver_country = await encryptDecryptService.decrypt(receiver_country);
+      }
+      replacements.payer_country_iso_code = receiver_country;
+    }
+
+    // dynamic filters
+    if (status) {
+      conditions.push('t.status_message = :status_message');
+      replacements.status_message = status;
+    }
       
     if (req?.user?.type === "merchant") {
       const sub_merchants = await get_sub_merchants(req.user.token);
@@ -422,7 +451,18 @@ const get_transaction_list = async (req, res) => {
 
 
     // Combine conditions if any
-    const whereClause = conditions.length ? `WHERE ${conditions.join(' AND ')}` : '';
+    let whereClause = conditions.length ? `WHERE ${conditions.join(' AND ')}` : '';
+
+
+    if (from_date) {
+      whereClause += " AND DATE(t.created_at) >= :from_date";
+      replacements.from_date = from_date;
+    }
+
+    if (to_date) {
+      whereClause += " AND DATE(t.created_at) <= :to_date";
+      replacements.to_date = to_date;
+    }
 
     const countResult = await db.sequelize.query(
       `SELECT COUNT(*) AS total FROM (
@@ -468,6 +508,7 @@ const get_transaction_list = async (req, res) => {
      {
        replacements: replacements,
        type: db.sequelize.QueryTypes.SELECT,
+       logging: console.log
      }
    );
 

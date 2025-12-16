@@ -6,6 +6,7 @@ const catchAsync = require("../utils/catchAsync");
 const httpStatus = require("http-status");
 const nodeServerAPIService = require("../service/node_server_api.service");
 const { decrypt } = require("../service/encrypt_decrypt.service");
+const receiverDBService = require("../service/receiver.db.service");
 
 /**
  * Add Receiver
@@ -404,7 +405,6 @@ const get_receiver_key_secret_list = catchAsync(async (req, res) => {
     per_page: per_page,
     sub_merchant_id: sub_merchant_id?.length > 10 ? await decrypt(sub_merchant_id) : sub_merchant_id
   }
-  console.log("🚀 ~ payload:", payload)
   // Get receivers details by key & secret
   const keySecretResponse = await receiverService.get_receiver_key_secret_list(
     payload
@@ -418,6 +418,25 @@ const get_receiver_key_secret_list = catchAsync(async (req, res) => {
       });
   }
   res.status(httpStatus.OK).send(keySecretResponse);
+});
+
+
+/**
+ * Get Receiver Name By ID
+ */
+const get_receiver_name_by_id = catchAsync(async (req, res) => {
+  const receiver_id = req.params.receiver_id;
+
+  var receiver = await receiverDBService.getReceiverNameById(receiver_id);
+  if (helperService.isNotValid(receiver)) {
+    res
+      .status(httpStatus.OK)
+      .send({ status: httpStatus.BAD_REQUEST, message: "Receiver not found!" });
+    return;
+  }
+  res
+    .status(httpStatus.OK)
+    .send({ status: 200, message: "Receiver found!", receiver: receiver });
 });
 
 module.exports = {
@@ -438,5 +457,6 @@ module.exports = {
   update_receiver_key_secret,
   get_receiver_key_secret,
   delete_key_secret,
-  get_receiver_key_secret_list
+  get_receiver_key_secret_list,
+  get_receiver_name_by_id
 };
