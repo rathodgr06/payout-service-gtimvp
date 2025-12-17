@@ -1,7 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class receiver extends Model {
+  class receiver_key_secret extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -9,9 +9,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      receiver_key_secret.belongsTo(models.receiver, { foreignKey: 'receiver_id', as: 'receiver' });
     }
   }
-  receiver.init(
+  receiver_key_secret.init(
     {
       receiver_id: DataTypes.INTEGER,
       type: DataTypes.STRING,
@@ -26,5 +27,5 @@ module.exports = (sequelize, DataTypes) => {
       timestamps: false,
     }
   );
-  return receiver;
+  return receiver_key_secret;
 };

@@ -348,7 +348,11 @@ const get_transaction_list = async (req, res) => {
     receiver_country,
     create_date,
     update_date,
+    status,
+    from_date,
+    to_date
   } = req.body;
+  console.log("🚀 ~ get_transaction_list ~ req.body:", req.body)
 
   const limit = parseInt(per_page);
   const offset = (parseInt(page) - 1) * limit;
@@ -392,6 +396,32 @@ const get_transaction_list = async (req, res) => {
       replacements.transaction_id = transaction_id;
     }
 
+    // dynamic filters
+    if (receiver_id) {
+      conditions.push('t.receiver_id = :receiver_id');
+      replacements.receiver_id = receiver_id;
+    }
+
+    // dynamic filters
+    if (receiver_currency) {
+      conditions.push('t.payer_currency = :payer_currency');
+      replacements.payer_currency = receiver_currency;
+    }
+
+    // dynamic filters
+    if (receiver_country) {
+      conditions.push('t.payer_country_iso_code = :payer_country_iso_code');
+      if (receiver_country?.length > 10) {
+        receiver_country = await encryptDecryptService.decrypt(receiver_country);
+      }
+      replacements.payer_country_iso_code = receiver_country;
+    }
+
+    // dynamic filters
+    if (status) {
+      conditions.push('t.status_message = :status_message');
+      replacements.status_message = status;
+    }
       
     if (req?.user?.type === "merchant") {
       const sub_merchants = await get_sub_merchants(req.user.token);
@@ -422,54 +452,79 @@ const get_transaction_list = async (req, res) => {
 
 
     // Combine conditions if any
-    const whereClause = conditions.length ? `WHERE ${conditions.join(' AND ')}` : '';
+    let whereClause = conditions.length ? `WHERE ${conditions.join(' AND ')}` : '';
+
+
+    if (from_date) {
+      whereClause += " AND DATE(t.created_at) >= :from_date";
+      replacements.from_date = from_date;
+    }
+
+    if (to_date) {
+      whereClause += " AND DATE(t.created_at) <= :to_date";
+      replacements.to_date = to_date;
+    }
 
     const countResult = await db.sequelize.query(
-      `SELECT COUNT(*) AS total FROM (
-     SELECT t.id
-     FROM transactions t
-     INNER JOIN (
-       SELECT 
-         MAX(id) AS id,
-         COALESCE(NULLIF(transaction_id, ''), external_id) AS group_id,
-         MAX(created_at) AS latestcreated_at
-       FROM transactions
-       GROUP BY COALESCE(NULLIF(transaction_id, ''), external_id)
-     ) latest
-     ON COALESCE(NULLIF(t.transaction_id, ''), t.external_id) = latest.group_id
-     AND t.created_at = latest.latestcreated_at
-     ${whereClause} 
-  ) AS subquery`,
+      `
+      SELECT COUNT(*) AS total
+      FROM (
+        SELECT t.id
+        FROM transactions t
+        INNER JOIN (
+          SELECT 
+            MAX(id) AS id,
+            COALESCE(NULLIF(transaction_id, ''), external_id) AS group_id,
+            MAX(created_at) AS latestcreated_at
+          FROM transactions
+          GROUP BY COALESCE(NULLIF(transaction_id, ''), external_id)
+        ) latest
+          ON COALESCE(NULLIF(t.transaction_id, ''), t.external_id) = latest.group_id
+        AND t.created_at = latest.latestcreated_at
+        LEFT JOIN receivers r
+          ON r.id = t.receiver_id
+        ${whereClause}
+      ) AS subquery
+      `,
       {
-        replacements: replacements,
-        type: db.sequelize.QueryTypes.SELECT,
+        replacements,
+        type: db.sequelize.QueryTypes.SELECT
       }
     );
 
-    const totalCount = countResult[0].total;
+    const totalCount = countResult[0]?.total || 0;
 
    const result = await db.sequelize.query(
-     `SELECT t.id AS transaction_ref_id, t.* 
-   FROM transactions t 
-   INNER JOIN (
-     /* Group by fallback key: use transaction_id if available, else external_id */
-     SELECT 
-       MAX(id) AS id, 
-       COALESCE(NULLIF(transaction_id, ''), external_id) AS group_id, 
-       MAX(created_at) AS latestcreated_at 
-     FROM transactions 
-     GROUP BY COALESCE(NULLIF(transaction_id, ''), external_id)
-   ) latest 
-   ON COALESCE(NULLIF(t.transaction_id, ''), t.external_id) = latest.group_id 
-   AND t.created_at = latest.latestcreated_at 
-   ${whereClause}
-   ORDER BY t.created_at DESC
-   LIMIT :limit OFFSET :offset`,
-     {
-       replacements: replacements,
-       type: db.sequelize.QueryTypes.SELECT,
-     }
-   );
+      `
+      SELECT 
+        t.id AS transaction_ref_id,
+        t.*,
+        r.receiver_name
+      FROM transactions t
+      INNER JOIN (
+        /* Group by fallback key: use transaction_id if available, else external_id */
+        SELECT 
+          MAX(id) AS id, 
+          COALESCE(NULLIF(transaction_id, ''), external_id) AS group_id, 
+          MAX(created_at) AS latestcreated_at 
+        FROM transactions 
+        GROUP BY COALESCE(NULLIF(transaction_id, ''), external_id)
+      ) latest 
+        ON COALESCE(NULLIF(t.transaction_id, ''), t.external_id) = latest.group_id 
+      AND t.created_at = latest.latestcreated_at
+      LEFT JOIN receivers r
+        ON r.id = t.receiver_id
+      ${whereClause}
+      ORDER BY t.created_at DESC
+      LIMIT :limit OFFSET :offset
+      `,
+      {
+        replacements,
+        type: db.sequelize.QueryTypes.SELECT,
+        logging: console.log
+      }
+    );
+
 
     // console.log("last query:", db.last_query());
     // console.log("🚀 ~ constget_transaction_list= ~ result:", result)

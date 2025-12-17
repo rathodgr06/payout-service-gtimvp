@@ -44,7 +44,7 @@ const check_access_token = catchAsync(async (req, res, next) => {
         let user = await verifyAccessToken(payload.payload);
         user.token = token;
         req.user = user;
-        console.log("🚀 ~ user:", user);
+        // console.log("🚀 ~ user:", user);
         if (req.user?.type === "admin" || req.user?.type === "merchant") {
           next();
         } else {
@@ -1796,6 +1796,37 @@ const validate_receiver = catchAsync(async (req, res, next) => {
   }
 });
 
+
+const validate_receiver_keys_list = catchAsync(async (req, res, next) => {
+  let X_USERNAME = process.env.A_X_USERNAME;
+  let X_PASSWORD = process.env.A_X_PASSWORD;
+  let xusername = req.headers["xusername"];
+  let xpassword = req.headers["xpassword"];
+  try {
+    if (xusername && xpassword) {
+      if (xusername == X_USERNAME && xpassword == X_PASSWORD) {
+        next();
+      } else {
+        var response = {
+          status: 401,
+          message: "Invalid access",
+          code: "E0060",
+        };
+        res.status(httpStatus.OK).send(response);
+      }
+    } else {
+      var response = {
+        status: 401,
+        message: "Invalid access",
+        code: "E0060",
+      };
+      res.status(httpStatus.OK).send(response);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 module.exports = {
   API_USER,
   token,
@@ -1816,4 +1847,5 @@ module.exports = {
   add_receiver,
   check_access_token,
   transaction_attachment,
+  validate_receiver_keys_list
 };

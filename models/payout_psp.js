@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   payout_psp.init(
     {
       psp_name: DataTypes.STRING,
+      psp_key: DataTypes.STRING,
       country_id: DataTypes.STRING,
       country_name: DataTypes.STRING,
       remark: DataTypes.STRING,

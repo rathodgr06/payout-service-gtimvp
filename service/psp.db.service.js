@@ -11,6 +11,7 @@ const addPSP = async (data) => {
       },
       defaults: {
         psp_name: data?.psp_name,
+        psp_key: data?.psp_key,
         country_id: data?.country_id || '',
         country_name: data?.country_name || '',
         remark: data?.remark || '',

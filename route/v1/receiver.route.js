@@ -116,4 +116,18 @@ router.post(
   receiverController.get_receiver_count
 );
 
+router.post(
+  "/get-receiver-key-secret-list",
+  validateHeaders.validate_receiver_keys_list,
+  validateHeaders.check_access_token,
+  validate(receiverValidation.get_receiver_key_secret_list),
+  receiverController.get_receiver_key_secret_list
+);
+
+
+router.get(
+  "/get-receiver-name-by-id/:receiver_id",
+  receiverController.get_receiver_name_by_id
+);
+
 module.exports = router;

@@ -9,7 +9,7 @@ const {tokenTypes} = require('../config/token');
 const ApiError = require('../utils/ApiError');
 
 const verifyAccessToken = async (token) => {
-    console.log("🚀 ~ verifyAccessToken ~ token:", token)
+    // console.log("🚀 ~ verifyAccessToken ~ token:", token)
     try {
         // const payload = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
         

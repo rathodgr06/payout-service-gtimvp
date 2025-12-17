@@ -5,9 +5,9 @@ async function getAccessToken(payload) {
   console.log("🚀 ~ getAccessToken ~ payload:", payload)
   try {
     const res = await axios.post(
-      process.env.PAYOUT_MODE == "test"
-        ? `${urls.alpay.test_url}/api/Authentication/Login`
-        : `${urls.alpay.live_url}/api/Authentication/Login`,
+      process.env.PAYOUT_MODE === "test"
+        ? `${urls.alpay_mock.test_url}/api/Authentication/Login`
+        : `${urls.alpay_mock.live_url}/api/Authentication/Login`,
       payload,
       {
         headers: {
@@ -31,7 +31,7 @@ async function nameEnquiryService(token, data) {
     console.log('Initiating NameEnquiry with transaction ID:', transaction_id);
     console.log('NameEnquiry Data:', JSON.stringify(data));
     console.log('Using Token:', token);
-    console.log('Using Base URL:', process.env.PAYOUT_MODE=="test"?`${urls.alpay.test_url}/${end_url}`:`${urls.alpay.live_url}/${end_url}`,
+    console.log('Using Base URL:', process.env.PAYOUT_MODE=="test"?`${urls.alpay_mock.test_url}/${end_url}`:`${urls.alpay_mock.live_url}/${end_url}`,
  );
     let headers =  {
           'Authorization': `Bearer ${token}`,
@@ -41,7 +41,7 @@ async function nameEnquiryService(token, data) {
 
   
     const res = await axios.post(
-      process.env.PAYOUT_MODE=="test"?`${urls.alpay.test_url}/${end_url}`:`${urls.alpay.live_url}/${end_url}`,
+      process.env.PAYOUT_MODE=="test"?`${urls.alpay_mock.test_url}/${end_url}`:`${urls.alpay_mock.live_url}/${end_url}`,
       data,
       {
         headers: {
@@ -77,7 +77,7 @@ async function initiateLocalTransfer(token, data) {
   try {
     console.log('Transfer Data:', JSON.stringify(data));
     console.log('Using Token:', token);
-    console.log('Using Base URL:', process.env.PAYOUT_MODE=="test"?`${urls.alpay.test_url}/${end_url}`:`${urls.alpay.live_url}/${end_url}`,
+    console.log('Using Base URL:', process.env.PAYOUT_MODE=="test"?`${urls.alpay_mock.test_url}/${end_url}`:`${urls.alpay_mock.live_url}/${end_url}`,
  );
     let headers =  {
           'Authorization': `Bearer ${token}`,
@@ -87,7 +87,7 @@ async function initiateLocalTransfer(token, data) {
 
   
     const res = await axios.post(
-      process.env.PAYOUT_MODE=="test"?`${urls.alpay.test_url}/${end_url}`:`${urls.alpay.live_url}/${end_url}`,
+      process.env.PAYOUT_MODE=="test"?`${urls.alpay_mock.test_url}/${end_url}`:`${urls.alpay_mock.live_url}/${end_url}`,
       data,
       {
         headers: {
@@ -119,7 +119,7 @@ async function initiateInternationalTransfer(token, data) {
   try {
     console.log('Transfer Data:', JSON.stringify(data));
     console.log('Using Token:', token);
-    console.log('Using Base URL:', process.env.PAYOUT_MODE=="test"?`${urls.alpay.test_url}/${end_url}`:`${urls.alpay.live_url}/${end_url}`,
+    console.log('Using Base URL:', process.env.PAYOUT_MODE=="test"?`${urls.alpay_mock.test_url}/${end_url}`:`${urls.alpay_mock.live_url}/${end_url}`,
  );
     let headers =  {
           'Authorization': `Bearer ${token}`,
@@ -129,7 +129,7 @@ async function initiateInternationalTransfer(token, data) {
 
   
     const res = await axios.post(
-      process.env.PAYOUT_MODE=="test"?`${urls.alpay.test_url}/${end_url}`:`${urls.alpay.live_url}/${end_url}`,
+      process.env.PAYOUT_MODE=="test"?`${urls.alpay_mock.test_url}/${end_url}`:`${urls.alpay_mock.live_url}/${end_url}`,
       data,
       {
         headers: {
@@ -162,8 +162,8 @@ async function getTransferStatus(token, transactionId, transactionType) {
     const end_url = "api/TransactionStatus/TransactionStatusService";
     const res = await axios.post(
       process.env.PAYOUT_MODE == "test"
-        ? `${urls.alpay.test_url}/${end_url}`
-        : `${urls.alpay.live_url}/${end_url}`,
+        ? `${urls.alpay_mock.test_url}/${end_url}`
+        : `${urls.alpay_mock.live_url}/${end_url}`,
       {
         transactionId: transactionId,
         transactionType: transactionType, //CREDIT or DEBIT

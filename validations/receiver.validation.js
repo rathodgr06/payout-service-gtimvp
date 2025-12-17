@@ -256,7 +256,7 @@ const dateRangeRegex =
 const get_receiver_list = {
   body: Joi.object({
     page: Joi.number().integer().min(1).optional(),
-    per_page: Joi.number().integer().min(1).max(100).optional(),
+    per_page: Joi.number().integer().min(1).max(helperService.max_per_page_record_count()).optional(),
 
     sub_merchant_id: Joi.string().allow("", null),
     receiver_id: Joi.string().allow("", null),
@@ -264,6 +264,7 @@ const get_receiver_list = {
     mobile_no: Joi.string().allow("", null),
 
     country: Joi.string().allow("", null),
+    search: Joi.string().allow("", null),
 
     create_date: Joi.string().pattern(dateRangeRegex).allow("", null).messages({
       "string.pattern.base":
@@ -327,6 +328,17 @@ const delete_key_secret = {
   }),
 };
 
+/**
+ * Validation For Receiver Keys
+ * */
+const get_receiver_key_secret_list = {
+  body: Joi.object({
+    page: Joi.number().required(),
+    per_page: Joi.number().max(50).required(),
+    sub_merchant_id: Joi.string().required(),
+  }),
+};
+
 module.exports = {
   add,
   add_receiver,
@@ -343,5 +355,6 @@ module.exports = {
   add_receiver_2,
   update_receiver_key_secret,
   get_receiver_key_secret,
-  delete_key_secret
+  delete_key_secret,
+  get_receiver_key_secret_list
 };

@@ -2133,7 +2133,7 @@ const payout = catchAsync(async (req, res) => {
     const responsePayload = {
       order_id: order_id,
       external_id: transactionPayload?.external_id,
-      transaction_id: getTransactionStatus.financialTransactionId,
+      transaction_id: getTransactionStatus?.financialTransactionId,
       sub_merchant_id: helperService.isValid(receiver?.sub_merchant_id)
         ? receiver?.sub_merchant_id
         : null,
@@ -2343,6 +2343,7 @@ const payout = catchAsync(async (req, res) => {
         payer_name: "ORANGE-MONEY",
       }),
     };
+    
     console.log(
       "🚀 ~ create_transaction_API_Call ~ account_data:",
       account_data
@@ -2746,6 +2747,370 @@ const payout = catchAsync(async (req, res) => {
       message: "Transaction confirmed successfully",
       data: responsePayload,
     });
+  } else if (receiver_account_details?.payer_id.includes('MAP_')) {
+    console.log(`initiateInternationalTransfer...`, receiver_account_details);
+    console.log(`here is reciever id and body in AlPay`);
+    console.log(req.body, receiver);
+    // fetch mid
+    let payout_mid_details = MID?.data;
+    // let payout_mid_details = await payout_mid.findOne({
+    //   where: { sub_merchant_id: receiver?.sub_merchant_id },
+    // });
+    console.log(payout_mid_details);
+    // Check payer currency and request payout currency
+    if (receiver_account_details?.currency != currency) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message:
+          "Invalid currency selected! The receiver only accepts payouts in " +
+          receiver_account_details?.currency,
+      });
+      return;
+    }
+
+    if (helperService.isNotValid(payout_mid_details?.api_key)) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message: "Invalid 'api_key'",
+      });
+      return;
+    }
+
+    if (helperService.isNotValid(payout_mid_details?.password)) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message: "Invalid 'password'",
+      });
+      return;
+    }
+
+    let getAccessTokenPayload = {
+      username: payout_mid_details?.api_key,
+      password: payout_mid_details?.password,
+    };
+    // get access token
+    let token = await alMockService.getAccessToken(getAccessTokenPayload);
+    //send response if reference id is fals
+    if (!token) {
+      res.status(httpStatus.OK).send({
+        status: 401,
+        message: "Invalid access",
+      });
+      return;
+    }
+
+    let externalTransactionId = await helperService.make_unique_id();
+
+    let nameEnquiryServicePayload = {
+      accountNumber: receiver_account_details?.account_details?.accountNumber,
+      channel:
+        receiver_account_details?.funding_source_type == 1
+          ? "MNO"
+          : "INTERBANK",
+      institutionCode:
+        receiver_account_details?.account_details?.institutionCode,
+      transactionId: externalTransactionId,
+    };
+    console.log("🚀 ~ nameEnquiryServicePayload:", nameEnquiryServicePayload);
+    let nameEnquiryServiceResponse = await alMockService.nameEnquiryService(
+      token,
+      nameEnquiryServicePayload
+    );
+    console.log("🚀 ~ nameEnquiryServiceResponse:", nameEnquiryServiceResponse);
+    if (nameEnquiryServiceResponse?.status != 200) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message:
+          nameEnquiryServiceResponse?.message || "Unable to initiate transfer",
+      });
+      return;
+    }
+
+    // Initiate Transfer
+    externalTransactionId = await helperService.make_unique_id();
+    const payoutReferenceId = uuidv4(); // Generate UUID
+    console.log("Transfer initiated, Reference ID:", payoutReferenceId);
+    let initiateTransferResponse = null;
+    if (receiver_account_details?.currency === "GHS") {
+      // make transfer payload
+      let data = {
+        accountName: nameEnquiryServiceResponse?.data?.accountName,
+        accountNumber: nameEnquiryServiceResponse?.data?.accountNumber,
+        amount: amount,
+        channel: "MNO",
+        institutionCode:
+          receiver_account_details?.account_details?.institutionCode,
+        transactionId: externalTransactionId,
+        CreditNaration: payout_reference || "Payout transaction",
+        currency: currency,
+      };
+      console.log("🚀 ~ initiateLocalTransfer data:", data);
+
+      // initiate payout
+      initiateTransferResponse = await alMockService.initiateLocalTransfer(
+        token,
+        data
+      );
+      console.log("🚀 ~ initiateTransferResponse:", initiateTransferResponse);
+    } else {
+      // make transfer payload
+      let data = {
+        accountNumber: receiver_account_details?.account_details?.accountNumber,
+        amount: amount,
+        channel: "INTERBANK",
+        transactionId: externalTransactionId,
+        creditNarration: payout_reference,
+        currency: currency,
+        currencyAmount: amount,
+        originCountryCode: "GH",
+        senderName: company_details?.data?.company_name,
+      };
+      console.log("🚀 ~ initiateInternationalTransfer data:", data);
+
+      // initiate payout
+      initiateTransferResponse =
+        await alMockService.initiateInternationalTransfer(token, data);
+      console.log("🚀 ~ initiateTransferResponse:", initiateTransferResponse);
+    }
+
+    //send response if reference id is fals
+    if (initiateTransferResponse?.status != 200) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message:
+          initiateTransferResponse?.message || "Unable to initiate transfer",
+      });
+      return;
+    }
+
+    //=============================================================================================
+    //get transaction status
+    let transactionStatusResponse = await alMockService.getTransferStatus(
+      token,
+      initiateTransferResponse?.data?.transactionId,
+      "CREDIT"
+    );
+    console.log("🚀 ~ transactionStatusResponse:", transactionStatusResponse);
+    if (transactionStatusResponse?.status != 200) {
+      res.status(httpStatus.OK).send({
+        status: 400,
+        message:
+          transactionStatusResponse?.message ||
+          "Unable to get a transaction status",
+      });
+      return;
+    }
+
+    let transactionStatus = "PENDING";
+    if (transactionStatusResponse?.message === "SUCCESSFUL") {
+      transactionStatus = "COMPLETED";
+    } else if (transactionStatusResponse?.message === "FAILED") {
+      transactionStatus = "FAILED";
+    }
+
+    let transaction_id = helperService.isNotValid(transactionStatusResponse?.data?.transactionId) ? "" : transactionStatusResponse?.data?.transactionId;
+    let transactionPayload = {
+      transaction_id: transaction_id,
+      external_id: externalTransactionId,
+      receiver_id: receiver_id,
+      order_id: order_id,
+      wallet_id: wallet_id,
+      account_id: account_id,
+      mid_id: MID?.data?.id,
+      batch_id: "",
+      super_merchant_id: "",
+      sub_merchant_id: receiver?.sub_merchant_id,
+      transaction_type: "B2B",
+      wholesale_fx_rate: parseFloat(0),
+      destination_amount: parseFloat(amount),
+      destination_currency: currency,
+      sent_amount: parseFloat(amount),
+      sent_currency: currency,
+      source_amount: parseFloat(amount),
+      source_currency: currency,
+      source_country_iso_code: receiver_account_details?.country,
+      payer_country_iso_code: "GHA",
+      fee_amount: parseFloat(0),
+      fee_currency: "NA",
+      creation_date: moment().format("YYYY-MM-DD hh:mm:ss"),
+      expiration_date: moment().format("YYYY-MM-DD hh:mm:ss"),
+      payer_id: receiver_account_details?.payer_id,
+      payer_currency: currency,
+      service_id: receiver_account_details?.funding_source_type,
+      service_name: "Mobile Wallet",
+      status_message: transactionStatus,
+      callback_url: payout_mid_details.callback,
+      payer_name: transactionStatusResponse?.data?.accountName,
+      payout_reference: payout_reference,
+    };
+    console.log("🚀 ~ payout ~ transactionPayload:", transactionPayload);
+    await transaction.create(transactionPayload);
+
+    //=============================================================================================
+    // DB Save account and payers data
+
+    let account_for = "";
+    if (
+      helperService.isNotValid(receiver_account_details?.sub_merchant_id) &&
+      helperService.isValid(receiver_account_details?.receiver_id)
+    ) {
+      account_for = "payout";
+    } else {
+      account_for = "settlement";
+    }
+
+    let account_data = {
+      transaction_id: transaction_id,
+      order_id: transactionPayload?.order_id,
+      external_id: transactionPayload?.external_id,
+      receiver_id: transactionPayload?.receiver_id,
+      sub_merchant_id: helperService.isNotValid(
+        transactionPayload?.sub_merchant_id
+      )
+        ? 0
+        : transactionPayload?.sub_merchant_id,
+      transaction_date: transactionPayload?.creation_date,
+      account_id: transactionPayload?.account_id,
+      account_type:
+        receiver_account_details?.customer_type?.toLowerCase() === "business"
+          ? 2
+          : 1,
+      account_for: account_for,
+      account_data: JSON.stringify(receiver_account_details),
+      payer_id: transactionPayload?.payer_id,
+      payer_name: transactionPayload?.payer_name,
+      payer_currency: transactionPayload?.payer_currency,
+      payer_data: JSON.stringify({
+        accountName: receiver_account_details?.account_details?.accountName,
+        accountNumber: receiver_account_details?.account_details?.accountNumber,
+        payer_id: receiver_account_details?.payer_id,
+        payer_name: "MOCK-AL-PAY",
+      }),
+    };
+    console.log(
+      "🚀 ~ create_transaction_API_Call ~ account_data:",
+      account_data
+    );
+
+    let account_result = await accountDetailsService.add(account_data);
+    console.log(
+      "🚀 ~ create_transaction_API_Call ~ account_result:",
+      account_result
+    );
+
+    //=============================================================================================
+    // call to node server to update charges
+    const payload = {
+      submerchant_id: helperService.isNotValid(receiver?.sub_merchant_id)
+        ? null
+        : receiver?.sub_merchant_id,
+      receiver_id: helperService.isNotValid(receiver_id)
+        ? null
+        : String(receiver_id),
+      currecny: currency,
+      amount: String(amount),
+      transaction_id: String(transaction_id),
+      order_id: externalTransactionId,
+      order_status: transactionStatus,
+    };
+    console.log("🚀 ~ constpayout_webhook=catchAsync ~ payload:", payload);
+    var result = await nodeServerAPIService.update_payout_status(req, payload);
+    console.log("🚀 ~ constpayout_webhook=catchAsync ~ result:", result);
+
+    //=============================================================================================
+    // Resturn Response
+
+    let debit_party = {};
+    // Check Type Of Transation (Settelment OR Payout)
+    if (helperService.isNotValid(receiver?.sub_merchant_id)) {
+      // THis is payout
+      debit_party = {
+        id: receiver?.receiver_id,
+        name: receiver?.receiver_name,
+        country: receiver?.registered_business_address,
+        webhook_url: receiver?.webhook_url,
+      };
+    } else if (
+      helperService.isValid(receiver?.sub_merchant_id) &&
+      helperService.isValid(receiver?.receiver_id)
+    ) {
+      // THis is settelment
+      debit_party = {
+        id: null,
+        name: company_details?.data?.company_name,
+        country: company_details?.data?.company_country,
+        webhook_url: null,
+      };
+    }
+
+    let credit_party = {
+      account_id: receiver_account_details?.account_id,
+      ...receiver_account_details?.account_details,
+    };
+
+    const responsePayload = {
+      order_id: order_id,
+      external_id: transactionPayload?.external_id,
+      transaction_id: transactionStatusResponse?.data?.transactionId,
+      sub_merchant_id: helperService.isValid(receiver?.sub_merchant_id)
+        ? receiver?.sub_merchant_id
+        : null,
+      receiver_id: helperService.isValid(receiver?.receiver_id)
+        ? receiver?.receiver_id
+        : null,
+      currency: currency,
+      wallet_id: wallet_id,
+      debit_party: debit_party,
+      credit_party: credit_party,
+      credit_party_identifier: {
+        accountName: receiver_account_details?.account_details?.accountName,
+        accountNumber: receiver_account_details?.account_details?.accountNumber,
+        payer_id: receiver_account_details?.payer_id,
+        payer_name: "AlPay",
+      },
+      debit_details: {
+        debit_amount: parseFloat(amount),
+        currency: currency,
+      },
+      credit_details: {
+        amount: parseFloat(amount),
+        currency: currency,
+      },
+      payout_reference: helperService.isValid(payout_reference)
+        ? payout_reference
+        : null,
+      webhook_url: helperService.isValid(webhook_url) ? webhook_url : null,
+      purpose_of_remittance: helperService.isValid(purpose_of_remittance)
+        ? purpose_of_remittance
+        : null,
+      document_reference_number: null,
+      transaction_status: transactionStatus,
+      transaction_status_code:
+        transactionStatus == "SUCCESSFUL"
+          ? 20000
+          : transactionStatus == "PENDING"
+          ? 10000
+          : 40000,
+      order_created_date: moment(transactionPayload?.creation_date).format(
+        "YYYY-MM-DD hh:mm:ss"
+      ),
+      order_updated_date: moment(transactionPayload?.creation_date).format(
+        "YYYY-MM-DD hh:mm:ss"
+      ),
+      batch_id: null,
+    };
+
+    // ==============================================================================
+    // Send Webhook
+    // await quotationService.send_webhook(responsePayload);
+
+    // ==============================================================================
+    // Send final response
+    res.status(httpStatus.OK).send({
+      status: httpStatus.OK,
+      message: "Transaction confirmed successfully",
+      data: responsePayload,
+    });
   } else if (receiver_account_details?.payer_id.includes('AP_')) {
     console.log(`initiateInternationalTransfer...`, receiver_account_details);
     console.log(`here is reciever id and body in AlPay`);
@@ -3111,369 +3476,6 @@ const payout = catchAsync(async (req, res) => {
       message: "Transaction confirmed successfully",
       data: responsePayload,
     });
-  } else if (receiver_account_details?.payer_id == "AL") {
-    console.log(`initiateInternationalTransfer...`, receiver_account_details);
-    console.log(`here is reciever id and body in AlPay`);
-    console.log(req.body, receiver);
-    // fetch mid
-    let payout_mid_details = MID?.data;
-    // let payout_mid_details = await payout_mid.findOne({
-    //   where: { sub_merchant_id: receiver?.sub_merchant_id },
-    // });
-    console.log(payout_mid_details);
-    // Check payer currency and request payout currency
-    if (receiver_account_details?.currency != currency) {
-      res.status(httpStatus.OK).send({
-        status: 400,
-        message:
-          "Invalid currency selected! The receiver only accepts payouts in " +
-          receiver_account_details?.currency,
-      });
-      return;
-    }
-    if (helperService.isNotValid(payout_mid_details?.api_key)) {
-      res.status(httpStatus.OK).send({
-        status: 400,
-        message: "Invalid 'api_key'",
-      });
-      return;
-    }
-
-    if (helperService.isNotValid(payout_mid_details?.password)) {
-      res.status(httpStatus.OK).send({
-        status: 400,
-        message: "Invalid 'password'",
-      });
-      return;
-    }
-
-    let getAccessTokenPayload = {
-      username: payout_mid_details?.api_key,
-      password: payout_mid_details?.password,
-    };
-    // get access token
-    let token = await alMockService.getAccessToken(getAccessTokenPayload);
-    //send response if reference id is fals
-    if (!token) {
-      res.status(httpStatus.OK).send({
-        status: 401,
-        message: "Invalid access",
-      });
-      return;
-    }
-
-    let externalTransactionId = await helperService.make_unique_id();
-
-    let nameEnquiryServicePayload = {
-      accountNumber: receiver_account_details?.account_details?.accountNumber,
-      channel:
-        receiver_account_details?.funding_source_type == 1
-          ? "MNO"
-          : "INTERBANK",
-      institutionCode:
-        receiver_account_details?.account_details?.institutionCode,
-      transactionId: externalTransactionId,
-    };
-    console.log("🚀 ~ nameEnquiryServicePayload:", nameEnquiryServicePayload);
-    let nameEnquiryServiceResponse = await alMockService.nameEnquiryService(
-      token,
-      nameEnquiryServicePayload
-    );
-    console.log("🚀 ~ nameEnquiryServiceResponse:", nameEnquiryServiceResponse);
-    if (nameEnquiryServiceResponse?.status != 200) {
-      res.status(httpStatus.OK).send({
-        status: 400,
-        message:
-          nameEnquiryServiceResponse?.message || "Unable to initiate transfer",
-      });
-      return;
-    }
-
-    // Initiate Transfer
-    externalTransactionId = await helperService.make_unique_id();
-    const payoutReferenceId = uuidv4(); // Generate UUID
-    console.log("Transfer initiated, Reference ID:", payoutReferenceId);
-    let initiateTransferResponse = null;
-    if (receiver_account_details?.currency === "GHS") {
-      // make transfer payload
-      let data = {
-        accountName: nameEnquiryServiceResponse?.data?.accountName,
-        accountNumber: nameEnquiryServiceResponse?.data?.accountNumber,
-        amount: amount,
-        channel: "MNO",
-        institutionCode:
-          receiver_account_details?.account_details?.institutionCode,
-        transactionId: externalTransactionId,
-        CreditNaration: payout_reference || "Payout transaction",
-        currency: currency,
-      };
-      console.log("🚀 ~ initiateLocalTransfer data:", data);
-
-      // initiate payout
-      initiateTransferResponse = await alMockService.initiateLocalTransfer(
-        token,
-        data
-      );
-      console.log("🚀 ~ initiateTransferResponse:", initiateTransferResponse);
-    } else {
-      // make transfer payload
-      let data = {
-        accountNumber: receiver_account_details?.account_details?.accountNumber,
-        amount: amount,
-        channel: "INTERBANK",
-        transactionId: externalTransactionId,
-        creditNarration: payout_reference,
-        currency: currency,
-        currencyAmount: amount,
-        originCountryCode: "GH",
-        senderName: company_details?.data?.company_name,
-      };
-      console.log("🚀 ~ initiateInternationalTransfer data:", data);
-
-      // initiate payout
-      initiateTransferResponse =
-        await alMockService.initiateInternationalTransfer(token, data);
-      console.log("🚀 ~ initiateTransferResponse:", initiateTransferResponse);
-    }
-
-    //send response if reference id is fals
-    if (initiateTransferResponse?.status != 200) {
-      res.status(httpStatus.OK).send({
-        status: 400,
-        message:
-          initiateTransferResponse?.message || "Unable to initiate transfer",
-      });
-      return;
-    }
-
-    //=============================================================================================
-    //get transaction status
-    let transactionStatusResponse = await alMockService.getTransferStatus(
-      token,
-      initiateTransferResponse?.data?.transactionId,
-      "CREDIT"
-    );
-    console.log("🚀 ~ transactionStatusResponse:", transactionStatusResponse);
-    if (transactionStatusResponse?.status != 200) {
-      res.status(httpStatus.OK).send({
-        status: 400,
-        message:
-          transactionStatusResponse?.message ||
-          "Unable to get a transaction status",
-      });
-      return;
-    }
-
-    let transactionStatus = "PENDING";
-    if (transactionStatusResponse?.message === "SUCCESSFUL") {
-      transactionStatus = "COMPLETED";
-    } else if (transactionStatusResponse?.message === "FAILED") {
-      transactionStatus = "FAILED";
-    }
-
-    let transaction_id = helperService.isNotValid(transactionStatusResponse?.data?.transactionId) ? "" : transactionStatusResponse?.data?.transactionId;
-    let transactionPayload = {
-      transaction_id: transaction_id,
-      external_id: externalTransactionId,
-      receiver_id: receiver_id,
-      order_id: order_id,
-      wallet_id: wallet_id,
-      account_id: account_id,
-      mid_id: MID?.data?.id,
-      batch_id: "",
-      super_merchant_id: "",
-      sub_merchant_id: receiver?.sub_merchant_id,
-      transaction_type: "B2B",
-      wholesale_fx_rate: parseFloat(0),
-      destination_amount: parseFloat(amount),
-      destination_currency: currency,
-      sent_amount: parseFloat(amount),
-      sent_currency: currency,
-      source_amount: parseFloat(amount),
-      source_currency: currency,
-      source_country_iso_code: receiver_account_details?.country,
-      payer_country_iso_code: "GHA",
-      fee_amount: parseFloat(0),
-      fee_currency: "NA",
-      creation_date: moment().format("YYYY-MM-DD hh:mm:ss"),
-      expiration_date: moment().format("YYYY-MM-DD hh:mm:ss"),
-      payer_id: receiver_account_details?.payer_id,
-      payer_currency: currency,
-      service_id: receiver_account_details?.funding_source_type,
-      service_name: "Mobile Wallet",
-      status_message: transactionStatus,
-      callback_url: payout_mid_details.callback,
-      payer_name: transactionStatusResponse?.data?.accountName,
-      payout_reference: payout_reference,
-    };
-    console.log("🚀 ~ payout ~ transactionPayload:", transactionPayload);
-    await transaction.create(transactionPayload);
-
-    //=============================================================================================
-    // DB Save account and payers data
-
-    let account_for = "";
-    if (
-      helperService.isNotValid(receiver_account_details?.sub_merchant_id) &&
-      helperService.isValid(receiver_account_details?.receiver_id)
-    ) {
-      account_for = "payout";
-    } else {
-      account_for = "settlement";
-    }
-
-    let account_data = {
-      transaction_id: transaction_id,
-      order_id: transactionPayload?.order_id,
-      external_id: transactionPayload?.external_id,
-      receiver_id: transactionPayload?.receiver_id,
-      sub_merchant_id: helperService.isNotValid(
-        transactionPayload?.sub_merchant_id
-      )
-        ? 0
-        : transactionPayload?.sub_merchant_id,
-      transaction_date: transactionPayload?.creation_date,
-      account_id: transactionPayload?.account_id,
-      account_type:
-        receiver_account_details?.customer_type?.toLowerCase() === "business"
-          ? 2
-          : 1,
-      account_for: account_for,
-      account_data: JSON.stringify(receiver_account_details),
-      payer_id: transactionPayload?.payer_id,
-      payer_name: transactionPayload?.payer_name,
-      payer_currency: transactionPayload?.payer_currency,
-      payer_data: JSON.stringify({
-        accountName: receiver_account_details?.account_details?.accountName,
-        accountNumber: receiver_account_details?.account_details?.accountNumber,
-        payer_id: receiver_account_details?.payer_id,
-        payer_name: "AL",
-      }),
-    };
-    console.log(
-      "🚀 ~ create_transaction_API_Call ~ account_data:",
-      account_data
-    );
-
-    let account_result = await accountDetailsService.add(account_data);
-    console.log(
-      "🚀 ~ create_transaction_API_Call ~ account_result:",
-      account_result
-    );
-
-    //=============================================================================================
-    // call to node server to update charges
-    const payload = {
-      submerchant_id: helperService.isNotValid(receiver?.sub_merchant_id)
-        ? null
-        : receiver?.sub_merchant_id,
-      receiver_id: helperService.isNotValid(receiver_id)
-        ? null
-        : String(receiver_id),
-      currecny: currency,
-      amount: String(amount),
-      transaction_id: String(transaction_id),
-      order_id: externalTransactionId,
-      order_status: transactionStatus,
-    };
-    console.log("🚀 ~ constpayout_webhook=catchAsync ~ payload:", payload);
-    var result = await nodeServerAPIService.update_payout_status(req, payload);
-    console.log("🚀 ~ constpayout_webhook=catchAsync ~ result:", result);
-
-    //=============================================================================================
-    // Resturn Response
-
-    let debit_party = {};
-    // Check Type Of Transation (Settelment OR Payout)
-    if (helperService.isNotValid(receiver?.sub_merchant_id)) {
-      // THis is payout
-      debit_party = {
-        id: receiver?.receiver_id,
-        name: receiver?.receiver_name,
-        country: receiver?.registered_business_address,
-        webhook_url: receiver?.webhook_url,
-      };
-    } else if (
-      helperService.isValid(receiver?.sub_merchant_id) &&
-      helperService.isValid(receiver?.receiver_id)
-    ) {
-      // THis is settelment
-      debit_party = {
-        id: null,
-        name: company_details?.data?.company_name,
-        country: company_details?.data?.company_country,
-        webhook_url: null,
-      };
-    }
-
-    let credit_party = {
-      account_id: receiver_account_details?.account_id,
-      ...receiver_account_details?.account_details,
-    };
-
-    const responsePayload = {
-      order_id: order_id,
-      external_id: transactionPayload?.external_id,
-      transaction_id: transactionStatusResponse?.data?.transactionId,
-      sub_merchant_id: helperService.isValid(receiver?.sub_merchant_id)
-        ? receiver?.sub_merchant_id
-        : null,
-      receiver_id: helperService.isValid(receiver?.receiver_id)
-        ? receiver?.receiver_id
-        : null,
-      currency: currency,
-      wallet_id: wallet_id,
-      debit_party: debit_party,
-      credit_party: credit_party,
-      credit_party_identifier: {
-        accountName: receiver_account_details?.account_details?.accountName,
-        accountNumber: receiver_account_details?.account_details?.accountNumber,
-        payer_id: receiver_account_details?.payer_id,
-        payer_name: "AlPay",
-      },
-      debit_details: {
-        debit_amount: parseFloat(amount),
-        currency: currency,
-      },
-      credit_details: {
-        amount: parseFloat(amount),
-        currency: currency,
-      },
-      payout_reference: helperService.isValid(payout_reference)
-        ? payout_reference
-        : null,
-      webhook_url: helperService.isValid(webhook_url) ? webhook_url : null,
-      purpose_of_remittance: helperService.isValid(purpose_of_remittance)
-        ? purpose_of_remittance
-        : null,
-      document_reference_number: null,
-      transaction_status: transactionStatus,
-      transaction_status_code:
-        transactionStatus == "SUCCESSFUL"
-          ? 20000
-          : transactionStatus == "PENDING"
-          ? 10000
-          : 40000,
-      order_created_date: moment(transactionPayload?.creation_date).format(
-        "YYYY-MM-DD hh:mm:ss"
-      ),
-      order_updated_date: moment(transactionPayload?.creation_date).format(
-        "YYYY-MM-DD hh:mm:ss"
-      ),
-      batch_id: null,
-    };
-
-    // ==============================================================================
-    // Send Webhook
-    // await quotationService.send_webhook(responsePayload);
-
-    // ==============================================================================
-    // Send final response
-    res.status(httpStatus.OK).send({
-      status: httpStatus.OK,
-      message: "Transaction confirmed successfully",
-      data: responsePayload,
-    });
   } else {
     // Get payer details by id
     const payerResponse = await payerService.getById(
@@ -3735,8 +3737,8 @@ const manage_payout = catchAsync(async (req, res) => {
       receiver_id: helperService.isNotValid(confirmResponse?.receiver_id)
         ? null
         : String(confirmResponse?.receiver_id),
-      currecny: confirmResponse?.destination?.currency,
-      amount: String(confirmResponse?.destination?.amount),
+      currecny: confirmResponse?.debit_details?.currency,
+      amount: String(confirmResponse?.debit_details?.debit_amount),
       transaction_id: String(confirmResponse?.transaction_id),
       order_id: confirmResponse?.external_id,
       order_status: "PENDING",

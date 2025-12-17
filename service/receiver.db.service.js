@@ -23,6 +23,7 @@ const addNewReceiver = async (data) => {
       where: where,
       defaults: {
         sub_merchant_id: data?.sub_merchant_id,
+        super_merchant_id: data?.super_merchant_id,
         receiver_name: data?.receiver_name,
         registered_business_address: data?.registered_business_address,
         email: data?.email,
@@ -77,6 +78,7 @@ const getReceiverById = async (id) => {
     attributes: [
       ["id", "receiver_id"],
       "sub_merchant_id",
+      "super_merchant_id",
       "receiver_name",
       "registered_business_address",
       "email",
@@ -106,6 +108,7 @@ const getReceiverBySubMerchantId = async (sub_merchant_id) => {
     attributes: [
       ["id", "receiver_id"],
       "sub_merchant_id",
+      "super_merchant_id",
       "receiver_name",
       "registered_business_address",
       "email",
@@ -246,6 +249,7 @@ const get_receiver_list = async (req, res) => {
     country,
     create_date,
     update_date,
+    search,
   } = req.body;
 
   let sub_merchant_id = req.body.sub_merchant_id;
@@ -261,6 +265,18 @@ const get_receiver_list = async (req, res) => {
   }
 
   let where = {};
+  
+  if (search) {
+    where = {
+      [Op.or]: [
+        { receiver_name: { [Op.like]: `%${search}%` } },
+        { id: { [Op.like]: `%${search}%` } },
+        { sub_merchant_id: { [Op.like]: `%${search}%` } },
+        { registered_business_address: { [Op.like]: `%${search}%` } },
+        { email: { [Op.like]: `%${search}%` } },
+      ]
+    }
+  }
 
   // OR logic for sub_merchant_id
   if (sub_merchant_id === undefined) {
@@ -292,6 +308,7 @@ const get_receiver_list = async (req, res) => {
   if (mobile_no) where.mobile_no = mobile_no;
   if (country) where.registered_business_address = country;
 
+
   // Helper function to parse date ranges
   const parseDateRange = (rangeStr) => {
     const [start, end] = rangeStr.split("/");
@@ -304,29 +321,50 @@ const get_receiver_list = async (req, res) => {
   if (update_date) where.updated_at = parseDateRange(update_date);
 
 
-  if (req?.user?.type === "merchant") {
-      const sub_merchants = await get_sub_merchants(req.user.token);
-
-      // Collect decrypted IDs into an array
-      const decryptedIds = [];
-      for (const element of sub_merchants?.data || []) {
-        const decryptedId = await decrypt(
-          element.submerchant_id
-        );
-        decryptedIds.push(decryptedId);
-      }
-
-          
-      // Add to where condition if IDs exist
-      if (decryptedIds.length > 0) {
-        where.sub_merchant_id = { [Op.in]: decryptedIds };
-      }
-      
-    } else {
-      if (where.sub_merchant_id && where.sub_merchant_id.length > 10) {
-        where.sub_merchant_id = await decrypt(where.sub_merchant_id);
-      }
+  if (where.sub_merchant_id) {
+    if (where.sub_merchant_id.length > 10) {
+      where.sub_merchant_id = await decrypt(where.sub_merchant_id);
     }
+  }
+
+  console.log("🚀 ~ get_receiver_list ~ req?.user:", req?.user)
+  if (req?.user?.type === "merchant") {
+    // const sub_merchants = await get_sub_merchants(req.user.token);
+
+    // // Collect decrypted IDs into an array
+    // const decryptedIds = [];
+    // for (const element of sub_merchants?.data || []) {
+    //   const decryptedId = await decrypt(
+    //     element.submerchant_id
+    //   );
+    //   decryptedIds.push(decryptedId);
+    // }
+
+    // // Add to where condition if IDs exist
+    // if (decryptedIds.length > 0) {
+    //   where.sub_merchant_id = { [Op.in]: decryptedIds };
+    // }
+    if (!where.sub_merchant_id && helperService.isValid(req?.user?.id)) {
+      where.super_merchant_id = req?.user?.id;
+    }
+  }
+
+  // Add search filter
+  if (req.body.search && req.body.search.trim() !== "") {
+    const s = req.body.search.trim();
+
+    where[Op.or] = [
+      { receiver_name: { [Op.like]: `%${s}%` } },
+      { email: { [Op.like]: `%${s}%` } },
+      { mobile_no: { [Op.like]: `%${s}%` } },
+      { registered_business_address: { [Op.like]: `%${s}%` } },
+      { sub_merchant_id: { [Op.like]: `%${s}%` } },
+      { super_merchant_id: { [Op.like]: `%${s}%` } },
+      { referral_code: { [Op.like]: `%${s}%` } },
+      { code: { [Op.like]: `%${s}%` } },
+    ];
+
+  }
 
   console.log("🚀 ~ get_receiver_list ~ where:", where);
 
@@ -339,6 +377,7 @@ const get_receiver_list = async (req, res) => {
       attributes: [
         ["id", "receiver_id"],
         "sub_merchant_id",
+        "super_merchant_id",
         "receiver_name",
         "registered_business_address",
         "email",
@@ -360,7 +399,8 @@ const get_receiver_list = async (req, res) => {
 
       return {
         receiver_id: json.receiver_id,
-        sub_merchant_id: json.sub_merchant_id === '' ? null : json.sub_merchant_id, // rename
+        sub_merchant_id: json.sub_merchant_id === '' ? null : json.sub_merchant_id,
+        super_merchant_id: json.super_merchant_id === '' ? null : json.super_merchant_id,
         receiver_name: json.receiver_name,
         registered_business_address: json.registered_business_address,
         email: json.email,
@@ -582,6 +622,102 @@ const update_receiver_key = async (id, updateData) => {
   }
 };
 
+const find_receiver_keys_list = async (payload) => {
+  try {
+
+    page = Number(payload?.page) || 1;
+    limit = Number(payload?.per_page) || 20;
+    const offset = (page - 1) * limit;
+
+    let receiver_where = {};
+    if (payload?.sub_merchant_id) {
+      receiver_where = { sub_merchant_id: payload?.sub_merchant_id };
+    }
+
+    const { rows, count } = await ReceiverKeySecret.findAndCountAll({
+      where: { deleted: 0 },
+
+      include: [
+        {
+          model: Receiver,
+          as: "receiver",
+          attributes: [
+            "id",
+            "sub_merchant_id",
+            "receiver_name"
+          ],
+          required: true,
+          where: receiver_where
+        }
+      ],
+
+      order: [["id", "DESC"]],
+      limit,
+      offset
+    });
+
+    if (!rows || rows.length === 0) {
+      return {
+        status: 404,
+        message: "Receiver keys not found",
+      };
+    }
+
+    const formatted = rows.map((item) => {
+      const data = item.toJSON();
+      const r = data.receiver || {}; // safety
+
+      return {
+        id: data.id,
+        receiver_id: data.receiver_id,
+        sub_merchant_id: r.sub_merchant_id || "",
+        super_merchant_id: r.super_merchant_id || "",
+        receiver_name: r.receiver_name || "",
+        type: data.type,
+        receiver_key: data.receiver_key,
+        receiver_secret: data.receiver_secret,
+        deleted: data.deleted
+      };
+    });
+
+    return {
+      status: 200,
+      message: "Receiver keys found",
+      data: formatted,
+      pagination: {
+        total: count,
+        page,
+        limit,
+        totalPages: Math.ceil(count / limit)
+      }
+    };
+
+  } catch (error) {
+    console.error("Receiver keys list error:", error);
+    return {
+      status: 500,
+      message: "Internal server error"
+    };
+  }
+};
+
+
+/**
+ * Get Receiver Name By Id
+ * @param {*} id 
+ * @returns 
+ */
+const getReceiverNameById = async (id) => {
+  const receiver = await Receiver.findOne({
+    where: { id },
+    attributes: [
+      ["id", "receiver_id"],
+      "receiver_name",
+    ],
+  });
+  return receiver ? receiver.toJSON() : null;
+};
+
 module.exports = {
   addNewReceiver,
   get_receiver_list,
@@ -595,5 +731,7 @@ module.exports = {
   find_receiver_keys_by_receiver_id,
   get_receiver_count,
   addOrUpdateReceiverKeyAndSecret,
-  update_receiver_key
+  update_receiver_key,
+  find_receiver_keys_list,
+  getReceiverNameById
 };

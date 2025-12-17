@@ -11,11 +11,13 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       receiver.hasMany(models.payout_mid, { foreignKey: 'receiver_id' });
+      receiver.hasMany(models.receiver_key_secret, { foreignKey: 'receiver_id' });
     }
   }
   receiver.init(
     {
       sub_merchant_id: DataTypes.STRING,
+      super_merchant_id: DataTypes.STRING,
       receiver_name: DataTypes.STRING,
       registered_business_address: DataTypes.STRING,
       email: DataTypes.STRING,
