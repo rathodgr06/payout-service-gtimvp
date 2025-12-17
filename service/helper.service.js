@@ -178,6 +178,10 @@ const make_order_number = async (pre) => {
   return str;
 };
 
+const max_per_page_record_count = () => {
+  return 500;
+};
+
 module.exports = {
   isValid,
   isNotValid,
@@ -189,5 +193,6 @@ module.exports = {
   parseFormattedNumber,
   make_order_number,
   isValidEmail,
-  generateKey
+  generateKey,
+  max_per_page_record_count
 };

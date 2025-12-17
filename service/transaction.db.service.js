@@ -352,6 +352,7 @@ const get_transaction_list = async (req, res) => {
     from_date,
     to_date
   } = req.body;
+  console.log("🚀 ~ get_transaction_list ~ req.body:", req.body)
 
   const limit = parseInt(per_page);
   const offset = (parseInt(page) - 1) * limit;
@@ -465,52 +466,65 @@ const get_transaction_list = async (req, res) => {
     }
 
     const countResult = await db.sequelize.query(
-      `SELECT COUNT(*) AS total FROM (
-     SELECT t.id
-     FROM transactions t
-     INNER JOIN (
-       SELECT 
-         MAX(id) AS id,
-         COALESCE(NULLIF(transaction_id, ''), external_id) AS group_id,
-         MAX(created_at) AS latestcreated_at
-       FROM transactions
-       GROUP BY COALESCE(NULLIF(transaction_id, ''), external_id)
-     ) latest
-     ON COALESCE(NULLIF(t.transaction_id, ''), t.external_id) = latest.group_id
-     AND t.created_at = latest.latestcreated_at
-     ${whereClause} 
-  ) AS subquery`,
+      `
+      SELECT COUNT(*) AS total
+      FROM (
+        SELECT t.id
+        FROM transactions t
+        INNER JOIN (
+          SELECT 
+            MAX(id) AS id,
+            COALESCE(NULLIF(transaction_id, ''), external_id) AS group_id,
+            MAX(created_at) AS latestcreated_at
+          FROM transactions
+          GROUP BY COALESCE(NULLIF(transaction_id, ''), external_id)
+        ) latest
+          ON COALESCE(NULLIF(t.transaction_id, ''), t.external_id) = latest.group_id
+        AND t.created_at = latest.latestcreated_at
+        LEFT JOIN receivers r
+          ON r.id = t.receiver_id
+        ${whereClause}
+      ) AS subquery
+      `,
       {
-        replacements: replacements,
-        type: db.sequelize.QueryTypes.SELECT,
+        replacements,
+        type: db.sequelize.QueryTypes.SELECT
       }
     );
 
-    const totalCount = countResult[0].total;
+    const totalCount = countResult[0]?.total || 0;
 
    const result = await db.sequelize.query(
-     `SELECT t.id AS transaction_ref_id, t.* 
-   FROM transactions t 
-   INNER JOIN (
-     /* Group by fallback key: use transaction_id if available, else external_id */
-     SELECT 
-       MAX(id) AS id, 
-       COALESCE(NULLIF(transaction_id, ''), external_id) AS group_id, 
-       MAX(created_at) AS latestcreated_at 
-     FROM transactions 
-     GROUP BY COALESCE(NULLIF(transaction_id, ''), external_id)
-   ) latest 
-   ON COALESCE(NULLIF(t.transaction_id, ''), t.external_id) = latest.group_id 
-   AND t.created_at = latest.latestcreated_at 
-   ${whereClause}
-   ORDER BY t.created_at DESC
-   LIMIT :limit OFFSET :offset`,
-     {
-       replacements: replacements,
-       type: db.sequelize.QueryTypes.SELECT,
-       logging: console.log
-     }
-   );
+      `
+      SELECT 
+        t.id AS transaction_ref_id,
+        t.*,
+        r.receiver_name
+      FROM transactions t
+      INNER JOIN (
+        /* Group by fallback key: use transaction_id if available, else external_id */
+        SELECT 
+          MAX(id) AS id, 
+          COALESCE(NULLIF(transaction_id, ''), external_id) AS group_id, 
+          MAX(created_at) AS latestcreated_at 
+        FROM transactions 
+        GROUP BY COALESCE(NULLIF(transaction_id, ''), external_id)
+      ) latest 
+        ON COALESCE(NULLIF(t.transaction_id, ''), t.external_id) = latest.group_id 
+      AND t.created_at = latest.latestcreated_at
+      LEFT JOIN receivers r
+        ON r.id = t.receiver_id
+      ${whereClause}
+      ORDER BY t.created_at DESC
+      LIMIT :limit OFFSET :offset
+      `,
+      {
+        replacements,
+        type: db.sequelize.QueryTypes.SELECT,
+        logging: console.log
+      }
+    );
+
 
     // console.log("last query:", db.last_query());
     // console.log("🚀 ~ constget_transaction_list= ~ result:", result)

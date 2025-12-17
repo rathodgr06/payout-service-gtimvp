@@ -125,7 +125,7 @@ const dateRangeRegex =
 const payout_list = {
   body: Joi.object().keys({
     page: Joi.number().integer().min(1).default(1),
-    per_page: Joi.number().integer().min(1).max(100).default(10),
+    per_page: Joi.number().integer().min(1).max(500).default(10),
 
     super_merchant_id: Joi.string().allow("", null), // Allow empty or null
     sub_merchant_id: Joi.string().allow("", null),

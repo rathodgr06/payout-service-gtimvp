@@ -256,7 +256,7 @@ const dateRangeRegex =
 const get_receiver_list = {
   body: Joi.object({
     page: Joi.number().integer().min(1).optional(),
-    per_page: Joi.number().integer().min(1).max(100).optional(),
+    per_page: Joi.number().integer().min(1).max(helperService.max_per_page_record_count()).optional(),
 
     sub_merchant_id: Joi.string().allow("", null),
     receiver_id: Joi.string().allow("", null),
