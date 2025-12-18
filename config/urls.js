@@ -17,15 +17,15 @@ module.exports = {
     },
     //Mock Server
     "alpay_mock":{
-        "test_url":"http://localhost:4005/alpay-mock",
+        "test_url":"https://uat-payout.paydart.co/alpay-mock",
         "live_url":"https://uat-payout.paydart.co/alpay-mock"
     },
     "mtn_mock":{
-        "test_url":"http://localhost:4005/mtn-mock",
+        "test_url":"https://uat-payout.paydart.co/mtn-mock",
         "live_url":"https://uat-payout.paydart.co/mtn-mock"
     },
     "orange_mock":{
-        "test_url":"http://localhost:4005/orange-mock",
+        "test_url":"https://uat-payout.paydart.co/orange-mock",
         "live_url":"https://uat-payout.paydart.co/orange-mock"
     },
 }
