@@ -81,9 +81,33 @@ const add_psp = catchAsync(async (req, res) => {
     
   }else if (PSP?.data?.psp_name === 'ORANGE-MONEY') {
     
+    mid_payload.primary_key = '';
+    mid_payload.api_key = 'GTISwitch';
+    mid_payload.password = 'Jr7javyC0GCatAaNT8FRipcs';
+
+  }else if (PSP?.data?.psp_name === 'AlPay') {
+    
+    mid_payload.primary_key = '';
+    mid_payload.api_key = 'GTIPay';
+    mid_payload.password = '95c7386b6ec04bd68f6f';
+
+  }else if (PSP?.data?.psp_name === 'MTN') {
+    
     mid_payload.primary_key = 'ec31d4b6e7d843e6b554be7c1df8d0cf';
     mid_payload.api_key = 'f68b43c3-b0f3-4375-bb67-9c5df9f1342d';
     mid_payload.password = 'e054b09ea1794e3c8765099cca568700';
+
+  }else if (PSP?.data?.psp_name === 'ORANGE') {
+    
+    mid_payload.primary_key = '';
+    mid_payload.api_key = 'GTISwitch';
+    mid_payload.password = 'e054Jr7javyC0GCatAaNT8FRipcs';
+
+  }else if (PSP?.data?.psp_name === 'MOCK-AL-PAY') {
+    
+    mid_payload.primary_key = '';
+    mid_payload.api_key = 'demo';
+    mid_payload.password = 'demo123';
 
   }
 
